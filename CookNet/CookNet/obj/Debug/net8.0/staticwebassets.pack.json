@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CookNet.bundle.scp.css",
+      "PackagePath": "staticwebassets\\CookNet.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CookNet.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.CookNet.props",
+      "PackagePath": "build\\CookNet.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.CookNet.props",
+      "PackagePath": "buildMultiTargeting\\CookNet.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.CookNet.props",
+      "PackagePath": "buildTransitive\\CookNet.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
