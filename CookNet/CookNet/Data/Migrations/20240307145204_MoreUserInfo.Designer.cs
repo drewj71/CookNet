@@ -4,6 +4,7 @@ using CookNet.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CookNet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240307145204_MoreUserInfo")]
+    partial class MoreUserInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,31 +133,6 @@ namespace CookNet.Migrations
                     b.ToTable("Ingredients");
                 });
 
-            modelBuilder.Entity("CookNet.Data.Instruction", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("InstructionText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RecipeID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StepNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("RecipeID");
-
-                    b.ToTable("Instructions");
-                });
-
             modelBuilder.Entity("CookNet.Data.Recipe", b =>
                 {
                     b.Property<int>("ID")
@@ -163,9 +141,9 @@ namespace CookNet.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<string>("AuthorID")
+                    b.Property<string>("Author")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -191,31 +169,7 @@ namespace CookNet.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AuthorID");
-
                     b.ToTable("Recipes");
-                });
-
-            modelBuilder.Entity("CookNet.Data.RecipeStory", b =>
-                {
-                    b.Property<int>("RecipeID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecipeID"));
-
-                    b.Property<int>("RecipeID1")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StoryText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RecipeID");
-
-                    b.HasIndex("RecipeID1");
-
-                    b.ToTable("RecipeStories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -351,57 +305,6 @@ namespace CookNet.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("RecipeIngredient", b =>
-                {
-                    b.Property<int>("RecipeID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IngredientID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("RecipeID", "IngredientID");
-
-                    b.HasIndex("IngredientID");
-
-                    b.ToTable("RecipeIngredients");
-                });
-
-            modelBuilder.Entity("CookNet.Data.Instruction", b =>
-                {
-                    b.HasOne("CookNet.Data.Recipe", "Recipe")
-                        .WithMany("Instructions")
-                        .HasForeignKey("RecipeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Recipe");
-                });
-
-            modelBuilder.Entity("CookNet.Data.Recipe", b =>
-                {
-                    b.HasOne("CookNet.Data.ApplicationUser", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("CookNet.Data.RecipeStory", b =>
-                {
-                    b.HasOne("CookNet.Data.Recipe", "Recipe")
-                        .WithMany("RecipeStories")
-                        .HasForeignKey("RecipeID1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Recipe");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -451,34 +354,6 @@ namespace CookNet.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("RecipeIngredient", b =>
-                {
-                    b.HasOne("CookNet.Data.Ingredient", "Ingredient")
-                        .WithMany()
-                        .HasForeignKey("IngredientID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CookNet.Data.Recipe", "Recipe")
-                        .WithMany("RecipeIngredients")
-                        .HasForeignKey("RecipeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ingredient");
-
-                    b.Navigation("Recipe");
-                });
-
-            modelBuilder.Entity("CookNet.Data.Recipe", b =>
-                {
-                    b.Navigation("Instructions");
-
-                    b.Navigation("RecipeIngredients");
-
-                    b.Navigation("RecipeStories");
                 });
 #pragma warning restore 612, 618
         }
