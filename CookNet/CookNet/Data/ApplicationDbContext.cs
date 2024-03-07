@@ -9,7 +9,6 @@ namespace CookNet.Data
             : base(options)
         {
         }
-
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
@@ -34,6 +33,18 @@ namespace CookNet.Data
                 .HasOne(ri => ri.Ingredient)
                 .WithMany()
                 .HasForeignKey(ri => ri.IngredientID);
+
+            // Configure one-to-many relationship between Recipe and Instruction
+            modelBuilder.Entity<Instruction>()
+                .HasOne(i => i.Recipe)
+                .WithMany(r => r.Instructions)
+                .HasForeignKey(i => i.RecipeID);
+
+            // Configure one-to-many relationship between Recipe and RecipeStory
+            modelBuilder.Entity<RecipeStory>()
+                .HasOne(rs => rs.Recipe)
+                .WithMany(r => r.RecipeStories)
+                .HasForeignKey(rs => rs.RecipeID);
         }
     }
 }

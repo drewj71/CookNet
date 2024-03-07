@@ -1,25 +1,35 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
 namespace CookNet.Migrations
 {
-    /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class CreatingInitialTables : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Author",
-                table: "Recipes");
-
-            migrationBuilder.AddColumn<string>(
-                name: "AuthorID",
-                table: "Recipes",
-                type: "nvarchar(450)",
-                nullable: false,
-                defaultValue: "");
+            migrationBuilder.CreateTable(
+                name: "Recipes",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CookTime = table.Column<int>(type: "int", nullable: false),
+                    Ethnicity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AuthorID = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Recipes", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Recipes_AspNetUsers_AuthorID",
+                        column: x => x.AuthorID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Instructions",
@@ -40,6 +50,19 @@ namespace CookNet.Migrations
                         principalTable: "Recipes",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ingredients",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ingredients", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -71,26 +94,19 @@ namespace CookNet.Migrations
                 name: "RecipeStories",
                 columns: table => new
                 {
-                    RecipeID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StoryText = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RecipeID1 = table.Column<int>(type: "int", nullable: false)
+                    RecipeID = table.Column<int>(type: "int", nullable: false),
+                    StoryText = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RecipeStories", x => x.RecipeID);
                     table.ForeignKey(
-                        name: "FK_RecipeStories_Recipes_RecipeID1",
-                        column: x => x.RecipeID1,
+                        name: "FK_RecipeStories_Recipes_RecipeID",
+                        column: x => x.RecipeID,
                         principalTable: "Recipes",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Recipes_AuthorID",
-                table: "Recipes",
-                column: "AuthorID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Instructions_RecipeID",
@@ -103,26 +119,13 @@ namespace CookNet.Migrations
                 column: "IngredientID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeStories_RecipeID1",
-                table: "RecipeStories",
-                column: "RecipeID1");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Recipes_AspNetUsers_AuthorID",
+                name: "IX_Recipes_AuthorID",
                 table: "Recipes",
-                column: "AuthorID",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                column: "AuthorID");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Recipes_AspNetUsers_AuthorID",
-                table: "Recipes");
-
             migrationBuilder.DropTable(
                 name: "Instructions");
 
@@ -132,20 +135,8 @@ namespace CookNet.Migrations
             migrationBuilder.DropTable(
                 name: "RecipeStories");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Recipes_AuthorID",
-                table: "Recipes");
-
-            migrationBuilder.DropColumn(
-                name: "AuthorID",
-                table: "Recipes");
-
-            migrationBuilder.AddColumn<string>(
-                name: "Author",
-                table: "Recipes",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+            migrationBuilder.DropTable(
+                name: "Recipes");
         }
     }
 }

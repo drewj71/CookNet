@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "CookNet.Client",
   "resources": {
-    "hash": "sha256-pUMOx3aspMdZ9H3UPx1qieDED8jyzhtlrZwUtv9ZSTU=",
+    "hash": "sha256-r25a+LTSDyukRIIb8R6GfStzMA5xyRyIiCMXUyd9D2M=",
     "jsModuleNative": {
       "dotnet.native.8.0.1.x8adpbmg4g.js": "sha256-SGOlISx+3G4kkvpC9Uq3qoPGsnjxGmW61QBev0lyI5U="
     },
@@ -210,10 +210,10 @@
       "mscorlib.wasm": "sha256-EpWTfh4m/hEcXRFYMCR9YeYHwdUJgcm1laBaxWfq2S4=",
       "netstandard.wasm": "sha256-2kH24/YfHmU3B4eYRyRmiwebYROM4+B9eDWKvMnUdP8=",
       "System.Private.CoreLib.wasm": "sha256-CsySKiP7HYY1pS8LTDE60EkqiX5oHb3WoEZHDNd1yK0=",
-      "CookNet.Client.wasm": "sha256-veDygJIgn0jpev0YNUQD8nc1IEZs2C8hpXPpE5uFIog="
+      "CookNet.Client.wasm": "sha256-WOF5R+14pF7yyy5ZFlGsxVgd5i26BHeISPNb3CsbJI4="
     },
     "pdb": {
-      "CookNet.Client.pdb": "sha256-SV7qz7VQF6SJAm2KDl3AOhjaDkhIVxxtTUKSO0U4CS0="
+      "CookNet.Client.pdb": "sha256-M/yQLkXyu/EIROMu2RhG2aK0Qo4slTt6QBRZDrwZ3sw="
     }
   },
   "cacheBootResources": true,

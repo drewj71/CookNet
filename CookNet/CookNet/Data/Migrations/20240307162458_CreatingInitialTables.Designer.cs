@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CookNet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240307153814_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240307162458_CreatingInitialTables")]
+    partial class CreatingInitialTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -202,12 +202,6 @@ namespace CookNet.Migrations
             modelBuilder.Entity("CookNet.Data.RecipeStory", b =>
                 {
                     b.Property<int>("RecipeID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecipeID"));
-
-                    b.Property<int>("RecipeID1")
                         .HasColumnType("int");
 
                     b.Property<string>("StoryText")
@@ -215,8 +209,6 @@ namespace CookNet.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RecipeID");
-
-                    b.HasIndex("RecipeID1");
 
                     b.ToTable("RecipeStories");
                 });
@@ -398,7 +390,7 @@ namespace CookNet.Migrations
                 {
                     b.HasOne("CookNet.Data.Recipe", "Recipe")
                         .WithMany("RecipeStories")
-                        .HasForeignKey("RecipeID1")
+                        .HasForeignKey("RecipeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

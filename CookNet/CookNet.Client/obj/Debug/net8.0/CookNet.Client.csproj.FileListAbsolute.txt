@@ -1036,3 +1036,4 @@ C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debu
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\refint\CookNet.Client.dll
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\CookNet.Client.pdb
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\ref\CookNet.Client.dll
+C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\CookNet.Client.sourcelink.json
