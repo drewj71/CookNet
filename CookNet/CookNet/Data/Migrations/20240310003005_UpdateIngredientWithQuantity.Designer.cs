@@ -4,6 +4,7 @@ using CookNet.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CookNet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240310003005_UpdateIngredientWithQuantity")]
+    partial class UpdateIngredientWithQuantity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,10 +131,6 @@ namespace CookNet.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("QuantityUnit")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ID");
 
                     b.ToTable("Ingredients");
@@ -141,15 +140,13 @@ namespace CookNet.Migrations
                         {
                             ID = 1,
                             Name = "Ingredient 1",
-                            Quantity = 0,
-                            QuantityUnit = ""
+                            Quantity = 0
                         },
                         new
                         {
                             ID = 2,
                             Name = "Ingredient 2",
-                            Quantity = 0,
-                            QuantityUnit = ""
+                            Quantity = 0
                         });
                 });
 
@@ -217,27 +214,6 @@ namespace CookNet.Migrations
                     b.HasIndex("AuthorID");
 
                     b.ToTable("Recipes");
-                });
-
-            modelBuilder.Entity("CookNet.Data.RecipeIngredient", b =>
-                {
-                    b.Property<int>("RecipeID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IngredientID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("RecipeID", "IngredientID");
-
-                    b.HasIndex("IngredientID");
-
-                    b.ToTable("RecipeIngredients");
                 });
 
             modelBuilder.Entity("CookNet.Data.RecipeStory", b =>
@@ -409,25 +385,6 @@ namespace CookNet.Migrations
                     b.Navigation("Author");
                 });
 
-            modelBuilder.Entity("CookNet.Data.RecipeIngredient", b =>
-                {
-                    b.HasOne("CookNet.Data.Ingredient", "Ingredient")
-                        .WithMany()
-                        .HasForeignKey("IngredientID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CookNet.Data.Recipe", "Recipe")
-                        .WithMany("RecipeIngredients")
-                        .HasForeignKey("RecipeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ingredient");
-
-                    b.Navigation("Recipe");
-                });
-
             modelBuilder.Entity("CookNet.Data.RecipeStory", b =>
                 {
                     b.HasOne("CookNet.Data.Recipe", "Recipe")
@@ -493,8 +450,6 @@ namespace CookNet.Migrations
             modelBuilder.Entity("CookNet.Data.Recipe", b =>
                 {
                     b.Navigation("Instructions");
-
-                    b.Navigation("RecipeIngredients");
 
                     b.Navigation("RecipeStories");
                 });

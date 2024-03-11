@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookNet", "CookNet\CookNet\CookNet.csproj", "{37149E8B-6640-4779-BF24-5F54B7E2AB20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookNet", "CookNet\CookNet\CookNet.csproj", "{37149E8B-6640-4779-BF24-5F54B7E2AB20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CookNet.Client", "CookNet\CookNet.Client\CookNet.Client.csproj", "{84F76AA6-DBC6-4028-B0BC-DB4AFD389DC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookNet.Client", "CookNet\CookNet.Client\CookNet.Client.csproj", "{84F76AA6-DBC6-4028-B0BC-DB4AFD389DC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

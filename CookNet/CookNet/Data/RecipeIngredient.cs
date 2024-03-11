@@ -1,29 +1,19 @@
-﻿using CookNet.Data;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-public class RecipeIngredient
+namespace CookNet.Data
 {
-    public int RecipeID { get; set; }
-    public int IngredientID { get; set; }
-    public int Quantity { get; set; }
-
-    // Navigation properties
-    public Recipe Recipe { get; set; }
-    public Ingredient Ingredient { get; set; }
-
-    // GetHashCode and Equals overrides
-    public override int GetHashCode()
+    public class RecipeIngredient
     {
-        return HashCode.Combine(RecipeID, IngredientID);
-    }
+        public int ID { get; set; }
 
-    public override bool Equals(object obj)
-    {
-        if (obj == null || GetType() != obj.GetType())
-        {
-            return false;
-        }
+        [ForeignKey("Recipe")]
+        public int RecipeID { get; set; }
+        public Recipe Recipe { get; set; }
 
-        RecipeIngredient other = (RecipeIngredient)obj;
-        return RecipeID == other.RecipeID && IngredientID == other.IngredientID;
+        [ForeignKey("Ingredient")]
+        public int IngredientID { get; set; }
+        public Ingredient Ingredient { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

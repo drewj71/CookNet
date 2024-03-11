@@ -4,6 +4,7 @@ using CookNet.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CookNet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240310005531_AddingRecipeIngredientBack")]
+    partial class AddingRecipeIngredientBack
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,10 +131,6 @@ namespace CookNet.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("QuantityUnit")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ID");
 
                     b.ToTable("Ingredients");
@@ -141,15 +140,13 @@ namespace CookNet.Migrations
                         {
                             ID = 1,
                             Name = "Ingredient 1",
-                            Quantity = 0,
-                            QuantityUnit = ""
+                            Quantity = 0
                         },
                         new
                         {
                             ID = 2,
                             Name = "Ingredient 2",
-                            Quantity = 0,
-                            QuantityUnit = ""
+                            Quantity = 0
                         });
                 });
 

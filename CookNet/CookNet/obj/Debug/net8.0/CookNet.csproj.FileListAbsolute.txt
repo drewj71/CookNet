@@ -149,6 +149,7 @@ C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.AssemblyInfo.cs
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.csproj.CoreCompileInputs.cache
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.sourcelink.json
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\staticwebassets\msbuild.CookNet.Microsoft.AspNetCore.StaticWebAssets.props
@@ -166,4 +167,3 @@ C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.pdb
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.genruntimeconfig.cache
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\ref\CookNet.dll
-C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.sourcelink.json

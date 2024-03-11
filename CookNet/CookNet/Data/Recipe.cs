@@ -11,8 +11,8 @@
         public string Category { get; set; }
         public string AuthorID { get; set; }
         public ApplicationUser Author { get; set; }
-        public ICollection<Instruction> Instructions { get; set; }
         public ICollection<RecipeIngredient> RecipeIngredients { get; set; }
+        public ICollection<Instruction> Instructions { get; set; }
         public ICollection<RecipeStory> RecipeStories { get; set; }
     }
 }

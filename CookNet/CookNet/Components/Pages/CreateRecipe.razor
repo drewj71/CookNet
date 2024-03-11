@@ -1,0 +1,144 @@
+﻿@page "/create-recipe"
+
+@using CookNet.Data
+@using System.Text.Json
+@inject IJSRuntime JSRuntime
+@inject RecipeService RecipeService
+@inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> UserManager
+@inject Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider AuthenticationStateProvider
+
+<h3>Post a Recipe!</h3>
+
+<AuthorizeView>
+    <Authorized>
+        <form @onsubmit="CreateNewRecipe">
+            <label>Name:</label>
+            <input type="text" @bind="recipeName" />
+
+            <label>Description:</label>
+            <input type="text" @bind="recipeDescription" />
+
+            <label>Cook Time (Hours):</label>
+            <input type="number" @bind="hours" />
+
+            <label>Cook Time (Minutes):</label>
+            <input type="number" @bind="minutes" />
+
+            <div>
+                <h4>Ingredients</h4>
+                <div>
+                    <label>Ingredient Name:</label>
+                    <input type="text" @bind="ingredientName" />
+
+                    <label>Quantity:</label>
+                    <input type="number" @bind="ingredientQuantity" />
+
+                    <label>Unit:</label>
+                    <select @bind="ingredientUnit">
+                        <!-- Options -->
+                    </select>
+
+                    <button type="button" @onclick="AddIngredient">Add Ingredient</button>
+                </div>
+                <!-- Display added ingredients -->
+                <ul>
+                    @foreach (var ingredient in addedIngredients)
+                    {
+                        <li>@ingredient.Name: @ingredient.Quantity @ingredient.QuantityUnit</li>
+                    }
+                </ul>
+            </div>
+
+            <label>Instructions:</label>
+            <textarea @bind-="recipeInstructions"></textarea>
+
+            <label>Ethnicity:</label>
+            <input type="text" @bind="recipeEthnicity" />
+
+            <label>Category:</label>
+            <input type="text" @bind="recipeCategory" />
+
+            <button type="submit">Post Recipe</button>
+        </form>
+    </Authorized>
+    <NotAuthorized>
+        <p>You must be logged in to create a recipe.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private string recipeName;
+    private string recipeDescription;
+    private int hours;
+    private int minutes;
+    private string recipeInstructions;
+    private string recipeEthnicity;
+    private string recipeCategory;
+    private int TotalCookTime => (hours * 60) + minutes;
+
+    private string ingredientName;
+    private int ingredientQuantity;
+    private string ingredientUnit;
+    private List<IngredientViewModel> addedIngredients = new List<IngredientViewModel>();
+
+    public class IngredientViewModel
+    {
+        public string Name { get; set; }
+        public int Quantity { get; set; }
+        public string QuantityUnit { get; set; }
+    }
+
+    private async Task AddIngredient()
+    {
+        // Add the ingredient to the list
+        var newIngredient = new IngredientViewModel
+            {
+                Name = ingredientName,
+                Quantity = ingredientQuantity,
+                QuantityUnit = ingredientUnit
+            };
+        addedIngredients.Add(newIngredient);
+
+        // Clear the input fields for the next ingredient
+        ingredientName = "";
+        ingredientQuantity = 0;
+        ingredientUnit = "teaspoon"; // Set a default value if needed
+
+        // Call JavaScript function to handle adding the ingredient on the client side
+        AddIngredientOnClientSide(newIngredient);
+    }
+
+    private void RemoveIngredient(IngredientViewModel ingredient)
+    {
+        addedIngredients.Remove(ingredient);
+    }
+
+    private async Task CreateNewRecipe()
+    {
+        async Task<AuthenticationState> GetAuthenticationStateAsync()
+        {
+            return await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        }
+
+        var recipe = new Recipe()
+            {
+                Name = recipeName,
+                Description = recipeDescription,
+                DateCreated = DateTime.UtcNow,
+                CookTime = TotalCookTime,
+                Ethnicity = recipeEthnicity,
+                Category = recipeCategory,
+            };
+
+        foreach (var ingredient in addedIngredients)
+        {
+            await RecipeService.AddIngredientToRecipeAsync(recipe, ingredient.Name, ingredient.Quantity);
+        }
+        await RecipeService.CreateRecipeAsync(recipe);
+    }
+
+    private async Task AddIngredientOnClientSide(IngredientViewModel ingredient)
+    {
+        await JSRuntime.InvokeVoidAsync("addIngredient", ingredient.Name, ingredient.Quantity, ingredient.QuantityUnit);
+    }
+}

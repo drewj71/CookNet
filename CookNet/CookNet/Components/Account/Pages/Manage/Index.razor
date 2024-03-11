@@ -33,6 +33,31 @@
                 <label for="phone-number" class="form-label">Date of birth</label>
                 <ValidationMessage For="() => Input.DateOfBirth" class="text-danger" />
             </div>
+            <div class="form-floating mb-3">
+                <InputText @bind-Value="Input.FullName" class="form-control" placeholder="Please enter your full name." />
+                <label for="full-name" class="form-label">Full name</label>
+                <ValidationMessage For="() => Input.FullName" class="text-danger" />
+            </div>
+            <div class="form-floating mb-3">
+                <InputText @bind-Value="Input.ProfilePictureURL" class="form-control" placeholder="Please enter your profile picture URL." />
+                <label for="profile-picture-url" class="form-label">Profile picture URL</label>
+                <ValidationMessage For="() => Input.ProfilePictureURL" class="text-danger" />
+            </div>
+            <div class="form-floating mb-3">
+                <InputText @bind-Value="Input.Location" class="form-control" placeholder="Please enter your location." />
+                <label for="location" class="form-label">Location</label>
+                <ValidationMessage For="() => Input.Location" class="text-danger" />
+            </div>
+            <div class="form-floating mb-3">
+                <InputText @bind-Value="Input.Biography" class="form-control" placeholder="Please enter your bio." />
+                <label for="biography" class="form-label">Biography</label>
+                <ValidationMessage For="() => Input.Biography" class="text-danger" />
+            </div>
+            <div class="form-floating mb-3">
+                <InputText @bind-Value="Input.SocialMediaLinks" class="form-control" placeholder="Please enter your social media links." />
+                <label for="social-media-links" class="form-label">Social Media Links</label>
+                <ValidationMessage For="() => Input.SocialMediaLinks" class="text-danger" />
+            </div>
             <button type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </EditForm>
     </div>
@@ -57,12 +82,22 @@
 
         Input.PhoneNumber ??= phoneNumber;
         Input.DateOfBirth ??= user.DateOfBirth;
+        Input.FullName ??= user.FullName;
+        Input.ProfilePictureURL ??= user.ProfilePictureURL;
+        Input.Location ??= user.Location;
+        Input.Biography ??= user.Biography;
+        Input.SocialMediaLinks ??= user.SocialMediaLinks;
     }
 
     private async Task OnValidSubmitAsync()
     {
         user.PhoneNumber = Input.PhoneNumber;
         user.DateOfBirth = Input.DateOfBirth;
+        user.FullName = Input.FullName;
+        user.ProfilePictureURL = Input.ProfilePictureURL;
+        user.Location = Input.Location;
+        user.Biography = Input.Biography;
+        user.SocialMediaLinks = Input.SocialMediaLinks;
         var updateResult = await UserManager.UpdateAsync(user);
 
         if (!updateResult.Succeeded) 
@@ -82,5 +117,23 @@
         public string? PhoneNumber { get; set; }
 
         public DateOnly? DateOfBirth { get; set; }
+
+        [Display(Name = "Full name")]
+        public string? FullName { get; set; }
+
+        [Display(Name = "Profile picture URL")]
+        public string? ProfilePictureURL { get; set; }
+
+        [Display(Name = "Location")]
+        public string? Location { get; set; }
+
+        [Display(Name = "Biography")]
+        public string? Biography { get; set; }
+
+        [Display(Name = "Social media links")]
+        public string? SocialMediaLinks { get; set; }
+
+        [Display(Name = "Registration date")]
+        public DateTime RegistrationDate { get; set; }
     }
 }

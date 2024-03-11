@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "efU0oKIRaxFUHVa1kvkPBJrFf3fsG5BsYQKt3klPqls=",
+  "Hash": "xyJ7KiPBaDg7L2dnWW5ftLXlKmu1tO7055R4QwQZ3N4=",
   "Source": "CookNet",
   "BasePath": "_content/CookNet",
   "Mode": "Default",
@@ -8033,6 +8033,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\wwwroot\\js\\recipeFunctions.js",
+      "SourceId": "CookNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\wwwroot\\",
+      "BasePath": "_content/CookNet",
+      "RelativePath": "js/recipeFunctions.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\recipeFunctions.js"
     }
   ]
 }
