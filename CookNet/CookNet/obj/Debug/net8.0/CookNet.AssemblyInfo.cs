@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CookNet")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a0ca8c29559a27ebe30bea3d885bc75ddebbe8e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+df188d6f43c5395157aa9f95e367ba971459d61b")]
 [assembly: System.Reflection.AssemblyProductAttribute("CookNet")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CookNet")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

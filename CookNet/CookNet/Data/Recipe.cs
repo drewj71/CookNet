@@ -14,5 +14,12 @@
         public ICollection<RecipeIngredient> RecipeIngredients { get; set; }
         public ICollection<Instruction> Instructions { get; set; }
         public ICollection<RecipeStory> RecipeStories { get; set; }
+
+        public Recipe()
+        {
+            RecipeIngredients = new List<RecipeIngredient>();
+            Instructions = new List<Instruction>();
+            RecipeStories = new List<RecipeStory>();
+        }
     }
 }

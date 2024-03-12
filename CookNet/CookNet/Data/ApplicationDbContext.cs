@@ -14,7 +14,7 @@ namespace CookNet.Data
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Instruction> Instructions { get; set; }
         public DbSet<RecipeStory> RecipeStories { get; set; }
-        public DbSet<RecipeIngredient> RecipeIngredients { get; set; } // Add this DbSet
+        public DbSet<RecipeIngredient> RecipeIngredients { get; set; } 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

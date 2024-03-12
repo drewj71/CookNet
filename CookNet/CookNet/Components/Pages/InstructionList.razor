@@ -1,0 +1,16 @@
+﻿@using CookNet.Data
+
+<div>
+    @foreach(var instruction in Instructions)
+    {
+        <div>
+            <InputNumber @bind-Value="@instruction.StepNumber" />
+            <InputTextArea @bind-Value="@instruction.InstructionText" />
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public List<Instruction> Instructions { get; set; }
+}

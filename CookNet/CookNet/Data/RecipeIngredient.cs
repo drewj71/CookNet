@@ -15,5 +15,7 @@ namespace CookNet.Data
         public Ingredient Ingredient { get; set; }
 
         public int Quantity { get; set; }
+
+        public string QuantityUnit { get; set; }
     }
 }

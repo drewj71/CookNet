@@ -1,125 +1,86 @@
 ﻿@page "/create-recipe"
-
 @using CookNet.Data
 @inject RecipeService RecipeService
-@inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUser> UserManager
-@inject Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.Components.Forms
 
-<h3>Post a Recipe!</h3>
+<h3>Create Recipe</h3>
 
-<form @onsubmit="CreateNewRecipe">
+<EditForm Model="@Recipe" OnValidSubmit="HandleSubmit" FormName="CreateRecipeForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
     <label>Name:</label>
-    <input type="text" @bind="recipeName" />
+    <InputText @bind-Value="@Recipe.Name" />
 
     <label>Description:</label>
-    <input type="text" @bind="recipeDescription" />
+    <InputTextArea @bind-Value="@Recipe.Description" />
 
-    <label>Cook Time (Hours):</label>
-    <input type="number" @bind="hours" />
-
-    <label>Cook Time (Minutes):</label>
-    <input type="number" @bind="minutes" />
-
-    <div>
-        <h4>Ingredients</h4>
-        <div>
-            <label>Ingredient Name:</label>
-            <input type="text" @bind="ingredientName" />
-
-            <label>Quantity:</label>
-            <input type="number" @bind="ingredientQuantity" />
-
-            <label>Unit:</label>
-            <select @bind="ingredientUnit">
-                <option value="teaspoon">tsp</option>
-                <option value="tablespoon">Tbsp</option>
-                <option value="cup">cup</option>
-                <option value="grams">g</option>
-                <option value="oz">oz</option>
-                <option value="cloves">clove</option>
-            </select>
-
-            <button type="button" @onclick="AddIngredient">Add Ingredient</button>
-        </div>
-        <!-- Display added ingredients -->
-        <ul>
-            @foreach (var ingredient in addedIngredients)
-            {
-                <li>@ingredient.Name: @ingredient.Quantity @ingredient.QuantityUnit</li>
-            }
-        </ul>
-    </div>
-
-    <label>Instructions:</label>
-    <textarea @bind-="recipeInstructions"></textarea>
+    <label>Cook Time (minutes):</label>
+    <InputNumber @bind-Value="@Recipe.CookTime" />
 
     <label>Ethnicity:</label>
-    <input type="text" @bind="recipeEthnicity" />
+    <InputText @bind-Value="@Recipe.Ethnicity" />
 
     <label>Category:</label>
-    <input type="text" @bind="recipeCategory" />
+    <InputText @bind-Value="@Recipe.Category" />
 
-    <button type="submit">Post Recipe</button>
-</form>
+    <div class="form-group">
+        <label>Ingredient Name:</label>
+        <InputText @bind-Value="@NewIngredientName" />
+    </div>
+    <div class="form-group">
+        <label>Quantity:</label>
+        <InputNumber @bind-Value="@NewIngredientQuantity" />
+    </div>
+    <div class="form-group">
+        <InputSelect @bind-Value="@NewIngredientQuantityUnit">
+            <option value="teaspoon">tsp</option>
+            <option value="tablespoon">Tbsp</option>
+            <option value="cup">Cup</option>
+            <option value="gram">Gram</option>
+            <option value="ounce">Ounce</option>
+        </InputSelect>
+    </div>
+    <button type="button" class="btn btn-primary" @onclick="AddIngredient">Add</button>
+
+    <div class="form-group">
+        <label>Instructions:</label>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+</EditForm>
 
 @code {
-    private string recipeName;
-    private string recipeDescription;
-    private int hours;
-    private int minutes;
-    private string recipeInstructions;
-    private string recipeEthnicity;
-    private string recipeCategory;
-    private int TotalCookTime => (hours * 60) + minutes;
+    Recipe Recipe { get; set; } = new Recipe();
+    string NewIngredientName { get; set; }
+    int NewIngredientQuantity { get; set; }
+    string NewIngredientQuantityUnit { get; set; } = "tsp";
 
-    private string ingredientName;
-    private int ingredientQuantity;
-    private string ingredientUnit;
-    private List<IngredientViewModel> addedIngredients = new List<IngredientViewModel>();
-
-    public class IngredientViewModel
+    async Task HandleSubmit()
     {
-        public string Name { get; set; }
-        public int Quantity { get; set; }
-        public string QuantityUnit { get; set; }
+        Console.WriteLine("BUTTON CLICKED!");
+        Recipe.DateCreated = DateTime.Now;
+        await RecipeService.CreateRecipeAsync(Recipe);
+        NavigationManager.NavigateTo("/recipes");
     }
 
-    private async Task AddIngredient()
+    private void AddIngredient()
     {
-        var newIngredient = new IngredientViewModel
-            {
-                Name = ingredientName,
-                Quantity = ingredientQuantity,
-                QuantityUnit = ingredientUnit
-            };
-        addedIngredients.Add(newIngredient);
-
-        ingredientName = "";
-        ingredientQuantity = 0;
-        ingredientUnit = "teaspoon";
-    }
-
-    private void RemoveIngredient(IngredientViewModel ingredient)
-    {
-        addedIngredients.Remove(ingredient);
-    }
-
-    private async Task CreateNewRecipe()
-    {
-        async Task<AuthenticationState> GetAuthenticationStateAsync()
+        Console.WriteLine("BUTTON CLICKED!");
+        Recipe.RecipeIngredients.Add(new RecipeIngredient
         {
-            return await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        }
+            Ingredient = new Ingredient { Name = NewIngredientName },
+            Quantity = NewIngredientQuantity,
+            QuantityUnit = NewIngredientQuantityUnit
+        });
+        NewIngredientName = string.Empty;
+        NewIngredientQuantity = 0;
+        NewIngredientQuantityUnit = "tsp";
+    }
 
-        var recipe = new Recipe()
-            {
-                Name = recipeName,
-                Description = recipeDescription,
-                DateCreated = DateTime.UtcNow,
-                CookTime = TotalCookTime,
-                Ethnicity = recipeEthnicity,
-                Category = recipeCategory,
-            };
-        await RecipeService.CreateRecipeAsync(recipe);
+    private void AddInstruction()
+    {
+        Recipe.Instructions.Add(new Instruction());
     }
 }
