@@ -37,6 +37,7 @@ main[b-2tlxc31yxu] {
         text-overflow: ellipsis;
     }
 
+
 @media (max-width: 640.98px) {
     .top-row[b-2tlxc31yxu] {
         justify-content: space-between;
@@ -95,6 +96,8 @@ main[b-2tlxc31yxu] {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+
 /* _content/CookNet/Components/Layout/NavMenu.razor.rz.scp.css */
 .navbar-toggler[b-8sk4w4v26d] {
     appearance: none;

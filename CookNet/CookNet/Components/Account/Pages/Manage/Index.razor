@@ -80,6 +80,7 @@
         username = await UserManager.GetUserNameAsync(user);
         phoneNumber = await UserManager.GetPhoneNumberAsync(user);
 
+
         Input.PhoneNumber ??= phoneNumber;
         Input.DateOfBirth ??= user.DateOfBirth;
         Input.FullName ??= user.FullName;

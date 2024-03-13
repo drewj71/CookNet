@@ -22,6 +22,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/drewj/OneDrive/Documents/GitHub/CookNet/CookNet/CookNet.Client/Pages/About.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWJvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/drewj/OneDrive/Documents/GitHub/CookNet/CookNet/CookNet.Client/Pages/Auth.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

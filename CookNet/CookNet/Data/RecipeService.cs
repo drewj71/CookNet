@@ -27,6 +27,11 @@ namespace CookNet.Data
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<Instruction>> GetAllInstructionsAsync()
+        {
+            return await _context.Instructions.ToListAsync();
+        }
+
         public async Task AddIngredientToRecipeAsync(Recipe recipe, string ingredientName, int quantity, string quantityMeasure)
         {
             var ingredient = await _context.Ingredients.FirstOrDefaultAsync(i => i.Name == ingredientName);
@@ -46,6 +51,19 @@ namespace CookNet.Data
             };
 
             _context.RecipeIngredients.Add(recipeIngredient);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddInstructionToRecipeAsync(Recipe recipe, string instructionText)
+        {
+            var instruction = new Instruction
+            {
+                StepNumber = recipe.Instructions.Count + 1,
+                InstructionText = instructionText
+            };
+
+            recipe.Instructions.Add(instruction);
 
             await _context.SaveChangesAsync();
         }

@@ -46,7 +46,9 @@
 
     <div class="form-group">
         <label>Instructions:</label>
+        <InputTextArea @bind-Value="NewInstructionText" />
     </div>
+    <button type="button" class="btn btn-primary" @onclick="AddInstruction">Add</button>
 
     <button type="submit" class="btn btn-success">Submit</button>
 </EditForm>
@@ -56,31 +58,28 @@
     string NewIngredientName { get; set; }
     int NewIngredientQuantity { get; set; }
     string NewIngredientQuantityUnit { get; set; } = "tsp";
+    string NewInstructionText { get; set; }
 
-    async Task HandleSubmit()
+    private async Task AddIngredient()
     {
         Console.WriteLine("BUTTON CLICKED!");
-        Recipe.DateCreated = DateTime.Now;
-        await RecipeService.CreateRecipeAsync(Recipe);
-        NavigationManager.NavigateTo("/recipes");
-    }
-
-    private void AddIngredient()
-    {
-        Console.WriteLine("BUTTON CLICKED!");
-        Recipe.RecipeIngredients.Add(new RecipeIngredient
-        {
-            Ingredient = new Ingredient { Name = NewIngredientName },
-            Quantity = NewIngredientQuantity,
-            QuantityUnit = NewIngredientQuantityUnit
-        });
+        await RecipeService.AddIngredientToRecipeAsync(Recipe, NewIngredientName, NewIngredientQuantity, NewIngredientQuantityUnit);
         NewIngredientName = string.Empty;
         NewIngredientQuantity = 0;
         NewIngredientQuantityUnit = "tsp";
     }
 
-    private void AddInstruction()
+    private async Task AddInstruction()
     {
-        Recipe.Instructions.Add(new Instruction());
+        Console.WriteLine("BUTTON CLICKED!");
+        await RecipeService.AddInstructionToRecipeAsync(Recipe, NewInstructionText);
+        NewInstructionText = string.Empty;
+    }
+
+    async Task HandleSubmit()
+    {
+        Recipe.DateCreated = DateTime.Now;
+        await RecipeService.CreateRecipeAsync(Recipe);
+        NavigationManager.NavigateTo("/recipes");
     }
 }
