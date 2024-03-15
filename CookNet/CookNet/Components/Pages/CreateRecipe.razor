@@ -6,7 +6,7 @@
 
 <h3>Create Recipe</h3>
 
-<EditForm Model="@Recipe" OnValidSubmit="@HandleSubmit" FormName="CreateRecipeForm">
+<EditForm Model="@Recipe" OnValidSubmit="HandleSubmit" FormName="CreateRecipeForm">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -69,10 +69,10 @@
         NewIngredientQuantityUnit = "tsp";
     }
 
-    private async Task AddInstruction()
+    private void AddInstruction()
     {
         Console.WriteLine("BUTTON CLICKED!");
-        await RecipeService.AddInstructionToRecipeAsync(Recipe, NewInstructionText);
+        RecipeService.AddInstructionToRecipeAsync(Recipe, NewInstructionText);
         NewInstructionText = string.Empty;
     }
 

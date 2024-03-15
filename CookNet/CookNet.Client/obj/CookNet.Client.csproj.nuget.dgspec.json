@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\CookNet.Client.csproj": {}
+    "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet.Client\\CookNet.Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\CookNet.Client.csproj": {
+    "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet.Client\\CookNet.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\CookNet.Client.csproj",
+        "projectUniqueName": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet.Client\\CookNet.Client.csproj",
         "projectName": "CookNet.Client",
-        "projectPath": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\CookNet.Client.csproj",
-        "packagesPath": "C:\\Users\\drewj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\",
+        "projectPath": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet.Client\\CookNet.Client.csproj",
+        "packagesPath": "C:\\Users\\Andrew Jenks\\.nuget\\packages\\",
+        "outputPath": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet.Client\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\drewj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Andrew Jenks\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
