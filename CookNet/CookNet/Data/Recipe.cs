@@ -7,6 +7,7 @@
         public string Description { get; set; }
         public DateTime DateCreated { get; set; }
         public int CookTime { get; set; }
+        public int PrepTime { get; set; }
         public string Ethnicity { get; set; }
         public string Category { get; set; }
         public string AuthorID { get; set; }

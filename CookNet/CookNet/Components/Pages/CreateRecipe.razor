@@ -1,8 +1,16 @@
 ﻿@page "/create-recipe"
 @using CookNet.Data
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@inject UserManager<ApplicationUser> UserManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject RecipeService RecipeService
 @inject NavigationManager NavigationManager
-@using Microsoft.AspNetCore.Components.Forms
+@rendermode InteractiveServer
+@attribute [Authorize]
 
 <h3>Create Recipe</h3>
 
@@ -10,76 +18,238 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <label>Name:</label>
-    <InputText @bind-Value="@Recipe.Name" />
-
-    <label>Description:</label>
-    <InputTextArea @bind-Value="@Recipe.Description" />
-
-    <label>Cook Time (minutes):</label>
-    <InputNumber @bind-Value="@Recipe.CookTime" />
-
-    <label>Ethnicity:</label>
-    <InputText @bind-Value="@Recipe.Ethnicity" />
-
-    <label>Category:</label>
-    <InputText @bind-Value="@Recipe.Category" />
-
     <div class="form-group">
-        <label>Ingredient Name:</label>
-        <InputText @bind-Value="@NewIngredientName" />
+        <label for="Name">Name:</label>
+        <InputText id="Name" class="form-control" @bind-Value="@Recipe.Name" placeholder="Levain Chocolate Chip Cookies" />
     </div>
+
     <div class="form-group">
-        <label>Quantity:</label>
-        <InputNumber @bind-Value="@NewIngredientQuantity" />
+        <label for="Description">Description:</label>
+        <InputTextArea id="Description" class="form-control" @bind-Value="@Recipe.Description" placeholder="Quick, Easy, Delicious Recipe!" />
     </div>
+
     <div class="form-group">
-        <InputSelect @bind-Value="@NewIngredientQuantityUnit">
-            <option value="teaspoon">tsp</option>
-            <option value="tablespoon">Tbsp</option>
-            <option value="cup">Cup</option>
-            <option value="gram">Gram</option>
-            <option value="ounce">Ounce</option>
+        <label for="PrepTime">Prep Time (minutes):</label>
+        <InputNumber id="PrepTime" class="form-control" @bind-Value="@Recipe.PrepTime" />
+    </div>
+
+    <div class="form-group">
+        <label for="CookTime">Cook Time (minutes):</label>
+        <InputNumber id="CookTime" class="form-control" @bind-Value="@Recipe.CookTime" />
+    </div>
+
+    <div class="form-group">
+        <label for="Category">Category:</label>
+        <InputSelect id="Category" class="form-control" @bind-Value="@Recipe.Category">
+            <option value="Select One">--Select One--</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Appetizer">Appetizer</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Snack">Snack</option>
+            <option value="Beverage">Beverage</option>
+            <option value="Topping">Topping</option>
         </InputSelect>
     </div>
-    <button type="button" class="btn btn-primary" @onclick="AddIngredient">Add</button>
 
     <div class="form-group">
-        <label>Instructions:</label>
-        <InputTextArea @bind-Value="NewInstructionText" />
+        <label for="Ethnicity">Ethnicity:</label>
+        <InputSelect id="Ethnicity" class="form-control" @bind-Value="@Recipe.Ethnicity">
+            <option value="Select One">--Select One--</option>
+            <option value="NA">N/A</option>
+            <option value="Asian">Asian</option>
+            <option value="LatinHispanic">Latin/Hispanic</option>
+            <option value="Mediterranean">Mediterranean</option>
+            <option value="MiddleEastern">Middle Eastern</option>
+            <option value="American">American</option>
+            <option value="Southern">Southern</option>
+        </InputSelect>
     </div>
-    <button type="button" class="btn btn-primary" @onclick="AddInstruction">Add</button>
+
+    <div class="form-group">
+        <label for="NewIngredientName">Ingredient Name:</label>
+        <InputText id="NewIngredientName" class="form-control" @bind-Value="@NewIngredientName" placeholder="All-Purpose Flour" />
+    </div>
+    <div class="form-group">
+        <label for="NewIngredientQuantity">Quantity:</label>
+        <InputText id="NewIngredientQuantity" class="form-control" @bind-Value="@NewIngredientQuantity" placeholder="1/2" />
+    </div>
+    <div class="form-group">
+        <label for="NewIngredientQuantityUnit">Quantity Unit:</label>
+        <InputText id="NewIngredientQuantityUnit" class="form-control" @bind-Value="@NewIngredientQuantityUnit" placeholder="cup" />
+    </div>
+        
+    <p><button type="button" class="btn btn-primary" @onclick="AddIngredientAsync">Add</button></p>
+
+    @if (AddedIngredients.Any())
+    {
+        <div style="background-color: #f2f2f2; padding: 10px; margin-bottom: 10px;">
+            <h4>Added Ingredients:</h4>
+            <ul class="list-unstyled">
+                @foreach (var ingredient in AddedIngredients)
+                {
+                    <li>
+                        <button type="button" class="btn btn-link text-danger" @onclick="() => RemoveIngredient(ingredient)">X</button>
+                        @($"{ingredient.Quantity} {ingredient.QuantityUnit} - {ingredient.Name}")
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+
+    <div class="form-group">
+        <label for="NewInstructionText">Instructions:</label>
+        <InputTextArea id="NewInstructionText" class="form-control" @bind-Value="NewInstructionText" placeholder="Preheat oven to 450." />
+    </div>
+    <p><button type="button" class="btn btn-primary" @onclick="AddInstructionAsync">Add</button></p>
+
+    @if (AddedInstructions.Any())
+    {
+        <div style="background-color: #f2f2f2; padding: 10px; margin-bottom: 10px;">
+            <h4>Added Instructions:</h4>
+            <ul class="list-unstyled">
+                @foreach (var instruction in AddedInstructions)
+                {
+                    <li>
+                        <button type="button" class="btn btn-link text-danger" @onclick="() => RemoveInstruction(instruction)">X</button>
+                        @($"{instruction.StepNumber}. {instruction.InstructionText}")
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+
+    <div class="form-group">
+        <label for="RecipeStory">Story:</label>
+        <InputTextArea id="RecipeStory" class="form-control" @bind-Value="NewRecipeStory" placeholder="Long detailed recipe story - " />
+    </div>
+    <p><button type="button" class="btn btn-primary" @onclick="AddRecipeStoryAsync">Add</button></p>
+
+    @if (AddedRecipeStory.Any())
+    {
+        <div style="background-color: #f2f2f2; padding: 10px; margin-bottom: 10px;">
+            <h4>Added Story:</h4>
+            <ul class="list-unstyled">
+                @foreach (var story in AddedRecipeStory)
+                {
+                    <li>
+                        <button type="button" class="btn btn-link text-danger" @onclick="() => RemoveStory(story)">X</button>
+                        @($"{story.StoryText}")
+                    </li>
+                }
+            </ul>
+        </div>
+    }
 
     <button type="submit" class="btn btn-success">Submit</button>
 </EditForm>
 
 @code {
-    Recipe Recipe { get; set; } = new Recipe();
-    string NewIngredientName { get; set; }
-    int NewIngredientQuantity { get; set; }
-    string NewIngredientQuantityUnit { get; set; } = "tsp";
-    string NewInstructionText { get; set; }
+    private Recipe Recipe { get; set; } = new Recipe();
+    private string NewIngredientName { get; set; }
+    private string NewIngredientQuantity { get; set; }
+    private string NewIngredientQuantityUnit { get; set; }
+    private string NewInstructionText { get; set; }
+    private string NewRecipeStory { get; set; }
+    private string UserId { get; set; }
+    private int currentStepNumber = 1;
+    List<Ingredient> AddedIngredients { get; set; } = new();
+    List<Instruction> AddedInstructions { get; set; } = new();
+    List<RecipeStory> AddedRecipeStory { get; set; } = new();
 
-    private void AddIngredient()
+    protected override async Task OnInitializedAsync()
     {
-        Console.WriteLine("BUTTON CLICKED!");
-        RecipeService.AddIngredientToRecipeAsync(Recipe, NewIngredientName, NewIngredientQuantity, NewIngredientQuantityUnit);
-        NewIngredientName = string.Empty;
-        NewIngredientQuantity = 0;
-        NewIngredientQuantityUnit = "tsp";
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        if (user.Identity.IsAuthenticated)
+        {
+            UserId = user.FindFirstValue(ClaimTypes.NameIdentifier);
+            Recipe.AuthorID = UserId;
+        }
     }
 
-    private void AddInstruction()
+    private async Task AddIngredientAsync()
     {
-        Console.WriteLine("BUTTON CLICKED!");
-        RecipeService.AddInstructionToRecipeAsync(Recipe, NewInstructionText);
+        AddedIngredients.Add(new Ingredient
+        {
+            Name = NewIngredientName,
+            Quantity = NewIngredientQuantity,
+            QuantityUnit = NewIngredientQuantityUnit
+        });
+
+        try
+        {
+            await RecipeService.AddIngredientToRecipeAsync(Recipe, NewIngredientName, NewIngredientQuantity, NewIngredientQuantityUnit);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error adding ingredient: {ex.Message}");
+        }
+
+        NewIngredientName = string.Empty;
+        NewIngredientQuantity = string.Empty;
+        NewIngredientQuantityUnit = string.Empty;
+    }
+
+    private async Task AddInstructionAsync()
+    {
+        AddedInstructions.Add(new Instruction
+        {
+            StepNumber = currentStepNumber++,
+            InstructionText = NewInstructionText
+        });
+
+        try
+        {
+            await RecipeService.AddInstructionToRecipeAsync(Recipe, NewInstructionText);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error adding instruction: {ex.Message}");
+        }
+
         NewInstructionText = string.Empty;
+    }
+
+    private async Task AddRecipeStoryAsync()
+    {
+        AddedRecipeStory.Add(new RecipeStory
+        {
+            StoryText = NewRecipeStory
+        });
+
+        try
+        {
+            await RecipeService.AddRecipeStoryToRecipeAsync(Recipe, NewRecipeStory);
+        } 
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error adding story: {ex.Message}");
+        }
+        NewRecipeStory = string.Empty;
+    }
+
+    // THESE REMOVE FUNCTIONS ONLY REMOVE FROM THE LIST NOT THE DATABASE ENTRY!
+    void RemoveIngredient(Ingredient ingredient)
+    {
+        AddedIngredients.Remove(ingredient);
+    }
+
+    void RemoveInstruction(Instruction instruction)
+    {
+        AddedInstructions.Remove(instruction);
+    }
+
+    void RemoveStory(RecipeStory story)
+    {
+        AddedRecipeStory.Remove(story);
     }
 
     async Task HandleSubmit()
     {
         Recipe.DateCreated = DateTime.Now;
         await RecipeService.CreateRecipeAsync(Recipe);
-        NavigationManager.NavigateTo("/recipes");
+        NavigationManager.NavigateTo($"/recipes/{Recipe.ID}");
     }
 }

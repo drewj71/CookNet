@@ -13,27 +13,27 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = CookNet.Client
 build_property.RootNamespace = CookNet.Client
-build_property.ProjectDir = D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\
+build_property.ProjectDir = C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = false
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client
+build_property.MSBuildProjectDirectory = C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet.Client/Pages/About.razor]
+[C:/Users/drewj/OneDrive/Documents/GitHub/CookNet/CookNet/CookNet.Client/Pages/About.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWJvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet.Client/Pages/Auth.razor]
+[C:/Users/drewj/OneDrive/Documents/GitHub/CookNet/CookNet/CookNet.Client/Pages/Auth.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet.Client/RedirectToLogin.razor]
+[C:/Users/drewj/OneDrive/Documents/GitHub/CookNet/CookNet/CookNet.Client/RedirectToLogin.razor]
 build_metadata.AdditionalFiles.TargetPath = UmVkaXJlY3RUb0xvZ2luLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet.Client/_Imports.razor]
+[C:/Users/drewj/OneDrive/Documents/GitHub/CookNet/CookNet/CookNet.Client/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

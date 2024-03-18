@@ -13,9 +13,7 @@ namespace CookNet.Data
         [ForeignKey("Ingredient")]
         public int IngredientID { get; set; }
         public Ingredient Ingredient { get; set; }
-
-        public int Quantity { get; set; }
-
-        public string QuantityUnit { get; set; }
+        public string Quantity { get; set; }
+        public string? QuantityUnit { get; set; }
     }
 }

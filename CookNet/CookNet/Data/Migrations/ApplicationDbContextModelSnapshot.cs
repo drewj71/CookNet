@@ -125,32 +125,16 @@ namespace CookNet.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                    b.Property<string>("Quantity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuantityUnit")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
                     b.ToTable("Ingredients");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Name = "Ingredient 1",
-                            Quantity = 0,
-                            QuantityUnit = ""
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "Ingredient 2",
-                            Quantity = 0,
-                            QuantityUnit = ""
-                        });
                 });
 
             modelBuilder.Entity("CookNet.Data.Instruction", b =>
@@ -212,6 +196,9 @@ namespace CookNet.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PrepTime")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
                     b.HasIndex("AuthorID");
@@ -230,8 +217,12 @@ namespace CookNet.Migrations
                     b.Property<int>("ID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                    b.Property<string>("Quantity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuantityUnit")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RecipeID", "IngredientID");
 

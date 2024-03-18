@@ -1,0 +1,42 @@
+﻿@page "/recipes/{RecipeId}"
+@using CookNet.Data
+@inject RecipeService RecipeService
+
+
+<h3>Recipe Details</h3>
+
+@if (Recipe != null)
+{
+    <div>
+        <h4>@Recipe.Name</h4>
+        <p>@Recipe.Description</p>
+        <p>@Recipe.PrepTime</p>
+        <p>@Recipe.CookTime</p>
+        <p>@Recipe.Category</p>
+        <p>@Recipe.Ethnicity</p>
+        <h5>Ingredients:</h5>
+        <ul>
+            @foreach (var ingredient in Recipe.RecipeIngredients)
+            {
+                <li>@($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Ingredient.Name}")</li>
+            }
+            <li></li>
+        </ul>
+    </div>
+} 
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    private Recipe Recipe;
+
+    [Parameter]
+    public int RecipeId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Recipe = await RecipeService.GetRecipeByIdAsync(RecipeId);
+    }
+}

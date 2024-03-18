@@ -20,6 +20,10 @@ namespace CookNet.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Recipe>()
+                .Property(r => r.ID)
+                .ValueGeneratedOnAdd();
+
             // Configure one-to-many relationship between Recipe and Instruction
             modelBuilder.Entity<Instruction>()
                 .HasOne(i => i.Recipe)
@@ -50,12 +54,6 @@ namespace CookNet.Data
             modelBuilder.Entity<Ingredient>()
                 .Property(i => i.Quantity)
                 .IsRequired();
-
-            // Optionally, you can also seed data for the Ingredient entity if needed
-            modelBuilder.Entity<Ingredient>().HasData(
-                new Ingredient { ID = 1, Name = "Ingredient 1", Quantity = 0, QuantityUnit = "" },
-                new Ingredient { ID = 2, Name = "Ingredient 2", Quantity = 0, QuantityUnit = "" }
-            );
         }
     }
 }
