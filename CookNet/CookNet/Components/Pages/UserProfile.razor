@@ -1,0 +1,104 @@
+﻿@page "/users/{UserName}"
+@using CookNet.Data
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@inject RecipeService RecipeService
+@rendermode InteractiveServer
+
+@if (User != null)
+{
+    <h3>@User.FullName</h3>
+    <p>@("@")@User.UserName</p>
+
+    <div class="container">
+        <!-- User information -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">User Information</h5>
+                        <p class="card-text">Date Joined: @User.RegistrationDate.ToShortDateString()</p>
+                        <p class="card-text">Biography: @User.Biography</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile tabs -->
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" @onclick="ShowRecipes">Recipes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" @onclick="ShowInsights">Insights</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Profile content -->
+        <div class="row mt-3">
+            <div class="col-md-6">
+                @if (showRecipes)
+                {
+                    <!-- Recipe list -->
+                    <h4>Recipes</h4>
+                    <div class="card-columns">
+                        @foreach (var recipe in UserRecipes)
+                        {
+                            <div class="card">
+                                <img class="card-img-top" src="" alt="@recipe.Name">
+                                <div class="card-body">
+                                    <h5 class="card-title">@recipe.Name</h5>
+                                    <p class="card-text">Cook Time: @recipe.CookTime</p>
+                                    <p class="card-text">Prep Time: @recipe.PrepTime</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <!-- Insights -->
+                    <h4>Insights</h4>
+                    <!-- Display insights here -->
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p>User not found.</p>
+}
+
+@code {
+    [Parameter]
+    public string UserName { get; set; }
+
+    private ApplicationUser User;
+    private List<Recipe> UserRecipes;
+    private bool showRecipes = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        User = await UserManager.FindByNameAsync(UserName);
+        if (User != null)
+        {
+            // Retrieve the user's posts
+            UserRecipes = await RecipeService.GetRecipesByAuthorAsync(User.Id);
+        }
+    }
+
+    private void ShowRecipes()
+    {
+        showRecipes = true;
+    }
+
+    private void ShowInsights()
+    {
+        showRecipes = false;
+    }
+}

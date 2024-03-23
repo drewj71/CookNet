@@ -31,7 +31,6 @@ namespace CookNet.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Biography")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -49,11 +48,9 @@ namespace CookNet.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -79,8 +76,7 @@ namespace CookNet.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ProfilePictureURL")
-                        .IsRequired()
+                    b.Property<string>("ProfilePictureBase64")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("RegistrationDate")
@@ -90,7 +86,6 @@ namespace CookNet.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SocialMediaLinks")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -170,6 +165,9 @@ namespace CookNet.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<string>("AdditionalImages")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AuthorID")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -199,6 +197,9 @@ namespace CookNet.Migrations
                     b.Property<int>("PrepTime")
                         .HasColumnType("int");
 
+                    b.Property<string>("ThumbnailImage")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ID");
 
                     b.HasIndex("AuthorID");
@@ -212,9 +213,6 @@ namespace CookNet.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("IngredientID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ID")
                         .HasColumnType("int");
 
                     b.Property<string>("Quantity")

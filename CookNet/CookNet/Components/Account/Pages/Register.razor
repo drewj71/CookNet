@@ -27,6 +27,16 @@
             <h2>Create a new account.</h2>
             <hr />
             <ValidationSummary class="text-danger" role="alert" />
+            <!-- Display error message for username -->
+            @if (usernameTaken)
+            {
+                <div class="alert alert-danger">Username is already taken. Please choose a different username.</div>
+            }
+            <div class="form-floating mb-3">
+                <InputText @bind-Value="Input.Username" class="form-control" autocomplete="username" aria-required="true" placeholder="username" />
+                <label for="username">Username</label>
+                <ValidationMessage For="() => Input.Username" class="text-danger" />
+            </div>
             <div class="form-floating mb-3">
                 <InputText @bind-Value="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                 <label for="email">Email</label>
@@ -65,11 +75,23 @@
 
     private string? Message => identityErrors is null ? null : $"Error: {string.Join(", ", identityErrors.Select(error => error.Description))}";
 
+    private bool usernameTaken = false;
+
     public async Task RegisterUser(EditContext editContext)
     {
+        var existingUser = await UserManager.FindByNameAsync(Input.Username);
+        if (existingUser != null)
+        {
+            usernameTaken = true;
+            return;
+        }
+        else
+        {
+            usernameTaken = false;
+        }
         var user = CreateUser();
 
-        await UserStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+        await UserStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
         var emailStore = GetEmailStore();
         await emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
         user.RegistrationDate = DateTime.UtcNow;
@@ -127,6 +149,12 @@
 
     private sealed class InputModel
     {
+        [Required(ErrorMessage = "Username is required.")]
+        [StringLength(20, MinimumLength = 3, ErrorMessage = "Username must be between 3 and 20 characters.")]
+        [RegularExpression(@"^[a-zA-Z0-9_-]+$", ErrorMessage = "Username can only contain letters, numbers, hyphens, and underscores.")]
+        [Display(Name = "Username")]
+        public string Username { get; set; } = "";
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

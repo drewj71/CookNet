@@ -1,42 +1,60 @@
 ﻿@page "/recipes/{RecipeId}"
 @using CookNet.Data
+@using Microsoft.AspNetCore.Identity
 @inject RecipeService RecipeService
-
-
-<h3>Recipe Details</h3>
+@rendermode InteractiveServer
 
 @if (Recipe != null)
 {
     <div>
         <h4>@Recipe.Name</h4>
+        <p>Author: @AuthorUserName</p>
+        <img src="@Recipe.ThumbnailImage" alt="RecipeThumbnail" class="img-fluid w-100 border rounded shadow m-2 p-2">
         <p>@Recipe.Description</p>
-        <p>@Recipe.PrepTime</p>
-        <p>@Recipe.CookTime</p>
-        <p>@Recipe.Category</p>
-        <p>@Recipe.Ethnicity</p>
+        @if (@Recipe.AdditionalImages != null) {
+            @foreach (var image in Recipe.AdditionalImages)
+            {
+                <img src="@image" alt="AdditionalImages" class="img-fluid w-100 border rounded shadow m-2 p-2">
+            }
+        }
+        <p>Prep Time: @Recipe.PrepTime</p>
+        <p>Cook Time: @Recipe.CookTime</p>
+        <p>Category: @Recipe.Category</p>
+        <p>Ethnicity: @Recipe.Ethnicity</p>
         <h5>Ingredients:</h5>
         <ul>
             @foreach (var ingredient in Recipe.RecipeIngredients)
             {
                 <li>@($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Ingredient.Name}")</li>
             }
-            <li></li>
         </ul>
     </div>
-} 
+}
 else
 {
     <p>Loading...</p>
 }
 
 @code {
+    [Inject]
+    private UserManager<ApplicationUser> UserManager { get; set; }
+
     private Recipe Recipe;
+    private string AuthorUserName;
 
     [Parameter]
-    public int RecipeId { get; set; }
+    public string RecipeId { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Recipe = await RecipeService.GetRecipeByIdAsync(RecipeId);
+        if (int.TryParse(RecipeId, out int recipeId))
+        {
+            Recipe = await RecipeService.GetRecipeByIdAsync(recipeId);
+            if (Recipe != null)
+            {
+                var author = await UserManager.FindByIdAsync(Recipe.AuthorID);
+                AuthorUserName = author?.UserName ?? "Anonymous";
+            }
+        }
     }
 }

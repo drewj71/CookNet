@@ -1,14 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace CookNet.Data
 {
     public class RecipeService
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public RecipeService(ApplicationDbContext context)
+        public RecipeService(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
-            this._context = context;
+            _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<List<Recipe>> GetRecipesAsync()
@@ -43,10 +51,10 @@ namespace CookNet.Data
 
             if (ingredient == null)
             {
-                ingredient = new Ingredient 
-                { 
-                    Name = ingredientName, 
-                    Quantity = quantity, 
+                ingredient = new Ingredient
+                {
+                    Name = ingredientName,
+                    Quantity = quantity,
                     QuantityUnit = quantityMeasure
                 };
                 _context.Ingredients.Add(ingredient);
@@ -61,8 +69,6 @@ namespace CookNet.Data
             };
 
             _context.RecipeIngredients.Add(recipeIngredient);
-
-            await _context.SaveChangesAsync();
         }
 
         public async Task AddInstructionToRecipeAsync(Recipe recipe, string instructionText)
@@ -74,8 +80,6 @@ namespace CookNet.Data
             };
 
             recipe.Instructions.Add(instruction);
-
-            await _context.SaveChangesAsync();
         }
 
         public async Task AddRecipeStoryToRecipeAsync(Recipe recipe, string storyText)
@@ -85,8 +89,6 @@ namespace CookNet.Data
                 StoryText = storyText
             };
             recipe.RecipeStories.Add(story);
-
-            await _context.SaveChangesAsync();
         }
 
         public async Task<Recipe> GetRecipeByIdAsync(int recipeId)
@@ -97,6 +99,47 @@ namespace CookNet.Data
                 throw new InvalidOperationException($"Recipe with ID '{recipeId}' not found.");
             }
             return recipe;
+        }
+        public async Task<List<Recipe>> GetRecipesByAuthorAsync(string authorId)
+        {
+            return await _context.Recipes
+                .Where(r => r.AuthorID == authorId)
+                .OrderByDescending(r => r.DateCreated)
+                .ToListAsync();
+        }
+
+        public async Task<string> UploadImageAsync(IBrowserFile file)
+        {
+            if (file == null || file.Size == 0 || string.IsNullOrEmpty(file.Name))
+            {
+                throw new ArgumentException("Invalid file");
+            }
+
+            // Save the image and return its path
+            return await SaveImageAsync(file);
+        }
+
+        private async Task<string> SaveImageAsync(IBrowserFile file)
+        {
+            // Check if the uploads directory exists, create it if not
+            var uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+            if (!Directory.Exists(uploadsDir))
+            {
+                Directory.CreateDirectory(uploadsDir);
+            }
+
+            // Generate a unique file name
+            var uniqueFileName = $"{Guid.NewGuid().ToString()}_{Path.GetFileName(file.Name)}";
+            var filePath = Path.Combine(uploadsDir, uniqueFileName);
+
+            // Save the file to the uploads directory
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.OpenReadStream().CopyToAsync(fileStream);
+            }
+
+            // Return the relative path to the saved file
+            return Path.Combine("uploads", uniqueFileName);
         }
     }
 }

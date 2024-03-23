@@ -5,6 +5,8 @@
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Identity
 @using System.Security.Claims
+@using Microsoft.AspNetCore.Http
+@using System.IO
 @inject UserManager<ApplicationUser> UserManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject RecipeService RecipeService
@@ -21,6 +23,16 @@
     <div class="form-group">
         <label for="Name">Name:</label>
         <InputText id="Name" class="form-control" @bind-Value="@Recipe.Name" placeholder="Levain Chocolate Chip Cookies" />
+    </div>
+
+    @if (@Recipe.ThumbnailImage != null)
+    {
+        <img src="@Recipe.ThumbnailImage" alt="RecipeThumbnail" class="img-fluid w-100 border rounded shadow m-2 p-2">
+    }
+
+    <div class="form-group">
+        <label for="ThumbnailImage">Upload Thumbnail:</label>
+        <InputFile id="ThumbnailImage" OnChange="@HandleThumbnailImageSelected" accept="image/*" />
     </div>
 
     <div class="form-group">
@@ -91,7 +103,7 @@
                 {
                     <li>
                         <button type="button" class="btn btn-link text-danger" @onclick="() => RemoveIngredient(ingredient)">X</button>
-                        @($"{ingredient.Quantity} {ingredient.QuantityUnit} - {ingredient.Name}")
+                        @($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Name}")
                     </li>
                 }
             </ul>
@@ -142,6 +154,21 @@
         </div>
     }
 
+    @if (@Recipe.AdditionalImages != null)
+    {
+        @foreach (var image in Recipe.AdditionalImages)
+        {
+            <img src="@image" alt="AdditionalImages" class="img-fluid w-100 border rounded shadow m-2 p-2">
+        }
+    }
+
+    <div class="form-group">
+        <label for="AdditionalImages">Upload (3) Additional Images:</label>
+        <InputFile id="AdditionalImages" OnChange="@HandleAdditionalImagesSelected" accept="image/*" />
+        <InputFile id="AdditionalImages" OnChange="@HandleAdditionalImagesSelected" accept="image/*" />
+        <InputFile id="AdditionalImages" OnChange="@HandleAdditionalImagesSelected" accept="image/*" />
+    </div>
+    
     <button type="submit" class="btn btn-success">Submit</button>
 </EditForm>
 
@@ -157,15 +184,17 @@
     List<Ingredient> AddedIngredients { get; set; } = new();
     List<Instruction> AddedInstructions { get; set; } = new();
     List<RecipeStory> AddedRecipeStory { get; set; } = new();
+    private List<string> AdditionalImages { get; set; } = new List<string>();
 
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
+        var currentUser = await UserManager.GetUserAsync(user);
         if (user.Identity.IsAuthenticated)
         {
             UserId = user.FindFirstValue(ClaimTypes.NameIdentifier);
-            Recipe.AuthorID = UserId;
+            Recipe.Author = currentUser;
         }
     }
 
@@ -244,6 +273,22 @@
     void RemoveStory(RecipeStory story)
     {
         AddedRecipeStory.Remove(story);
+    }
+
+    private async Task HandleThumbnailImageSelected(InputFileChangeEventArgs e)
+    {
+        var thumbnailImage = e.File;
+        var thumbnailUrl = await RecipeService.UploadImageAsync(thumbnailImage);
+        Recipe.ThumbnailImage = thumbnailUrl;
+    }
+
+    private async Task HandleAdditionalImagesSelected(InputFileChangeEventArgs e)
+    {
+        foreach (var file in e.GetMultipleFiles())
+        {
+            var imageUrl = await RecipeService.UploadImageAsync(file);
+            Recipe.AdditionalImages.Add(imageUrl);
+        }
     }
 
     async Task HandleSubmit()

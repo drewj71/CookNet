@@ -20,10 +20,6 @@ namespace CookNet.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Recipe>()
-                .Property(r => r.ID)
-                .ValueGeneratedOnAdd();
-
             // Configure one-to-many relationship between Recipe and Instruction
             modelBuilder.Entity<Instruction>()
                 .HasOne(i => i.Recipe)
