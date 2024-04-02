@@ -8,13 +8,21 @@
 {
     <div>
         <h4>@Recipe.Name</h4>
-        <p>Author: @AuthorUserName</p>
-        <img src="@Recipe.ThumbnailImage" alt="RecipeThumbnail" class="img-fluid w-100 border rounded shadow m-2 p-2">
+        <p>Author: <a class="text-decoration-none" href=@($"/users/{AuthorUserName}")>@("@")@AuthorUserName</a></p>
+        <img src="@Recipe.ThumbnailImage" alt="RecipeThumbnail" class="img-fluid border rounded shadow m-2 p-2" style="width: 1920px; height: 1080px;">
         <p>@Recipe.Description</p>
-        @if (@Recipe.AdditionalImages != null) {
-            @foreach (var image in Recipe.AdditionalImages)
+        @if (@Recipe.AdditionalImages != null) 
+        {
+            @foreach (var image in @Recipe.AdditionalImages)
             {
                 <img src="@image" alt="AdditionalImages" class="img-fluid w-100 border rounded shadow m-2 p-2">
+            }
+        }
+        @if (Recipe.RecipeStories != null)
+        {
+            @foreach (var story in @Story)
+            {
+                <p>@($"{story.StoryText}")</p>
             }
         }
         <p>Prep Time: @Recipe.PrepTime</p>
@@ -23,9 +31,16 @@
         <p>Ethnicity: @Recipe.Ethnicity</p>
         <h5>Ingredients:</h5>
         <ul>
-            @foreach (var ingredient in Recipe.RecipeIngredients)
+            @foreach (var ingredient in @RecipeIngredients)
             {
-                <li>@($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Ingredient.Name}")</li>
+                <li>@($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Name}")</li>
+            }
+        </ul>
+        <h6>Instructions:</h6>
+        <ul>
+            @foreach (var instruction in @Instructions)
+            {
+                <li>@($"{instruction.StepNumber}. {instruction.InstructionText}")</li>
             }
         </ul>
     </div>
@@ -40,6 +55,9 @@ else
     private UserManager<ApplicationUser> UserManager { get; set; }
 
     private Recipe Recipe;
+    private List<Ingredient> RecipeIngredients = [];
+    private List<RecipeStory> Story = [];
+    private List<Instruction> Instructions = [];
     private string AuthorUserName;
 
     [Parameter]
@@ -50,6 +68,10 @@ else
         if (int.TryParse(RecipeId, out int recipeId))
         {
             Recipe = await RecipeService.GetRecipeByIdAsync(recipeId);
+            RecipeIngredients = await RecipeService.GetAllIngredientsAsync();
+            Story = await RecipeService.GetRecipeStoryAsync();
+            Instructions = await RecipeService.GetAllInstructionsAsync();
+
             if (Recipe != null)
             {
                 var author = await UserManager.FindByIdAsync(Recipe.AuthorID);

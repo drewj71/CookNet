@@ -1,8 +1,10 @@
 ﻿@inherits LayoutComponentBase
+@implements IDisposable
 @using Microsoft.AspNetCore.Identity
 @using CookNet.Data
+@using CookNet.Components.Account
 @inject NavigationManager NavigationManager
-@inject UserManager<ApplicationUser> UserManager
+@inject IUserService UserService
 
 <div class="page">
     <div class="sidebar">
@@ -14,9 +16,9 @@
             <AuthorizeView>
                 <Authorized>
                     <div class="nav-item px-3">
-                        <NavLink class="nav-link" href="Account/Manage">
+                        <NavLink class="nav-link" href="@($"/users/{context.User.Identity?.Name}")">
                             <button type="submit" class="btn btn-primary">
-                                <span class="bi bi-person-fill" aria-hidden="true"></span> Account
+                                <span class="bi bi-person-fill" aria-hidden="true"></span> Profile
                             </button>
                         </NavLink>
                     </div>
@@ -69,6 +71,7 @@
         currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
         NavigationManager.LocationChanged += OnLocationChanged;
     }
+
 
     private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
     {

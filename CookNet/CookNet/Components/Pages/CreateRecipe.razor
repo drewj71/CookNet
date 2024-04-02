@@ -7,6 +7,7 @@
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Http
 @using System.IO
+@inject IUserService UserService
 @inject UserManager<ApplicationUser> UserManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject RecipeService RecipeService
@@ -14,7 +15,7 @@
 @rendermode InteractiveServer
 @attribute [Authorize]
 
-<h3>Create Recipe</h3>
+<h3>Create a New Recipe</h3>
 
 <EditForm Model="@Recipe" OnValidSubmit="HandleSubmit" FormName="CreateRecipeForm">
     <DataAnnotationsValidator />
@@ -185,18 +186,7 @@
     List<Instruction> AddedInstructions { get; set; } = new();
     List<RecipeStory> AddedRecipeStory { get; set; } = new();
     private List<string> AdditionalImages { get; set; } = new List<string>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        var currentUser = await UserManager.GetUserAsync(user);
-        if (user.Identity.IsAuthenticated)
-        {
-            UserId = user.FindFirstValue(ClaimTypes.NameIdentifier);
-            Recipe.Author = currentUser;
-        }
-    }
+    ApplicationUser User;
 
     private async Task AddIngredientAsync()
     {
@@ -293,8 +283,20 @@
 
     async Task HandleSubmit()
     {
-        Recipe.DateCreated = DateTime.Now;
-        await RecipeService.CreateRecipeAsync(Recipe);
-        NavigationManager.NavigateTo($"/recipes/{Recipe.ID}");
+        // Fetch the current user
+        var currentUser = await UserService.GetUserAsync();
+
+        // Ensure a user is fetched before proceeding
+        if (currentUser != null)
+        {
+            Recipe.Author = currentUser;
+            Recipe.DateCreated = DateTime.Now;
+            await RecipeService.CreateRecipeAsync(Recipe);
+            NavigationManager.NavigateTo($"/recipes/{Recipe.ID}");
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/Account/Login");
+        }
     }
 }
