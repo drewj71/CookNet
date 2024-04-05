@@ -10,14 +10,15 @@
     <div>
         @if (@User.ProfilePictureBase64 != null)
         {
-            <img src="@User.ProfilePictureBase64" alt="RecipeThumbnail" class="img-fluid w-100 border rounded shadow m-2 p-2">
+            <img src="@User.ProfilePictureBase64" alt="Profile Picture" class="img-fluid w-100 border rounded shadow m-2 p-2">
         }
         else
         {
-            <a href=""><i class="bi bi-person-circle" style="font-size: 8rem;"></i></a>
+            <i class="bi bi-person-circle" style="font-size: 8rem;"></i>
         }
     </div>
-    <h3>@User.FullName</h3>
+    <p><a href="@($"/update-profile/")" class="btn btn-primary">Edit Profile</a></p>
+    <h3>@User.DisplayName</h3>
     <p>@("@")@User.UserName</p>
 
     <div class="container">

@@ -1,0 +1,20 @@
+﻿@page "/cookbooks/{UserName}"
+@using CookNet.Data
+@using Microsoft.AspNetCore.Identity
+@inject IUserService UserService
+@inject RecipeService RecipeService
+@rendermode InteractiveServer
+
+<h3>Cookbook</h3>
+
+@code {
+    [Parameter]
+    public string UserName { get; set; }
+
+    private ApplicationUser User;
+
+    protected override async Task OnInitializedAsync()
+    {
+        User = await UserService.GetUserByUsernameAsync(UserName);
+    }
+}
