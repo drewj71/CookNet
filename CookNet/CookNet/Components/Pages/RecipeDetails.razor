@@ -25,10 +25,13 @@
                 <p>@($"{story.StoryText}")</p>
             }
         }
-        <p>Prep Time: @Recipe.PrepTime</p>
-        <p>Cook Time: @Recipe.CookTime</p>
+        <p>Prep Time: @Recipe.PrepTime mins</p>
+        <p>Cook Time: @Recipe.CookTime mins</p>
         <p>Category: @Recipe.Category</p>
-        <p>Ethnicity: @Recipe.Ethnicity</p>
+        @if (Recipe.Ethnicity != "NA")
+        {
+            <p>Ethnicity: @Recipe.Ethnicity</p>
+        }
         <h5>Ingredients:</h5>
         <ul>
             @foreach (var ingredient in @RecipeIngredients)

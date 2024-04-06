@@ -141,5 +141,10 @@ namespace CookNet.Data
             // Return the relative path to the saved file
             return Path.Combine("uploads", uniqueFileName);
         }
+
+        public async Task SaveChanges()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

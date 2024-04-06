@@ -96,6 +96,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\01149d28-b89d-4239-bc8d-159a4a27612f_72557916422__E030ECCF-2F38-4DF4-9A02-7A8170CF0C7F.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\137cd6f0-fb27-4549-a0ce-e4cf9ffb6ba2_cartoonReddit.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/137cd6f0-fb27-4549-a0ce-e4cf9ffb6ba2_cartoonReddit.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\137cd6f0-fb27-4549-a0ce-e4cf9ffb6ba2_cartoonReddit.png))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\1c918d39-d801-46d0-931d-20ed0ebbf669_F8-LFO7WcAAgg8S.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>CookNet</SourceId>
@@ -224,6 +240,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\65f3e258-9807-485a-9ad1-68b1d38a9a5c_F8-LFO7WcAAgg8S.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\66bed95b-4a50-42db-99e7-d8bfeec7de40_cartoonReddit.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/66bed95b-4a50-42db-99e7-d8bfeec7de40_cartoonReddit.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\66bed95b-4a50-42db-99e7-d8bfeec7de40_cartoonReddit.png))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\6fdf8274-e83f-4d1e-b761-214de7733471_F8-LFO7WcAAgg8S.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>CookNet</SourceId>
@@ -335,6 +367,38 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\963e40b1-b83f-4b04-a5fe-c8ca2b64f6da_72557916422__E030ECCF-2F38-4DF4-9A02-7A8170CF0C7F.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\98e59c1f-f0b7-4573-9a1e-6b93b4a70cb2_lowsProfPic.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/98e59c1f-f0b7-4573-9a1e-6b93b4a70cb2_lowsProfPic.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\98e59c1f-f0b7-4573-9a1e-6b93b4a70cb2_lowsProfPic.png))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\d2e14c54-776a-4eab-9eed-73120b87b0db_cartoonReddit.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/d2e14c54-776a-4eab-9eed-73120b87b0db_cartoonReddit.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\d2e14c54-776a-4eab-9eed-73120b87b0db_cartoonReddit.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\e480a8c8-7629-4317-b469-78d1c1cde736_72557916422__E030ECCF-2F38-4DF4-9A02-7A8170CF0C7F.jpg))">
       <SourceType>Package</SourceType>

@@ -10,14 +10,25 @@
     <div>
         @if (@User.ProfilePictureBase64 != null)
         {
-            <img src="@User.ProfilePictureBase64" alt="Profile Picture" class="img-fluid w-100 border rounded shadow m-2 p-2">
+            <!-- Profile Picture -->
+            <img src="@User.ProfilePictureBase64" alt="Profile Picture" class="profile-picture img-fluid w-100 border rounded shadow m-2 p-2" style="max-width: 150px; max-height: 150px;">
+
+            <!-- Edit Icon -->
+            <div class="edit-icon">
+                <a href="edit-profile-picture"><i class="bi bi-pencil"></i></a>
+            </div>
         }
         else
         {
             <i class="bi bi-person-circle" style="font-size: 8rem;"></i>
+
+            <!-- Edit Icon -->
+            <div class="edit-icon">
+                <a href="edit-profile-picture"><i class="bi bi-pencil"></i></a>
+            </div>
         }
     </div>
-    <p><a href="@($"/update-profile/")" class="btn btn-primary">Edit Profile</a></p>
+    <p><a href="/Account/Manage")" class="btn btn-primary">Edit Profile</a></p>
     <h3>@User.DisplayName</h3>
     <p>@("@")@User.UserName</p>
 
@@ -27,7 +38,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">User Information</h5>
+                        <h5 class="card-title">Info</h5>
                         <p class="card-text">Date Joined: @User.RegistrationDate.ToShortDateString()</p>
                         <p class="card-text">Biography: @User.Biography</p>
                     </div>
@@ -60,11 +71,12 @@
                         {
                             @foreach (var recipe in UserRecipes)
                             {
-                                <div class="card">
+                                <div class="card" style="width: 18rem;">
                                     <a class="text-decoration-none" href="@($"/recipes/{recipe.ID}")">
-                                    <img class="card-img-top" src="@recipe.ThumbnailImage" alt="@recipe.Name">
+                                        <img class="card-img-top" src="@recipe.ThumbnailImage" alt="@recipe.Name" style="height: 200px; object-fit: cover;">
                                     <div class="card-body">
                                         <h5 class="card-title">@recipe.Name</h5>
+                                        <p class="cook-time">Time: @recipe.CookTime mins</p>
                                     </div>
                                     </a>
                                 </div>

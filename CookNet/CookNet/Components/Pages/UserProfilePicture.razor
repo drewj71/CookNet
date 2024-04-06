@@ -1,0 +1,54 @@
+﻿@page "/edit-profile-picture"
+@using System.IO
+@using CookNet.Data
+@using Microsoft.AspNetCore.Identity
+@inject IUserService UserService
+@inject NavigationManager NavigationManager
+@inject RecipeService RecipeService
+@rendermode InteractiveServer
+
+<h3>Upload Profile Picture</h3>
+
+<InputFile OnChange="@HandleFileSelected" accept="image/*" />
+
+@if (User != null && User.ProfilePictureBase64 != null)
+{
+    <h4>Preview:</h4>
+    <div style="max-width: 200px; max-height: 200px; overflow: hidden;">
+        <img src="@User.ProfilePictureBase64" alt="Profile Picture" style="max-width: 100%; max-height: 100%;">
+    </div>
+}
+
+<div style="margin-top: 10px;">
+    <button type="button" class="btn btn-primary" @onclick="() => RemoveProfilePicture()">Remove Profile Picture</button>
+    <button type="button" class="btn btn-success" @onclick="() => SubmitAndRedirect()">Save</button>
+</div>
+
+@code {
+    private ApplicationUser User;
+
+    private IBrowserFile profilePictureFile;
+
+    protected override async Task OnInitializedAsync()
+    {
+        User = await UserService.GetUserAsync();
+    }
+
+    private async Task HandleFileSelected(InputFileChangeEventArgs e)
+    {
+        profilePictureFile = e.File;
+        var profilePicUrl = await RecipeService.UploadImageAsync(profilePictureFile);
+        User.ProfilePictureBase64 = profilePicUrl;
+        await RecipeService.SaveChanges();
+    }
+
+    private void RemoveProfilePicture()
+    {
+        User.ProfilePictureBase64 = null;
+    }
+
+    private void SubmitAndRedirect()
+    {
+        NavigationManager.NavigateTo($"/users/{User.UserName}");
+    }
+}
