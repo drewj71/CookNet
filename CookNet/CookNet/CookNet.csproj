@@ -21,4 +21,8 @@
     <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\cooknetLogo.png" />
+  </ItemGroup>
+
 </Project>
