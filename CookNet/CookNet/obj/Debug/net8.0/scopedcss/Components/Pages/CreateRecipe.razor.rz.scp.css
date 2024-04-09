@@ -1,0 +1,86 @@
+.create-recipe-title[b-n8opd8dmcj] {
+    font-size: 3rem;
+    text-align: center;
+}
+
+.form-group[b-n8opd8dmcj] {
+    margin: 15px 0 15px 0;
+}
+
+.preview-thumbnail[b-n8opd8dmcj] {
+    width: 200px;
+    height: auto;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+}
+
+/* Custom CSS to position the thumbnail container and close button */
+.thumbnail-container[b-n8opd8dmcj] {
+    position: relative;
+    display: inline-block; /* Ensure the container size fits the image */
+}
+
+/* Custom CSS to style the close button ('x') */
+.close[b-n8opd8dmcj] {
+    position: absolute;
+    top: -10px; /* Adjust vertical position */
+    right: 0.5rem; /* Adjust horizontal position */
+    z-index: 1; /* Ensure it's above the image */
+    padding: 0.75rem; /* Increase padding to make the 'x' bigger */
+    font-size: 2rem; /* Increase font size to make the 'x' bigger */
+    background-color: transparent; /* Transparent background */
+    border: none; /* Remove border */
+    color: red; /* Red color for the 'x' */
+}
+
+/* Style the wrapper */
+.file-input-wrapper[b-n8opd8dmcj] {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+    padding: 8px 8px;
+    cursor: pointer;
+    width: fit-content; /* Adjust as needed */
+}
+
+/* Style the label */
+.custom-file-label[b-n8opd8dmcj] {
+    color: #fff;
+    cursor: pointer;
+    z-index: 1; /* Ensure label is on top */
+}
+
+.inline-group[b-n8opd8dmcj] {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.inline-group-long[b-n8opd8dmcj] {
+    display: inline-block;
+    margin-right: 10px;
+    width: 358px;
+}
+
+.ingredient-inline[b-n8opd8dmcj] {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.ingredient-inline-long[b-n8opd8dmcj] {
+    display: inline-block;
+    margin-right: 10px;
+    width: 660px;
+}
+
+.ingredient-inline button[b-n8opd8dmcj] {
+    margin-top: -4px;
+}
+
+.instr-story-btn[b-n8opd8dmcj] {
+    margin-top: -5px;
+}

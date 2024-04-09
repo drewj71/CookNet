@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CookNet.Client")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ffe0ce766e635f373792e4d83fdd81945f382a67")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a2d879dd6641fef2eb76d18a43d5fadd53f300d0")]
 [assembly: System.Reflection.AssemblyProductAttribute("CookNet.Client")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CookNet.Client")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
