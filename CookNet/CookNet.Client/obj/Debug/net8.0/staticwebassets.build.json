@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BB2lKiusKIyYmn5Cq9TmSrfVAkkCjipvFCi7KZ1r+tM=",
+  "Hash": "5J4+osllcFGbq38MJvLLgr/7B5tBtpOOFVoUGS5Ehx4=",
   "Source": "CookNet.Client",
   "BasePath": "/",
   "Mode": "Default",
@@ -128,7 +128,7 @@
       "AssetTraitValue": "native",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.1\\runtimes\\browser-wasm\\native\\dotnet.js"
+      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.4\\runtimes\\browser-wasm\\native\\dotnet.js"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.js.map",
@@ -147,15 +147,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.1\\runtimes\\browser-wasm\\native\\dotnet.js.map"
+      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.4\\runtimes\\browser-wasm\\native\\dotnet.js.map"
     },
     {
-      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.native.8.0.1.x8adpbmg4g.js",
+      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.native.8.0.4.9gg5pehr8s.js",
       "SourceId": "CookNet.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
       "BasePath": "/",
-      "RelativePath": "_framework/dotnet.native.8.0.1.x8adpbmg4g.js",
+      "RelativePath": "_framework/dotnet.native.8.0.4.9gg5pehr8s.js",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -166,7 +166,7 @@
       "AssetTraitValue": "native",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.1\\runtimes\\browser-wasm\\native\\dotnet.native.js"
+      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.4\\runtimes\\browser-wasm\\native\\dotnet.native.js"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.native.wasm",
@@ -185,15 +185,15 @@
       "AssetTraitValue": "native",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.1\\runtimes\\browser-wasm\\native\\dotnet.native.wasm"
+      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.4\\runtimes\\browser-wasm\\native\\dotnet.native.wasm"
     },
     {
-      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.runtime.8.0.1.073wx0qq4p.js",
+      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.runtime.8.0.4.ssrnq7wayn.js",
       "SourceId": "CookNet.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
       "BasePath": "/",
-      "RelativePath": "_framework/dotnet.runtime.8.0.1.073wx0qq4p.js",
+      "RelativePath": "_framework/dotnet.runtime.8.0.4.ssrnq7wayn.js",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -204,7 +204,7 @@
       "AssetTraitValue": "native",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.1\\runtimes\\browser-wasm\\native\\dotnet.runtime.js"
+      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.4\\runtimes\\browser-wasm\\native\\dotnet.runtime.js"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.runtime.js.map",
@@ -223,7 +223,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.1\\runtimes\\browser-wasm\\native\\dotnet.runtime.js.map"
+      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.4\\runtimes\\browser-wasm\\native\\dotnet.runtime.js.map"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_CJK.dat",
@@ -242,7 +242,7 @@
       "AssetTraitValue": "native",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.1\\runtimes\\browser-wasm\\native\\icudt_CJK.dat"
+      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.4\\runtimes\\browser-wasm\\native\\icudt_CJK.dat"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_EFIGS.dat",
@@ -261,7 +261,7 @@
       "AssetTraitValue": "native",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.1\\runtimes\\browser-wasm\\native\\icudt_EFIGS.dat"
+      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.4\\runtimes\\browser-wasm\\native\\icudt_EFIGS.dat"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_no_CJK.dat",
@@ -280,7 +280,7 @@
       "AssetTraitValue": "native",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.1\\runtimes\\browser-wasm\\native\\icudt_no_CJK.dat"
+      "OriginalItemSpec": "C:\\Users\\drewj\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\8.0.4\\runtimes\\browser-wasm\\native\\icudt_no_CJK.dat"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Authorization.wasm",
@@ -3950,25 +3950,6 @@
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\webcil\\WindowsBase.wasm"
     },
     {
-      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\073wx0qq4p.gz",
-      "SourceId": "CookNet.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/dotnet.runtime.8.0.1.073wx0qq4p.js.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.runtime.8.0.1.073wx0qq4p.js",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.runtime.8.0.1.073wx0qq4p.js"
-    },
-    {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\07i1c2xi5o.gz",
       "SourceId": "CookNet.Client",
       "SourceType": "Computed",
@@ -4273,44 +4254,6 @@
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Runtime.Serialization.Xml.wasm"
     },
     {
-      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\2wpiuv7oms.gz",
-      "SourceId": "CookNet.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/dotnet.runtime.js.map.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.runtime.js.map",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.runtime.js.map"
-    },
-    {
-      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\367y8x70wo.gz",
-      "SourceId": "CookNet.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/dotnet.js.map.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.js.map",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.js.map"
-    },
-    {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\37dcejkm88.gz",
       "SourceId": "CookNet.Client",
       "SourceType": "Computed",
@@ -4347,6 +4290,25 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Reflection.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\3nhhv7lzml.gz",
+      "SourceId": "CookNet.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/dotnet.native.wasm.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.native.wasm",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.native.wasm"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\3qctz9uvln.gz",
@@ -4482,25 +4444,6 @@
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Transactions.wasm"
     },
     {
-      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\5aekhj9ysz.gz",
-      "SourceId": "CookNet.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/icudt_EFIGS.dat.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_EFIGS.dat",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_EFIGS.dat"
-    },
-    {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\5bcap5vl3c.gz",
       "SourceId": "CookNet.Client",
       "SourceType": "Computed",
@@ -4518,6 +4461,25 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\Microsoft.VisualBasic.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\5jldse37tw.gz",
+      "SourceId": "CookNet.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/icudt_EFIGS.dat.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_EFIGS.dat",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_EFIGS.dat"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\649lhjzskb.gz",
@@ -4689,6 +4651,25 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.ValueTuple.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\7yt9avjzrx.gz",
+      "SourceId": "CookNet.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/icudt_CJK.dat.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_CJK.dat",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_CJK.dat"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\83olbc6llh.gz",
@@ -4938,6 +4919,25 @@
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.IO.MemoryMappedFiles.wasm"
     },
     {
+      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\9gg5pehr8s.gz",
+      "SourceId": "CookNet.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/dotnet.native.8.0.4.9gg5pehr8s.js.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.native.8.0.4.9gg5pehr8s.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.native.8.0.4.9gg5pehr8s.js"
+    },
+    {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\9p2698c97z.gz",
       "SourceId": "CookNet.Client",
       "SourceType": "Computed",
@@ -4993,25 +4993,6 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Runtime.InteropServices.JavaScript.wasm"
-    },
-    {
-      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\adkvqgeljr.gz",
-      "SourceId": "CookNet.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/dotnet.js.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.js",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.js"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\ajt0kz1f6t.gz",
@@ -5356,6 +5337,25 @@
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Security.Cryptography.Cng.wasm"
     },
     {
+      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\cbfmm4ewah.gz",
+      "SourceId": "CookNet.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/dotnet.js.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.js"
+    },
+    {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\cgtpwstg6t.gz",
       "SourceId": "CookNet.Client",
       "SourceType": "Computed",
@@ -5430,6 +5430,25 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Diagnostics.Process.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\d4ehz25a9j.gz",
+      "SourceId": "CookNet.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/dotnet.runtime.js.map.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.runtime.js.map",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.runtime.js.map"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\d5vp95v26a.gz",
@@ -5888,25 +5907,6 @@
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Security.Claims.wasm"
     },
     {
-      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\g3j62484ab.gz",
-      "SourceId": "CookNet.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/icudt_no_CJK.dat.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_no_CJK.dat",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_no_CJK.dat"
-    },
-    {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\g4squykq0j.gz",
       "SourceId": "CookNet.Client",
       "SourceType": "Computed",
@@ -5943,25 +5943,6 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.ServiceModel.Web.wasm"
-    },
-    {
-      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\gqq353dzed.gz",
-      "SourceId": "CookNet.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/dotnet.native.wasm.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.native.wasm",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.native.wasm"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\gw0ehwy2n2.gz",
@@ -6914,25 +6895,6 @@
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\mscorlib.wasm"
     },
     {
-      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\qev4i6khgf.gz",
-      "SourceId": "CookNet.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/icudt_CJK.dat.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_CJK.dat",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_CJK.dat"
-    },
-    {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\qn25iz7611.gz",
       "SourceId": "CookNet.Client",
       "SourceType": "Computed",
@@ -7237,6 +7199,25 @@
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Reflection.DispatchProxy.wasm"
     },
     {
+      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\ssrnq7wayn.gz",
+      "SourceId": "CookNet.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/dotnet.runtime.8.0.4.ssrnq7wayn.js.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.runtime.8.0.4.ssrnq7wayn.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.runtime.8.0.4.ssrnq7wayn.js"
+    },
+    {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\stgka0p6ap.gz",
       "SourceId": "CookNet.Client",
       "SourceType": "Computed",
@@ -7292,6 +7273,25 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Runtime.Numerics.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\tk9n33udhf.gz",
+      "SourceId": "CookNet.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/icudt_no_CJK.dat.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_no_CJK.dat",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\icudt_no_CJK.dat"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\tprtcso65r.gz",
@@ -7655,25 +7655,6 @@
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Numerics.Vectors.wasm"
     },
     {
-      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\x8adpbmg4g.gz",
-      "SourceId": "CookNet.Client",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
-      "BasePath": "/",
-      "RelativePath": "_framework/dotnet.native.8.0.1.x8adpbmg4g.js.gz",
-      "AssetKind": "Build",
-      "AssetMode": "All",
-      "AssetRole": "Alternative",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.native.8.0.1.x8adpbmg4g.js",
-      "AssetTraitName": "Content-Encoding",
-      "AssetTraitValue": "gzip",
-      "CopyToOutputDirectory": "PreserveNewest",
-      "CopyToPublishDirectory": "Never",
-      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.native.8.0.1.x8adpbmg4g.js"
-    },
-    {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\y68e4mm7e4.gz",
       "SourceId": "CookNet.Client",
       "SourceType": "Computed",
@@ -7748,6 +7729,25 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Globalization.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\z29yv2t0xd.gz",
+      "SourceId": "CookNet.Client",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/dotnet.js.map.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.js.map",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\dotnet.js.map"
     },
     {
       "Identity": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\obj\\Debug\\net8.0\\compressed\\z4aa1pt76h.gz",

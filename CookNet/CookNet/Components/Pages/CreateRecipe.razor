@@ -162,22 +162,6 @@
                 </ul>
             </div>
         }
-
-        @if (@Recipe.AdditionalImages != null)
-        {
-            @foreach (var image in Recipe.AdditionalImages)
-            {
-                <img src="@image" alt="AdditionalImages" class="img-fluid w-100 border rounded shadow m-2 p-2">
-            }
-        }
-
-        <div class="form-group">
-            <label for="AdditionalImages">Upload (3) Additional Images:</label>
-            <InputFile id="AdditionalImages" OnChange="@HandleAdditionalImagesSelected" accept="image/*" />
-            <InputFile id="AdditionalImages" OnChange="@HandleAdditionalImagesSelected" accept="image/*" />
-            <InputFile id="AdditionalImages" OnChange="@HandleAdditionalImagesSelected" accept="image/*" />
-        </div>
-
         <button type="submit" class="btn btn-success">Submit</button>
     </EditForm>
 </div>
@@ -283,15 +267,6 @@
     private void RemoveThumbnail()
     {
         Recipe.ThumbnailImage = null;
-    }
-
-    private async Task HandleAdditionalImagesSelected(InputFileChangeEventArgs e)
-    {
-        foreach (var file in e.GetMultipleFiles())
-        {
-            var imageUrl = await RecipeService.UploadImageAsync(file);
-            Recipe.AdditionalImages.Add(imageUrl);
-        }
     }
 
     async Task HandleSubmit()

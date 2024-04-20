@@ -2,22 +2,24 @@
 @using CookNet.Data
 @using Microsoft.AspNetCore.Identity
 @inject RecipeService RecipeService
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IUserService UserService
 @rendermode InteractiveServer
 
 @if (Recipe != null)
 {
     <div>
+        @if (IsUserAuthor)
+        {
+            <button class="btn btn-primary" @onclick="() => EditRecipe(Recipe.ID)">Edit</button>
+        }
+
         <h4>@Recipe.Name</h4>
         <p>Author: <a class="text-decoration-none" href=@($"/users/{AuthorUserName}")>@("@")@AuthorUserName</a></p>
         <img src="@Recipe.ThumbnailImage" alt="RecipeThumbnail" class="img-fluid border rounded shadow m-2 p-2" style="width: 1920px; height: 1080px;">
         <p>@Recipe.Description</p>
-        @if (@Recipe.AdditionalImages != null) 
-        {
-            @foreach (var image in @Recipe.AdditionalImages)
-            {
-                <img src="@image" alt="AdditionalImages" class="img-fluid w-100 border rounded shadow m-2 p-2">
-            }
-        }
+
         @if (Recipe.RecipeStories != null)
         {
             @foreach (var story in @Story)
@@ -28,10 +30,12 @@
         <p>Prep Time: @Recipe.PrepTime mins</p>
         <p>Cook Time: @Recipe.CookTime mins</p>
         <p>Category: @Recipe.Category</p>
+
         @if (Recipe.Ethnicity != "NA")
         {
             <p>Ethnicity: @Recipe.Ethnicity</p>
         }
+
         <h5>Ingredients:</h5>
         <ul>
             @foreach (var ingredient in @RecipeIngredients)
@@ -39,6 +43,7 @@
                 <li>@($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Name}")</li>
             }
         </ul>
+
         <h6>Instructions:</h6>
         <ul>
             @foreach (var instruction in @Instructions)
@@ -62,6 +67,7 @@ else
     private List<RecipeStory> Story = [];
     private List<Instruction> Instructions = [];
     private string AuthorUserName;
+    private bool IsUserAuthor = false;
 
     [Parameter]
     public string RecipeId { get; set; }
@@ -77,9 +83,23 @@ else
 
             if (Recipe != null)
             {
+                // Fetch the author's username using the Recipe's AuthorID
                 var author = await UserManager.FindByIdAsync(Recipe.AuthorID);
                 AuthorUserName = author?.UserName ?? "Anonymous";
+
+                // Check if the current user is the author
+                var currentUser = await UserService.GetUserAsync();
+                if (currentUser != null && currentUser.Id == Recipe.AuthorID)
+                {
+                    IsUserAuthor = true;
+                }
             }
         }
+    }
+
+
+    private void EditRecipe(int recipeId)
+    {
+        NavigationManager.NavigateTo($"/edit-recipe/{recipeId}");
     }
 }
