@@ -186,10 +186,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbmdyZWRpZW50SW5zaWdodHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/drewj/OneDrive/Documents/GitHub/CookNet/CookNet/CookNet/Components/Pages/RecipeDetails.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWNpcGVEZXRhaWxzLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/drewj/OneDrive/Documents/GitHub/CookNet/CookNet/CookNet/Components/Pages/UserCookbooks.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2VyQ29va2Jvb2tzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -225,3 +221,7 @@ build_metadata.AdditionalFiles.CssScope = b-n8opd8dmcj
 [C:/Users/drewj/OneDrive/Documents/GitHub/CookNet/CookNet/CookNet/Components/Pages/EditRecipe.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFZGl0UmVjaXBlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-nwn678rb5z
+
+[C:/Users/drewj/OneDrive/Documents/GitHub/CookNet/CookNet/CookNet/Components/Pages/RecipeDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWNpcGVEZXRhaWxzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-j9rgftzswo

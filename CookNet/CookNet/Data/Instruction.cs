@@ -7,5 +7,6 @@
         public int StepNumber { get; set; }
         public string InstructionText { get; set; }
         public Recipe Recipe { get; set; }
+        public bool IsEditing { get; set; } = false;    // For EditRecipe
     }
 }

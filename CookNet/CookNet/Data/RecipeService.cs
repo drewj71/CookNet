@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.Data.SqlClient;
 
 namespace CookNet.Data
 {
@@ -24,41 +25,54 @@ namespace CookNet.Data
             return await _context.Recipes.ToListAsync();
         }
 
-        public async Task<List<Ingredient>> GetAllIngredientsAsync()
-        {
-            return await _context.Ingredients.ToListAsync();
-        }
-
-        public async Task<List<RecipeStory>> GetRecipeStoryAsync()
-        {
-            return await _context.RecipeStories.ToListAsync();
-        }
-
         public async Task CreateRecipeAsync(Recipe recipe)
         {
             _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Instruction>> GetAllInstructionsAsync()
+        public async Task DeleteRecipeAsync(int recipeId)
         {
-            return await _context.Instructions.ToListAsync();
+            var recipe = await _context.Recipes.FindAsync(recipeId);
+            if (recipe != null)
+            {
+                //SPROC currently not working
+                //await _context.Database.ExecuteSqlRawAsync("EXEC DeleteRelatedIngredients @RecipeID", new SqlParameter("@RecipeID", recipeId));
+                _context.Recipes.Remove(recipe);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<List<Ingredient>> GetIngredientsByRecipeIdAsync(int recipeId)
+        {
+            var recipeIngredients = await _context.RecipeIngredients
+                .Where(ri => ri.RecipeID == recipeId)
+                .Include(ri => ri.Ingredient).ToListAsync();
+
+            var ingredients = recipeIngredients.Select(ri => ri.Ingredient).ToList();
+
+            return ingredients;
+        }
+
+        public async Task<List<RecipeStory>> GetRecipeStoryByRecipeIdAsync(int recipeId)
+        {
+            return await _context.RecipeStories.Where(rs => rs.RecipeID == recipeId).ToListAsync();
+        }
+
+        public async Task<List<Instruction>> GetInstructionsByRecipeIdAsync(int recipeId)
+        {
+            return await _context.Instructions.Where(ins => ins.RecipeID == recipeId).ToListAsync();
         }
 
         public async Task AddIngredientToRecipeAsync(Recipe recipe, string ingredientName, string quantity, string quantityMeasure)
         {
-            var ingredient = await _context.Ingredients.FirstOrDefaultAsync(i => i.Name == ingredientName);
-
-            if (ingredient == null)
+            var ingredient = new Ingredient
             {
-                ingredient = new Ingredient
-                {
-                    Name = ingredientName,
-                    Quantity = quantity,
-                    QuantityUnit = quantityMeasure
-                };
-                _context.Ingredients.Add(ingredient);
-            }
+                Name = ingredientName,
+                Quantity = quantity,
+                QuantityUnit = quantityMeasure
+            };
+            _context.Ingredients.Add(ingredient);
 
             var recipeIngredient = new RecipeIngredient
             {
@@ -145,6 +159,39 @@ namespace CookNet.Data
         public async Task SaveChanges()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public async Task RemoveIngredientFromRecipeAsync(Recipe recipe, Ingredient ingredient)
+        {
+            var recipeIngredient = await _context.RecipeIngredients.FirstOrDefaultAsync(ri => ri.RecipeID == recipe.ID && ri.IngredientID == ingredient.ID);
+
+            if (recipeIngredient != null)
+            {
+                _context.RecipeIngredients.Remove(recipeIngredient);
+                await SaveChanges();
+            }
+        }
+
+        public async Task RemoveInstructionFromRecipeAsync(Recipe recipe, Instruction instruction)
+        {
+            var recipeInstruction = await _context.Instructions.FirstOrDefaultAsync(i => i.RecipeID == recipe.ID && i.ID == instruction.ID);
+
+            if (recipeInstruction != null)
+            {
+                _context.Instructions.Remove(recipeInstruction);
+                await SaveChanges();
+            }
+        }
+
+        public async Task RemoveStoryFromRecipeAsync(Recipe recipe, RecipeStory story)
+        {
+            var recipeStory = await _context.RecipeStories.FirstOrDefaultAsync(rs => rs.RecipeID == recipe.ID && rs.RecipeID == story.RecipeID);
+
+            if (recipeStory != null)
+            {
+                _context.RecipeStories.Remove(recipeStory);
+                await SaveChanges();
+            }
         }
     }
 }

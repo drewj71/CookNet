@@ -143,7 +143,7 @@
 
         <div class="form-group">
             <label for="RecipeStory">Story:</label>
-            <InputTextArea id="RecipeStory" class="form-control" @bind-Value="NewRecipeStory" placeholder="Long detailed recipe story - " />
+            <InputTextArea id="RecipeStory" class="form-control" @bind-Value="NewRecipeStory" placeholder="Long detailed recipe story - " style="height: 300px;" />
         </div>
         <p class="instr-story-btn"><button type="button" class="btn btn-primary" @onclick="AddRecipeStoryAsync">Add</button></p>
 
@@ -174,11 +174,17 @@
     private string NewInstructionText { get; set; }
     private string NewRecipeStory { get; set; }
     private string UserId { get; set; }
-    private int currentStepNumber = 1;
     List<Ingredient> AddedIngredients { get; set; } = new();
     List<Instruction> AddedInstructions { get; set; } = new();
     List<RecipeStory> AddedRecipeStory { get; set; } = new();
-    private List<string> AdditionalImages { get; set; } = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Recipe = new Recipe();
+        AddedIngredients = new List<Ingredient>();
+        AddedInstructions = new List<Instruction>();
+        AddedRecipeStory = new List<RecipeStory>();
+    }
 
     private async Task AddIngredientAsync()
     {
@@ -189,15 +195,6 @@
             QuantityUnit = NewIngredientQuantityUnit
         });
 
-        try
-        {
-            await RecipeService.AddIngredientToRecipeAsync(Recipe, NewIngredientName, NewIngredientQuantity, NewIngredientQuantityUnit);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error adding ingredient: {ex.Message}");
-        }
-
         NewIngredientName = string.Empty;
         NewIngredientQuantity = string.Empty;
         NewIngredientQuantityUnit = string.Empty;
@@ -205,20 +202,12 @@
 
     private async Task AddInstructionAsync()
     {
+        int stepNumber = AddedInstructions.Count + 1;
         AddedInstructions.Add(new Instruction
         {
-            StepNumber = currentStepNumber++,
+            StepNumber = stepNumber,
             InstructionText = NewInstructionText
         });
-
-        try
-        {
-            await RecipeService.AddInstructionToRecipeAsync(Recipe, NewInstructionText);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error adding instruction: {ex.Message}");
-        }
 
         NewInstructionText = string.Empty;
     }
@@ -230,29 +219,20 @@
             StoryText = NewRecipeStory
         });
 
-        try
-        {
-            await RecipeService.AddRecipeStoryToRecipeAsync(Recipe, NewRecipeStory);
-        } 
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error adding story: {ex.Message}");
-        }
         NewRecipeStory = string.Empty;
     }
 
-    // THESE REMOVE FUNCTIONS ONLY REMOVE FROM THE LIST NOT THE DATABASE ENTRY!
-    void RemoveIngredient(Ingredient ingredient)
+    async void RemoveIngredient(Ingredient ingredient)
     {
         AddedIngredients.Remove(ingredient);
     }
 
-    void RemoveInstruction(Instruction instruction)
+    async void RemoveInstruction(Instruction instruction)
     {
         AddedInstructions.Remove(instruction);
     }
 
-    void RemoveStory(RecipeStory story)
+    async void RemoveStory(RecipeStory story)
     {
         AddedRecipeStory.Remove(story);
     }
@@ -279,6 +259,22 @@
         {
             Recipe.Author = currentUser;
             Recipe.DateCreated = DateTime.Now;
+
+            foreach (var ingredient in AddedIngredients)
+            {
+                await RecipeService.AddIngredientToRecipeAsync(Recipe, ingredient.Name, ingredient.Quantity, ingredient.QuantityUnit);
+            }
+
+            foreach (var instruction in AddedInstructions)
+            {
+                await RecipeService.AddInstructionToRecipeAsync(Recipe, instruction.InstructionText);
+            }
+
+            foreach (var story in AddedRecipeStory)
+            {
+                await RecipeService.AddRecipeStoryToRecipeAsync(Recipe, story.StoryText);
+            }
+
             await RecipeService.CreateRecipeAsync(Recipe);
             NavigationManager.NavigateTo($"/recipes/{Recipe.ID}");
         }

@@ -14,7 +14,7 @@ namespace CookNet.Data
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Instruction> Instructions { get; set; }
         public DbSet<RecipeStory> RecipeStories { get; set; }
-        public DbSet<RecipeIngredient> RecipeIngredients { get; set; } 
+        public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,12 +39,14 @@ namespace CookNet.Data
             modelBuilder.Entity<RecipeIngredient>()
                 .HasOne(ri => ri.Recipe)
                 .WithMany(r => r.RecipeIngredients)
-                .HasForeignKey(ri => ri.RecipeID);
+                .HasForeignKey(ri => ri.RecipeID)
+                .OnDelete(DeleteBehavior.Cascade); // Cascade delete from Recipe to RecipeIngredient
 
             modelBuilder.Entity<RecipeIngredient>()
                 .HasOne(ri => ri.Ingredient)
                 .WithMany()
-                .HasForeignKey(ri => ri.IngredientID);
+                .HasForeignKey(ri => ri.IngredientID)
+                .OnDelete(DeleteBehavior.Cascade); // Cascade delete from RecipeIngredient to Ingredient
 
             // Modify the Ingredient entity to include the Quantity property
             modelBuilder.Entity<Ingredient>()

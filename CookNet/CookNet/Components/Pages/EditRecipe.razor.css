@@ -38,14 +38,14 @@
 /* Style the wrapper */
 .file-input-wrapper {
     position: relative;
-    display: inline-block;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #1b6ec2;
     border-color: #1861ac;
     padding: 8px 8px;
     cursor: pointer;
-    width: fit-content; /* Adjust as needed */
+    width: fit-content;
+    margin-left: 30px;
 }
 
 /* Style the label */
@@ -81,6 +81,58 @@
     margin-top: -4px;
 }
 
+.ingredient-edit, .instruction-edit {
+    line-height: 50px;
+}
+
+.ingredient-edit button, .instruction-edit button {
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
 .instr-story-btn {
     margin-top: -5px;
+}
+
+.form-group-label {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #fff; /* White background */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+/* Modal header */
+.modal-header {
+    background-color: #f8d7da; /* Red background */
+    color: #721c24; /* Red text color */
+    border-bottom: 1px solid #f5c6cb; /* Red border bottom */
+    border-radius: 5px 5px 0 0; /* Rounded corners, except bottom */
+}
+
+/* Modal body */
+.modal-body {
+    padding: 20px; /* Padding around content */
+}
+
+/* Modal footer */
+.modal-footer {
+    background-color: #f8d7da; /* Red background */
+    border-top: 1px solid #f5c6cb; /* Red border top */
+    border-radius: 0 0 5px 5px; /* Rounded corners, only bottom */
+}
+
+/* Close button */
+.modal-header .close {
+    color: #721c24; /* Red close button color */
+    font-size: 20px; /* Larger close button */
 }

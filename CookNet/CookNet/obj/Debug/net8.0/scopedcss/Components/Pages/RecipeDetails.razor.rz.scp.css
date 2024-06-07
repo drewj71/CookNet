@@ -1,0 +1,72 @@
+.recipe-title[b-j9rgftzswo] {
+    font-size: 3rem;
+    text-align: center;
+}
+
+.edit-button[b-j9rgftzswo] {
+    margin: auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.recipe-author[b-j9rgftzswo] {
+    font-size: 1.3rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.recipe-thumbnail[b-j9rgftzswo] {
+    width: 400px;
+    height: auto;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    margin: auto !important;
+    display: block !important;
+}
+
+.recipe-description[b-j9rgftzswo] {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.recipe-story[b-j9rgftzswo] {
+    font-size: 1rem;
+}
+
+.center-container[b-j9rgftzswo] {
+    display: flex;
+    justify-content: center;
+}
+
+.recipe-preptime[b-j9rgftzswo], 
+.recipe-cooktime[b-j9rgftzswo], 
+.recipe-category[b-j9rgftzswo], 
+.recipe-ethnicity[b-j9rgftzswo] {
+    margin: 0 10px 20px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.recipe-story-title[b-j9rgftzswo], .recipe-ingredients-title[b-j9rgftzswo], .recipe-instructions-title[b-j9rgftzswo] {
+    font-size: 1.8rem;
+}
+
+.recipe-ingredients[b-j9rgftzswo], .recipe-instructions[b-j9rgftzswo] {
+    font-size: 1rem;
+    line-height: 35px;
+}
+
+.ingredients-list[b-j9rgftzswo] {
+    list-style-type: none; /* Remove default bullet points */
+    padding-left: 15px; /* Remove default padding */
+}
+
+.recipe-ingredients[b-j9rgftzswo]::before {
+    content: "\25C6"; /* Unicode character for diamond */
+    color: rgb(107, 36, 12);
+    display: inline-block;
+    width: 1em; /* Adjust size as needed */
+    margin-left: -1em; /* Adjust indentation */
+}

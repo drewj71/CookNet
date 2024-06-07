@@ -8,5 +8,7 @@ namespace CookNet.Data
         public int RecipeID { get; set; }
         public string StoryText { get; set; }
         public Recipe Recipe { get; set; }
+        public bool IsEditing { get; set; } = false;    // For EditRecipe
+
     }
 }

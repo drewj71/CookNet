@@ -338,3 +338,4 @@ C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\CreateRecipe.razor.rz.scp.css
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.csproj.Up2Date
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\EditRecipe.razor.rz.scp.css
+C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\RecipeDetails.razor.rz.scp.css

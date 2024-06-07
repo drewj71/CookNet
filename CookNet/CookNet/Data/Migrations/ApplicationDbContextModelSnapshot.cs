@@ -144,6 +144,9 @@ namespace CookNet.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsEditing")
+                        .HasColumnType("bit");
+
                     b.Property<int>("RecipeID")
                         .HasColumnType("int");
 
@@ -215,6 +218,9 @@ namespace CookNet.Migrations
                     b.Property<int>("IngredientID")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsEditing")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Quantity")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -233,6 +239,9 @@ namespace CookNet.Migrations
                 {
                     b.Property<int>("RecipeID")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsEditing")
+                        .HasColumnType("bit");
 
                     b.Property<string>("StoryText")
                         .IsRequired()

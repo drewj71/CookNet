@@ -3,24 +3,60 @@
   "WorkspaceRootPath": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\data\\recipeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\data\\recipeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\data\\migrations\\20240607124305_deleterelatedingredientssproc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\data\\migrations\\20240607124305_deleterelatedingredientssproc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\data\\recipe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\data\\recipe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\data\\instruction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\data\\instruction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\data\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\data\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\data\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\data\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\data\\recipestory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\data\\recipestory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\data\\recipeingredient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\data\\recipeingredient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\data\\ingredient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\data\\ingredient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\components\\pages\\editrecipe.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\components\\pages\\editrecipe.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\components\\pages\\editrecipe.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\components\\pages\\editrecipe.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\components\\pages\\createrecipe.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\components\\pages\\createrecipe.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\components\\pages\\createrecipe.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\components\\pages\\createrecipe.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\data\\recipeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\data\\recipeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\components\\pages\\createrecipe.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|solutionrelative:cooknet\\cooknet\\components\\pages\\createrecipe.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{37149E8B-6640-4779-BF24-5F54B7E2AB20}|CookNet\\CookNet\\CookNet.csproj|c:\\users\\drewj\\onedrive\\documents\\github\\cooknet\\cooknet\\cooknet\\components\\pages\\recipedetails.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -58,7 +94,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -71,69 +107,197 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "EditRecipe.razor.css",
-              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\EditRecipe.razor.css",
-              "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Pages\\EditRecipe.razor.css",
-              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\EditRecipe.razor.css",
-              "RelativeToolTip": "CookNet\\CookNet\\Components\\Pages\\EditRecipe.razor.css",
-              "ViewState": "AQIAADAAAAAAAAAAAAAAAEEAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-04-19T19:59:05.144Z",
+              "Title": "20240607124305_DeleteRelatedIngredientsSPROC.cs",
+              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\Migrations\\20240607124305_DeleteRelatedIngredientsSPROC.cs",
+              "RelativeDocumentMoniker": "CookNet\\CookNet\\Data\\Migrations\\20240607124305_DeleteRelatedIngredientsSPROC.cs",
+              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\Migrations\\20240607124305_DeleteRelatedIngredientsSPROC.cs",
+              "RelativeToolTip": "CookNet\\CookNet\\Data\\Migrations\\20240607124305_DeleteRelatedIngredientsSPROC.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAAwBkAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T12:43:35.124Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "CookNet\\CookNet\\Data\\ApplicationUser.cs",
+              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\ApplicationUser.cs",
+              "RelativeToolTip": "CookNet\\CookNet\\Data\\ApplicationUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T12:22:09.992Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\UserService.cs",
+              "RelativeDocumentMoniker": "CookNet\\CookNet\\Data\\UserService.cs",
+              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\UserService.cs",
+              "RelativeToolTip": "CookNet\\CookNet\\Data\\UserService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T12:22:08.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Instruction.cs",
+              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\Instruction.cs",
+              "RelativeDocumentMoniker": "CookNet\\CookNet\\Data\\Instruction.cs",
+              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\Instruction.cs",
+              "RelativeToolTip": "CookNet\\CookNet\\Data\\Instruction.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T12:21:54.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Recipe.cs",
+              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\Recipe.cs",
+              "RelativeDocumentMoniker": "CookNet\\CookNet\\Data\\Recipe.cs",
+              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\Recipe.cs",
+              "RelativeToolTip": "CookNet\\CookNet\\Data\\Recipe.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T12:21:36.535Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "RecipeService.cs",
+              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\RecipeService.cs",
+              "RelativeDocumentMoniker": "CookNet\\CookNet\\Data\\RecipeService.cs",
+              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\RecipeService.cs",
+              "RelativeToolTip": "CookNet\\CookNet\\Data\\RecipeService.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAQwCYAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-15T23:08:51.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RecipeStory.cs",
+              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\RecipeStory.cs",
+              "RelativeDocumentMoniker": "CookNet\\CookNet\\Data\\RecipeStory.cs",
+              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\RecipeStory.cs",
+              "RelativeToolTip": "CookNet\\CookNet\\Data\\RecipeStory.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T12:22:02.064Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RecipeIngredient.cs",
+              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\RecipeIngredient.cs",
+              "RelativeDocumentMoniker": "CookNet\\CookNet\\Data\\RecipeIngredient.cs",
+              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\RecipeIngredient.cs",
+              "RelativeToolTip": "CookNet\\CookNet\\Data\\RecipeIngredient.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T12:21:45.59Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Ingredient.cs",
+              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\Ingredient.cs",
+              "RelativeDocumentMoniker": "CookNet\\CookNet\\Data\\Ingredient.cs",
+              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\Ingredient.cs",
+              "RelativeToolTip": "CookNet\\CookNet\\Data\\Ingredient.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T12:21:15.882Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Layout\\MainLayout.razor",
+              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "CookNet\\CookNet\\Components\\Layout\\MainLayout.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-07T12:11:59.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CreateRecipe.razor",
+              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\CreateRecipe.razor",
+              "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Pages\\CreateRecipe.razor",
+              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\CreateRecipe.razor",
+              "RelativeToolTip": "CookNet\\CookNet\\Components\\Pages\\CreateRecipe.razor",
+              "ViewState": "AQIAAJcAAAAAAAAAAAAlwJ4AAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-15T23:08:51.927Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "EditRecipe.razor.css",
+              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\EditRecipe.razor.css",
+              "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Pages\\EditRecipe.razor.css",
+              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\EditRecipe.razor.css",
+              "RelativeToolTip": "CookNet\\CookNet\\Components\\Pages\\EditRecipe.razor.css",
+              "ViewState": "AQIAAFMAAAAAAAAAAAAIwIkAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-04-19T19:59:05.144Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "EditRecipe.razor",
               "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\EditRecipe.razor",
               "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Pages\\EditRecipe.razor",
               "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\EditRecipe.razor",
               "RelativeToolTip": "CookNet\\CookNet\\Components\\Pages\\EditRecipe.razor",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAAAEsAAAA6AAAA",
+              "ViewState": "AQIAAAkBAAAAAAAAAAAmwBABAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-04-19T17:21:47.6Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CreateRecipe.razor",
-              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\CreateRecipe.razor",
-              "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Pages\\CreateRecipe.razor",
-              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\CreateRecipe.razor",
-              "RelativeToolTip": "CookNet\\CookNet\\Components\\Pages\\CreateRecipe.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-15T23:08:51.927Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 13,
               "Title": "CreateRecipe.razor.css",
               "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\CreateRecipe.razor.css",
               "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Pages\\CreateRecipe.razor.css",
               "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\CreateRecipe.razor.css",
               "RelativeToolTip": "CookNet\\CookNet\\Components\\Pages\\CreateRecipe.razor.css",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAARAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABAAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-04-08T20:23:23.51Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-08T20:23:23.51Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "RecipeService.cs",
-              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\RecipeService.cs",
-              "RelativeDocumentMoniker": "CookNet\\CookNet\\Data\\RecipeService.cs",
-              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Data\\RecipeService.cs",
-              "RelativeToolTip": "CookNet\\CookNet\\Data\\RecipeService.cs",
-              "ViewState": "AQIAACIAAAAAAAAAAAAkwCsAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-15T23:08:51.995Z"
+              "DocumentIndex": 14,
+              "Title": "RecipeDetails.razor",
+              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\RecipeDetails.razor",
+              "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Pages\\RecipeDetails.razor",
+              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\RecipeDetails.razor",
+              "RelativeToolTip": "CookNet\\CookNet\\Components\\Pages\\RecipeDetails.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADAAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-17T18:57:50.162Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 18,
               "Title": "UserProfilePicture.razor",
               "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\UserProfilePicture.razor",
               "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Pages\\UserProfilePicture.razor",
@@ -145,7 +309,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 17,
               "Title": "UserProfile.razor",
               "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\UserProfile.razor",
               "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Pages\\UserProfile.razor",
@@ -157,7 +321,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 19,
               "Title": "AllRecipes.razor",
               "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\AllRecipes.razor",
               "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Pages\\AllRecipes.razor",
@@ -169,7 +333,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 16,
               "Title": "Home.razor",
               "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\Home.razor",
               "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Pages\\Home.razor",
@@ -181,19 +345,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "RecipeDetails.razor",
-              "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\RecipeDetails.razor",
-              "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Pages\\RecipeDetails.razor",
-              "ToolTip": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\RecipeDetails.razor",
-              "RelativeToolTip": "CookNet\\CookNet\\Components\\Pages\\RecipeDetails.razor",
-              "ViewState": "AQIAADkAAAAAAAAAAAAAAEcAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-17T18:57:50.162Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 15,
               "Title": "Index.razor",
               "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Account\\Pages\\Manage\\Index.razor",
               "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Account\\Pages\\Manage\\Index.razor",
@@ -206,7 +358,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 20,
               "Title": "IngredientInsights.razor",
               "DocumentMoniker": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\Components\\Pages\\IngredientInsights.razor",
               "RelativeDocumentMoniker": "CookNet\\CookNet\\Components\\Pages\\IngredientInsights.razor",
