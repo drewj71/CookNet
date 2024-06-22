@@ -7,54 +7,64 @@
 
 @if (User != null)
 {
-    <div>
+    <div class="profile-picture-container position-relative">
         @if (@User.ProfilePictureBase64 != null)
         {
-            <!-- Profile Picture -->
-            <img src="@User.ProfilePictureBase64" alt="Profile Picture" class="profile-picture img-fluid w-100 border rounded shadow m-2 p-2" style="max-width: 150px; max-height: 150px;">
+            <div class="position-relative d-inline-block">
+                <!-- Profile Picture -->
+                <img src="@User.ProfilePictureBase64" alt="Profile Picture" class="profile-picture img-fluid w-20 border rounded shadow m-2 p-2">
 
-            <!-- Edit Icon -->
-            <div class="edit-icon">
-                <a href="edit-profile-picture"><i class="bi bi-pencil"></i></a>
+                <!-- Edit Icon -->
+                <div class="edit-icon position-absolute bottom-0 end-0 p-2 mr-2">
+                    <a href="edit-profile-picture"><i class="fa fa-pen"></i></a>
+                </div>
             </div>
         }
         else
         {
-            <i class="bi bi-person-circle" style="font-size: 8rem;"></i>
+            <div class="position-relative d-inline-block">
+                <i class="bi bi-person-circle" style="font-size: 8rem;"></i>
 
-            <!-- Edit Icon -->
-            <div class="edit-icon">
-                <a href="edit-profile-picture"><i class="bi bi-pencil"></i></a>
+                <!-- Edit Icon -->
+                <div class="edit-icon">
+                    <a href="edit-profile-picture"><i class="fa fa-pen"></i></a>
+                </div>
             </div>
         }
     </div>
-    <p><a href="/Account/Manage")" class="btn btn-primary">Edit Profile</a></p>
-    <h3>@User.DisplayName</h3>
-    <p>@("@")@User.UserName</p>
-
-    <div class="container">
-        <!-- User information -->
+    <div class="user-header-container col-md-10 position-relative pt-2">
         <div class="row">
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Info</h5>
-                        <p class="card-text">Date Joined: @User.RegistrationDate.ToShortDateString()</p>
-                        <p class="card-text">Biography: @User.Biography</p>
-                    </div>
+                <div class="display-name">
+                    <h3>@User.DisplayName</h3>
+                </div>
+            </div>
+            <div class="col-md-6 text-md-end pt-1">
+                <div class="edit-profile-btn">
+                    <p><a href="/Account/Manage" class="btn btn-primary">Edit Profile</a></p>
                 </div>
             </div>
         </div>
+        <div class="userinfo-container">
+            <p class="username">@("@")@User.UserName</p>
+            <p class="bio">@User.Biography</p>
+            <div class="joined-date-container">
+                <i class="fa-solid fa-calendar-days"></i>
+                <p class="join-date">Joined @User.RegistrationDate.ToShortDateString()</p>
+            </div>
+        </div>
+    </div>
 
+    <div class="container">
         <!-- Profile tabs -->
         <div class="row mt-3">
             <div class="col-md-6">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link @(showRecipes ? "active" : "")" @onclick="ShowRecipes">Recipes</a>
+                            <a class="nav-link @(showRecipes ? "active" : "")" @onclick="ShowRecipes" style="cursor:pointer;">Recipes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @(showRecipes ? "" : "active")" @onclick="ShowInsights">Insights</a>
+                        <a class="nav-link @(showRecipes ? "" : "active")" @onclick="ShowInsights" style="cursor:pointer;">Insights</a>
                     </li>
                 </ul>
             </div>
@@ -91,7 +101,6 @@
                 else
                 {
                     <!-- Insights -->
-                    <h4>Insights</h4>
                     <!-- Display insights here -->
                 }
             </div>

@@ -498,3 +498,14 @@ main[b-2tlxc31yxu] {
     width: 1em; /* Adjust size as needed */
     margin-left: -1em; /* Adjust indentation */
 }
+/* _content/CookNet/Components/Pages/UserProfile.razor.rz.scp.css */
+.edit-icon[b-be9y8cypfz] {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.userinfo-container[b-be9y8cypfz] {
+    margin-top: -25px;
+}
+.join-date[b-be9y8cypfz] {
+    margin-top: -15px;
+}
