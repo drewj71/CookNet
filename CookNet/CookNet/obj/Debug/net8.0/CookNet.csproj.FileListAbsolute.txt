@@ -343,3 +343,4 @@ D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.pdb
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.genruntimeconfig.cache
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\ref\CookNet.dll
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\Home.razor.rz.scp.css

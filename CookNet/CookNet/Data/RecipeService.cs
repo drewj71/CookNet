@@ -193,5 +193,19 @@ namespace CookNet.Data
                 await SaveChanges();
             }
         }
+
+        public async Task<List<Recipe>> GetMostRecentRecipesAsync()
+        {
+            return await _context.Recipes
+                .Include(r => r.Author)
+                .OrderByDescending(r => r.DateCreated)
+                .Take(10)
+                .ToListAsync();
+        }
+
+        //public async Task<List<Recipe>> GetTop10RecipesAsync()
+        //{
+
+        //}
     }
 }

@@ -1,10 +1,104 @@
+.user-profile-container[b-be9y8cypfz] {
+    padding: 25px;
+    color: black;
+}
+
+.profile-picture[b-be9y8cypfz] {
+    z-index: 999;
+}
+
 .edit-icon[b-be9y8cypfz] {
     margin-right: 5px;
     margin-bottom: 5px;
 }
+
 .userinfo-container[b-be9y8cypfz] {
     margin-top: -25px;
 }
+
 .join-date[b-be9y8cypfz] {
     margin-top: -15px;
+}
+
+.file-input-wrapper[b-be9y8cypfz] {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+    padding: 8px 16px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.custom-file-label[b-be9y8cypfz] {
+    display: block;
+    color: white;
+    cursor: pointer;
+}
+
+.nav-header[b-be9y8cypfz] {
+    background-color: rgb(107, 36, 12);
+}
+    .nav-header:hover[b-be9y8cypfz] {
+        background-color: rgb(153, 77, 28);
+    }
+    .nav-header.active[b-be9y8cypfz] {
+        background-color: rgb(153, 77, 28);
+    }
+
+.nav-link[b-be9y8cypfz] {
+    color: white;
+    cursor: pointer;
+}
+
+.cook-time[b-be9y8cypfz] {
+    position: absolute;
+    color: white;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.bookmark-recipe[b-be9y8cypfz] {
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 3px;
+}
+
+.card[b-be9y8cypfz] {
+    width: 350px;
+    background-color: rgb(228, 143, 69);
+}
+
+.card-img-top[b-be9y8cypfz] {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title[b-be9y8cypfz], .date-created[b-be9y8cypfz] {
+    color: white;
+}
+
+.date-created[b-be9y8cypfz] {
+    float: right;
+}
+
+.username-nav[b-be9y8cypfz] {
+    display: block;
+    margin: -20px 0 -5px 15px;
+    color: white;
+}
+
+.users-recipe[b-be9y8cypfz] {
+    color: rgb(107, 36, 12);
 }

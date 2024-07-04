@@ -43,23 +43,24 @@
             />
             <label for="file-upload" class="custom-file-label">Upload Thumbnail</label>
         </div>
+        <span class="file-upload-hint"> Recommended file size: 1920x1080</span>
 
         <div class="form-group">
             <label for="Description">Description:</label>
             <InputTextArea id="Description" class="form-control" @bind-Value="@Recipe.Description" placeholder="Quick, Easy, Delicious Recipe!" />
         </div>
 
-        <div class="form-group inline-group">
+        <div class="col-md-3 form-group inline-group">
             <label for="PrepTime">Prep Time (minutes):</label>
             <InputNumber id="PrepTime" class="form-control" @bind-Value="@Recipe.PrepTime" />
         </div>
 
-        <div class="form-group inline-group">
+        <div class="col-md-3 form-group inline-group">
             <label for="CookTime">Cook Time (minutes):</label>
             <InputNumber id="CookTime" class="form-control" @bind-Value="@Recipe.CookTime" />
         </div>
 
-        <div class="form-group inline-group-long">
+        <div class="col-md-3 form-group inline-group-long">
             <label for="Category">Category:</label>
             <InputSelect id="Category" class="form-control long-select" @bind-Value="@Recipe.Category">
                 <option value="Select One">--Select One--</option>
@@ -74,7 +75,7 @@
             </InputSelect>
         </div>
 
-        <div class="form-group inline-group-long">
+        <div class="col-sm-1 col-md-3 form-group inline-group-long">
             <label for="Ethnicity">Ethnicity:</label>
             <InputSelect id="Ethnicity" class="form-control long-select" @bind-Value="@Recipe.Ethnicity">
                 <option value="Select One">--Select One--</option>
@@ -88,20 +89,20 @@
             </InputSelect>
         </div>
 
-        <div class="form-group ingredient-inline-long">
+        <div class="col-md-6 form-group ingredient-inline-long">
             <label for="NewIngredientName">Ingredient Name:</label>
             <InputText id="NewIngredientName" class="form-control" @bind-Value="@NewIngredientName" placeholder="All-Purpose Flour" />
         </div>
-        <div class="form-group ingredient-inline">
+        <div class="col-md-2 form-group ingredient-inline">
             <label for="NewIngredientQuantity">Quantity:</label>
             <InputText id="NewIngredientQuantity" class="form-control" @bind-Value="@NewIngredientQuantity" placeholder="1/2" />
         </div>
-        <div class="form-group ingredient-inline">
+        <div class="col-md-2 form-group ingredient-inline">
             <label for="NewIngredientQuantityUnit">Quantity Unit:</label>
             <InputText id="NewIngredientQuantityUnit" class="form-control" @bind-Value="@NewIngredientQuantityUnit" placeholder="cup" />
         </div>
 
-        <p class="ingredient-inline"><button type="button" class="btn btn-primary" @onclick="AddIngredientAsync">Add</button></p>
+        <p class="col-md-2 ingredient-inline"><button type="button" class="btn btn-primary" @onclick="AddIngredientAsync">Add</button></p>
 
         @if (AddedIngredients.Any())
         {

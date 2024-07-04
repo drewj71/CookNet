@@ -5,12 +5,28 @@
       "PackagePath": "staticwebassets\\CookNet.bundle.scp.css"
     },
     {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\CookNetHeader.jpg",
+      "PackagePath": "staticwebassets\\CookNetHeader.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\0020871e-e241-4b37-9f78-8b4034d680ad_pexels-stefanstefancik-91216 (1).jpg",
+      "PackagePath": "staticwebassets\\Uploads\\0020871e-e241-4b37-9f78-8b4034d680ad_pexels-stefanstefancik-91216 (1).jpg"
+    },
+    {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\067d9639-5b80-45b9-b66f-18662efc6195_F8-LFO7WcAAgg8S.jpg",
       "PackagePath": "staticwebassets\\Uploads\\067d9639-5b80-45b9-b66f-18662efc6195_F8-LFO7WcAAgg8S.jpg"
     },
     {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\071fb4a5-bc05-49b1-9f9a-e1dbcceb8391_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\071fb4a5-bc05-49b1-9f9a-e1dbcceb8391_AJProfilePicture.png"
+    },
+    {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\0e8d6c64-5fd9-48c2-bc5c-7f69a1f749d8_cartoonReddit.png",
       "PackagePath": "staticwebassets\\Uploads\\0e8d6c64-5fd9-48c2-bc5c-7f69a1f749d8_cartoonReddit.png"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\17e5a21c-e49c-4dfa-898b-44497f40bdca_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\17e5a21c-e49c-4dfa-898b-44497f40bdca_AJProfilePicture.png"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\19ee8d91-bdb8-4230-b950-d3dd8f4109a0_F8-LFO7WcAAgg8S.jpg",
@@ -19,6 +35,10 @@
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\1c3071b8-66a0-4833-aff9-27c72cbbca02_F8-LFO7WcAAgg8S.jpg",
       "PackagePath": "staticwebassets\\Uploads\\1c3071b8-66a0-4833-aff9-27c72cbbca02_F8-LFO7WcAAgg8S.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\1f4e8714-429d-43e7-9042-81e4bdbde73a_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\1f4e8714-429d-43e7-9042-81e4bdbde73a_AJProfilePicture.png"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\274fa7b8-3767-4ab8-9391-fa9823cad8fd_F8-LFO7WcAAgg8S.jpg",
@@ -33,12 +53,32 @@
       "PackagePath": "staticwebassets\\Uploads\\2d655809-72b7-4abe-826e-2a3f27262e55_1712508498512eq7xf8cv.jpg"
     },
     {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\2d6edf1d-ae8d-4a2c-a4e0-3ec1b6cff698_YouTube-Thumbnail-_-Food-6-scaled.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\2d6edf1d-ae8d-4a2c-a4e0-3ec1b6cff698_YouTube-Thumbnail-_-Food-6-scaled.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\35980c71-70e5-47b8-b946-9cd391514201_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\35980c71-70e5-47b8-b946-9cd391514201_AJProfilePicture.png"
+    },
+    {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\3d3f7b3c-8d20-4a0f-9436-947f5d94084d_F8-LFO7WcAAgg8S.jpg",
       "PackagePath": "staticwebassets\\Uploads\\3d3f7b3c-8d20-4a0f-9436-947f5d94084d_F8-LFO7WcAAgg8S.jpg"
     },
     {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\3ead7924-b0ec-406b-8611-71caa9370674_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\3ead7924-b0ec-406b-8611-71caa9370674_AJProfilePicture.png"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\434ff88a-91b8-4e16-8533-c4e10b0dd517_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\434ff88a-91b8-4e16-8533-c4e10b0dd517_AJProfilePicture.png"
+    },
+    {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\43cd50d5-02de-4628-8ba3-47a7206fcd2f_AJ (2).png",
       "PackagePath": "staticwebassets\\Uploads\\43cd50d5-02de-4628-8ba3-47a7206fcd2f_AJ (2).png"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\43f0c0b0-ede7-4384-af62-7a97f0074733_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\43f0c0b0-ede7-4384-af62-7a97f0074733_AJProfilePicture.png"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\4598e9f5-8b5f-48a8-8dc2-1acea6f04964_1712508498512eq7xf8cv.jpg",
@@ -49,8 +89,20 @@
       "PackagePath": "staticwebassets\\Uploads\\461a1897-8881-45a1-b965-2679469c64ee_F8-LFO7WcAAgg8S.jpg"
     },
     {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\46f0e34f-1e75-44a8-b407-2b39e65c4445_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\46f0e34f-1e75-44a8-b407-2b39e65c4445_AJProfilePicture.png"
+    },
+    {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\4bd89106-9ebb-41ac-930d-078f87d07665_F8-LFO7WcAAgg8S.jpg",
       "PackagePath": "staticwebassets\\Uploads\\4bd89106-9ebb-41ac-930d-078f87d07665_F8-LFO7WcAAgg8S.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\4da26302-3adf-4ea9-932c-60b1241754c2_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\4da26302-3adf-4ea9-932c-60b1241754c2_AJProfilePicture.png"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\4f48c29d-a85e-4940-a53a-6c65d763cc4d_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\4f48c29d-a85e-4940-a53a-6c65d763cc4d_AJProfilePicture.png"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\4f4e41e0-51ac-4b0d-b411-384ec3e67230_F8-LFO7WcAAgg8S.jpg",
@@ -61,8 +113,20 @@
       "PackagePath": "staticwebassets\\Uploads\\4f7dfead-ee84-4375-a98b-be569c521e30_IMG_3135.jpg"
     },
     {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\663e3db2-298a-4981-8372-b6e31943fbe0_YouTube-Thumbnail-_-Food-6-scaled.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\663e3db2-298a-4981-8372-b6e31943fbe0_YouTube-Thumbnail-_-Food-6-scaled.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\6b566f65-8936-4cc9-93d5-fa91d3867984_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\6b566f65-8936-4cc9-93d5-fa91d3867984_AJProfilePicture.png"
+    },
+    {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\7109c837-49ac-4731-a14b-998f97b9500a_F8-LFO7WcAAgg8S.jpg",
       "PackagePath": "staticwebassets\\Uploads\\7109c837-49ac-4731-a14b-998f97b9500a_F8-LFO7WcAAgg8S.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\766d378e-7ef3-48b8-a579-affcf623946b_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\766d378e-7ef3-48b8-a579-affcf623946b_AJProfilePicture.png"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\812386cb-21ba-4a7c-ac17-b1489e650d33_1712508498512eq7xf8cv.jpg",
@@ -73,12 +137,20 @@
       "PackagePath": "staticwebassets\\Uploads\\8554fc2a-9b32-47ab-ac1e-f48b1feae546_F8-LFO7WcAAgg8S.jpg"
     },
     {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\9262a52d-9e7f-4143-a291-943938f05a2f_YouTube-Thumbnail-_-Food-6-scaled.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\9262a52d-9e7f-4143-a291-943938f05a2f_YouTube-Thumbnail-_-Food-6-scaled.jpg"
+    },
+    {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\97a78e63-0c3e-4ede-a4f4-95a9fc0413d3_1712508498512eq7xf8cv.jpg",
       "PackagePath": "staticwebassets\\Uploads\\97a78e63-0c3e-4ede-a4f4-95a9fc0413d3_1712508498512eq7xf8cv.jpg"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\98690cc4-629d-4fe4-b4f5-b6be4d9f1bcf_F8-LFO7WcAAgg8S.jpg",
       "PackagePath": "staticwebassets\\Uploads\\98690cc4-629d-4fe4-b4f5-b6be4d9f1bcf_F8-LFO7WcAAgg8S.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\98a9cbe5-a0cf-4a13-8ed0-4b3541578982_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\98a9cbe5-a0cf-4a13-8ed0-4b3541578982_AJProfilePicture.png"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\9913f5c5-7b0a-40e2-adf5-564f29f0588d_1712508498512eq7xf8cv.jpg",
@@ -97,6 +169,10 @@
       "PackagePath": "staticwebassets\\Uploads\\9db67724-4460-4af3-9538-8648f37fb6d5_F8-LFO7WcAAgg8S.jpg"
     },
     {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\9e3a6171-0c92-4444-81a6-b0e208b3155b_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\9e3a6171-0c92-4444-81a6-b0e208b3155b_AJProfilePicture.png"
+    },
+    {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\a51aa7f3-6aff-405d-b44b-5fa95bdc55bb_F8-LFO7WcAAgg8S.jpg",
       "PackagePath": "staticwebassets\\Uploads\\a51aa7f3-6aff-405d-b44b-5fa95bdc55bb_F8-LFO7WcAAgg8S.jpg"
     },
@@ -105,12 +181,20 @@
       "PackagePath": "staticwebassets\\Uploads\\a71655ee-6caf-4276-be4e-2dd3d37ecb61_1712508498512eq7xf8cv.jpg"
     },
     {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\a8b153b1-58b4-4ae8-8de4-b157d4d11d24_pexels-stefanstefancik-91216 (1).jpg",
+      "PackagePath": "staticwebassets\\Uploads\\a8b153b1-58b4-4ae8-8de4-b157d4d11d24_pexels-stefanstefancik-91216 (1).jpg"
+    },
+    {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\b0db10a3-4626-4ac6-9049-16a5f5ffd4bd_cartoonYT.png",
       "PackagePath": "staticwebassets\\Uploads\\b0db10a3-4626-4ac6-9049-16a5f5ffd4bd_cartoonYT.png"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\bede9047-f14d-4baf-9b76-80fe6fb3800d_1712508498512eq7xf8cv.jpg",
       "PackagePath": "staticwebassets\\Uploads\\bede9047-f14d-4baf-9b76-80fe6fb3800d_1712508498512eq7xf8cv.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\d0ee6353-73b7-44f4-a8b1-f6f2782260dc_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\d0ee6353-73b7-44f4-a8b1-f6f2782260dc_AJProfilePicture.png"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\daecb3ea-a3d5-4d76-a08e-1add65283ea0_F8-LFO7WcAAgg8S.jpg",
@@ -139,6 +223,14 @@
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\f7f97e3a-3b56-4321-aec0-89545debc098_F8-LFO7WcAAgg8S.jpg",
       "PackagePath": "staticwebassets\\Uploads\\f7f97e3a-3b56-4321-aec0-89545debc098_F8-LFO7WcAAgg8S.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\fbc7ba9b-acf7-43e8-8f59-fe0ec9d6299d_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\fbc7ba9b-acf7-43e8-8f59-fe0ec9d6299d_AJProfilePicture.png"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\ff86a10e-e028-4095-856b-555bd108ba47_AJProfilePicture.png",
+      "PackagePath": "staticwebassets\\Uploads\\ff86a10e-e028-4095-856b-555bd108ba47_AJProfilePicture.png"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\app.css",

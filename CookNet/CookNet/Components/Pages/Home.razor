@@ -1,12 +1,98 @@
 ﻿@page "/"
-
+@using CookNet.Data
+@using Microsoft.AspNetCore.Identity
+@inject IUserService UserService
+@inject RecipeService RecipeService
+@rendermode InteractiveServer
 <PageTitle>Home</PageTitle>
 
-<h1>CookNet</h1>
+<div class="header-container">
+    <div class="header" style="color: white;">
+        <div class="img-container position-relative text-center">
+            <img src="CookNetHeader.jpg" class="main-img img-fluid opacity-75" alt="CookNet Home" />
+            <div class="overlay-text position-absolute top-0 start-0 w-100 h-100 bg-black opacity-50"></div>
+            <div class="overlay-text position-absolute top-50 start-50 translate-middle">
+                <h1 class="main-text" style="font-size:7rem;">CookNet</h1> <br />
+                <p class="main-desc fs-4">CookNet - Home of recipes and more!</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-CookNet - Home of recipes and more!
+<div class="divider-row"></div>
+
+<div class="maincontent-container">
+    <div class="recentrecipes-container px-5">
+        <div class="recentrecipes-title">
+            <h1 class="recent-header">Most Recent Recipes</h1>
+        </div>
+        <div class="recentrecipes-cards">
+            @if (MostRecentRecipes == null)
+            {
+                <p>No Recent Recipes to Display</p>
+            }
+            else
+            {
+                <div class="card-columns pb-3">
+                    @foreach (var recipe in MostRecentRecipes)
+                    {
+                        int totalCookTime = recipe.CookTime + recipe.PrepTime;
+                        string hrsOrMins = "";
+                        @if (totalCookTime > 120)
+                        {
+                            totalCookTime = 2;
+                            hrsOrMins = "hrs";
+                        }
+                        else if (totalCookTime > 60)
+                        {
+                            totalCookTime = 1;
+                            hrsOrMins = "hr";
+                        }
+                        else
+                        {
+                            hrsOrMins = "mins";
+                        }
+                        <div class="card">
+                            <a class="text-decoration-none" href="@($"/recipes/{recipe.ID}")">
+                                <div class="image-container position-relative">
+                                    <img class="card-img-top" src="@recipe.ThumbnailImage" title="@recipe.Name">
+                                    <p class="cook-time" title="Total Cook Time">@totalCookTime @hrsOrMins</p>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title d-inline-block">@recipe.Name</h5>
+                                    <p class="date-created d-inline-block">@recipe.DateCreated.ToShortDateString()</p>
+                                </div>
+                            </a>
+                            <a class="username-nav text-decoration-none" href="@($"/users/{recipe.Author.UserName}")">
+                                <p class="users-recipe">@("@")@recipe.Author.UserName</p>
+                            </a>
+                            <button class="bookmark-recipe" title="Save to Cookbook">
+                                <i class="cookbooks-icon bi bi-journal-bookmark-fill"></i>
+                            </button>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="top10recipes-container px-5">
+        <div class="top10recipes-title">
+            <h1 class="top10-header">Top 10 Recipes of the Week</h1>
+        </div>
+        <div class="top10recipes-cards">
+        </div>
+    </div>
+</div>
 
 @code {
     // TODO - DISPLAY TOP 10 RECIPES, TOP RATED RECIPES, OR SPECIAL CATEGORIES
     // SUCH AS DISPLAYING TOP POSTERS OR INTERESTING INGREDIENT INSIGHT POSTS
+    private List<Recipe> MostRecentRecipes;
+    private List<Recipe> Top10Recipes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        MostRecentRecipes = await RecipeService.GetMostRecentRecipesAsync();
+    }
 }

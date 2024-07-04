@@ -5,112 +5,211 @@
 @inject RecipeService RecipeService
 @rendermode InteractiveServer
 
-@if (User != null)
-{
-    <div class="profile-picture-container position-relative">
-        @if (@User.ProfilePictureBase64 != null)
-        {
-            <div class="position-relative d-inline-block">
-                <!-- Profile Picture -->
-                <img src="@User.ProfilePictureBase64" alt="Profile Picture" class="profile-picture img-fluid w-20 border rounded shadow m-2 p-2">
+<div class="user-profile-container">
+    @if (User != null)
+    {
+        <div class="profile-picture-container position-relative">
+            @if (@User.ProfilePictureBase64 != null)
+            {
+                <div class="position-relative d-inline-block">
+                    <!-- Profile Picture -->
+                    <img src="@User.ProfilePictureBase64" alt="Profile Picture" class="profile-picture img-fluid border rounded-3 w-20 m-2 p-2">
 
-                <!-- Edit Icon -->
-                <div class="edit-icon position-absolute bottom-0 end-0 p-2 mr-2">
-                    <a href="edit-profile-picture"><i class="fa fa-pen"></i></a>
-                </div>
-            </div>
-        }
-        else
-        {
-            <div class="position-relative d-inline-block">
-                <i class="bi bi-person-circle" style="font-size: 8rem;"></i>
-
-                <!-- Edit Icon -->
-                <div class="edit-icon">
-                    <a href="edit-profile-picture"><i class="fa fa-pen"></i></a>
-                </div>
-            </div>
-        }
-    </div>
-    <div class="user-header-container col-md-10 position-relative pt-2">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="display-name">
-                    <h3>@User.DisplayName</h3>
-                </div>
-            </div>
-            <div class="col-md-6 text-md-end pt-1">
-                <div class="edit-profile-btn">
-                    <p><a href="/Account/Manage" class="btn btn-primary">Edit Profile</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="userinfo-container">
-            <p class="username">@("@")@User.UserName</p>
-            <p class="bio">@User.Biography</p>
-            <div class="joined-date-container">
-                <i class="fa-solid fa-calendar-days"></i>
-                <p class="join-date">Joined @User.RegistrationDate.ToShortDateString()</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Profile tabs -->
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                            <a class="nav-link @(showRecipes ? "active" : "")" @onclick="ShowRecipes" style="cursor:pointer;">Recipes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link @(showRecipes ? "" : "active")" @onclick="ShowInsights" style="cursor:pointer;">Insights</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Profile content -->
-        <div class="row mt-3">
-            <div class="col-md-6">
-                @if (showRecipes)
-                {
-                    <!-- Recipe list -->
-                    <div class="card-columns">
-                        @if (UserRecipes != null && UserRecipes.Any())
-                        {
-                            @foreach (var recipe in UserRecipes)
-                            {
-                                <div class="card" style="width: 18rem;">
-                                    <a class="text-decoration-none" href="@($"/recipes/{recipe.ID}")">
-                                        <img class="card-img-top" src="@recipe.ThumbnailImage" alt="@recipe.Name" style="height: 200px; object-fit: cover;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">@recipe.Name</h5>
-                                        <p class="cook-time">Time: @recipe.CookTime mins</p>
-                                    </div>
-                                    </a>
-                                </div>
-                            }
-                        }
-                        else
-                        {
-                            <p>No recipes found.</p>
-                        }
+                    <!-- Edit Icon -->
+                    <div class="edit-icon position-absolute bottom-0 end-0 p-2 mr-2">
+                        <i class="fa fa-pen" @onclick="ShowEditProfPictureModal" style="cursor:pointer"></i>
                     </div>
-                }
-                else
-                {
-                    <!-- Insights -->
-                    <!-- Display insights here -->
-                }
+                </div>
+            }
+            else
+            {
+                <div class="position-relative d-inline-block">
+                    <i class="bi bi-person-circle" style="font-size: 8rem;"></i>
+
+                    <!-- Edit Icon -->
+                    <div class="edit-icon position-absolute bottom-0 end-0 p-2 mr-2">
+                        <i class="fa fa-pen" @onclick="ShowEditProfPictureModal" style="cursor:pointer"></i>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (ShowModal)
+        {
+            <div class="modal fade show" tabindex="-1" role="dialog" style="display:block;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Profile Picture</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="position-relative text-center">
+                                @if (User.ProfilePictureBase64 != null && profilePicturePreview == null)
+                                {
+                                    <div class="profile-picture-display">
+                                        <img src="@User.ProfilePictureBase64" alt="Profile Picture" class="profile-picture img-fluid w-20 border rounded shadow m-2 p-2">
+                                    </div>
+                                    <div class="file-input-wrapper d-inline-block mt-2">
+                                        <label class="custom-file-label">
+                                            Upload Picture
+                                            <InputFile OnChange="@HandleFileSelected" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;" />
+                                        </label>
+                                    </div>
+                                    <div class="remove-btn mt-2">
+                                        <button type="button" class="btn btn-danger" @onclick="() => RemoveProfilePicture()">Remove Picture</button>
+                                    </div>
+                                }
+                                else if (profilePicturePreview != null)
+                                {
+                                    <div class="profile-picture-display">
+                                        <img src="@profilePicturePreview" alt="Profile Picture" class="profile-picture img-fluid w-20 border rounded shadow m-2 p-2">
+                                    </div>
+                                    <div class="file-input-wrapper d-inline-block mt-2">
+                                        <label class="custom-file-label">
+                                            Upload Picture
+                                            <InputFile OnChange="@HandleFileSelected" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;" />
+                                        </label>
+                                    </div>
+                                    <div class="remove-btn mt-2">
+                                        <button type="button" class="btn btn-danger" @onclick="() => RemoveProfilePicture()">Remove Picture</button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="profile-picture-display">
+                                        <i class="bi bi-person-circle" style="font-size: 8rem;"></i>
+                                    </div>
+                                    <div class="file-input-wrapper d-inline-block mt-2">
+                                        <label class="custom-file-label">
+                                            Upload Picture
+                                            <InputFile OnChange="@HandleFileSelected" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;" />
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @onclick="CloseEditProfPictureModal">Cancel</button>
+                            <button type="button" class="btn btn-success" @onclick="ConfirmProfilePicEdit">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="user-header-container col-md-10 position-relative pt-2">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="display-name">
+                        <h3>@User.DisplayName</h3>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end pt-1">
+                    <div class="edit-profile-btn">
+                        <p><a href="/Account/Manage" class="btn btn-primary">Edit Profile</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="userinfo-container">
+                <p class="username">@("@")@User.UserName</p>
+                <div class="bio-container">
+                    <i class="bi bi-file-person d-inline-block"></i>
+                    <p class="bio d-inline-block">@User.Biography</p>
+                </div>
+                <div class="joined-date-container">
+                    <i class="bi bi-calendar-week d-inline-block"></i>
+                    <p class="join-date d-inline-block">Joined @User.RegistrationDate.ToShortDateString()</p>
+                </div>
             </div>
         </div>
-    </div>
-}
-else
-{
-    <p>User not found.</p>
-}
+
+        <div class="container pt-3">
+            <div class="row">
+                <div class="nav-header col-sm border border-light rounded text-center @(showRecipes ? "active" : "")">
+                    <a class="nav-link @(showRecipes ? "active" : "")" @onclick="ShowRecipes">Recipes</a>
+                </div>
+                <div class="nav-header col-sm border border-light rounded text-center @(showInsights ? "active" : "")">
+                    <a class="nav-link @(showInsights ? "active" : "")" @onclick="ShowInsights">Ingredient Insights</a>
+                </div>
+                <div class="nav-header col-sm border border-light rounded text-center @(showCookBooks ? "active" : "")">
+                    <a class="nav-link @(showCookBooks ? "active" : "")" @onclick="ShowCookBooks">Cook Books</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    @if (showRecipes)
+                    {
+                        <!-- Recipe list -->
+                        <div class="card-columns">
+                            @if (UserRecipes != null && UserRecipes.Any())
+                            {
+                                @foreach (var recipe in UserRecipes)
+                                {
+                                    int totalCookTime = recipe.CookTime + recipe.PrepTime;
+                                    string hrsOrMins = "";
+                                    @if (totalCookTime > 120)
+                                    {
+                                        totalCookTime = 2;
+                                        hrsOrMins = "hrs";
+                                    }
+                                    else if (totalCookTime > 60)
+                                    {
+                                        totalCookTime = 1;
+                                        hrsOrMins = "hr";
+                                    }
+                                    else
+                                    {
+                                        hrsOrMins = "mins";
+                                    }
+                                    <div class="card">
+                                        <a class="text-decoration-none" href="@($"/recipes/{recipe.ID}")">
+                                            <div class="image-container position-relative">
+                                                <img class="card-img-top" src="@recipe.ThumbnailImage" title="@recipe.Name">
+                                                <p class="cook-time" title="Total Cook Time">@totalCookTime @hrsOrMins</p>
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title d-inline-block">@recipe.Name</h5>
+                                                <p class="date-created d-inline-block">@recipe.DateCreated.ToShortDateString()</p>
+                                            </div>
+                                        </a>
+                                        <a class="username-nav text-decoration-none" href="@($"/users/{recipe.Author.UserName}")">
+                                            <p class="users-recipe">@("@")@recipe.Author.UserName</p>
+                                        </a>
+                                        <button class="bookmark-recipe" title="Save to Cookbook">
+                                            <i class="cookbooks-icon bi bi-journal-bookmark-fill"></i>
+                                        </button>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No recipes found.</p>
+                            }
+                        </div>
+                    }
+                    else if (showInsights)
+                    {
+                        <!-- Insights -->
+                        <p>Coming soon!</p>
+                        <!-- Display insights here -->
+                    }
+                    else if (showCookBooks)
+                    {
+                        <p>Coming soon!</p>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>User not found.</p>
+    }
+
+</div>
 
 @code {
     [Parameter]
@@ -119,6 +218,11 @@ else
     private ApplicationUser User;
     private List<Recipe> UserRecipes;
     private bool showRecipes = true;
+    private bool showInsights = false;
+    private bool showCookBooks = false;
+    private bool ShowModal = false;
+    private IBrowserFile profilePictureFile;
+    private string? profilePicturePreview = null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -131,11 +235,53 @@ else
 
     private void ShowRecipes()
     {
+        showCookBooks = false;
+        showInsights = false;
         showRecipes = true;
     }
 
     private void ShowInsights()
     {
         showRecipes = false;
+        showCookBooks = false;
+        showInsights = true;
+    }
+
+    private void ShowCookBooks()
+    {
+        showRecipes = false;
+        showInsights = false;
+        showCookBooks = true;
+    }
+
+    private void ShowEditProfPictureModal() => ShowModal = true;
+
+    private void CloseEditProfPictureModal()
+    {
+        ShowModal = false;
+        profilePicturePreview = null;
+    }
+
+    private async Task HandleFileSelected(InputFileChangeEventArgs e)
+    {
+        profilePictureFile = e.File;
+        var profilePicUrl = await RecipeService.UploadImageAsync(profilePictureFile);
+        profilePicturePreview = profilePicUrl;
+    }
+
+    private async Task ConfirmProfilePicEdit()
+    {
+        if (profilePicturePreview != null)
+        {
+            User.ProfilePictureBase64 = profilePicturePreview;
+        }
+        await RecipeService.SaveChanges();
+        CloseEditProfPictureModal();
+    }
+
+    private void RemoveProfilePicture()
+    {
+        profilePicturePreview = null;
+        User.ProfilePictureBase64 = null;
     }
 }
