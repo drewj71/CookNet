@@ -1,3 +1,5 @@
+@import 'CookNet.Client.bundle.scp.css';
+
 /* _content/CookNet/Components/Layout/MainLayout.razor.rz.scp.css */
 .page[b-2tlxc31yxu] {
     position: relative;
@@ -202,6 +204,11 @@ main[b-2tlxc31yxu] {
         overflow-y: auto;
     }
 }
+/* _content/CookNet/Components/Pages/AllRecipes.razor.rz.scp.css */
+.allrecipes-container[b-incnqhfhkm] {
+    color: black; 
+    padding: 25px;
+}
 /* _content/CookNet/Components/Pages/CreateRecipe.razor.rz.scp.css */
 .create-recipe-container[b-n8opd8dmcj] {
     color: black;
@@ -265,6 +272,11 @@ main[b-2tlxc31yxu] {
     z-index: 1; /* Ensure label is on top */
 }
 
+.file-upload-hint[b-n8opd8dmcj] {
+    font-style: italic;
+    padding-left: 5px;
+}
+
 .inline-group[b-n8opd8dmcj] {
     display: inline-block;
     margin-right: 10px;
@@ -295,6 +307,11 @@ main[b-2tlxc31yxu] {
     margin-top: -5px;
 }
 /* _content/CookNet/Components/Pages/EditRecipe.razor.rz.scp.css */
+.edit-recipe-container[b-nwn678rb5z] {
+    color: black;
+    padding: 25px;
+}
+
 .edit-recipe-title[b-nwn678rb5z] {
     font-size: 3rem;
     text-align: center;
@@ -350,6 +367,10 @@ main[b-2tlxc31yxu] {
     color: #fff;
     cursor: pointer;
     z-index: 1; /* Ensure label is on top */
+}
+
+.remove-thumbnail[b-nwn678rb5z] {
+
 }
 
 .inline-group[b-nwn678rb5z] {
@@ -433,6 +454,20 @@ main[b-2tlxc31yxu] {
     color: #721c24; /* Red close button color */
     font-size: 20px; /* Larger close button */
 }
+
+.remove-ingredient[b-nwn678rb5z], .edit-ingredient[b-nwn678rb5z] {
+    font-size: 1.5rem;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+.remove-ingredient[b-nwn678rb5z] {
+    color: red;
+}
+
+.edit-ingredient[b-nwn678rb5z] {
+
+}
 /* _content/CookNet/Components/Pages/Home.razor.rz.scp.css */
 .divider-row[b-bv7obqaypn] {
     background-color: rgb(107, 36, 12);
@@ -441,7 +476,7 @@ main[b-2tlxc31yxu] {
 }
 
 .maincontent-container[b-bv7obqaypn] {
-
+    padding-top: 10px;
 }
 
 .cook-time[b-bv7obqaypn] {
@@ -493,7 +528,17 @@ main[b-2tlxc31yxu] {
 .users-recipe[b-bv7obqaypn] {
     color: rgb(107, 36, 12);
 }
+/* _content/CookNet/Components/Pages/IngredientInsights.razor.rz.scp.css */
+.ingredientinsights-container[b-60vrozr92x] {
+    color: black;
+    padding: 25px;
+}
 /* _content/CookNet/Components/Pages/RecipeDetails.razor.rz.scp.css */
+.recipedetails-container[b-j9rgftzswo] {
+    color: black;
+    padding: 25px;
+}
+
 .recipe-title[b-j9rgftzswo] {
     font-size: 3rem;
     text-align: center;
@@ -565,6 +610,22 @@ main[b-2tlxc31yxu] {
     display: inline-block;
     width: 1em; /* Adjust size as needed */
     margin-left: -1em; /* Adjust indentation */
+}
+/* _content/CookNet/Components/Pages/UserCookbooks.razor.rz.scp.css */
+.usercookbooks-container[b-zdxd9okrfd] {
+    color: black;
+    padding: 25px;
+}
+
+.yourcookbooks-title[b-zdxd9okrfd] {
+    font-size: 3rem;
+    text-align: center;
+}
+
+.add-cookbook[b-zdxd9okrfd] {
+    margin: auto;
+    display: block;
+    margin-bottom: 20px;
 }
 /* _content/CookNet/Components/Pages/UserProfile.razor.rz.scp.css */
 .user-profile-container[b-be9y8cypfz] {

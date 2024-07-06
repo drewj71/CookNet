@@ -1,4 +1,9 @@
-﻿.recipe-title {
+﻿.recipedetails-container {
+    color: black;
+    padding: 25px;
+}
+
+.recipe-title {
     font-size: 3rem;
     text-align: center;
 }

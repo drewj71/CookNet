@@ -5022,23 +5022,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Andrew Jenks\\.nuget\\packages\\": {},
-    "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\drewj\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\CookNet.csproj",
+      "projectUniqueName": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\CookNet.csproj",
       "projectName": "CookNet",
-      "projectPath": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\CookNet.csproj",
-      "packagesPath": "C:\\Users\\Andrew Jenks\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\obj\\",
+      "projectPath": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\CookNet.csproj",
+      "packagesPath": "C:\\Users\\drewj\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Andrew Jenks\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\drewj\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5054,8 +5054,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet.Client\\CookNet.Client.csproj": {
-              "projectPath": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet.Client\\CookNet.Client.csproj"
+            "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\CookNet.Client.csproj": {
+              "projectPath": "C:\\Users\\drewj\\OneDrive\\Documents\\GitHub\\CookNet\\CookNet\\CookNet.Client\\CookNet.Client.csproj"
             }
           }
         }
@@ -5064,6 +5064,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -5110,7 +5115,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

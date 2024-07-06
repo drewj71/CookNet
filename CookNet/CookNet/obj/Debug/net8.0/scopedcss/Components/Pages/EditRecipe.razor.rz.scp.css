@@ -1,3 +1,8 @@
+.edit-recipe-container[b-nwn678rb5z] {
+    color: black;
+    padding: 25px;
+}
+
 .edit-recipe-title[b-nwn678rb5z] {
     font-size: 3rem;
     text-align: center;
@@ -53,6 +58,10 @@
     color: #fff;
     cursor: pointer;
     z-index: 1; /* Ensure label is on top */
+}
+
+.remove-thumbnail[b-nwn678rb5z] {
+
 }
 
 .inline-group[b-nwn678rb5z] {
@@ -135,4 +144,18 @@
 .modal-header .close[b-nwn678rb5z] {
     color: #721c24; /* Red close button color */
     font-size: 20px; /* Larger close button */
+}
+
+.remove-ingredient[b-nwn678rb5z], .edit-ingredient[b-nwn678rb5z] {
+    font-size: 1.5rem;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+.remove-ingredient[b-nwn678rb5z] {
+    color: red;
+}
+
+.edit-ingredient[b-nwn678rb5z] {
+
 }

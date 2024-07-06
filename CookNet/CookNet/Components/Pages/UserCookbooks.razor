@@ -5,16 +5,69 @@
 @inject RecipeService RecipeService
 @rendermode InteractiveServer
 
-<h3>Cookbook</h3>
+<div class="usercookbooks-container">
+    <h3 class="yourcookbooks-title">Your CookBooks</h3>
+    <button class="add-cookbook btn btn-primary" type="button" @onclick="ShowAddCookbookModal">Add</button>
+    @if (ShowCookbookModal)
+    {
+        <div class="modal fade show" tabindex="-1" role="dialog" style="display:block;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New CookBook</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="position-relative text-center">
+                            @* 
+                                ALLOW THE USER TO ADD A NEW COOKBOOK
+                                DEFINE THE NAME, A THUMBNAIL PICTURE,
+                                MAYBE SOME TAGS TO DEFINE THE COOKBOOK,
+                                AND MORE!
+                            *@
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @onclick="CloseAddCookbookModal">Cancel</button>
+                        <button type="button" class="btn btn-success" @onclick="SaveAddCookbookModal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="usercookbooks-grid">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+
+                </div>
+                <div class="col-sm">
+
+                </div>
+                <div class="col-sm">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
     [Parameter]
     public string UserName { get; set; }
-
     private ApplicationUser User;
+    private bool ShowCookbookModal = false;
 
     protected override async Task OnInitializedAsync()
     {
         User = await UserService.GetUserByUsernameAsync(UserName);
+    }
+
+    private void ShowAddCookbookModal() => ShowCookbookModal = true;
+
+    private void CloseAddCookbookModal() => ShowCookbookModal = false;
+
+    private void SaveAddCookbookModal()
+    {
+        
     }
 }

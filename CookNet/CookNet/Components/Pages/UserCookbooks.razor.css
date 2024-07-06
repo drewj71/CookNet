@@ -1,0 +1,15 @@
+﻿.usercookbooks-container {
+    color: black;
+    padding: 25px;
+}
+
+.yourcookbooks-title {
+    font-size: 3rem;
+    text-align: center;
+}
+
+.add-cookbook {
+    margin: auto;
+    display: block;
+    margin-bottom: 20px;
+}

@@ -344,3 +344,8 @@ D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.genruntimeconfig.cache
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\ref\CookNet.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\Home.razor.rz.scp.css
+C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\Home.razor.rz.scp.css
+C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\UserProfile.razor.rz.scp.css
+C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\AllRecipes.razor.rz.scp.css
+C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\IngredientInsights.razor.rz.scp.css
+C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\UserCookbooks.razor.rz.scp.css

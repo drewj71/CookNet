@@ -21,16 +21,15 @@
         {
             <div class="thumbnail-container position-relative">
                 <img src="@Recipe.ThumbnailImage" alt="RecipeThumbnail" class="border rounded shadow m-2 p-2 preview-thumbnail">
-                <button type="button" class="close" aria-label="Close" @onclick="RemoveThumbnail">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            </div>
+            <div class="d-inline-block remove-thumbnail-container">
+                <button class="remove-thumbnail btn btn-danger" type="button" @onclick="RemoveThumbnail">Remove Thumbnail</button>
             </div>
         }
 
-        <div class="file-input-wrapper">
+        <div class="d-inline-block file-input-wrapper">
             <InputFile class="custom-file-input" OnChange="@HandleThumbnailImageSelected" accept="image/*"
-                       style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 2;
-            " />
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 2;" />
             <label for="file-upload" class="custom-file-label">Upload Thumbnail</label>
         </div>
 
@@ -87,19 +86,25 @@
                     @if (!recipeIngredient.IsEditing)
                     {
                         <div>
+                            <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveIngredient(recipeIngredient)"></i>
+                            <i class="edit-ingredient fa fa-pen" @onclick="() => EditIngredient(recipeIngredient)"></i>
                             <span>@recipeIngredient.Quantity</span>
                             <span>@recipeIngredient.QuantityUnit</span>
                             <span>@ingredient.Name</span>
-                            <button type="button" class="btn btn-primary" @onclick="() => EditIngredient(recipeIngredient)">Edit</button>
-                            <button type="button" class="btn btn-danger" @onclick="() => RemoveIngredient(recipeIngredient)">Remove</button>
                         </div>
                     }
                     else
                     {
                         <div>
-                            <InputText class="form-control" @bind-Value="ingredient.Name" />
-                            <InputText class="form-control" @bind-Value="recipeIngredient.Quantity" />
-                            <InputText class="form-control" @bind-Value="recipeIngredient.QuantityUnit" />
+                            <div class="col-md-6 ingredient-name d-inline-block">
+                                <InputText class="form-control" @bind-Value="ingredient.Name" />
+                            </div>
+                            <div class="col-md-2 ingredient-quantity d-inline-block">
+                                <InputText class="form-control" @bind-Value="recipeIngredient.Quantity" />
+                            </div>
+                            <div class="col-md-2 ingredient-unit d-inline-block">
+                                <InputText class="form-control" @bind-Value="recipeIngredient.QuantityUnit" />
+                            </div>
                             <button type="button" class="btn btn-primary" @onclick="() => SaveIngredient(recipeIngredient)">Save</button>
                             <button type="button" class="btn btn-danger" @onclick="() => CancelEditIngredient(recipeIngredient)">Cancel</button>
                         </div>

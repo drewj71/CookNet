@@ -7,65 +7,67 @@
 @inject IUserService UserService
 @rendermode InteractiveServer
 
-@if (Recipe != null)
-{
-    <div>
-        <h4 class="recipe-title">@Recipe.Name</h4>
+<div class="recipedetails-container">
+    @if (Recipe != null)
+    {
+        <div>
+            <h4 class="recipe-title">@Recipe.Name</h4>
 
-        <p class="recipe-author">Author: <a class="text-decoration-none" href=@($"/users/{AuthorUserName}")>@("@")@AuthorUserName</a></p>
+            <p class="recipe-author">Author: <a class="text-decoration-none" href=@($"/users/{AuthorUserName}")>@("@")@AuthorUserName</a></p>
 
-        <div class="center-container">
-            <p class="recipe-preptime">Prep Time: @Recipe.PrepTime mins</p>
-            <p class="recipe-cooktime">Cook Time: @Recipe.CookTime mins</p>
-            <p class="recipe-category">Category: @Recipe.Category</p>
-            @if (Recipe.Ethnicity != "NA")
+            <div class="center-container">
+                <p class="recipe-preptime">Prep Time: @Recipe.PrepTime mins</p>
+                <p class="recipe-cooktime">Cook Time: @Recipe.CookTime mins</p>
+                <p class="recipe-category">Category: @Recipe.Category</p>
+                @if (Recipe.Ethnicity != "NA")
+                {
+                    <p class="recipe-ethnicity">Ethnicity: @Recipe.Ethnicity</p>
+                }
+                else
+                {
+                    <p class="recipe-ethnicity">Ethnicity: N/A</p>
+                }
+            </div>
+
+            @if (IsUserAuthor)
             {
-                <p class="recipe-ethnicity">Ethnicity: @Recipe.Ethnicity</p>
+                <button class="btn btn-primary edit-button" @onclick="() => EditRecipe(Recipe.ID)">Edit</button>
             }
-            else
+
+            <img src="@Recipe.ThumbnailImage" alt="RecipeThumbnail" class="img-fluid border rounded shadow m-2 p-2 recipe-thumbnail">
+            <p class="recipe-description">@Recipe.Description</p>
+
+            @if (Recipe.RecipeStories != null)
             {
-                <p class="recipe-ethnicity">Ethnicity: N/A</p>
+                <h4 class="recipe-story-title">Recipe Story:</h4>
+                @foreach (var story in @Story)
+                {
+                    <p class="recipe-story">@($"{story.StoryText}")</p>
+                }
             }
+
+            <h4 class="recipe-ingredients-title">Ingredients:</h4>
+            <ul class="ingredients-list">
+                @foreach (var ingredient in @RecipeIngredients)
+                {
+                    <li class="recipe-ingredients">@($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Name}")</li>
+                }
+            </ul>
+
+            <h4 class="recipe-instructions-title">Instructions:</h4>
+            <ul class="list-unstyled">
+                @foreach (var instruction in @Instructions)
+                {
+                    <li class="recipe-instructions">@($"{instruction.StepNumber}. {instruction.InstructionText}")</li>
+                }
+            </ul>
         </div>
-
-        @if (IsUserAuthor)
-        {
-            <button class="btn btn-primary edit-button" @onclick="() => EditRecipe(Recipe.ID)">Edit</button>
-        }
-
-        <img src="@Recipe.ThumbnailImage" alt="RecipeThumbnail" class="img-fluid border rounded shadow m-2 p-2 recipe-thumbnail">
-        <p class="recipe-description">@Recipe.Description</p>
-
-        @if (Recipe.RecipeStories != null)
-        {
-            <h4 class="recipe-story-title">Recipe Story:</h4>
-            @foreach (var story in @Story)
-            {
-                <p class="recipe-story">@($"{story.StoryText}")</p>
-            }
-        }
-
-        <h4 class="recipe-ingredients-title">Ingredients:</h4>
-        <ul class="ingredients-list">
-            @foreach (var ingredient in @RecipeIngredients)
-            {
-                <li class="recipe-ingredients">@($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Name}")</li>
-            }
-        </ul>
-
-        <h4 class="recipe-instructions-title">Instructions:</h4>
-        <ul class="list-unstyled">
-            @foreach (var instruction in @Instructions)
-            {
-                <li class="recipe-instructions">@($"{instruction.StepNumber}. {instruction.InstructionText}")</li>
-            }
-        </ul>
-    </div>
-}
-else
-{
-    <p>Loading...</p>
-}
+    }
+    else
+    {
+        <p>Loading...</p>
+    }
+</div>
 
 @code {
     [Inject]

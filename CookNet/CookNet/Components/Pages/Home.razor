@@ -66,7 +66,7 @@
                             <a class="username-nav text-decoration-none" href="@($"/users/{recipe.Author.UserName}")">
                                 <p class="users-recipe">@("@")@recipe.Author.UserName</p>
                             </a>
-                            <button class="bookmark-recipe" title="Save to Cookbook">
+                            <button class="bookmark-recipe" @onclick="ShowAddCookbookModal" title="Save to Cookbook">
                                 <i class="cookbooks-icon bi bi-journal-bookmark-fill"></i>
                             </button>
                         </div>
@@ -85,14 +85,50 @@
     </div>
 </div>
 
+@* MODAL FOR ADDING TO COOKBOOK *@
+@if (ShowCookbookModal)
+{
+    <div class="modal fade show" tabindex="-1" role="dialog" style="display:block;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add to CookBook</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="position-relative text-center">
+                        @* IF USER HAS COOKBOOKS ALREADY THEN SELECT ONE TO ADD RECIPE TO
+                           OR ALLOW THE OPTION TO CREATE A NEW COOKBOOK *@
+
+                        @* ELSE ALLOW THE USER NO CREATE A NEW COOKBOOK  *@
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="CloseAddCookbookModal">Cancel</button>
+                    <button type="button" class="btn btn-success" @onclick="ConfirmCookbookSave">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
 @code {
     // TODO - DISPLAY TOP 10 RECIPES, TOP RATED RECIPES, OR SPECIAL CATEGORIES
     // SUCH AS DISPLAYING TOP POSTERS OR INTERESTING INGREDIENT INSIGHT POSTS
     private List<Recipe> MostRecentRecipes;
     private List<Recipe> Top10Recipes;
+    private bool ShowCookbookModal = false;
 
     protected override async Task OnInitializedAsync()
     {
         MostRecentRecipes = await RecipeService.GetMostRecentRecipesAsync();
+    }
+
+    private void ShowAddCookbookModal() => ShowCookbookModal = true;
+
+    private void CloseAddCookbookModal() => ShowCookbookModal = false;
+
+    private void ConfirmCookbookSave()
+    {
+        
     }
 }

@@ -43,19 +43,19 @@
             />
             <label for="file-upload" class="custom-file-label">Upload Thumbnail</label>
         </div>
-        <span class="file-upload-hint"> Recommended file size: 1920x1080</span>
+        <span class="file-upload-hint">Recommended file size: 1920x1080</span>
 
         <div class="form-group">
             <label for="Description">Description:</label>
             <InputTextArea id="Description" class="form-control" @bind-Value="@Recipe.Description" placeholder="Quick, Easy, Delicious Recipe!" />
         </div>
 
-        <div class="col-md-3 form-group inline-group">
+        <div class="col-md-2 form-group inline-group">
             <label for="PrepTime">Prep Time (minutes):</label>
             <InputNumber id="PrepTime" class="form-control" @bind-Value="@Recipe.PrepTime" />
         </div>
 
-        <div class="col-md-3 form-group inline-group">
+        <div class="col-md-2 form-group inline-group">
             <label for="CookTime">Cook Time (minutes):</label>
             <InputNumber id="CookTime" class="form-control" @bind-Value="@Recipe.CookTime" />
         </div>
@@ -75,7 +75,7 @@
             </InputSelect>
         </div>
 
-        <div class="col-sm-1 col-md-3 form-group inline-group-long">
+        <div class="col-md-3 form-group inline-group-long">
             <label for="Ethnicity">Ethnicity:</label>
             <InputSelect id="Ethnicity" class="form-control long-select" @bind-Value="@Recipe.Ethnicity">
                 <option value="Select One">--Select One--</option>

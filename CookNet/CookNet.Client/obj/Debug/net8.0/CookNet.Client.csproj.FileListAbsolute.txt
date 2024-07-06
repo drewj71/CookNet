@@ -2076,3 +2076,5 @@ D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\refint\CookNet.Client.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\CookNet.Client.pdb
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\ref\CookNet.Client.dll
+C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\scopedcss\Pages\About.razor.rz.scp.css
+C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\scopedcss\projectbundle\CookNet.Client.bundle.scp.css
