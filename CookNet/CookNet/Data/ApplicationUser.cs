@@ -19,5 +19,10 @@ namespace CookNet.Data
         public string? Biography { get; set; }
         public string? SocialMediaLinks { get; set; }
         public DateTime RegistrationDate { get; set; }
+        public ICollection<UserCookbook> UserCookbooks { get; set; }
+
+        public ApplicationUser() { 
+            UserCookbooks = new List<UserCookbook>();
+        }    
     }
 }

@@ -54,11 +54,6 @@ namespace CookNet.Data
             return ingredients;
         }
 
-        public async Task<List<RecipeStory>> GetRecipeStoryByRecipeIdAsync(int recipeId)
-        {
-            return await _context.RecipeStories.Where(rs => rs.RecipeID == recipeId).ToListAsync();
-        }
-
         public async Task<List<Instruction>> GetInstructionsByRecipeIdAsync(int recipeId)
         {
             return await _context.Instructions.Where(ins => ins.RecipeID == recipeId).ToListAsync();
@@ -94,15 +89,6 @@ namespace CookNet.Data
             };
 
             recipe.Instructions.Add(instruction);
-        }
-
-        public async Task AddRecipeStoryToRecipeAsync(Recipe recipe, string storyText)
-        {
-            var story = new RecipeStory
-            {
-                StoryText = storyText
-            };
-            recipe.RecipeStories.Add(story);
         }
 
         public async Task<Recipe> GetRecipeByIdAsync(int recipeId)
@@ -179,17 +165,6 @@ namespace CookNet.Data
             if (recipeInstruction != null)
             {
                 _context.Instructions.Remove(recipeInstruction);
-                await SaveChanges();
-            }
-        }
-
-        public async Task RemoveStoryFromRecipeAsync(Recipe recipe, RecipeStory story)
-        {
-            var recipeStory = await _context.RecipeStories.FirstOrDefaultAsync(rs => rs.RecipeID == recipe.ID && rs.RecipeID == story.RecipeID);
-
-            if (recipeStory != null)
-            {
-                _context.RecipeStories.Remove(recipeStory);
                 await SaveChanges();
             }
         }

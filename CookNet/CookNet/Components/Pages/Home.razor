@@ -1,8 +1,11 @@
 ﻿@page "/"
 @using CookNet.Data
 @using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
 @inject IUserService UserService
 @inject RecipeService RecipeService
+@inject CookbookService CookbookService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @rendermode InteractiveServer
 <PageTitle>Home</PageTitle>
 
@@ -66,7 +69,7 @@
                             <a class="username-nav text-decoration-none" href="@($"/users/{recipe.Author.UserName}")">
                                 <p class="users-recipe">@("@")@recipe.Author.UserName</p>
                             </a>
-                            <button class="bookmark-recipe" @onclick="ShowAddCookbookModal" title="Save to Cookbook">
+                            <button class="bookmark-recipe" @onclick="() => ShowAddCookbookModal(recipe.ID)" title="Save to Cookbook">
                                 <i class="cookbooks-icon bi bi-journal-bookmark-fill"></i>
                             </button>
                         </div>
@@ -88,7 +91,7 @@
 @* MODAL FOR ADDING TO COOKBOOK *@
 @if (ShowCookbookModal)
 {
-    <div class="modal fade show" tabindex="-1" role="dialog" style="display:block;">
+    <div class="modal fade show @HideModal" tabindex="-1" role="dialog" aria-labelledby="addToCookbook" aria-hidden="true" data-bs-backdrop="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -96,10 +99,37 @@
                 </div>
                 <div class="modal-body">
                     <div class="position-relative text-center">
-                        @* IF USER HAS COOKBOOKS ALREADY THEN SELECT ONE TO ADD RECIPE TO
-                           OR ALLOW THE OPTION TO CREATE A NEW COOKBOOK *@
-
-                        @* ELSE ALLOW THE USER NO CREATE A NEW COOKBOOK  *@
+                        @if (UserCookbooks.Count > 0)
+                        {
+                            <h5 class="mb-2">Select a Cookbook</h5>
+                            <div class="cookbook-card-container">
+                                @foreach (var cookbook in UserCookbooks)
+                                {
+                                    var isCookbookPublic = cookbook.IsPublic ? "Public" : "Private";
+                                    <div class="cookbook-card @(selectedCookbooks.Contains(cookbook.CookbookID) ? "selected" : "")" @onclick="() => SelectCookbook(cookbook.CookbookID)">
+                                        <div class="cookbook-img position-relative">
+                                            @if (!string.IsNullOrEmpty(cookbook.CoverImage))
+                                            {
+                                                <img class="cookbookcard-img-top" src="@cookbook.CoverImage" alt="Cover Image" title="@cookbook.CookbookName" />
+                                            }
+                                        </div>
+                                        <div class="cookbookcard-body">
+                                            <h5 class="cookbookcard-title d-inline-block">@cookbook.CookbookName</h5>
+                                            <em><p class="cookbookdate-created" title="Created Date">@cookbook.DateCreated.ToShortDateString()</p></em>
+                                            <p class="cookbook-ispublic @isCookbookPublic">@isCookbookPublic</p>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="create-cookbook-button mt-4">
+                                <button type="button" class="btn btn-primary" @onclick="ShowCreateACookbookModal">New Cookbook</button>
+                            </div>
+                        }
+                        else
+                        {
+                            <p>You don't have any Cookbooks!</p>
+                            <button type="button" class="btn btn-primary" @onclick="ShowCreateACookbookModal">New Cookbook</button>
+                        }
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -111,24 +141,174 @@
     </div>
 }
 
+@* MODAL FOR CREATING NEW COOKBOOK *@
+@if (ShowCreateCookbookModal)
+{
+    <EditForm Model="@cookbook" OnValidSubmit="SaveNewCookbook" FormName="CreateCookbookForm">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="modal fade show" tabindex="-1" role="dialog" style="display:block;" aria-labelledby="createCookbook" aria-hidden="true" data-bs-backdrop="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create New Cookbook</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="coverimg-container text-center py-2">
+                            <div class="coverimg-title col-md-12 pb-2">
+                                <p class="cookbookCoverImg">Cover Image</p>
+                            </div>
+                            <div class="coverimg-preview">
+                                @if (cookbook.CoverImage != null)
+                                {
+                                    <MudImage Src="@cookbook.CoverImage" Alt="Cover Image" Class="border-4 border-solid mud-border-primary pa-4 rounded mb-2"
+                                              Style="width: 400px; height: auto;" />
+                                    <button class="btn btn-danger mb-3" type="button" @onclick="RemoveCoverImage">Remove</button>
+                                }
+                            </div>
+                            @if (showFileUpload)
+                            {
+                                <div class="coverimg-input col-md-12">
+                                    <em><p class="coverimg-help">Recommended file size: 1200 x 1800</p></em>
+                                    <MudFileUpload T="IBrowserFile" Accept=".png, .jpg" FilesChanged="HandleCoverImageSelected" MaximumFileCount="1">
+                                        <ActivatorContent>
+                                            <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.CloudUpload">
+                                                Choose Image
+                                            </MudButton>
+                                        </ActivatorContent>
+                                    </MudFileUpload>
+                                </div>
+                            }
+                        </div>
+                        <div class="cookbookname-container py-2">
+                            <label for="cookbookName">Name</label>
+                            <InputText type="text" class="cookbookName form-control" placeholder="Fall Recipes" @bind-Value="cookbook.CookbookName" />
+                        </div>
+                        <div class="cookbookdesc-container py-2">
+                            <label for="cookbookDesc">Cookbook Description</label>
+                            <InputTextArea class="cookbookDesc form-control" placeholder="Collection of the best fall recipes!" @bind-Value="cookbook.CookbookDescription" />
+                        </div>
+                        <div class="ispublic-container mt-2 text-center">
+                            <p class="ispublic-msg">Do you want this CookBook to be public?</p>
+                            <MudSwitch T="bool" Color="Color.Primary" ValueChanged="SetCookbookPublic" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @onclick="CloseCreateACookbookModal">Cancel</button>
+                        <button type="button" class="btn btn-success" @onclick="SaveNewCookbook">Save Cookbook</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+}
+
 @code {
-    // TODO - DISPLAY TOP 10 RECIPES, TOP RATED RECIPES, OR SPECIAL CATEGORIES
-    // SUCH AS DISPLAYING TOP POSTERS OR INTERESTING INGREDIENT INSIGHT POSTS
     private List<Recipe> MostRecentRecipes;
     private List<Recipe> Top10Recipes;
+    private List<UserCookbook> UserCookbooks;
     private bool ShowCookbookModal = false;
+    private bool ShowCreateCookbookModal = false;
+    private IBrowserFile? CoverImage;
+    private bool IsPublic = false;
+    private UserCookbook cookbook = new UserCookbook();
+    private int SelectedRecipeID { get; set; }
+    private List<int> selectedCookbooks = new List<int>();
+    private string NewCookbookName = "";
+    private string NewCookbookDescription = "";
+    private string userId { get; set; }
+    private string HideModal = "showModal";
+    private bool showFileUpload = true;
 
     protected override async Task OnInitializedAsync()
     {
+        var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
+        if (user != null)
+        {
+            userId = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+        }
         MostRecentRecipes = await RecipeService.GetMostRecentRecipesAsync();
+        if (userId != null)
+        {
+            UserCookbooks = await CookbookService.GetCookbooksByUserIdAsync(userId);
+        }
     }
 
-    private void ShowAddCookbookModal() => ShowCookbookModal = true;
+    private void ShowAddCookbookModal(int recipeId)
+    {
+        SelectedRecipeID = recipeId;
+        ShowCookbookModal = true;
+    }
 
     private void CloseAddCookbookModal() => ShowCookbookModal = false;
 
-    private void ConfirmCookbookSave()
+    private void ShowCreateACookbookModal()
     {
-        
+        HideModal = "hideModal";
+        ShowCreateCookbookModal = true;
+    }
+
+    private void CloseCreateACookbookModal()
+    {
+        NewCookbookName = "";
+        NewCookbookDescription = "";
+        IsPublic = false;
+        CoverImage = null;
+        cookbook.CoverImage = null;
+        ShowCreateCookbookModal = false;
+        HideModal = "showModal";
+    }
+
+    private void SelectCookbook(int cookbookId)
+    {
+        if (selectedCookbooks.Contains(cookbookId))
+        {
+            selectedCookbooks.Remove(cookbookId);
+        }
+        else
+        {
+            selectedCookbooks.Add(cookbookId);
+        }
+    }
+
+    private async void ConfirmCookbookSave()
+    {
+        if (selectedCookbooks.Any())
+        {
+            CloseAddCookbookModal();
+            await CookbookService.AddRecipeToCookbooks(SelectedRecipeID, selectedCookbooks);
+            selectedCookbooks.Clear();
+
+        }
+    }
+
+    private async Task HandleCoverImageSelected(IBrowserFile file)
+    {
+        if (file != null)
+        {
+            CoverImage = file;
+            var thumbnailUrl = await CookbookService.UploadImageAsync(CoverImage);
+            cookbook.CoverImage = thumbnailUrl;
+            showFileUpload = false;
+        }
+    }
+
+    private void RemoveCoverImage()
+    {
+        CoverImage = null;
+        cookbook.CoverImage = null;
+        showFileUpload = true;
+    }
+
+    private void SetCookbookPublic() => IsPublic = true;
+
+    private async Task SaveNewCookbook()
+    {
+        cookbook.IsPublic = IsPublic;
+        cookbook.DateCreated = DateTime.Now;
+        cookbook.DateUpdated = DateTime.Now;
+        cookbook.UserID = userId;
+        await CookbookService.CreateCookbookAsync(cookbook);
+        CloseCreateACookbookModal();
     }
 }

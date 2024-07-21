@@ -488,7 +488,7 @@ main[b-2tlxc31yxu] {
 }
 
 .bookmark-recipe[b-bv7obqaypn] {
-    font-size: 20px;
+    font-size: 25px;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -497,6 +497,7 @@ main[b-2tlxc31yxu] {
     color: white;
     background-color: rgba(0, 0, 0, 0.75);
     border-radius: 3px;
+    padding: 3px;
 }
 
 .card[b-bv7obqaypn] {
@@ -525,6 +526,115 @@ main[b-2tlxc31yxu] {
 
 .users-recipe[b-bv7obqaypn] {
     color: rgb(107, 36, 12);
+}
+
+.image-frame[b-bv7obqaypn] {
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.ispublic-container[b-bv7obqaypn] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ispublic-msg[b-bv7obqaypn] {
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.Private[b-bv7obqaypn] {
+    color: red !important;
+}
+
+.Public[b-bv7obqaypn] {
+    font-weight: 800;
+    color: forestgreen !important;
+}
+
+.cookbook-card-container[b-bv7obqaypn] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust the gap between cards */
+    padding: 0;
+}
+
+.cookbook-card[b-bv7obqaypn] {
+    flex: 1 1 calc(50% - 10px); /* Two cards per row with gap consideration */
+    background-color: rgb(228, 143, 69);
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+    .cookbook-card:hover[b-bv7obqaypn] {
+        transform: scale(1.05); /* Slightly enlarge on hover */
+    }
+
+    .cookbook-card.selected[b-bv7obqaypn] {
+        border: 2px solid #007bff;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+.cookbook-img[b-bv7obqaypn] {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 150%; /* Aspect ratio for 600x900 */
+    overflow: hidden;
+}
+
+.cookbookcard-img-top[b-bv7obqaypn] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cookbookcard-body[b-bv7obqaypn] {
+    padding: 5px;
+}
+
+.cookbookcard-title[b-bv7obqaypn] {
+    color: white;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    white-space: nowrap; /* Prevent text from wrapping to a new line */
+    overflow: hidden; /* Hide the overflowed text */
+    text-overflow: ellipsis; /* Add ellipsis (...) when text overflows */
+}
+
+.cookbookdate-created[b-bv7obqaypn] {
+    font-size: 0.875rem;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.cookbook-ispublic[b-bv7obqaypn] {
+    font-size: 0.875rem;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .cookbook-card[b-bv7obqaypn] {
+        flex: 1 1 100%; /* Full width for smaller screens */
+    }
+}
+
+.hideModal[b-bv7obqaypn] {
+    display: none;
+}
+
+.showModal[b-bv7obqaypn] {
+    display: block;
 }
 /* _content/CookNet/Components/Pages/IngredientInsights.razor.rz.scp.css */
 .ingredientinsights-container[b-60vrozr92x] {
@@ -615,15 +725,141 @@ main[b-2tlxc31yxu] {
     padding: 25px;
 }
 
+.usercookbooks-header[b-zdxd9okrfd] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .yourcookbooks-title[b-zdxd9okrfd] {
     font-size: 3rem;
+    margin: 0;
     text-align: center;
 }
 
+.top-buttons[b-zdxd9okrfd] {
+    margin-top: 10px;
+}
+
+.divider-line[b-zdxd9okrfd] {
+    height: 1px;
+    background-color: #000;
+    margin: 10px 0;
+    width: 100%;
+}
+
 .add-cookbook[b-zdxd9okrfd] {
-    margin: auto;
-    display: block;
-    margin-bottom: 20px;
+    margin: 0;
+    margin-left: 10px;
+}
+
+.cookbooks-amount[b-zdxd9okrfd] {
+    margin-top: 10px;
+}
+
+.cookbooks-count[b-zdxd9okrfd] {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.ispublic-container[b-zdxd9okrfd] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ispublic-msg[b-zdxd9okrfd] {
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.Private[b-zdxd9okrfd] {
+    color: red !important;
+}
+
+.Public[b-zdxd9okrfd] {
+    font-weight: 800;
+    color: forestgreen !important;
+}
+
+.displaycookbooks-container[b-zdxd9okrfd] {
+    padding: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust gap between cards */
+    justify-content: center; /* Center the cards horizontally */
+}
+
+.cookbook-card-container[b-zdxd9okrfd] {
+    flex: 1 1 calc(25% - 20px); /* Four cards per row with gap consideration */
+    display: flex;
+    justify-content: center; /* Center the card within the container */
+}
+
+.cookbook-card[b-zdxd9okrfd] {
+    background-color: rgb(228, 143, 69);
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px; /* Set a maximum width for the cards */
+    box-sizing: border-box;
+}
+
+    .cookbook-card:hover[b-zdxd9okrfd] {
+        transform: scale(1.05); /* Slightly enlarge on hover */
+    }
+
+.cookbook-img[b-zdxd9okrfd] {
+    width: 100%;
+    height: 0;
+    padding-top: 150%; /* Aspect ratio for 600x900 */
+    position: relative;
+    overflow: hidden;
+}
+
+.cookbookcard-img-top[b-zdxd9okrfd] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cookbookcard-body[b-zdxd9okrfd] {
+    padding: 10px;
+    text-align: center;
+}
+
+.cookbookcard-title[b-zdxd9okrfd] {
+    color: white;
+    font-size: 1.2rem; /* Larger font size for titles */
+    margin: 0 0 5px 0;
+}
+
+.cookbookdate-created[b-zdxd9okrfd],
+.cookbook-ispublic[b-zdxd9okrfd] {
+    font-size: 0.875rem;
+    color: white;
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .cookbook-card-container[b-zdxd9okrfd] {
+        flex: 1 1 calc(50% - 20px); /* Two cards per row for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .cookbook-card-container[b-zdxd9okrfd] {
+        flex: 1 1 100%; /* One card per row for very small screens */
+    }
 }
 /* _content/CookNet/Components/Pages/UserProfile.razor.rz.scp.css */
 .user-profile-container[b-be9y8cypfz] {
@@ -637,7 +873,36 @@ main[b-2tlxc31yxu] {
 
 .edit-icon[b-be9y8cypfz] {
     margin-right: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-pen[b-be9y8cypfz] {
+    color: white;
+}
+
+.edit-icon-noprof[b-be9y8cypfz] {
+    margin-right: 10px;
+    margin-bottom: 40px;
+    background-color: white;
+    opacity: 70%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-pen-noprof[b-be9y8cypfz] {
+    color: black;
+}
+
+.noprof-container[b-be9y8cypfz] {
+    margin-top: -25px;
+    margin-bottom: -25px;
 }
 
 .userinfo-container[b-be9y8cypfz] {
@@ -692,7 +957,7 @@ main[b-2tlxc31yxu] {
 }
 
 .bookmark-recipe[b-be9y8cypfz] {
-    font-size: 20px;
+    font-size: 25px;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -701,6 +966,7 @@ main[b-2tlxc31yxu] {
     color: white;
     background-color: rgba(0, 0, 0, 0.75);
     border-radius: 3px;
+    padding: 3px;
 }
 
 .card[b-be9y8cypfz] {
@@ -729,4 +995,112 @@ main[b-2tlxc31yxu] {
 
 .users-recipe[b-be9y8cypfz] {
     color: rgb(107, 36, 12);
+}
+
+.divider-line[b-be9y8cypfz] {
+    height: 1px;
+    background-color: #000;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.ispublic-container[b-be9y8cypfz] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ispublic-msg[b-be9y8cypfz] {
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.Private[b-be9y8cypfz] {
+    color: red !important;
+}
+
+.Public[b-be9y8cypfz] {
+    font-weight: 800;
+    color: forestgreen !important;
+}
+
+.cookbook-card-container[b-be9y8cypfz] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust the gap between cards */
+    padding: 0;
+}
+
+.cookbook-card[b-be9y8cypfz] {
+    flex: 1 1 calc(50% - 10px); /* Two cards per row with gap consideration */
+    background-color: rgb(228, 143, 69);
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+    .cookbook-card:hover[b-be9y8cypfz] {
+        transform: scale(1.05); /* Slightly enlarge on hover */
+    }
+
+    .cookbook-card.selected[b-be9y8cypfz] {
+        border: 2px solid #007bff;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+.cookbook-img[b-be9y8cypfz] {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 150%; /* Aspect ratio for 600x900 */
+    overflow: hidden;
+}
+
+.cookbookcard-img-top[b-be9y8cypfz] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cookbookcard-body[b-be9y8cypfz] {
+    padding: 5px;
+}
+
+.cookbookcard-title[b-be9y8cypfz] {
+    color: white;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    white-space: nowrap; /* Prevent text from wrapping to a new line */
+    overflow: hidden; /* Hide the overflowed text */
+    text-overflow: ellipsis; /* Add ellipsis (...) when text overflows */
+}
+
+.cookbookdate-created[b-be9y8cypfz] {
+    font-size: 0.875rem;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.cookbook-ispublic[b-be9y8cypfz] {
+    font-size: 0.875rem;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .cookbook-card[b-be9y8cypfz] {
+        flex: 1 1 100%; /* Full width for smaller screens */
+    }
+}
+
+.hideModal[b-be9y8cypfz] {
+    display: none;
+}
+
+.showModal[b-be9y8cypfz] {
+    display: block;
 }

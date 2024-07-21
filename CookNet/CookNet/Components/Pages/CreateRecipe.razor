@@ -15,6 +15,8 @@
 @rendermode InteractiveServer
 @attribute [Authorize]
 
+<PageTitle>Create a Recipe</PageTitle>
+
 <div class="create-recipe-container">
     <EditForm Model="@Recipe" OnValidSubmit="HandleSubmit" FormName="CreateRecipeForm">
         <DataAnnotationsValidator />
@@ -26,24 +28,27 @@
             <InputText id="Name" class="form-control" @bind-Value="@Recipe.Name" placeholder="Levain Chocolate Chip Cookies" />
         </div>
 
-        @if (@Recipe.ThumbnailImage != null)
+        @if (Recipe.ThumbnailImage != null)
         {
-            <div class="thumbnail-container position-relative">
-                <img src="@Recipe.ThumbnailImage" alt="RecipeThumbnail" class="border rounded shadow m-2 p-2 preview-thumbnail">
-                <button type="button" class="close" aria-label="Close" @onclick="RemoveThumbnail">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+            <MudImage Src="@Recipe.ThumbnailImage" Alt="Thumbnail Image" Class="border-4 border-solid mud-border-primary pa-4 rounded mb-2"
+                      Style="width: 400px; height: auto;" />
+            <br />
+            <button class="btn btn-danger" type="button" @onclick="RemoveThumbnail">Remove</button>
         }
 
-        <div class="file-input-wrapper">
-            <InputFile class="custom-file-input" OnChange="@HandleThumbnailImageSelected" accept="image/*"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 2;
-            "
-            />
-            <label for="file-upload" class="custom-file-label">Upload Thumbnail</label>
-        </div>
-        <span class="file-upload-hint">Recommended file size: 1920x1080</span>
+        @if (showFileUpload)
+        {
+            <div class="thumbnailimg-input col-md-6">
+                <em><p class="thumbnailimg-help">Recommended file size: 1920 x 1080</p></em>
+                <MudFileUpload T="IBrowserFile" Accept=".png, .jpg" FilesChanged="HandleThumbnailImageSelected" MaximumFileCount="10">
+                    <ActivatorContent>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.CloudUpload">
+                            Choose Image
+                        </MudButton>
+                    </ActivatorContent>
+                </MudFileUpload>
+            </div>
+        }
 
         <div class="form-group">
             <label for="Description">Description:</label>
@@ -146,23 +151,6 @@
             <label for="RecipeStory">Story:</label>
             <InputTextArea id="RecipeStory" class="form-control" @bind-Value="NewRecipeStory" placeholder="Long detailed recipe story - " style="height: 300px;" />
         </div>
-        <p class="instr-story-btn"><button type="button" class="btn btn-primary" @onclick="AddRecipeStoryAsync">Add</button></p>
-
-        @if (AddedRecipeStory.Any())
-        {
-            <div style="background-color: #f2f2f2; padding: 10px; margin-bottom: 10px;">
-                <h4>Added Story:</h4>
-                <ul class="list-unstyled">
-                    @foreach (var story in AddedRecipeStory)
-                    {
-                        <li>
-                            <button type="button" class="btn btn-link text-danger" @onclick="() => RemoveStory(story)">X</button>
-                            @($"{story.StoryText}")
-                        </li>
-                    }
-                </ul>
-            </div>
-        }
         <button type="submit" class="btn btn-success">Submit</button>
     </EditForm>
 </div>
@@ -178,6 +166,9 @@
     List<Ingredient> AddedIngredients { get; set; } = new();
     List<Instruction> AddedInstructions { get; set; } = new();
     List<RecipeStory> AddedRecipeStory { get; set; } = new();
+    private IBrowserFile? ThumbnailImage;
+    private string? ThumbnailImagePreview;
+    private bool showFileUpload = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -213,16 +204,6 @@
         NewInstructionText = string.Empty;
     }
 
-    private async Task AddRecipeStoryAsync()
-    {
-        AddedRecipeStory.Add(new RecipeStory
-        {
-            StoryText = NewRecipeStory
-        });
-
-        NewRecipeStory = string.Empty;
-    }
-
     async void RemoveIngredient(Ingredient ingredient)
     {
         AddedIngredients.Remove(ingredient);
@@ -233,21 +214,23 @@
         AddedInstructions.Remove(instruction);
     }
 
-    async void RemoveStory(RecipeStory story)
+    private async Task HandleThumbnailImageSelected(IBrowserFile file)
     {
-        AddedRecipeStory.Remove(story);
+        if (file != null)
+        {
+            ThumbnailImage = file;
+            var thumbnailUrl = await RecipeService.UploadImageAsync(ThumbnailImage);
+            Recipe.ThumbnailImage = thumbnailUrl;
+            showFileUpload = false;
+        }
     }
 
-    private async Task HandleThumbnailImageSelected(InputFileChangeEventArgs e)
-    {
-        var thumbnailImage = e.File;
-        var thumbnailUrl = await RecipeService.UploadImageAsync(thumbnailImage);
-        Recipe.ThumbnailImage = thumbnailUrl;
-    }
 
     private void RemoveThumbnail()
     {
+        ThumbnailImage = null;
         Recipe.ThumbnailImage = null;
+        showFileUpload = true;
     }
 
     async Task HandleSubmit()
@@ -260,6 +243,7 @@
         {
             Recipe.Author = currentUser;
             Recipe.DateCreated = DateTime.Now;
+            Recipe.RecipeStory = NewRecipeStory;
 
             foreach (var ingredient in AddedIngredients)
             {
@@ -269,11 +253,6 @@
             foreach (var instruction in AddedInstructions)
             {
                 await RecipeService.AddInstructionToRecipeAsync(Recipe, instruction.InstructionText);
-            }
-
-            foreach (var story in AddedRecipeStory)
-            {
-                await RecipeService.AddRecipeStoryToRecipeAsync(Recipe, story.StoryText);
             }
 
             await RecipeService.CreateRecipeAsync(Recipe);

@@ -1037,6 +1037,8 @@ C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debu
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\5jldse37tw.gz
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\tk9n33udhf.gz
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\CookNet..C3BC3A09.Up2Date
+C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\scopedcss\Pages\About.razor.rz.scp.css
+C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\scopedcss\projectbundle\CookNet.Client.bundle.scp.css
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\wwwroot\_framework\blazor.boot.json
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\wwwroot\_framework\blazor.webassembly.js
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\wwwroot\_framework\CookNet.Client.pdb
@@ -1864,7 +1866,9 @@ D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.CookNet.Client.props
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.CookNet.Client.props
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\staticwebassets.pack.json
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\scopedcss\Pages\About.razor.rz.scp.css
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\scopedcss\bundle\CookNet.Client.styles.css
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\scopedcss\projectbundle\CookNet.Client.bundle.scp.css
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\q512cru0x1.gz
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\mmm35ph60j.gz
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\u9spm02olf.gz
@@ -2076,5 +2080,3 @@ D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\refint\CookNet.Client.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\CookNet.Client.pdb
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\ref\CookNet.Client.dll
-C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\scopedcss\Pages\About.razor.rz.scp.css
-C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\scopedcss\projectbundle\CookNet.Client.bundle.scp.css

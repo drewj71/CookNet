@@ -5,6 +5,8 @@
 @inject RecipeService RecipeService
 @rendermode InteractiveServer
 
+<PageTitle>Edit Recipe</PageTitle>
+
 <div class="edit-recipe-container">
     <EditForm Model="@Recipe" OnValidSubmit="HandleSubmit" FormName="EditRecipeForm">
         <DataAnnotationsValidator />
@@ -162,10 +164,7 @@
 
         <div class="form-group">
             <h4 class="edit-story-title">Recipe Story:</h4>
-            @foreach (var story in Recipe.RecipeStories)
-            {
-                <InputTextArea id="StoryText" class="form-control" @bind-Value="story.StoryText" style="height: 300px;" />
-            }
+            <InputTextArea id="StoryText" class="form-control" @bind-Value="@RecipeStory" style="height: 300px;" />
         </div>
 
         <button type="submit" class="btn btn-success">Save</button>
@@ -211,6 +210,7 @@
     private int RecipeCookTime { get; set; }
     private string RecipeCategory { get; set; }
     private string RecipeEthnicity { get; set; }
+    private string RecipeStory { get; set; }
     private bool ShowModal { get; set; } = false;
 
     private string NewIngredientName { get; set; }
@@ -232,7 +232,7 @@
             RecipeCookTime = Recipe.CookTime;
             RecipeCategory = Recipe.Category;
             RecipeEthnicity = Recipe.Ethnicity;
-
+            RecipeStory = Recipe.RecipeStory;
         }
     }
 
@@ -343,6 +343,7 @@
         Recipe.CookTime = RecipeCookTime;
         Recipe.Category = RecipeCategory;
         Recipe.Ethnicity = RecipeEthnicity;
+        Recipe.RecipeStory = RecipeStory;
 
         foreach (var ingredient in AddedIngredients)
         {

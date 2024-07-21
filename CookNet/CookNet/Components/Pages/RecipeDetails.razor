@@ -10,6 +10,7 @@
 <div class="recipedetails-container">
     @if (Recipe != null)
     {
+        <PageTitle>@Recipe.Name</PageTitle>
         <div>
             <h4 class="recipe-title">@Recipe.Name</h4>
 
@@ -37,13 +38,10 @@
             <img src="@Recipe.ThumbnailImage" alt="RecipeThumbnail" class="img-fluid border rounded shadow m-2 p-2 recipe-thumbnail">
             <p class="recipe-description">@Recipe.Description</p>
 
-            @if (Recipe.RecipeStories != null)
+            @if (Recipe.RecipeStory != null)
             {
                 <h4 class="recipe-story-title">Recipe Story:</h4>
-                @foreach (var story in @Story)
-                {
-                    <p class="recipe-story">@($"{story.StoryText}")</p>
-                }
+                <p class="recipe-story">@($"{Recipe.RecipeStory}")</p>
             }
 
             <h4 class="recipe-ingredients-title">Ingredients:</h4>
@@ -65,7 +63,8 @@
     }
     else
     {
-        <p>Loading...</p>
+        <PageTitle>Invalid Recipe</PageTitle>
+        <p>Recipe not found...</p>
     }
 </div>
 
@@ -75,7 +74,6 @@
 
     private Recipe Recipe;
     private List<Ingredient> RecipeIngredients = [];
-    private List<RecipeStory> Story = [];
     private List<Instruction> Instructions = [];
     private string AuthorUserName;
     private bool IsUserAuthor = false;
@@ -103,7 +101,6 @@
                 }
 
                 RecipeIngredients = await RecipeService.GetIngredientsByRecipeIdAsync(recipeId);
-                Story = await RecipeService.GetRecipeStoryByRecipeIdAsync(recipeId);
                 Instructions = await RecipeService.GetInstructionsByRecipeIdAsync(recipeId);
             }
         }

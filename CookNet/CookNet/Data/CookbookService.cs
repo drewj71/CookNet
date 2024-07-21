@@ -1,0 +1,134 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.Data.SqlClient;
+
+namespace CookNet.Data
+{
+    public class CookbookService
+    {
+        private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public CookbookService(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        {
+            _context = context;
+            _webHostEnvironment = webHostEnvironment;
+        }
+
+        public async Task<List<UserCookbook>> GetCookbooksAsync()
+        {
+            return await _context.UserCookbooks.ToListAsync();
+        }
+
+        public async Task<UserCookbook?> GetCookbookByIdAsync(int cookbookID)
+        {
+            return await _context.UserCookbooks.FindAsync(cookbookID);
+        }
+
+        public async Task<List<UserCookbook>> GetCookbooksByUserIdAsync(string userId)
+        {
+            return await _context.UserCookbooks
+                .Where(c => c.UserID == userId)
+                .ToListAsync();
+        }
+
+        public async Task CreateCookbookAsync(UserCookbook book)
+        {
+            if (book == null)
+            {
+                throw new ArgumentNullException(nameof(book));
+            }
+            _context.UserCookbooks.Add(book);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateCookbookAsync(UserCookbook book)
+        {
+            var existingBook = await _context.UserCookbooks.FindAsync(book.CookbookID);
+            if (existingBook != null)
+            {
+                _context.Entry(existingBook).CurrentValues.SetValues(book);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteCookbookAsync(int cookbookID)
+        {
+            var book = await _context.UserCookbooks.FindAsync(cookbookID);
+            if (book != null)
+            {
+                _context.UserCookbooks.Remove(book);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task AddRecipeToCookbooks(int recipeId, List<int> cookbookIds)
+        {
+            var existingAssociations = _context.CookbookRecipes.Where(cr => cr.RecipeID == recipeId);
+            _context.CookbookRecipes.RemoveRange(existingAssociations);
+
+            var newAssociations = cookbookIds.Select(cookbookId => new CookbookRecipe
+            {
+                CookbookID = cookbookId,
+                RecipeID = recipeId,
+                DateAdded = DateTime.UtcNow
+            });
+
+            _context.CookbookRecipes.AddRange(newAssociations);
+            await _context.SaveChangesAsync();
+        }
+
+        private readonly HashSet<string> AllowedExtensions = new HashSet<string> { ".jpg", ".jpeg", ".png" };
+        private const long MaxFileSize = 10 * 1024 * 1024; // 10 MB
+
+        private bool IsValidImage(string fileName)
+        {
+            var extension = Path.GetExtension(fileName).ToLowerInvariant();
+            return AllowedExtensions.Contains(extension);
+        }
+
+        public async Task<string> UploadImageAsync(IBrowserFile file)
+        {
+            if (file == null || file.Size == 0 || string.IsNullOrEmpty(file.Name) || !IsValidImage(file.Name) || file.Size > MaxFileSize)
+            {
+                throw new ArgumentException("Invalid file or unsupported file type");
+            }
+
+            // Save the image and return its path
+            return await SaveImageAsync(file);
+        }
+
+        private async Task<string> SaveImageAsync(IBrowserFile file)
+        {
+            try
+            {
+                var uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+                if (!Directory.Exists(uploadsDir))
+                {
+                    Directory.CreateDirectory(uploadsDir);
+                }
+
+                var uniqueFileName = $"{Guid.NewGuid()}_{Path.GetFileName(file.Name)}";
+                var filePath = Path.Combine(uploadsDir, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.OpenReadStream().CopyToAsync(fileStream);
+                }
+
+                return Path.Combine("uploads", uniqueFileName);
+            }
+            catch (Exception ex)
+            {
+                // Log the error or handle it accordingly
+                throw new InvalidOperationException("Error saving image file", ex);
+            }
+        }
+
+    }
+}
