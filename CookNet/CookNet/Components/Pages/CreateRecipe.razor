@@ -170,7 +170,7 @@
     private string? ThumbnailImagePreview;
     private bool showFileUpload = true;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Recipe = new Recipe();
         AddedIngredients = new List<Ingredient>();

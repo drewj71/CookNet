@@ -19,16 +19,19 @@ namespace CookNet.Data
         public ApplicationUser Author { get; set; }
         public string? ThumbnailImage { get; set; }
         public string RecipeStory { get; set; }
+        public int? Servings { get; set; }
         public ICollection<RecipeIngredient> RecipeIngredients { get; set; }
         public ICollection<Instruction> Instructions { get; set; }
         public ICollection<RecipeImage> RecipeImages { get; set; }
         public ICollection<CookbookRecipe> CookbookRecipes { get; set; }
+        public ICollection<RecipeRating> RecipeRatings { get; set; }
         public Recipe()
         {
             RecipeIngredients = new List<RecipeIngredient>();
             Instructions = new List<Instruction>();
             RecipeImages = new List<RecipeImage>();
             CookbookRecipes = new List<CookbookRecipe>();
+            RecipeRatings = new List<RecipeRating>();
         }
     }
 }

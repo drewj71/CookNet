@@ -108,11 +108,20 @@ namespace CookNet.Data
                 .ToListAsync();
         }
 
+        private readonly HashSet<string> AllowedExtensions = new HashSet<string> { ".jpg", ".jpeg", ".png" };
+        private const long MaxFileSize = 10 * 1024 * 1024; // 10 MB
+
+        private bool IsValidImage(string fileName)
+        {
+            var extension = Path.GetExtension(fileName).ToLowerInvariant();
+            return AllowedExtensions.Contains(extension);
+        }
+
         public async Task<string> UploadImageAsync(IBrowserFile file)
         {
-            if (file == null || file.Size == 0 || string.IsNullOrEmpty(file.Name))
+            if (file == null || file.Size == 0 || string.IsNullOrEmpty(file.Name) || !IsValidImage(file.Name) || file.Size > MaxFileSize)
             {
-                throw new ArgumentException("Invalid file");
+                throw new ArgumentException("Invalid file or unsupported file type");
             }
 
             // Save the image and return its path
@@ -121,25 +130,29 @@ namespace CookNet.Data
 
         private async Task<string> SaveImageAsync(IBrowserFile file)
         {
-            // Check if the uploads directory exists, create it if not
-            var uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
-            if (!Directory.Exists(uploadsDir))
+            try
             {
-                Directory.CreateDirectory(uploadsDir);
+                var uploadsDir = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+                if (!Directory.Exists(uploadsDir))
+                {
+                    Directory.CreateDirectory(uploadsDir);
+                }
+
+                var uniqueFileName = $"{Guid.NewGuid()}_{Path.GetFileName(file.Name)}";
+                var filePath = Path.Combine(uploadsDir, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.OpenReadStream().CopyToAsync(fileStream);
+                }
+
+                return Path.Combine("uploads", uniqueFileName);
             }
-
-            // Generate a unique file name
-            var uniqueFileName = $"{Guid.NewGuid().ToString()}_{Path.GetFileName(file.Name)}";
-            var filePath = Path.Combine(uploadsDir, uniqueFileName);
-
-            // Save the file to the uploads directory
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            catch (Exception ex)
             {
-                await file.OpenReadStream().CopyToAsync(fileStream);
+                // Log the error or handle it accordingly
+                throw new InvalidOperationException("Error saving image file", ex);
             }
-
-            // Return the relative path to the saved file
-            return Path.Combine("uploads", uniqueFileName);
         }
 
         public async Task SaveChanges()

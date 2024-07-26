@@ -101,6 +101,11 @@ main[b-2tlxc31yxu] {
     margin: 0 !important;
     padding: 0 !important;
 }
+
+.profpic-icon[b-2tlxc31yxu] {
+    font-size: 2.5rem;
+    padding-top: 5px;
+}
 /* _content/CookNet/Components/Layout/NavMenu.razor.rz.scp.css */
 .navbar-toggler:checked[b-8sk4w4v26d] {
     background-color: rgba(255, 255, 255, 0.5);

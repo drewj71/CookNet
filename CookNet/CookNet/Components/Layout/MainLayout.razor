@@ -4,7 +4,8 @@
 @using CookNet.Data
 @using CookNet.Components.Account
 @inject NavigationManager NavigationManager
-@inject IUserService UserService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
 
 <div class="page">
     <div class="sidebar">
@@ -17,9 +18,10 @@
                 <Authorized>
                     <div class="nav-item px-3">
                         <NavLink class="nav-link" href="@($"/users/{context.User.Identity?.Name}")">
-                            <button type="submit" class="btn btn-primary">
+                            @* <button type="submit" class="btn btn-primary">
                                 <span class="bi bi-person-fill" aria-hidden="true"></span> Profile
-                            </button>
+                            </button>    *@   
+                            <ProfilePictureIcon />
                         </NavLink>
                     </div>
                     <div class="nav-item px-3">
@@ -71,7 +73,6 @@
         currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
         NavigationManager.LocationChanged += OnLocationChanged;
     }
-
 
     private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
     {

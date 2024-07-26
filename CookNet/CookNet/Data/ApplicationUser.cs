@@ -20,9 +20,11 @@ namespace CookNet.Data
         public string? SocialMediaLinks { get; set; }
         public DateTime RegistrationDate { get; set; }
         public ICollection<UserCookbook> UserCookbooks { get; set; }
+        public ICollection<RecipeRating> RecipeRatings { get; set; }
 
         public ApplicationUser() { 
             UserCookbooks = new List<UserCookbook>();
+            RecipeRatings = new List<RecipeRating>();
         }    
     }
 }

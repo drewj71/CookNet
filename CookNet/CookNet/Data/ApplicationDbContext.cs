@@ -17,6 +17,7 @@ namespace CookNet.Data
         public DbSet<RecipeImage> RecipeImages { get; set; }
         public DbSet<UserCookbook> UserCookbooks { get; set; }
         public DbSet<CookbookRecipe> CookbookRecipes { get; set; }
+        public DbSet<RecipeRating> RecipeRatings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -68,6 +69,21 @@ namespace CookNet.Data
                 .HasOne(uc => uc.User)
                 .WithMany(u => u.UserCookbooks)
                 .HasForeignKey(uc => uc.UserID);
+
+            modelBuilder.Entity<RecipeRating>()
+                .HasKey(rr => rr.RatingID);
+
+            modelBuilder.Entity<RecipeRating>()
+                .HasOne(rr => rr.User)
+                .WithMany(u => u.RecipeRatings)
+                .HasForeignKey(rr => rr.UserID)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<RecipeRating>()
+                .HasOne(rr => rr.Recipe)
+                .WithMany(r => r.RecipeRatings)
+                .HasForeignKey(rr => rr.RecipeID)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

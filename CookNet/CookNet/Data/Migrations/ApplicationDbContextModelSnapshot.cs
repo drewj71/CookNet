@@ -227,6 +227,9 @@ namespace CookNet.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Servings")
+                        .HasColumnType("int");
+
                     b.Property<string>("ThumbnailImage")
                         .HasColumnType("nvarchar(max)");
 
@@ -294,6 +297,33 @@ namespace CookNet.Migrations
                     b.HasIndex("IngredientID");
 
                     b.ToTable("RecipeIngredients");
+                });
+
+            modelBuilder.Entity("CookNet.Data.RecipeRating", b =>
+                {
+                    b.Property<int>("RatingID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RatingID"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RecipeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("RatingID");
+
+                    b.HasIndex("RecipeID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("RecipeRatings");
                 });
 
             modelBuilder.Entity("CookNet.Data.UserCookbook", b =>
@@ -538,6 +568,25 @@ namespace CookNet.Migrations
                     b.Navigation("Recipe");
                 });
 
+            modelBuilder.Entity("CookNet.Data.RecipeRating", b =>
+                {
+                    b.HasOne("CookNet.Data.Recipe", "Recipe")
+                        .WithMany("RecipeRatings")
+                        .HasForeignKey("RecipeID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("CookNet.Data.ApplicationUser", "User")
+                        .WithMany("RecipeRatings")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Recipe");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("CookNet.Data.UserCookbook", b =>
                 {
                     b.HasOne("CookNet.Data.ApplicationUser", "User")
@@ -602,6 +651,8 @@ namespace CookNet.Migrations
 
             modelBuilder.Entity("CookNet.Data.ApplicationUser", b =>
                 {
+                    b.Navigation("RecipeRatings");
+
                     b.Navigation("UserCookbooks");
                 });
 
@@ -614,6 +665,8 @@ namespace CookNet.Migrations
                     b.Navigation("RecipeImages");
 
                     b.Navigation("RecipeIngredients");
+
+                    b.Navigation("RecipeRatings");
                 });
 
             modelBuilder.Entity("CookNet.Data.UserCookbook", b =>
