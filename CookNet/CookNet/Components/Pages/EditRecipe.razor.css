@@ -12,86 +12,27 @@
     margin: 15px 0 15px 0;
 }
 
-.preview-thumbnail {
-    width: 200px;
-    height: auto;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    margin: 10px;
+.edit-section {
+    display: flex;
+    gap: 20px; /* Space between ingredients and instructions sections */
+    margin-bottom: 20px; /* Space below the sections */
 }
 
-/* Custom CSS to position the thumbnail container and close button */
-.thumbnail-container {
-    position: relative;
-    display: inline-block; /* Ensure the container size fits the image */
-}
+    .edit-section h4 {
+        width: 100%;
+    }
 
-/* Custom CSS to style the close button ('x') */
-.close {
-    position: absolute;
-    top: -10px; /* Adjust vertical position */
-    right: 0.5rem; /* Adjust horizontal position */
-    z-index: 1; /* Ensure it's above the image */
-    padding: 0.75rem; /* Increase padding to make the 'x' bigger */
-    font-size: 2rem; /* Increase font size to make the 'x' bigger */
-    background-color: transparent; /* Transparent background */
-    border: none; /* Remove border */
-    color: red; /* Red color for the 'x' */
-}
-
-/* Style the wrapper */
-.file-input-wrapper {
-    position: relative;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-    padding: 8px 8px;
-    cursor: pointer;
-    width: fit-content;
-    margin-left: 30px;
-}
-
-/* Style the label */
-.custom-file-label {
-    color: #fff;
-    cursor: pointer;
-    z-index: 1; /* Ensure label is on top */
-}
-
-.remove-thumbnail {
-
-}
-
-.inline-group {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.inline-group-long {
-    display: inline-block;
-    margin-right: 10px;
-    width: 358px;
-}
-
-.ingredient-inline {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.ingredient-inline-long {
-    display: inline-block;
-    margin-right: 10px;
-    width: 660px;
-}
-
-.ingredient-inline button {
-    margin-top: -4px;
+.ingredients, .instructions {
+    flex: 1; /* Equal width for both sections */
 }
 
 .ingredient-edit, .instruction-edit {
-    line-height: 50px;
+    margin-bottom: 10px; /* Space between items */
+}
+
+.remove-ingredient, .edit-ingredient {
+    cursor: pointer;
+    margin-right: 10px; /* Space between icons and text */
 }
 
 .ingredient-edit button, .instruction-edit button {
@@ -156,6 +97,10 @@
     color: red;
 }
 
-.edit-ingredient {
+.add-ingredient-btn, .add-instruction-btn {
+    margin-top: 24px;
+}
 
+.save-cancel-btns {
+    margin-top: 22px;
 }

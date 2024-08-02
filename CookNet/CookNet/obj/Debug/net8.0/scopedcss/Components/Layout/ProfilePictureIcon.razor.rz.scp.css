@@ -1,0 +1,10 @@
+.profpic-icon[b-ogpfqys2na] {
+    font-size: 2rem;
+    margin-top: 10px;
+    color: black;
+    transition: color 0.3s ease-in-out;
+}
+
+.profpic-icon:hover[b-ogpfqys2na] {
+    color: gray;
+}

@@ -6,24 +6,26 @@
 @inject RecipeService RecipeService
 @inject CookbookService CookbookService
 @inject AuthenticationStateProvider AuthenticationStateProvider
-@rendermode InteractiveServer
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
 
 <div class="user-profile-container">
     @if (User != null)
     {
         <PageTitle>@User.DisplayName Profile</PageTitle>
+
         <div class="profile-picture-container position-relative">
             @if (@User.ProfilePictureBase64 != null)
             {
                 <div class="position-relative d-inline-block">
-                    <!-- Profile Picture -->
                     <MudImage Src="@User.ProfilePictureBase64" Alt="Profile Picture" Class="rounded-lg mb-2"
                               Style="width: 200px; height: auto;" />
-
-                    <!-- Edit Icon -->
-                    <div class="edit-icon position-absolute bottom-0 end-0 p-2 mr-1">
-                        <i class="edit-pen fa fa-pen" @onclick="ShowEditProfPictureModal" style="cursor:pointer"></i>
-                    </div>
+                    @if (IsUserAuthor)
+                    {
+                        <div class="edit-icon position-absolute bottom-0 end-0 p-2 mr-1">
+                            <i class="edit-pen fa fa-pen" @onclick="ShowEditProfPictureModal" style="cursor:pointer"></i>
+                        </div>
+                    }
                 </div>
             }
             else
@@ -31,10 +33,12 @@
                 <div class="noprof-container position-relative d-inline-block">
                     <i class="bi bi-person-square" style="font-size: 9rem;"></i>
 
-                    <!-- Edit Icon -->
-                    <div class="edit-icon-noprof position-absolute bottom-0 end-0 p-2 mr-1">
-                        <i class="edit-pen-noprof fa fa-pen" @onclick="ShowEditProfPictureModal" style="cursor:pointer"></i>
-                    </div>
+                    @if (IsUserAuthor)
+                    {
+                        <div class="edit-icon-noprof position-absolute bottom-0 end-0 p-2 mr-1">
+                            <i class="edit-pen-noprof fa fa-pen" @onclick="ShowEditProfPictureModal" style="cursor:pointer"></i>
+                        </div>
+                    }
                 </div>
             }
         </div>
@@ -89,17 +93,16 @@
         }
 
         <div class="user-header-container col-md-10 position-relative pt-2">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="display-name">
-                        <h3>@User.DisplayName</h3>
-                    </div>
+            <div class="name-and-edit d-inline-flex">
+                <div class="display-name">
+                    <h3 class="displayname">@User.DisplayName</h3>
                 </div>
-                <div class="col-md-6 text-md-end pt-1">
+                @if (IsUserAuthor)
+                {
                     <div class="edit-profile-btn">
                         <p><a href="/Account/Manage" class="btn btn-primary">Edit Profile</a></p>
                     </div>
-                </div>
+                }
             </div>
             <div class="userinfo-container">
                 <p class="username">@("@")@User.UserName</p>
@@ -130,75 +133,241 @@
             </div>
         </div>
 
-        <div class="container">
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    @if (showRecipes)
-                    {
-                        <!-- Recipe list -->
-                        <div class="card-columns">
-                            @if (UserRecipes != null && UserRecipes.Any())
-                            {
-                                @foreach (var recipe in UserRecipes)
-                                {
-                                    int totalCookTime = recipe.CookTime + recipe.PrepTime;
-                                    string hrsOrMins = "";
-                                    @if (totalCookTime > 120)
-                                    {
-                                        totalCookTime = 2;
-                                        hrsOrMins = "hrs";
-                                    }
-                                    else if (totalCookTime > 60)
-                                    {
-                                        totalCookTime = 1;
-                                        hrsOrMins = "hr";
-                                    }
-                                    else
-                                    {
-                                        hrsOrMins = "mins";
-                                    }
-                                    <div class="card">
-                                        <a class="text-decoration-none" href="@($"/recipes/{recipe.ID}")">
-                                            <div class="image-container position-relative">
-                                                <img class="card-img-top" src="@recipe.ThumbnailImage" title="@recipe.Name">
-                                                <p class="cook-time" title="Total Cook Time">@totalCookTime @hrsOrMins</p>
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title d-inline-block">@recipe.Name</h5>
-                                                <p class="date-created d-inline-block">@recipe.DateCreated.ToShortDateString()</p>
-                                            </div>
-                                        </a>
-                                        <a class="username-nav text-decoration-none" href="@($"/users/{recipe.Author.UserName}")">
-                                            <p class="users-recipe">@("@")@recipe.Author.UserName</p>
-                                        </a>
-                                        <button class="bookmark-recipe" @onclick="() => ShowAddCookbookModal(recipe.ID)" title="Save to Cookbook">
-                                            <i class="cookbooks-icon bi bi-journal-bookmark-fill"></i>
-                                        </button>
-                                    </div>
-                                }
-                            }
-                            else
-                            {
-                                <p>No recipes found.</p>
-                            }
-                        </div>
-                    }
-                    else if (showInsights)
-                    {
-                        <!-- Insights -->
-                        <p>Coming soon!</p>
-                        <!-- Display insights here -->
-                    }
-                    else if (showCookBooks)
-                    {
-                        <p>Coming soon!</p>
-                    }
-                </div>
-            </div>
+        <div class="useritems-container">
+            @if (showRecipes)
+            {
+                @if (UserRecipes != null && UserRecipes.Any())
+                {
+                   <RecipeCards Recipes="UserRecipes" OnBookmarkClicked="OpenCookbookDialogAsync" />
+                }
+                else
+                {
+                    <p>No recipes found.</p>
+                }
+            }
+            else if (showInsights)
+            {
+                <!-- Insights -->
+                <p>Coming soon!</p>
+                <!-- Display insights here -->
+            }
+            else if (showCookBooks)
+            {
+                <p>Coming soon!</p>
+            }
         </div>
+    }
+    else
+    {
+        <PageTitle>User not found</PageTitle>
+        <p>User not found.</p>
+    }
+
+</div>
+
+@code {
+    [Parameter]
+    public string UserName { get; set; }
+
+    private ApplicationUser User;
+    private List<Recipe> UserRecipes;
+    private bool showRecipes = true;
+    private bool showInsights = false;
+    private bool showCookBooks = false;
+    private bool ShowModal = false;
+    private IBrowserFile? profilePictureFile;
+    private bool showFileUpload = true;
+    private string? previousProfilePicture;
+    private bool confirmProfilePic = false;
+    private List<UserCookbook> UserCookbooks;
+    private string userId { get; set; }
+    private bool IsUserAuthor = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        User = await UserService.GetUserByUsernameAsync(UserName);
+        if (User != null)
+        {
+            UserRecipes = await RecipeService.GetRecipesByAuthorAsync(User.Id);
+            if (User.ProfilePictureBase64 != null)
+            {
+                previousProfilePicture = User.ProfilePictureBase64;
+            } 
+        }
+        var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
+        if (user != null)
+        {
+            userId = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+        }
+        if (userId != null)
+        {
+            UserCookbooks = await CookbookService.GetCookbooksByUserIdAsync(userId);
+        }
+        if (userId == User.Id)
+        {
+            IsUserAuthor = true;
+        }
+    }
+
+    private void ShowRecipes()
+    {
+        showCookBooks = false;
+        showInsights = false;
+        showRecipes = true;
+    }
+
+    private void ShowInsights()
+    {
+        showRecipes = false;
+        showCookBooks = false;
+        showInsights = true;
+    }
+
+    private void ShowCookBooks()
+    {
+        showRecipes = false;
+        showInsights = false;
+        showCookBooks = true;
+    }
+
+    private void ShowEditProfPictureModal() => ShowModal = true;
+
+    private void CloseEditProfPictureModal()
+    {
+        ShowModal = false;
+        profilePictureFile = null;
+        if (!confirmProfilePic)
+        {
+            User.ProfilePictureBase64 = previousProfilePicture;
+        }
+    }
+
+    private async Task HandleProfilePictureSelected(IBrowserFile file)
+    {
+        if (file != null)
+        {
+            profilePictureFile = file;
+            var profilePicUrl = await RecipeService.UploadImageAsync(profilePictureFile);
+            User.ProfilePictureBase64 = profilePicUrl;
+            showFileUpload = false;
+        }
+    }
+
+    private async Task ConfirmProfilePicEdit()
+    {
+        confirmProfilePic = true;
+        await RecipeService.SaveChanges();
+        CloseEditProfPictureModal();
+    }
+
+    private void RemoveProfilePicture()
+    {
+        profilePictureFile = null;
+        User.ProfilePictureBase64 = null;
+        showFileUpload = true;
+    }
+
+    private async Task OpenCookbookDialogAsync(int recipeId)
+    {
+        var parameters = new DialogParameters
+        {
+            { "UserCookbooks", UserCookbooks },
+            { "RecipeID", recipeId }
+        };
+
+        var options = new DialogOptions
+            {
+
+                MaxWidth = MaxWidth.Small,
+                FullWidth = true
+            };
+
+        var dialog = await DialogService.ShowAsync<AddCookbookDialog>("Add to CookBook", parameters, options);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Canceled)
+        {
+            Snackbar.Add("Recipe added successfully!", Severity.Success);
+        }
+    }
+
+    // private void ShowAddCookbookModal(int recipeId)
+    // {
+    //     SelectedRecipeID = recipeId;
+    //     ShowCookbookModal = true;
+    // }
+
+    // private void CloseAddCookbookModal() => ShowCookbookModal = false;
+
+    // private void ShowCreateACookbookModal()
+    // {
+    //     HideModal = "hideModal";
+    //     ShowCreateCookbookModal = true;
+    // }
+
+    // private void CloseCreateACookbookModal()
+    // {
+    //     cookbook.CoverImage = null;
+    //     ShowCreateCookbookModal = false;
+    //     HideModal = "showModal";
+    // }
+
+    // private void SelectCookbook(int cookbookId)
+    // {
+    //     if (selectedCookbooks.Contains(cookbookId))
+    //     {
+    //         selectedCookbooks.Remove(cookbookId);
+    //     }
+    //     else
+    //     {
+    //         selectedCookbooks.Add(cookbookId);
+    //     }
+    // }
+
+    // private async void ConfirmCookbookSave()
+    // {
+    //     if (selectedCookbooks.Any())
+    //     {
+    //         CloseAddCookbookModal();
+    //         await CookbookService.AddRecipeToCookbooks(SelectedRecipeID, selectedCookbooks);
+    //         selectedCookbooks.Clear();
+
+    //     }
+    // }
+
+    // private async Task HandleCoverImageSelected(IBrowserFile file)
+    // {
+    //     if (file != null)
+    //     {
+    //         CoverImage = file;
+    //         var thumbnailUrl = await CookbookService.UploadImageAsync(CoverImage);
+    //         cookbook.CoverImage = thumbnailUrl;
+    //         showFileUpload = false;
+    //     }
+    // }
+
+    // private void RemoveCoverImage()
+    // {
+    //     CoverImage = null;
+    //     cookbook.CoverImage = null;
+    //     showFileUpload = true;
+    // }
+
+    // private void SetCookbookPublic() => IsPublic = true;
+
+    // private async Task SaveNewCookbook()
+    // {
+    //     cookbook.IsPublic = IsPublic;
+    //     cookbook.DateCreated = DateTime.Now;
+    //     cookbook.DateUpdated = DateTime.Now;
+    //     cookbook.UserID = userId;
+    //     await CookbookService.CreateCookbookAsync(cookbook);
+    //     CloseCreateACookbookModal();
+    // }
+}
 
         @* MODAL FOR ADDING TO COOKBOOK *@
-        @if (ShowCookbookModal)
+@*         @if (ShowCookbookModal)
         {
             <div class="modal fade show @HideModal" tabindex="-1" role="dialog" aria-labelledby="addToCookbook" aria-hidden="true" data-bs-backdrop="true">
                 <div class="modal-dialog" role="document">
@@ -309,195 +478,4 @@
                     </div>
                 </div>
             </EditForm>
-        }
-    }
-    else
-    {
-        <PageTitle>User not found</PageTitle>
-        <p>User not found.</p>
-    }
-
-</div>
-
-@code {
-    [Parameter]
-    public string UserName { get; set; }
-
-    private ApplicationUser User;
-    private List<Recipe> UserRecipes;
-    private bool showRecipes = true;
-    private bool showInsights = false;
-    private bool showCookBooks = false;
-    private bool ShowModal = false;
-    private IBrowserFile? profilePictureFile;
-    private bool showFileUpload = true;
-    private string? previousProfilePicture;
-    private bool confirmProfilePic = false;
-    private List<UserCookbook> UserCookbooks;
-    private bool ShowCookbookModal = false;
-    private bool ShowCreateCookbookModal = false;
-    private IBrowserFile? CoverImage;
-    private bool IsPublic = false;
-    private UserCookbook cookbook = new UserCookbook();
-    private int SelectedRecipeID { get; set; }
-    private List<int> selectedCookbooks = new List<int>();
-    private string NewCookbookName = "";
-    private string NewCookbookDescription = "";
-    private string HideModal = "showModal";
-    private bool showFileUploadCookbook = true;
-    private string userId { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        User = await UserService.GetUserByUsernameAsync(UserName);
-        if (User != null)
-        {
-            UserRecipes = await RecipeService.GetRecipesByAuthorAsync(User.Id);
-            if (User.ProfilePictureBase64 != null)
-            {
-                previousProfilePicture = User.ProfilePictureBase64;
-            } 
-        }
-        var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
-        if (user != null)
-        {
-            userId = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-        }
-        if (userId != null)
-        {
-            UserCookbooks = await CookbookService.GetCookbooksByUserIdAsync(userId);
-        }
-    }
-
-    private void ShowRecipes()
-    {
-        showCookBooks = false;
-        showInsights = false;
-        showRecipes = true;
-    }
-
-    private void ShowInsights()
-    {
-        showRecipes = false;
-        showCookBooks = false;
-        showInsights = true;
-    }
-
-    private void ShowCookBooks()
-    {
-        showRecipes = false;
-        showInsights = false;
-        showCookBooks = true;
-    }
-
-    private void ShowEditProfPictureModal() => ShowModal = true;
-
-    private void CloseEditProfPictureModal()
-    {
-        ShowModal = false;
-        profilePictureFile = null;
-        if (!confirmProfilePic)
-        {
-            User.ProfilePictureBase64 = previousProfilePicture;
-        }
-    }
-
-    private async Task HandleProfilePictureSelected(IBrowserFile file)
-    {
-        if (file != null)
-        {
-            profilePictureFile = file;
-            var profilePicUrl = await RecipeService.UploadImageAsync(profilePictureFile);
-            User.ProfilePictureBase64 = profilePicUrl;
-            showFileUpload = false;
-        }
-    }
-
-    private async Task ConfirmProfilePicEdit()
-    {
-        confirmProfilePic = true;
-        await RecipeService.SaveChanges();
-        CloseEditProfPictureModal();
-    }
-
-    private void RemoveProfilePicture()
-    {
-        profilePictureFile = null;
-        User.ProfilePictureBase64 = null;
-        showFileUpload = true;
-    }
-
-    private void ShowAddCookbookModal(int recipeId)
-    {
-        SelectedRecipeID = recipeId;
-        ShowCookbookModal = true;
-    }
-
-    private void CloseAddCookbookModal() => ShowCookbookModal = false;
-
-    private void ShowCreateACookbookModal()
-    {
-        HideModal = "hideModal";
-        ShowCreateCookbookModal = true;
-    }
-
-    private void CloseCreateACookbookModal()
-    {
-        cookbook.CoverImage = null;
-        ShowCreateCookbookModal = false;
-        HideModal = "showModal";
-    }
-
-    private void SelectCookbook(int cookbookId)
-    {
-        if (selectedCookbooks.Contains(cookbookId))
-        {
-            selectedCookbooks.Remove(cookbookId);
-        }
-        else
-        {
-            selectedCookbooks.Add(cookbookId);
-        }
-    }
-
-    private async void ConfirmCookbookSave()
-    {
-        if (selectedCookbooks.Any())
-        {
-            CloseAddCookbookModal();
-            await CookbookService.AddRecipeToCookbooks(SelectedRecipeID, selectedCookbooks);
-            selectedCookbooks.Clear();
-
-        }
-    }
-
-    private async Task HandleCoverImageSelected(IBrowserFile file)
-    {
-        if (file != null)
-        {
-            CoverImage = file;
-            var thumbnailUrl = await CookbookService.UploadImageAsync(CoverImage);
-            cookbook.CoverImage = thumbnailUrl;
-            showFileUpload = false;
-        }
-    }
-
-    private void RemoveCoverImage()
-    {
-        CoverImage = null;
-        cookbook.CoverImage = null;
-        showFileUpload = true;
-    }
-
-    private void SetCookbookPublic() => IsPublic = true;
-
-    private async Task SaveNewCookbook()
-    {
-        cookbook.IsPublic = IsPublic;
-        cookbook.DateCreated = DateTime.Now;
-        cookbook.DateUpdated = DateTime.Now;
-        cookbook.UserID = userId;
-        await CookbookService.CreateCookbookAsync(cookbook);
-        CloseCreateACookbookModal();
-    }
-}
+        } *@

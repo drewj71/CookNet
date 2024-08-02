@@ -1,4 +1,6 @@
-﻿namespace CookNet.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CookNet.Data
 {
     public class Ingredient
     {

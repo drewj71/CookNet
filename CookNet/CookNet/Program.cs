@@ -5,6 +5,7 @@ using CookNet.Data;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MudBlazor;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddMudServices(config =>
+{
+    config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.TopCenter;
+    config.SnackbarConfiguration.VisibleStateDuration = 5000; // 5 seconds
+    config.SnackbarConfiguration.HideTransitionDuration = 300;
+    config.SnackbarConfiguration.ShowTransitionDuration = 300;
+    config.SnackbarConfiguration.MaxDisplayedSnackbars = 5;
+});
 
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityUserAccessor>();
@@ -44,8 +54,6 @@ builder.Services.AddAuthentication(options =>
 .AddIdentityCookies();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
-
-builder.Services.AddMudServices();
 
 var app = builder.Build();
 

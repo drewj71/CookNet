@@ -14,163 +14,206 @@
 
         <h3 class="edit-recipe-title">Edit Recipe</h3>
 
-        <div class="form-group">
-            <label class="form-group-label" for="Name">Name: </label>
-            <InputText id="Name" class="form-control" @bind-Value="@RecipeName" />
-        </div>
-
-        @if (@Recipe.ThumbnailImage != null)
-        {
-            <div class="thumbnail-container position-relative">
-                <img src="@Recipe.ThumbnailImage" alt="RecipeThumbnail" class="border rounded shadow m-2 p-2 preview-thumbnail">
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label class="form-group-label" for="Name">Name: </label>
+                <InputText id="Name" class="form-control" @bind-Value="@RecipeName" style="@GetInputStyle(RecipeName, isNameValid)" />
             </div>
-            <div class="d-inline-block remove-thumbnail-container">
-                <button class="remove-thumbnail btn btn-danger" type="button" @onclick="RemoveThumbnail">Remove Thumbnail</button>
+            <div class="col-md-6 form-group">
+                <label class="form-group-label" for="Description">Description:</label>
+                <InputTextArea id="Description" class="form-control" @bind-Value="@RecipeDescription" style="@GetInputStyle(RecipeDescription, isDescriptionValid)" />
             </div>
-        }
-
-        <div class="d-inline-block file-input-wrapper">
-            <InputFile class="custom-file-input" OnChange="@HandleThumbnailImageSelected" accept="image/*"
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 2;" />
-            <label for="file-upload" class="custom-file-label">Upload Thumbnail</label>
         </div>
 
-        <div class="form-group">
-            <label class="form-group-label" for="Description">Description:</label>
-            <InputTextArea id="Description" class="form-control" @bind-Value="@RecipeDescription" />
+        <div class="row d-flex">
+            <div class="col-md-6 d-flex flex-column">
+                @if (Recipe.ThumbnailImage != null)
+                {
+                    <MudImage Src="@Recipe.ThumbnailImage" Alt="Thumbnail Image" Class="mb-2"
+                              Style="width: 400px; height: auto;" />
+                    <div class="col-md-6 d-flex flex-column px-3">
+                        <button class="btn btn-danger" type="button" @onclick="RemoveThumbnail">Remove Thumbnail</button>
+                    </div>
+                }
+
+                @if (showFileUpload)
+                {
+                    <div class="thumbnailimg-input col-md-4">
+                        <em><p class="thumbnailimg-help">Recommended file size: 1920 x 1080</p></em>
+                        <MudFileUpload T="IBrowserFile" Accept=".png, .jpg" FilesChanged="HandleThumbnailImageSelected" MaximumFileCount="10">
+                            <ActivatorContent>
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.CloudUpload">
+                                    Choose Image
+                                </MudButton>
+                            </ActivatorContent>
+                        </MudFileUpload>
+                    </div>
+                }
+            </div>
+            <div class="col-md-6 d-flex flex-column">
+                <label class="form-group-label" for="StoryText">Recipe Story:</label>
+                <InputTextArea id="StoryText" class="form-control" @bind-Value="@RecipeStory" style="flex-grow: 1; resize: none;" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-8 col-md-3 form-group">
+                <label class="form-group-label" for="PrepTime">Prep Time (minutes):</label>
+                <InputNumber id="PrepTime" class="form-control" @bind-Value="@RecipePrepTime" style="@GetInputStyleInt(RecipePrepTime, isPrepValid)" />
+            </div>
+
+            <div class="col-sm-8 col-md-3 form-group">
+                <label class="form-group-label" for="CookTime">Cook Time (minutes):</label>
+                <InputNumber id="CookTime" class="form-control" @bind-Value="@RecipeCookTime" style="@GetInputStyleInt(RecipeCookTime, isCookTimeValid)" />
+            </div>
+
+            <div class="col-sm-8 col-md-3 form-group">
+                <label class="form-group-label" for="Category">Category:</label>
+                <InputSelect id="Category" class="form-control long-select" @bind-Value="@RecipeCategory"
+                             style="@GetInputStyleDDL(RecipeCategory, isCategoryValid)">
+                    <option value="Select One">--Select One--</option>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch">Lunch</option>
+                    <option value="Appetizer">Appetizer</option>
+                    <option value="Dinner">Dinner</option>
+                    <option value="Dessert">Dessert</option>
+                    <option value="Snack">Snack</option>
+                    <option value="Beverage">Beverage</option>
+                    <option value="Topping">Topping</option>
+                </InputSelect>
+            </div>
+
+            <div class="col-sm-8 col-md-3 form-group">
+                <label class="form-group-label" for="Ethnicity">Ethnicity:</label>
+                <InputSelect id="Ethnicity" class="form-control long-select" @bind-Value="@RecipeEthnicity"
+                             style="@GetInputStyleDDL(RecipeEthnicity, isEthnicityValid)">
+                    <option value="Select One">--Select One--</option>
+                    <option value="NA">N/A</option>
+                    <option value="Asian">Asian</option>
+                    <option value="LatinHispanic">Latin/Hispanic</option>
+                    <option value="Mediterranean">Mediterranean</option>
+                    <option value="MiddleEastern">Middle Eastern</option>
+                    <option value="American">American</option>
+                    <option value="Southern">Southern</option>
+                </InputSelect>
+            </div>
         </div>
 
-        <div class="form-group inline-group">
-            <label class="form-group-label" for="PrepTime">Prep Time (minutes):</label>
-            <InputNumber id="PrepTime" class="form-control" @bind-Value="@RecipePrepTime" />
-        </div>
-
-        <div class="form-group inline-group">
-            <label class="form-group-label" for="CookTime">Cook Time (minutes):</label>
-            <InputNumber id="CookTime" class="form-control" @bind-Value="@RecipeCookTime" />
-        </div>
-
-        <div class="form-group inline-group-long">
-            <label class="form-group-label" for="Category">Category:</label>
-            <InputSelect id="Category" class="form-control long-select" @bind-Value="@Recipe.Category">
-                <option value="Select One">--Select One--</option>
-                <option value="Breakfast">Breakfast</option>
-                <option value="Lunch">Lunch</option>
-                <option value="Appetizer">Appetizer</option>
-                <option value="Dinner">Dinner</option>
-                <option value="Dessert">Dessert</option>
-                <option value="Snack">Snack</option>
-                <option value="Beverage">Beverage</option>
-                <option value="Topping">Topping</option>
-            </InputSelect>
-        </div>
-
-        <div class="form-group inline-group-long">
-            <label class="form-group-label" for="Ethnicity">Ethnicity:</label>
-            <InputSelect id="Ethnicity" class="form-control long-select" @bind-Value="@Recipe.Ethnicity">
-                <option value="Select One">--Select One--</option>
-                <option value="NA">N/A</option>
-                <option value="Asian">Asian</option>
-                <option value="LatinHispanic">Latin/Hispanic</option>
-                <option value="Mediterranean">Mediterranean</option>
-                <option value="MiddleEastern">Middle Eastern</option>
-                <option value="American">American</option>
-                <option value="Southern">Southern</option>
-            </InputSelect>
-        </div>
-
-        <div class="form-group">
-            <h4 class="edit-ingredients-title">Ingredients:</h4>
-            @foreach (var recipeIngredient in Recipe.RecipeIngredients)
-            {
-                var ingredient = recipeIngredient.Ingredient;
-                <div class="ingredient-edit">
-                    @if (!recipeIngredient.IsEditing)
-                    {
-                        <div>
-                            <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveIngredient(recipeIngredient)"></i>
-                            <i class="edit-ingredient fa fa-pen" @onclick="() => EditIngredient(recipeIngredient)"></i>
-                            <span>@recipeIngredient.Quantity</span>
-                            <span>@recipeIngredient.QuantityUnit</span>
-                            <span>@ingredient.Name</span>
-                        </div>
-                    }
-                    else
-                    {
-                        <div>
-                            <div class="col-md-6 ingredient-name d-inline-block">
-                                <InputText class="form-control" @bind-Value="ingredient.Name" />
+        <div class="edit-section">
+            <div class="col-md-6 edit-ingredients">
+                <h4 class="col-md-6 edit-ingredients-title">Ingredients:</h4>
+                @foreach (var recipeIngredient in Recipe.RecipeIngredients)
+                {
+                    var ingredient = recipeIngredient.Ingredient;
+                    <div class="col-md-12 ingredient-edit">
+                        @if (!recipeIngredient.IsEditing)
+                        {
+                            <div>
+                                <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveIngredient(recipeIngredient)"></i>
+                                <i class="edit-ingredient fa fa-pen" @onclick="() => EditIngredient(recipeIngredient)"></i>
+                                <span>@recipeIngredient.Quantity</span>
+                                <span>@recipeIngredient.QuantityUnit</span>
+                                <span>@ingredient.Name</span>
                             </div>
-                            <div class="col-md-2 ingredient-quantity d-inline-block">
-                                <InputText class="form-control" @bind-Value="recipeIngredient.Quantity" />
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="form-group-label" for="NewIngredientName">Name:</label>
+                                    <InputText id="NewIngredientName" class="form-control" @bind-Value="ingredient.Name"
+                                               style="@GetInputStyle(ingredient.Name, isIngNameValid)"/>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-group-label" for="NewIngredientQuantity">Quantity:</label>
+                                    <InputText id="NewIngredientQuantity" class="form-control" @bind-Value="recipeIngredient.Quantity"
+                                               style="@GetInputStyle(recipeIngredient.Quantity, isQuantityValid)"/>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-group-label" for="NewQuantityUnit">Unit:</label>
+                                    <InputText id="NewQuantityUnit" class="form-control" @bind-Value="recipeIngredient.QuantityUnit" />
+                                </div>
+                                <div class="col-md-3 save-cancel-btns">
+                                    <button type="button" class="btn btn-primary" @onclick="() => SaveIngredient(recipeIngredient)">Save</button>
+                                    <button type="button" class="btn btn-danger" @onclick="() => CancelEditIngredient(recipeIngredient)">Cancel</button>
+                                </div>
                             </div>
-                            <div class="col-md-2 ingredient-unit d-inline-block">
-                                <InputText class="form-control" @bind-Value="recipeIngredient.QuantityUnit" />
+                        }
+                    </div>
+                }
+            </div>
+            <div class="col-md-6 edit-instructions">
+                <h4 class="col-md-6 edit-instructions-title">Instructions:</h4>
+                @foreach (var instruction in Recipe.Instructions)
+                {
+                    <div class="col-md-12 instruction-edit">
+                        @if (!instruction.IsEditing)
+                        {
+                            <div>
+                                <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveInstruction(instruction)"></i>
+                                <i class="edit-ingredient fa fa-pen" @onclick="() => EditInstruction(instruction)"></i>
+                                <span>@instruction.InstructionText</span>
                             </div>
-                            <button type="button" class="btn btn-primary" @onclick="() => SaveIngredient(recipeIngredient)">Save</button>
-                            <button type="button" class="btn btn-danger" @onclick="() => CancelEditIngredient(recipeIngredient)">Cancel</button>
-                        </div>
-                    }
-                </div>
-            }
-            <div class="addnew-ingredient">
-                <div class="form-group ingredient-inline-long">
-                    <label for="NewIngredientName">Ingredient Name:</label>
-                    <InputText id="NewIngredientName" class="form-control" @bind-Value="@NewIngredientName" placeholder="All-Purpose Flour" />
-                </div>
-                <div class="form-group ingredient-inline">
-                    <label for="NewIngredientQuantity">Quantity:</label>
-                    <InputText id="NewIngredientQuantity" class="form-control" @bind-Value="@NewIngredientQuantity" placeholder="1/2" />
-                </div>
-                <div class="form-group ingredient-inline">
-                    <label for="NewIngredientQuantityUnit">Quantity Unit:</label>
-                    <InputText id="NewIngredientQuantityUnit" class="form-control" @bind-Value="@NewIngredientQuantityUnit" placeholder="cup" />
-                </div>
-
-                <p class="ingredient-inline"><button type="button" class="btn btn-primary" @onclick="AddIngredientAsync">Add</button></p>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <label class="form-group-label" for="NewInstruction">Instruction:</label>
+                                    <InputText id="NewInstruction" class="form-control" @bind-Value="instruction.InstructionText"
+                                               style="@GetInputStyle(instruction.InstructionText, isInstructionValid)" />
+                                </div>
+                                <div class="col-md-3 save-cancel-btns">
+                                    <button type="button" class="btn btn-primary" @onclick="() => SaveInstruction(instruction)">Save</button>
+                                    <button type="button" class="btn btn-danger" @onclick="() => CancelEditInstruction(instruction)">Cancel</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
             </div>
         </div>
 
-        <div class="form-group">
-            <h4 class="edit-instructions-title">Instructions:</h4>
-            @foreach (var instruction in Recipe.Instructions)
-            {
-                <div class="instruction-edit">
-                    @if (!instruction.IsEditing)
-                    {
-                        <div>
-                            <span>@instruction.StepNumber. @instruction.InstructionText</span>
-                            <button type="button" class="btn btn-primary" @onclick="() => EditInstruction(instruction)">Edit</button>
-                            <button type="button" class="btn btn-danger" @onclick="() => RemoveInstruction(instruction)">Remove</button>
-                        </div>
-                    }
-                    else
-                    {
-                        <div>
-                            <InputText class="form-control" @bind-Value="instruction.InstructionText" />
-                            <button type="button" class="btn btn-primary" @onclick="() => SaveInstruction(instruction)">Save</button>
-                            <button type="button" class="btn btn-danger" @onclick="() => CancelEditInstruction(instruction)">Cancel</button>
-                        </div>
-                    }
+        <div class="col-md-12 row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label class="form-group-label" for="NewIngredientName">Ingredient Name:</label>
+                        <InputText id="NewIngredientName" class="form-control" @bind-Value="@NewIngredientName" placeholder="All-Purpose Flour"
+                                   style="@GetInputStyle(NewIngredientName, isNewIngNameValid)" />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-group-label" for="NewIngredientQuantity">Quantity:</label>
+                        <InputText id="NewIngredientQuantity" class="form-control" @bind-Value="@NewIngredientQuantity" placeholder="1/2"
+                                   style="@GetInputStyle(NewIngredientQuantity, isNewQuantityValid)" />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-group-label" for="NewIngredientQuantityUnit">Quantity Unit:</label>
+                        <InputText id="NewIngredientQuantityUnit" class="form-control" @bind-Value="@NewIngredientQuantityUnit" placeholder="cup" />
+                    </div>
+                    <div class="col-md-3 add-ingredient-btn">
+                        <button type="button" class="btn btn-primary" @onclick="AddIngredientAsync">Add Ingredient</button>
+                    </div>
                 </div>
-            }
-            <div class="form-group">
-                <label for="NewInstructionText">Instructions:</label>
-                <InputTextArea id="NewInstructionText" class="form-control" @bind-Value="NewInstructionText" placeholder="Preheat oven to 450." />
             </div>
-            <p class="instr-story-btn"><button type="button" class="btn btn-primary" @onclick="AddInstructionAsync">Add</button></p>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-9">
+                        <label class="form-group-label" for="NewInstructionText">Instructions:</label>
+                        <InputText id="NewInstructionText" class="form-control" @bind-Value="NewInstructionText" placeholder="Preheat oven to 450."
+                                   style="@GetInputStyle(NewInstructionText, isNewInstructionValid)" />
+                    </div>
+                    <div class="col-md-3 add-instruction-btn">
+                        <button type="button" class="btn btn-primary" @onclick="AddInstructionAsync">Add Instruction</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-
-        <div class="form-group">
-            <h4 class="edit-story-title">Recipe Story:</h4>
-            <InputTextArea id="StoryText" class="form-control" @bind-Value="@RecipeStory" style="height: 300px;" />
+        <div class="col-md-12 confirmation-btns pt-3">
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-danger" @onclick="ShowConfirmationModal">Delete Recipe</button>
         </div>
-
-        <button type="submit" class="btn btn-success">Save</button>
-
-        <!-- Delete Recipe Button -->
-        <button type="button" class="btn btn-danger" @onclick="ShowConfirmationModal">Delete Recipe</button>
 
         <!-- Delete Confirmation Modal -->
         @if (ShowModal)
@@ -212,11 +255,28 @@
     private string RecipeEthnicity { get; set; }
     private string RecipeStory { get; set; }
     private bool ShowModal { get; set; } = false;
-
+    private IBrowserFile? ThumbnailImage;
+    private bool showFileUpload = true;
     private string NewIngredientName { get; set; }
     private string NewIngredientQuantity { get; set; }
     private string NewIngredientQuantityUnit { get; set; }
     private string NewInstructionText { get; set; }
+    private bool isNameValid = true;
+    private bool isDescriptionValid = true;
+    private bool isPrepValid = true;
+    private bool isCookTimeValid = true;
+    private bool isCategoryValid = true;
+    private bool isEthnicityValid = true;
+    private bool isIngNameValid = true;
+    private bool isQuantityValid = true;
+    private bool isInstructionValid = true;
+    private bool isNewIngNameValid = true;
+    private bool isNewQuantityValid = true;
+    private bool isNewInstructionValid = true;
+    private string currentIngredientNameEdit;
+    private string currentQuantityEdit;
+    private string currentUnitEdit;
+    private string currentInstructionEdit;
 
     List<Ingredient> AddedIngredients { get; set; } = new();
     List<Instruction> AddedInstructions { get; set; } = new();
@@ -233,36 +293,64 @@
             RecipeCategory = Recipe.Category;
             RecipeEthnicity = Recipe.Ethnicity;
             RecipeStory = Recipe.RecipeStory;
+            if (Recipe.ThumbnailImage != null)
+            {
+                showFileUpload = false;
+            }
         }
+    }
+
+    private string GetInputStyle(string value, bool isValid)
+    {
+        return string.IsNullOrWhiteSpace(value) && !isValid ? "border: 1px solid red;" : "border: 1px solid initial;";
+    }
+
+    private string GetInputStyleInt(int value, bool isValid)
+    {
+        return value <= 0 && !isValid ? "border: 1px solid red;" : "border: 1px solid initial;";
+    }
+
+    private string GetInputStyleDDL(string value, bool isValid)
+    {
+        return !isValid && value == "Select One" ? "border: 1px solid red;" : "border: 1px solid initial;";
     }
 
     private async Task AddIngredientAsync()
     {
-        AddedIngredients.Add(new Ingredient
+        isNewIngNameValid = !string.IsNullOrWhiteSpace(NewIngredientName);
+        isNewQuantityValid = !string.IsNullOrWhiteSpace(NewIngredientQuantity);
+
+        if (isNewIngNameValid && isNewQuantityValid)
+        {
+            AddedIngredients.Add(new Ingredient
             {
                 Name = NewIngredientName,
                 Quantity = NewIngredientQuantity,
                 QuantityUnit = NewIngredientQuantityUnit
             });
 
-        NewIngredientName = string.Empty;
-        NewIngredientQuantity = string.Empty;
-        NewIngredientQuantityUnit = string.Empty;
+            NewIngredientName = string.Empty;
+            NewIngredientQuantity = string.Empty;
+            NewIngredientQuantityUnit = string.Empty;
+        }
     }
 
     private async Task AddInstructionAsync()
     {
-        int stepNumber = Recipe.Instructions.Count + 1;
-        AddedInstructions.Add(new Instruction
+        isNewInstructionValid = !string.IsNullOrWhiteSpace(NewInstructionText);
+
+        if (isNewInstructionValid)
+        {
+            AddedInstructions.Add(new Instruction
             {
-                StepNumber = stepNumber,
                 InstructionText = NewInstructionText
             });
 
-        NewInstructionText = string.Empty;
+            NewInstructionText = string.Empty;
+        }
     }
 
-    private async Task ShowConfirmationModal()
+    private void ShowConfirmationModal()
     {
         ShowModal = true;
     }
@@ -281,78 +369,137 @@
         NavigationManager.NavigateTo("/");
     }
 
-    private async Task HandleThumbnailImageSelected(InputFileChangeEventArgs e)
+    private async Task HandleThumbnailImageSelected(IBrowserFile file)
     {
-        var thumbnailImage = e.File;
-        var thumbnailUrl = await RecipeService.UploadImageAsync(thumbnailImage);
-        Recipe.ThumbnailImage = thumbnailUrl;
+        if (file != null)
+        {
+            ThumbnailImage = file;
+            var thumbnailUrl = await RecipeService.UploadImageAsync(ThumbnailImage);
+            Recipe.ThumbnailImage = thumbnailUrl;
+            showFileUpload = false;
+        }
     }
 
     private void RemoveThumbnail()
     {
+        ThumbnailImage = null;
         Recipe.ThumbnailImage = null;
+        showFileUpload = true;
     }
 
-    void EditIngredient(RecipeIngredient recipeIngredient)
+    private void EditIngredient(RecipeIngredient recipeIngredient)
     {
+        foreach (var ingredient in Recipe.RecipeIngredients)
+        {
+            ingredient.IsEditing = false;
+        }
+
+        currentIngredientNameEdit = recipeIngredient.Ingredient.Name;
+        currentQuantityEdit = recipeIngredient.Quantity;
+        currentUnitEdit = recipeIngredient.QuantityUnit;
         recipeIngredient.IsEditing = true;
     }
 
-    void SaveIngredient(RecipeIngredient recipeIngredient)
+    private void SaveIngredient(RecipeIngredient recipeIngredient)
     {
+        isIngNameValid = !string.IsNullOrEmpty(recipeIngredient.Ingredient.Name);
+        isQuantityValid = !string.IsNullOrEmpty(recipeIngredient.Quantity);
+
+        if (isIngNameValid && isQuantityValid)
+        {
+            recipeIngredient.IsEditing = false;
+        }
+    }
+
+    private void CancelEditIngredient(RecipeIngredient recipeIngredient)
+    {
+        recipeIngredient.Ingredient.Name = currentIngredientNameEdit;
+        recipeIngredient.Quantity = currentQuantityEdit;
+        recipeIngredient.QuantityUnit = currentUnitEdit;
         recipeIngredient.IsEditing = false;
     }
 
-    void CancelEditIngredient(RecipeIngredient recipeIngredient)
-    {
-        recipeIngredient.IsEditing = false;
-        // Optionally, revert changes made to the ingredient
-    }
-
-    void RemoveIngredient(RecipeIngredient recipeIngredient)
+    private void RemoveIngredient(RecipeIngredient recipeIngredient)
     {
         Recipe.RecipeIngredients.Remove(recipeIngredient);
     }
 
-    async Task EditInstruction(Instruction instruction)
+    private void EditInstruction(Instruction instruction)
     {
+        foreach (var instr in Recipe.Instructions)
+        {
+            instr.IsEditing = false;
+        }
+        currentInstructionEdit = instruction.InstructionText;
         instruction.IsEditing = true;
     }
 
-    async Task RemoveInstruction(Instruction instruction)
+    private void RemoveInstruction(Instruction instruction)
     {
         Recipe.Instructions.Remove(instruction);
     }
 
-    async Task SaveInstruction(Instruction instruction)
+    private void SaveInstruction(Instruction instruction)
     {
-        instruction.IsEditing = false;
-    }
-
-    async Task CancelEditInstruction(Instruction instruction)
-    {
-        instruction.IsEditing = false;
-    }
-
-    async Task HandleSubmit()
-    {
-        // Update recipe details
-        Recipe.Name = RecipeName;
-        Recipe.Description = RecipeDescription;
-        Recipe.PrepTime = RecipePrepTime;
-        Recipe.CookTime = RecipeCookTime;
-        Recipe.Category = RecipeCategory;
-        Recipe.Ethnicity = RecipeEthnicity;
-        Recipe.RecipeStory = RecipeStory;
-
-        foreach (var ingredient in AddedIngredients)
+        isInstructionValid = !string.IsNullOrEmpty(instruction.InstructionText);
+        if (isInstructionValid)
         {
-            await RecipeService.AddIngredientToRecipeAsync(Recipe, ingredient.Name, ingredient.Quantity, ingredient.QuantityUnit);
+            instruction.IsEditing = false;
+        }
+    }
+
+    private void CancelEditInstruction(Instruction instruction)
+    {
+        instruction.InstructionText = currentInstructionEdit;
+        instruction.IsEditing = false;
+    }
+
+    private bool SaveEditRecipe()
+    {
+        isNameValid = !string.IsNullOrWhiteSpace(RecipeName);
+        isDescriptionValid = !string.IsNullOrWhiteSpace(RecipeDescription);
+        isPrepValid = RecipePrepTime > 0;
+        isCookTimeValid = RecipeCookTime > 0;
+        isCategoryValid = RecipeCategory != "Select One";
+        isEthnicityValid = RecipeEthnicity != "Select One";
+
+        if (isNameValid && isDescriptionValid && isPrepValid && isCookTimeValid && isCategoryValid && isEthnicityValid)
+        {
+            Recipe.Name = RecipeName;
+            Recipe.Description = RecipeDescription;
+            Recipe.PrepTime = RecipePrepTime;
+            Recipe.CookTime = RecipeCookTime;
+            Recipe.Category = RecipeCategory;
+            Recipe.Ethnicity = RecipeEthnicity;
+            Recipe.RecipeStory = RecipeStory == null ? null : RecipeStory;
+            return true;
         }
 
-        foreach (var instruction in AddedInstructions)
+        return false;
+    }
+
+    private async Task HandleSubmit()
+    {
+        var ConfirmSave = SaveEditRecipe();
+        if (!ConfirmSave)
         {
-            await RecipeService.AddInstructionToRecipeAsync(Recipe, instruction.InstructionText);
+            return;
+        }
+
+        if (AddedIngredients != null && AddedIngredients.Count > 0)
+        {
+            foreach (var ingredient in AddedIngredients)
+            {
+                await RecipeService.AddIngredientToRecipeAsync(Recipe, ingredient.Name, ingredient.Quantity, ingredient.QuantityUnit);
+            }
+        }
+
+        if (AddedInstructions != null && AddedInstructions.Count > 0)
+        {
+            foreach (var instruction in AddedInstructions)
+            {
+                await RecipeService.AddInstructionToRecipeAsync(Recipe, instruction.InstructionText);
+            }
         }
 
         await RecipeService.SaveChanges();

@@ -12,86 +12,27 @@
     margin: 15px 0 15px 0;
 }
 
-.preview-thumbnail[b-nwn678rb5z] {
-    width: 200px;
-    height: auto;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    margin: 10px;
+.edit-section[b-nwn678rb5z] {
+    display: flex;
+    gap: 20px; /* Space between ingredients and instructions sections */
+    margin-bottom: 20px; /* Space below the sections */
 }
 
-/* Custom CSS to position the thumbnail container and close button */
-.thumbnail-container[b-nwn678rb5z] {
-    position: relative;
-    display: inline-block; /* Ensure the container size fits the image */
-}
+    .edit-section h4[b-nwn678rb5z] {
+        width: 100%;
+    }
 
-/* Custom CSS to style the close button ('x') */
-.close[b-nwn678rb5z] {
-    position: absolute;
-    top: -10px; /* Adjust vertical position */
-    right: 0.5rem; /* Adjust horizontal position */
-    z-index: 1; /* Ensure it's above the image */
-    padding: 0.75rem; /* Increase padding to make the 'x' bigger */
-    font-size: 2rem; /* Increase font size to make the 'x' bigger */
-    background-color: transparent; /* Transparent background */
-    border: none; /* Remove border */
-    color: red; /* Red color for the 'x' */
-}
-
-/* Style the wrapper */
-.file-input-wrapper[b-nwn678rb5z] {
-    position: relative;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-    padding: 8px 8px;
-    cursor: pointer;
-    width: fit-content;
-    margin-left: 30px;
-}
-
-/* Style the label */
-.custom-file-label[b-nwn678rb5z] {
-    color: #fff;
-    cursor: pointer;
-    z-index: 1; /* Ensure label is on top */
-}
-
-.remove-thumbnail[b-nwn678rb5z] {
-
-}
-
-.inline-group[b-nwn678rb5z] {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.inline-group-long[b-nwn678rb5z] {
-    display: inline-block;
-    margin-right: 10px;
-    width: 358px;
-}
-
-.ingredient-inline[b-nwn678rb5z] {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.ingredient-inline-long[b-nwn678rb5z] {
-    display: inline-block;
-    margin-right: 10px;
-    width: 660px;
-}
-
-.ingredient-inline button[b-nwn678rb5z] {
-    margin-top: -4px;
+.ingredients[b-nwn678rb5z], .instructions[b-nwn678rb5z] {
+    flex: 1; /* Equal width for both sections */
 }
 
 .ingredient-edit[b-nwn678rb5z], .instruction-edit[b-nwn678rb5z] {
-    line-height: 50px;
+    margin-bottom: 10px; /* Space between items */
+}
+
+.remove-ingredient[b-nwn678rb5z], .edit-ingredient[b-nwn678rb5z] {
+    cursor: pointer;
+    margin-right: 10px; /* Space between icons and text */
 }
 
 .ingredient-edit button[b-nwn678rb5z], .instruction-edit button[b-nwn678rb5z] {
@@ -156,6 +97,10 @@
     color: red;
 }
 
-.edit-ingredient[b-nwn678rb5z] {
+.add-ingredient-btn[b-nwn678rb5z], .add-instruction-btn[b-nwn678rb5z] {
+    margin-top: 24px;
+}
 
+.save-cancel-btns[b-nwn678rb5z] {
+    margin-top: 22px;
 }

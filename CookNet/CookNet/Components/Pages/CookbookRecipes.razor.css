@@ -1,0 +1,14 @@
+﻿.cookbook-recipes-container {
+    color: black;
+    padding: 25px;
+}
+
+.cookbook-recipes-title {
+    padding-bottom: 20px;
+}
+
+.cookbook-name {
+    font-size: 3rem;
+    margin: 0;
+    text-align: center;
+}

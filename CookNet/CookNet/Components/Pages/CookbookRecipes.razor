@@ -1,0 +1,86 @@
+﻿@page "/cookbook-recipes/{CookbookID:int}/{CookbookName}"
+@using CookNet.Data
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Authorization
+@inject IUserService UserService
+@inject RecipeService RecipeService
+@inject CookbookService CookbookService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<PageTitle>Recipes - @CookbookName</PageTitle>
+
+<div class="cookbook-recipes-container">
+    <div class="cookbook-recipes-title">
+        <h5 class="cookbook-name">Recipes in @CookbookName</h5>
+    </div>
+    <div class="cookbook-recipes">
+        @if (CookbookRecipesList != null && CookbookRecipesList.Count > 0)
+        {
+            <RecipeCards Recipes="CookbookRecipesList" OnBookmarkClicked="OpenCookbookDialogAsync" />
+        }
+        else
+        {
+            <p class="text-center">No Recipes in this CookBook!</p>
+        }
+    </div>
+</div>
+
+    @code {
+    [Parameter]
+    public int CookbookID { get; set; }
+
+    [Parameter]
+    public string CookbookName { get; set; }
+
+    private List<UserCookbook> UserCookbooksList;
+    public List<Recipe> CookbookRecipesList = new List<Recipe>();
+    public string userId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
+        if (user != null)
+        {
+            userId = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+        }
+        if (userId != null)
+        {
+            LoadUserCookbooks();
+            CookbookRecipesList = await CookbookService.GetRecipesByCookbookIdAsync(CookbookID);
+        }
+    }
+
+    private async Task OpenCookbookDialogAsync(int recipeId)
+    {
+        var parameters = new DialogParameters
+        {
+            { "UserCookbooks", UserCookbooksList },
+            { "RecipeID", recipeId },
+            { "UserID" , userId },
+            { "RefreshCookbooksCallback", EventCallback.Factory.Create(this, LoadUserCookbooks) }
+        };
+
+        var options = new DialogOptions
+            {
+                MaxWidth = MaxWidth.Small,
+                FullWidth = true
+            };
+
+        var dialog = await DialogService.ShowAsync<AddCookbookDialog>("Add to CookBook", parameters, options);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Canceled)
+        {
+            Snackbar.Add("Recipe added successfully!", Severity.Success);
+        }
+    }
+
+    private async Task LoadUserCookbooks()
+    {
+        UserCookbooksList = await CookbookService.GetCookbooksByUserIdAsync(userId);
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,132 @@
+﻿@using CookNet.Data
+@using MudBlazor
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Authorization
+@inject CookbookService CookbookService
+@inject NavigationManager Navigation
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@attribute [Authorize]
+
+<MudDialog>
+    <TitleContent>
+        <div class="title-container">
+            <h5 class="dialog-centered">Add to CookBooks</h5>
+            <button type="button" class="btn btn-success newCookbookBtn" @onclick="OpenCreateCookbookDialogAsync" title="New CookBook">+</button>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        @if (!string.IsNullOrEmpty(UserID))
+        {
+            @if (UserCookbooks.Count > 0)
+            {
+                <div class="cookbook-card-container">
+                    @foreach (var cookbook in UserCookbooks)
+                    {
+                        var isCookbookPublic = cookbook.IsPublic ? "Public" : "Private";
+                        <div class="cookbook-card @(selectedCookbooks.Contains(cookbook.CookbookID) ? "selected" : "")" @onclick="() => SelectCookbook(cookbook.CookbookID)">
+                            <div class="cookbook-img position-relative">
+                                @if (!string.IsNullOrEmpty(cookbook.CoverImage))
+                                {
+                                    <img class="cookbookcard-img-top" src="@cookbook.CoverImage" alt="Cover Image" title="@cookbook.CookbookName" />
+                                }
+                            </div>
+                            <div class="cookbookcard-body text-center">
+                                <h5 class="cookbookcard-title d-inline-block">@cookbook.CookbookName</h5>
+                                <em><p class="cookbookdate-created" title="Created Date">@cookbook.DateCreated.ToShortDateString()</p></em>
+                                <p class="cookbook-ispublic @isCookbookPublic">@isCookbookPublic</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>You don't have any Cookbooks!</p>
+                <button type="button" class="btn btn-primary" @onclick="OpenCreateCookbookDialogAsync">New Cookbook</button>
+            }
+        }
+        else
+        {
+            Navigation.NavigateTo("/Account/Login");
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; }
+
+    [Parameter]
+    public List<UserCookbook> UserCookbooks { get; set; }
+
+    [Parameter]
+    public int RecipeID { get; set; } // Ensure this parameter is correctly bound
+
+    [Parameter]
+    public string UserID { get; set; }
+
+    [Parameter]
+    public EventCallback RefreshCookbooksCallback { get; set; }
+
+    private List<int> selectedCookbooks = new List<int>();
+
+    private async Task Submit()
+    {
+        await CookbookService.AddRecipeToCookbooks(RecipeID, selectedCookbooks);
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+
+    private async Task OpenCreateCookbookDialogAsync()
+    {
+        var parameters = new DialogParameters
+        {
+            { "UserID" , UserID },
+            { "OnCreatedCallback", EventCallback.Factory.Create(this, OnCookbookCreated) }
+        };
+
+        var options = new DialogOptions
+        {
+            MaxWidth = MaxWidth.Small,
+            FullWidth = true
+        };
+
+        var dialog = await DialogService.ShowAsync<CreateCookbookDialog>("Create New Cookbook", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            Snackbar.Add("Cookbook created successfully!", Severity.Success);
+        } 
+    }
+
+    private void SelectCookbook(int cookbookId)
+    {
+        if (selectedCookbooks.Contains(cookbookId))
+        {
+            selectedCookbooks.Remove(cookbookId);
+        }
+        else
+        {
+            selectedCookbooks.Add(cookbookId);
+        }
+    }
+
+    private async Task OnCookbookCreated()
+    {
+        if (RefreshCookbooksCallback.HasDelegate)
+        {
+            await RefreshCookbooksCallback.InvokeAsync(null);
+        }
+
+        // Reload the UserCookbooks list
+        UserCookbooks = await CookbookService.GetCookbooksByUserIdAsync(UserID);
+        StateHasChanged();
+    }
+}

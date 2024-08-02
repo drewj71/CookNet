@@ -21,25 +21,6 @@
         <EditForm Model="Input" FormName="profile" OnValidSubmit="OnValidSubmitAsync" method="post" enctype="multipart/form-data">
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" role="alert" />
-
-            @if (user != null && user.ProfilePictureBase64 != null)
-            {
-                <img src="@user.ProfilePictureBase64" alt="Profile Picture" class="profile-picture img-fluid w-100 border rounded shadow m-2 p-2">
-
-                <!-- Edit Icon -->
-                <div class="edit-icon">
-                    <a href="edit-profile-picture"><i class="bi bi-pencil"></i></a>
-                </div>
-            }
-            else
-            {
-                <i class="bi bi-person-circle" style="font-size: 8rem;"></i>
-
-                <!-- Edit Icon -->
-                <div class="edit-icon">
-                    <a href="edit-profile-picture"><i class="bi bi-pencil"></i></a>
-                </div>
-            }
             <div class="form-floating mb-3">
                 <input type="text" value="@username" class="form-control" placeholder="Please choose your username." disabled />
                 <label for="username" class="form-label">Username</label>
@@ -92,34 +73,23 @@
 
     protected override async Task OnInitializedAsync()
     {
-        user = await UserAccessor.GetRequiredUserAsync(HttpContext);
-        username = await UserManager.GetUserNameAsync(user);
-        phoneNumber = await UserManager.GetPhoneNumberAsync(user);
+        if (user == null)
+        {
+            user = await UserAccessor.GetRequiredUserAsync(HttpContext);
+            username = await UserManager.GetUserNameAsync(user);
+            phoneNumber = await UserManager.GetPhoneNumberAsync(user);
 
-        Input.PhoneNumber ??= phoneNumber;
-        Input.DateOfBirth ??= user.DateOfBirth;
-        Input.DisplayName ??= user.DisplayName;
-        Input.ProfilePictureBase64 ??= user.ProfilePictureBase64;
-        Input.Location ??= user.Location;
-        Input.Biography ??= user.Biography;
-        Input.SocialMediaLinks ??= user.SocialMediaLinks;
+            Input.PhoneNumber = phoneNumber ?? Input.PhoneNumber;
+            Input.DateOfBirth = user.DateOfBirth ?? Input.DateOfBirth;
+            Input.DisplayName = user.DisplayName ?? Input.DisplayName;
+            Input.Location = user.Location ?? Input.Location;
+            Input.Biography = user.Biography ?? Input.Biography;
+            Input.SocialMediaLinks = user.SocialMediaLinks ?? Input.SocialMediaLinks;
+        }
     }
 
     private async Task OnValidSubmitAsync()
     {
-        if (Input.ProfilePictureFile != null)
-        {
-            // Read the file content into a memory stream
-            using var memoryStream = new MemoryStream();
-            await Input.ProfilePictureFile.OpenReadStream().CopyToAsync(memoryStream);
-
-            // Convert the file content to a base64 string
-            var base64String = Convert.ToBase64String(memoryStream.ToArray());
-
-            // Set the profile picture base64 string
-            Input.ProfilePictureBase64 = base64String;
-        }
-
         user.PhoneNumber = Input.PhoneNumber;
         user.DateOfBirth = Input.DateOfBirth;
         user.DisplayName = Input.DisplayName;
@@ -153,9 +123,6 @@
 
         [Display(Name = "Profile picture URL")]
         public string? ProfilePictureBase64 { get; set; }
-
-        [Display(Name = "Profile picture file")]
-        public IBrowserFile ProfilePictureFile { get; set; }
 
         [Display(Name = "Location")]
         public string? Location { get; set; }

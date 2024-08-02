@@ -6,6 +6,11 @@
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
+<MudThemeProvider />
+<MudPopoverProvider /> 
+<MudDialogProvider />
+<MudSnackbarProvider />
+<HeadOutlet />
 
 <div class="page">
     <div class="sidebar">
@@ -17,10 +22,7 @@
             <AuthorizeView>
                 <Authorized>
                     <div class="nav-item px-3">
-                        <NavLink class="nav-link" href="@($"/users/{context.User.Identity?.Name}")">
-                            @* <button type="submit" class="btn btn-primary">
-                                <span class="bi bi-person-fill" aria-hidden="true"></span> Profile
-                            </button>    *@   
+                        <NavLink class="nav-link profpic" href="@($"/users/{context.User.Identity?.Name}")">
                             <ProfilePictureIcon />
                         </NavLink>
                     </div>

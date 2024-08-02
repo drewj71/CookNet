@@ -173,10 +173,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet/Components/Layout/ProfilePictureIcon.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcUHJvZmlsZVBpY3R1cmVJY29uLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -201,9 +197,25 @@ build_metadata.AdditionalFiles.CssScope = b-2tlxc31yxu
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-8sk4w4v26d
 
+[D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet/Components/Layout/ProfilePictureIcon.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcUHJvZmlsZVBpY3R1cmVJY29uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-ogpfqys2na
+
+[D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet/Components/Pages/AddCookbookDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZGRDb29rYm9va0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-l4ll7e598k
+
 [D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet/Components/Pages/AllRecipes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBbGxSZWNpcGVzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-incnqhfhkm
+
+[D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet/Components/Pages/CookbookRecipes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb29rYm9va1JlY2lwZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-fbahpg667f
+
+[D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet/Components/Pages/CreateCookbookDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDcmVhdGVDb29rYm9va0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-q7w4dkw477
 
 [D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet/Components/Pages/CreateRecipe.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDcmVhdGVSZWNpcGUucmF6b3I=
@@ -220,6 +232,10 @@ build_metadata.AdditionalFiles.CssScope = b-bv7obqaypn
 [D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet/Components/Pages/IngredientInsights.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbmdyZWRpZW50SW5zaWdodHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-60vrozr92x
+
+[D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet/Components/Pages/RecipeCards.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWNpcGVDYXJkcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-pxf527or8f
 
 [D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet/Components/Pages/RecipeDetails.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWNpcGVEZXRhaWxzLnJhem9y

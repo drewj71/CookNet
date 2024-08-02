@@ -41,96 +41,37 @@
     margin-bottom: -25px;
 }
 
-.userinfo-container[b-be9y8cypfz] {
-    margin-top: -25px;
+.displayname[b-be9y8cypfz] {
+    margin-bottom: 0;
+}
+
+.edit-profile-btn[b-be9y8cypfz] {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
+
+.edit-profile-btn p[b-be9y8cypfz] {
+    margin: 0;
 }
 
 .join-date[b-be9y8cypfz] {
     margin-top: -15px;
 }
 
-.file-input-wrapper[b-be9y8cypfz] {
-    position: relative;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-    padding: 8px 16px;
-    width: fit-content;
-    cursor: pointer;
-}
-
-.custom-file-label[b-be9y8cypfz] {
-    display: block;
-    color: white;
-    cursor: pointer;
-}
-
 .nav-header[b-be9y8cypfz] {
-    background-color: rgb(107, 36, 12);
+    background-color: rgb(54, 21, 0);
 }
     .nav-header:hover[b-be9y8cypfz] {
-        background-color: rgb(153, 77, 28);
+        background-color: rgb(111, 78, 55);
     }
     .nav-header.active[b-be9y8cypfz] {
-        background-color: rgb(153, 77, 28);
+        background-color: rgb(111, 78, 55);
     }
 
 .nav-link[b-be9y8cypfz] {
     color: white;
     cursor: pointer;
-}
-
-.cook-time[b-be9y8cypfz] {
-    position: absolute;
-    color: white;
-    top: 10px;
-    left: 10px;
-    background-color: rgba(0, 0, 0, 0.75);
-    padding: 5px;
-    border-radius: 3px;
-}
-
-.bookmark-recipe[b-be9y8cypfz] {
-    font-size: 25px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.75);
-    border-radius: 3px;
-    padding: 3px;
-}
-
-.card[b-be9y8cypfz] {
-    width: 350px;
-    background-color: rgb(228, 143, 69);
-}
-
-.card-img-top[b-be9y8cypfz] {
-    height: 200px;
-    object-fit: cover;
-}
-
-.card-title[b-be9y8cypfz], .date-created[b-be9y8cypfz] {
-    color: white;
-}
-
-.date-created[b-be9y8cypfz] {
-    float: right;
-}
-
-.username-nav[b-be9y8cypfz] {
-    display: block;
-    margin: -20px 0 -5px 15px;
-    color: white;
-}
-
-.users-recipe[b-be9y8cypfz] {
-    color: rgb(107, 36, 12);
 }
 
 .divider-line[b-be9y8cypfz] {
@@ -140,103 +81,6 @@
     width: 100%;
 }
 
-.ispublic-container[b-be9y8cypfz] {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.ispublic-msg[b-be9y8cypfz] {
-    margin-top: 20px;
-    margin-right: 10px;
-}
-
-.Private[b-be9y8cypfz] {
-    color: red !important;
-}
-
-.Public[b-be9y8cypfz] {
-    font-weight: 800;
-    color: forestgreen !important;
-}
-
-.cookbook-card-container[b-be9y8cypfz] {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Adjust the gap between cards */
-    padding: 0;
-}
-
-.cookbook-card[b-be9y8cypfz] {
-    flex: 1 1 calc(50% - 10px); /* Two cards per row with gap consideration */
-    background-color: rgb(228, 143, 69);
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s;
-    cursor: pointer;
-}
-
-    .cookbook-card:hover[b-be9y8cypfz] {
-        transform: scale(1.05); /* Slightly enlarge on hover */
-    }
-
-    .cookbook-card.selected[b-be9y8cypfz] {
-        border: 2px solid #007bff;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    }
-
-.cookbook-img[b-be9y8cypfz] {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 150%; /* Aspect ratio for 600x900 */
-    overflow: hidden;
-}
-
-.cookbookcard-img-top[b-be9y8cypfz] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.cookbookcard-body[b-be9y8cypfz] {
-    padding: 5px;
-}
-
-.cookbookcard-title[b-be9y8cypfz] {
-    color: white;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    white-space: nowrap; /* Prevent text from wrapping to a new line */
-    overflow: hidden; /* Hide the overflowed text */
-    text-overflow: ellipsis; /* Add ellipsis (...) when text overflows */
-}
-
-.cookbookdate-created[b-be9y8cypfz] {
-    font-size: 0.875rem;
-    color: white;
-    margin-bottom: 5px;
-}
-
-.cookbook-ispublic[b-be9y8cypfz] {
-    font-size: 0.875rem;
-    margin-bottom: 0;
-}
-
-@media (max-width: 768px) {
-    .cookbook-card[b-be9y8cypfz] {
-        flex: 1 1 100%; /* Full width for smaller screens */
-    }
-}
-
-.hideModal[b-be9y8cypfz] {
-    display: none;
-}
-
-.showModal[b-be9y8cypfz] {
-    display: block;
+.useritems-container[b-be9y8cypfz] {
+    padding: 20px;
 }

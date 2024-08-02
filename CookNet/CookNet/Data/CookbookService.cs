@@ -13,11 +13,13 @@ namespace CookNet.Data
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly DbContextFactory _contextFactory;
 
-        public CookbookService(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        public CookbookService(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, DbContextFactory contextFactory)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _contextFactory = contextFactory;
         }
 
         public async Task<List<UserCookbook>> GetCookbooksAsync()
@@ -35,6 +37,28 @@ namespace CookNet.Data
             return await _context.UserCookbooks
                 .Where(c => c.UserID == userId)
                 .ToListAsync();
+        }
+
+        public async Task<List<Recipe>> GetRecipesByCookbookIdAsync(int cookbookId)
+        {
+            using (var context = _contextFactory.CreateDbContext())
+            {
+                var recipes = await context.Recipes
+                    .Where(r => r.CookbookRecipes.Any(cr => cr.CookbookID == cookbookId))
+                    .Select(r => new Recipe
+                    {
+                        ID = r.ID,
+                        Name = r.Name,
+                        DateCreated = r.DateCreated,
+                        CookTime = r.CookTime,
+                        PrepTime = r.PrepTime,
+                        ThumbnailImage = r.ThumbnailImage,
+                        Author = r.Author
+                    })
+                    .ToListAsync();
+
+                return recipes;
+            }
         }
 
         public async Task CreateCookbookAsync(UserCookbook book)
@@ -69,15 +93,18 @@ namespace CookNet.Data
 
         public async Task AddRecipeToCookbooks(int recipeId, List<int> cookbookIds)
         {
-            var existingAssociations = _context.CookbookRecipes.Where(cr => cr.RecipeID == recipeId);
-            _context.CookbookRecipes.RemoveRange(existingAssociations);
+            var existingAssociations = _context.CookbookRecipes
+                .Where(cr => cr.RecipeID == recipeId)
+                .ToList();
 
-            var newAssociations = cookbookIds.Select(cookbookId => new CookbookRecipe
-            {
-                CookbookID = cookbookId,
-                RecipeID = recipeId,
-                DateAdded = DateTime.UtcNow
-            });
+            var newAssociations = cookbookIds
+                .Where(cookbookId => !existingAssociations.Any(cr => cr.CookbookID == cookbookId))
+                .Select(cookbookId => new CookbookRecipe
+                {
+                    CookbookID = cookbookId,
+                    RecipeID = recipeId,
+                    DateAdded = DateTime.UtcNow
+                });
 
             _context.CookbookRecipes.AddRange(newAssociations);
             await _context.SaveChangesAsync();

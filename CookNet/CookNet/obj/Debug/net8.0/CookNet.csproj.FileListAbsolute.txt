@@ -175,6 +175,13 @@ C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\AllRecipes.razor.rz.scp.css
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\IngredientInsights.razor.rz.scp.css
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\UserCookbooks.razor.rz.scp.css
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.csproj.AssemblyReference.cache
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.AssemblyInfoInputs.cache
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.AssemblyInfo.cs
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.csproj.CoreCompileInputs.cache
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.MvcApplicationPartsAssemblyInfo.cache
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.sourcelink.json
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\bin\Debug\net8.0\CookNet.Client.staticwebassets.runtime.json
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\bin\Debug\net8.0\appsettings.Development.json
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\bin\Debug\net8.0\appsettings.json
@@ -326,13 +333,6 @@ D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\bin\Debug\net8.0\
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\bin\Debug\net8.0\CookNet.Client.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\bin\Debug\net8.0\CookNet.Client.pdb
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.csproj.AssemblyReference.cache
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.GeneratedMSBuildEditorConfig.editorconfig
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.AssemblyInfoInputs.cache
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.AssemblyInfo.cs
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.csproj.CoreCompileInputs.cache
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.MvcApplicationPartsAssemblyInfo.cache
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\CookNet.sourcelink.json
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\staticwebassets.build.json
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\staticwebassets.development.json
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\staticwebassets\msbuild.CookNet.Microsoft.AspNetCore.StaticWebAssets.props
@@ -342,11 +342,16 @@ D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\staticwebassets.pack.json
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Layout\MainLayout.razor.rz.scp.css
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Layout\ProfilePictureIcon.razor.rz.scp.css
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\AddCookbookDialog.razor.rz.scp.css
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\AllRecipes.razor.rz.scp.css
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\CookbookRecipes.razor.rz.scp.css
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\CreateCookbookDialog.razor.rz.scp.css
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\CreateRecipe.razor.rz.scp.css
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\EditRecipe.razor.rz.scp.css
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\Home.razor.rz.scp.css
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\IngredientInsights.razor.rz.scp.css
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\RecipeCards.razor.rz.scp.css
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\RecipeDetails.razor.rz.scp.css
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\UserCookbooks.razor.rz.scp.css
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet\obj\Debug\net8.0\scopedcss\Components\Pages\UserProfile.razor.rz.scp.css
