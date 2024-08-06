@@ -1,4 +1,3 @@
-
 .card-columns[b-pxf527or8f] {
     display: flex;
     flex-wrap: wrap;
@@ -12,7 +11,8 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .card-img-top[b-pxf527or8f] {
@@ -20,25 +20,37 @@
     object-fit: cover;
 }
 
-.card-title[b-pxf527or8f], .date-created[b-pxf527or8f] {
+.card-body[b-pxf527or8f] {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-title[b-pxf527or8f] {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.card-meta[b-pxf527or8f] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
     color: white;
 }
 
 .date-created[b-pxf527or8f] {
-    float: right;
+    margin: 0;
 }
 
 .username-nav[b-pxf527or8f] {
-    display: block;
-    margin: -20px 0 -5px 15px;
-    color: white;
-}
-
-.users-recipe[b-pxf527or8f] {
     color: rgb(28, 10, 0);
+    text-decoration: none;
 }
 
-    .users-recipe:hover[b-pxf527or8f] {
+    .username-nav:hover[b-pxf527or8f] {
         opacity: 75%;
     }
 

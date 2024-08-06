@@ -1,24 +1,39 @@
 .recipedetails-container[b-j9rgftzswo] {
     color: black;
+}
+
+.recipe-details[b-j9rgftzswo] {
     padding: 25px;
 }
 
 .recipe-title[b-j9rgftzswo] {
     font-size: 3rem;
     text-align: center;
+    font-weight: bold;
 }
 
 .edit-button[b-j9rgftzswo] {
     margin: auto;
     display: block;
-    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.cookbooks-icon[b-j9rgftzswo] {
+    font-size: 2.5rem !important;
+    margin-bottom: -10px;
 }
 
 .recipe-author[b-j9rgftzswo] {
     font-size: 1.3rem;
     text-align: center;
     font-weight: 600;
+    margin-bottom: 0;
 }
+
+    .recipe-author a[b-j9rgftzswo] {
+        color: rgb(111, 78, 55);
+    }
 
 .recipe-thumbnail[b-j9rgftzswo] {
     width: 400px;
@@ -31,18 +46,17 @@
 }
 
 .recipe-description[b-j9rgftzswo] {
-    margin-top: 20px;
     font-size: 1.2rem;
     text-align: center;
 }
 
 .recipe-story[b-j9rgftzswo] {
-    font-size: 1rem;
+    font-size: 1.5rem;
+    line-height: 1.6;
 }
 
-.center-container[b-j9rgftzswo] {
-    display: flex;
-    justify-content: center;
+.recipe-details-body[b-j9rgftzswo] {
+    text-align: center;
 }
 
 .recipe-preptime[b-j9rgftzswo], 
@@ -50,28 +64,49 @@
 .recipe-category[b-j9rgftzswo], 
 .recipe-ethnicity[b-j9rgftzswo] {
     margin: 0 10px 20px 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
 .recipe-story-title[b-j9rgftzswo], .recipe-ingredients-title[b-j9rgftzswo], .recipe-instructions-title[b-j9rgftzswo] {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .recipe-ingredients[b-j9rgftzswo], .recipe-instructions[b-j9rgftzswo] {
-    font-size: 1rem;
-    line-height: 35px;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
 }
 
 .ingredients-list[b-j9rgftzswo] {
-    list-style-type: none; /* Remove default bullet points */
-    padding-left: 15px; /* Remove default padding */
+    list-style-type: none;
 }
 
-.recipe-ingredients[b-j9rgftzswo]::before {
-    content: "\25C6"; /* Unicode character for diamond */
-    color: rgb(107, 36, 12);
-    display: inline-block;
-    width: 1em; /* Adjust size as needed */
-    margin-left: -1em; /* Adjust indentation */
+
+.divider-line[b-j9rgftzswo] {
+    height: 1px;
+    background-color: #000;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.card[b-j9rgftzswo] {
+    background-color: #f2f2f2;
+}
+
+.card-title[b-j9rgftzswo] {
+    font-size: 2rem;
+    margin-left: 20px;
+}
+
+.ingredients-col[b-j9rgftzswo] {
+    padding: 0;
+    text-align: initial;
+    margin-left: 25px;
+    margin-right: -25px;
+}
+
+.serving-null[b-j9rgftzswo] {
+    margin-left: 0 !important;
 }

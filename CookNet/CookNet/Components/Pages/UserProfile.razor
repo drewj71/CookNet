@@ -6,6 +6,7 @@
 @inject RecipeService RecipeService
 @inject CookbookService CookbookService
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Nav
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 
@@ -136,7 +137,7 @@
         <div class="useritems-container">
             @if (showRecipes)
             {
-                @if (UserRecipes != null && UserRecipes.Any())
+                if (UserRecipes != null && UserRecipes.Any())
                 {
                    <RecipeCards Recipes="UserRecipes" OnBookmarkClicked="OpenCookbookDialogAsync" />
                 }
@@ -153,7 +154,61 @@
             }
             else if (showCookBooks)
             {
-                <p>Coming soon!</p>
+                <div class="displaycookbooks-container">
+                    @if (UserCookbooks != null && UserCookbooks.Count > 0)
+                    {
+                        @foreach (var cookbook in UserCookbooks)
+                        {
+                            if (IsUserAuthor)
+                            {
+                                var isCookbookPublic = cookbook.IsPublic ? "Public" : "Private";
+                                <div class="cookbook-card-container">
+                                    <div class="cookbook-card">
+                                        <div class="cookbook-img" @onclick="() => NavigateToCookbookRecipes(cookbook.CookbookID, cookbook.CookbookName)">
+                                            @if (!string.IsNullOrEmpty(cookbook.CoverImage))
+                                            {
+                                                <img class="cookbookcard-img-top" src="@cookbook.CoverImage" alt="Cover Image" title="@cookbook.CookbookName" />
+                                            }
+                                        </div>
+                                        <div class="cookbookcard-body">
+                                            <h5 class="cookbookcard-title">@cookbook.CookbookName</h5>
+                                            <p class="cookbookdate-created">@cookbook.DateCreated.ToShortDateString()</p>
+                                            <p class="cookbook-ispublic @isCookbookPublic">@((cookbook.IsPublic ? "Public" : "Private"))</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                if (cookbook.IsPublic)
+                                {
+                                    var isCookbookPublic = cookbook.IsPublic ? "Public" : "Private";
+                                    <div class="cookbook-card-container">
+                                        <div class="cookbook-card">
+                                            <div class="cookbook-img" @onclick="() => NavigateToCookbookRecipes(cookbook.CookbookID, cookbook.CookbookName)">
+                                                @if (!string.IsNullOrEmpty(cookbook.CoverImage))
+                                                {
+                                                    <img class="cookbookcard-img-top" src="@cookbook.CoverImage" alt="Cover Image" title="@cookbook.CookbookName" />
+                                                }
+                                            </div>
+                                            <div class="cookbookcard-body">
+                                                <h5 class="cookbookcard-title">@cookbook.CookbookName</h5>
+                                                <p class="cookbookdate-created">@cookbook.DateCreated.ToShortDateString()</p>
+                                                <p class="cookbook-ispublic @isCookbookPublic">@((cookbook.IsPublic ? "Public" : "Private"))</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <div class="nonefound-container text-center">
+                            <h5 class="nonefound-title">You don't have any CookBooks yet!</h5>
+                        </div>
+                    }
+                </div>
             }
         </div>
     }
@@ -180,7 +235,7 @@
     private string? previousProfilePicture;
     private bool confirmProfilePic = false;
     private List<UserCookbook> UserCookbooks;
-    private string userId { get; set; }
+    private string UserID { get; set; }
     private bool IsUserAuthor = false;
 
     protected override async Task OnInitializedAsync()
@@ -189,6 +244,7 @@
         if (User != null)
         {
             UserRecipes = await RecipeService.GetRecipesByAuthorAsync(User.Id);
+            UserCookbooks = await CookbookService.GetCookbooksByUserIdAsync(User.Id);
             if (User.ProfilePictureBase64 != null)
             {
                 previousProfilePicture = User.ProfilePictureBase64;
@@ -197,13 +253,13 @@
         var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
         if (user != null)
         {
-            userId = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            UserID = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
         }
-        if (userId != null)
+        if (UserID != null)
         {
-            UserCookbooks = await CookbookService.GetCookbooksByUserIdAsync(userId);
+            UserCookbooks = await CookbookService.GetCookbooksByUserIdAsync(UserID);
         }
-        if (userId == User.Id)
+        if (UserID == User.Id)
         {
             IsUserAuthor = true;
         }
@@ -260,6 +316,11 @@
         CloseEditProfPictureModal();
     }
 
+    private async Task LoadUserCookbooks()
+    {
+        StateHasChanged();
+    }
+
     private void RemoveProfilePicture()
     {
         profilePictureFile = null;
@@ -272,12 +333,13 @@
         var parameters = new DialogParameters
         {
             { "UserCookbooks", UserCookbooks },
-            { "RecipeID", recipeId }
+            { "RecipeID", recipeId },
+            { "UserID" , UserID },
+            { "RefreshCookbooksCallback", EventCallback.Factory.Create(this, LoadUserCookbooks) }
         };
 
         var options = new DialogOptions
             {
-
                 MaxWidth = MaxWidth.Small,
                 FullWidth = true
             };
@@ -291,191 +353,8 @@
         }
     }
 
-    // private void ShowAddCookbookModal(int recipeId)
-    // {
-    //     SelectedRecipeID = recipeId;
-    //     ShowCookbookModal = true;
-    // }
-
-    // private void CloseAddCookbookModal() => ShowCookbookModal = false;
-
-    // private void ShowCreateACookbookModal()
-    // {
-    //     HideModal = "hideModal";
-    //     ShowCreateCookbookModal = true;
-    // }
-
-    // private void CloseCreateACookbookModal()
-    // {
-    //     cookbook.CoverImage = null;
-    //     ShowCreateCookbookModal = false;
-    //     HideModal = "showModal";
-    // }
-
-    // private void SelectCookbook(int cookbookId)
-    // {
-    //     if (selectedCookbooks.Contains(cookbookId))
-    //     {
-    //         selectedCookbooks.Remove(cookbookId);
-    //     }
-    //     else
-    //     {
-    //         selectedCookbooks.Add(cookbookId);
-    //     }
-    // }
-
-    // private async void ConfirmCookbookSave()
-    // {
-    //     if (selectedCookbooks.Any())
-    //     {
-    //         CloseAddCookbookModal();
-    //         await CookbookService.AddRecipeToCookbooks(SelectedRecipeID, selectedCookbooks);
-    //         selectedCookbooks.Clear();
-
-    //     }
-    // }
-
-    // private async Task HandleCoverImageSelected(IBrowserFile file)
-    // {
-    //     if (file != null)
-    //     {
-    //         CoverImage = file;
-    //         var thumbnailUrl = await CookbookService.UploadImageAsync(CoverImage);
-    //         cookbook.CoverImage = thumbnailUrl;
-    //         showFileUpload = false;
-    //     }
-    // }
-
-    // private void RemoveCoverImage()
-    // {
-    //     CoverImage = null;
-    //     cookbook.CoverImage = null;
-    //     showFileUpload = true;
-    // }
-
-    // private void SetCookbookPublic() => IsPublic = true;
-
-    // private async Task SaveNewCookbook()
-    // {
-    //     cookbook.IsPublic = IsPublic;
-    //     cookbook.DateCreated = DateTime.Now;
-    //     cookbook.DateUpdated = DateTime.Now;
-    //     cookbook.UserID = userId;
-    //     await CookbookService.CreateCookbookAsync(cookbook);
-    //     CloseCreateACookbookModal();
-    // }
+    private void NavigateToCookbookRecipes(int cookbookId, string cookbookName)
+    {
+        Nav.NavigateTo($"/cookbook-recipes/{cookbookId}/{cookbookName}");
+    }
 }
-
-        @* MODAL FOR ADDING TO COOKBOOK *@
-@*         @if (ShowCookbookModal)
-        {
-            <div class="modal fade show @HideModal" tabindex="-1" role="dialog" aria-labelledby="addToCookbook" aria-hidden="true" data-bs-backdrop="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Add to CookBook</h5>
-                        </div>
-                        <div class="modal-body">
-                            <div class="position-relative text-center">
-                                @if (UserCookbooks.Count > 0)
-                                {
-                                    <h5 class="mb-2">Select a Cookbook</h5>
-                                    <div class="cookbook-card-container">
-                                        @foreach (var cookbook in UserCookbooks)
-                                        {
-                                            var isCookbookPublic = cookbook.IsPublic ? "Public" : "Private";
-                                            <div class="cookbook-card @(selectedCookbooks.Contains(cookbook.CookbookID) ? "selected" : "")" @onclick="() => SelectCookbook(cookbook.CookbookID)">
-                                                <div class="cookbook-img position-relative">
-                                                    @if (!string.IsNullOrEmpty(cookbook.CoverImage))
-                                                    {
-                                                        <img class="cookbookcard-img-top" src="@cookbook.CoverImage" alt="Cover Image" title="@cookbook.CookbookName" />
-                                                    }
-                                                </div>
-                                                <div class="cookbookcard-body">
-                                                    <h5 class="cookbookcard-title d-inline-block">@cookbook.CookbookName</h5>
-                                                    <em><p class="cookbookdate-created" title="Created Date">@cookbook.DateCreated.ToShortDateString()</p></em>
-                                                    <p class="cookbook-ispublic @isCookbookPublic">@isCookbookPublic</p>
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
-                                    <div class="create-cookbook-button mt-4">
-                                        <button type="button" class="btn btn-primary" @onclick="ShowCreateACookbookModal">New Cookbook</button>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <p>You don't have any Cookbooks!</p>
-                                    <button type="button" class="btn btn-primary" @onclick="ShowCreateACookbookModal">New Cookbook</button>
-                                }
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @onclick="CloseAddCookbookModal">Cancel</button>
-                            <button type="button" class="btn btn-success" @onclick="ConfirmCookbookSave">Save</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-
-        @if (ShowCreateCookbookModal)
-        {
-            <EditForm Model="@cookbook" OnValidSubmit="SaveNewCookbook" FormName="CreateCookbookForm">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div class="modal fade show" tabindex="-1" role="dialog" style="display:block;" aria-labelledby="createCookbook" aria-hidden="true" data-bs-backdrop="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Create New Cookbook</h5>
-                            </div>
-                            <div class="modal-body">
-                                <div class="coverimg-container text-center py-2">
-                                    <div class="coverimg-title col-md-12 pb-2">
-                                        <p class="cookbookCoverImg">Cover Image</p>
-                                    </div>
-                                    <div class="coverimg-preview">
-                                        @if (cookbook.CoverImage != null)
-                                        {
-                                            <MudImage Src="@cookbook.CoverImage" Alt="Cover Image" Class="border-4 border-solid mud-border-primary pa-4 rounded mb-2"
-                                                      Style="width: 400px; height: auto;" />
-                                            <button class="btn btn-danger mb-3" type="button" @onclick="RemoveCoverImage">Remove</button>
-                                        }
-                                    </div>
-                                    @if (showFileUpload)
-                                    {
-                                        <div class="coverimg-input col-md-12">
-                                            <em><p class="coverimg-help">Recommended file size: 1200 x 1800</p></em>
-                                            <MudFileUpload T="IBrowserFile" Accept=".png, .jpg" FilesChanged="HandleCoverImageSelected" MaximumFileCount="1">
-                                                <ActivatorContent>
-                                                    <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.CloudUpload">
-                                                        Choose Image
-                                                    </MudButton>
-                                                </ActivatorContent>
-                                            </MudFileUpload>
-                                        </div>
-                                    }
-                                </div>
-                                <div class="cookbookname-container py-2">
-                                    <label for="cookbookName">Name</label>
-                                    <InputText type="text" class="cookbookName form-control" placeholder="Fall Recipes" @bind-Value="cookbook.CookbookName" />
-                                </div>
-                                <div class="cookbookdesc-container py-2">
-                                    <label for="cookbookDesc">Cookbook Description</label>
-                                    <InputTextArea class="cookbookDesc form-control" placeholder="Collection of the best fall recipes!" @bind-Value="cookbook.CookbookDescription" />
-                                </div>
-                                <div class="ispublic-container mt-2 text-center">
-                                    <p class="ispublic-msg">Do you want this CookBook to be public?</p>
-                                    <MudSwitch T="bool" Color="Color.Primary" ValueChanged="SetCookbookPublic" />
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" @onclick="CloseCreateACookbookModal">Cancel</button>
-                                <button type="button" class="btn btn-success" @onclick="SaveNewCookbook">Save Cookbook</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </EditForm>
-        } *@

@@ -17,6 +17,10 @@
     font-weight: 600;
 }
 
+.servingsTxt, .categoryTxt, .ethnicityTxt {
+    margin-top: 6px;
+}
+
 .preview-thumbnail {
     width: 200px;
     height: auto;

@@ -195,5 +195,55 @@ namespace CookNet.Data
         //{
 
         //}
+
+        public async Task<int> GetCookbookSavesCount(int recipeId)
+        {
+            return await _context.CookbookRecipes
+                .Where(r => r.RecipeID == recipeId)
+                .CountAsync();
+        }
+
+        public async Task<int> GetLikeCountAsync(int recipeId)
+        {
+            return await _context.RecipeRatings
+                .Where(r => r.RecipeID == recipeId)
+                .CountAsync();
+        }
+
+        public async Task<bool> IsRecipeLikedByUserAsync(int recipeId, string currentUserId)
+        {
+            return await _context.RecipeRatings
+                .AnyAsync(r => r.RecipeID == recipeId && r.UserID == currentUserId);
+        }
+
+        public async Task<int> ToggleLikeAsync(int recipeId, bool isLiked, string currentUserId)
+        {
+            var existingLike = await _context.RecipeRatings
+                .FirstOrDefaultAsync(r => r.RecipeID == recipeId && r.UserID == currentUserId);
+
+            if (isLiked)
+            {
+                if (existingLike == null)
+                {
+                    var newLike = new RecipeRating
+                    {
+                        RecipeID = recipeId,
+                        UserID = currentUserId,
+                        CreatedDate = DateTime.UtcNow
+                    };
+                    _context.RecipeRatings.Add(newLike);
+                    await SaveChanges();
+                }
+            }
+            else
+            {
+                if (existingLike != null) 
+                {
+                    _context.RecipeRatings.Remove(existingLike);
+                    await SaveChanges();
+                }
+            }
+            return await _context.RecipeRatings.CountAsync(r => r.RecipeID == recipeId);
+        }
     }
 }

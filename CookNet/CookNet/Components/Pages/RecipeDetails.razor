@@ -2,63 +2,106 @@
 @using CookNet.Data
 @using Microsoft.AspNetCore.Identity
 @inject RecipeService RecipeService
+@inject CookbookService CookbookService
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IUserService UserService
-@rendermode InteractiveServer
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
 
 <div class="recipedetails-container">
     @if (Recipe != null)
     {
         <PageTitle>@Recipe.Name</PageTitle>
-        <div>
+        <div class="header-recipe-thumbnail">
+            <MudImage ObjectFit="ObjectFit.Cover" Src="@Recipe.ThumbnailImage" Alt="@Recipe.Name" Elevation="25" Style="width: 100%; height: 70vh;"/>
+        </div>
+        <div class="recipe-details">
             <h4 class="recipe-title">@Recipe.Name</h4>
-
-            <p class="recipe-author">Author: <a class="text-decoration-none" href=@($"/users/{AuthorUserName}")>@("@")@AuthorUserName</a></p>
-
-            <div class="center-container">
-                <p class="recipe-preptime">Prep Time: @Recipe.PrepTime mins</p>
-                <p class="recipe-cooktime">Cook Time: @Recipe.CookTime mins</p>
-                <p class="recipe-category">Category: @Recipe.Category</p>
-                @if (Recipe.Ethnicity != "NA")
-                {
-                    <p class="recipe-ethnicity">Ethnicity: @Recipe.Ethnicity</p>
-                }
-                else
-                {
-                    <p class="recipe-ethnicity">Ethnicity: N/A</p>
-                }
-            </div>
+            <p class="recipe-author">@Recipe.DateCreated.ToString("MMMM dd, yyyy") by <a class="text-decoration-none" href=@($"/users/{AuthorUserName}")>@("@")@AuthorUserName</a></p>
 
             @if (IsUserAuthor)
             {
-                <button class="btn btn-primary edit-button" @onclick="() => EditRecipe(Recipe.ID)">Edit</button>
+                <button class="btn btn-primary edit-button" @onclick="() => EditRecipe(Recipe.ID)">Edit Recipe</button>
             }
 
-            <img src="@Recipe.ThumbnailImage" alt="RecipeThumbnail" class="img-fluid border rounded shadow m-2 p-2 recipe-thumbnail">
+            @* ADD LIKE, SHARE, AND BOOKMARK *@
+            <div class="row justify-content-center align-items-center text-center mb-3">
+                <div class="col-auto d-flex flex-column align-items-center">
+                    <MudIcon Icon="@((IsRecipeLiked) ? Icons.Material.Filled.Favorite : Icons.Material.Filled.FavoriteBorder)" Title="Favorite"
+                             Color="@((IsRecipeLiked) ? Color.Error : Color.Dark)" @onclick="ToggleLike" Style="font-size: 3rem; cursor: pointer;" />
+                    <p class="text-muted mb-0 mt-2">@LikeCount Likes</p>
+                </div>
+                <div class="col-auto d-flex flex-column align-items-center">
+                    <button class="bookmark-recipe" @onclick="@(async () => await OpenCookbookDialogAsync(Recipe.ID))" title="Save to Cookbook">
+                        <i class="cookbooks-icon bi bi-journal-bookmark-fill" style="font-size: 2rem; cursor: pointer;"></i>
+                    </button>
+                    <p class="text-muted mb-0 mt-2">@CookbookCount Saves</p>
+                </div>
+            </div>
+
+
             <p class="recipe-description">@Recipe.Description</p>
+            <div class="divider-line"></div>
 
-            @if (Recipe.RecipeStory != null)
-            {
-                <h4 class="recipe-story-title">Recipe Story:</h4>
-                <p class="recipe-story">@($"{Recipe.RecipeStory}")</p>
-            }
-
-            <h4 class="recipe-ingredients-title">Ingredients:</h4>
-            <ul class="ingredients-list">
-                @foreach (var ingredient in @RecipeIngredients)
+            <div class="recipe-details-body">
+                @if (Recipe.RecipeStory != null)
                 {
-                    <li class="recipe-ingredients">@($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Name}")</li>
+                    <div class="d-flex justify-content-center">
+                        <div class="col-md-8">
+                            <p class="recipe-story pt-3">@($"{Recipe.RecipeStory}")</p>
+                        </div>
+                    </div>
                 }
-            </ul>
 
-            <h4 class="recipe-instructions-title">Instructions:</h4>
-            <ul class="list-unstyled">
-                @foreach (var instruction in @Instructions)
-                {
-                    <li class="recipe-instructions">@($"{instruction.StepNumber}. {instruction.InstructionText}")</li>
-                }
-            </ul>
+                <div class="d-flex justify-content-center">
+                    <div class="card mb-4 col-md-10 col-lg-8">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="col-md-1"></div>
+                                <div class="col text-center">
+                                    <h5 class="card-title" style="@IsServingNull">@Recipe.Name</h5>
+                                </div>
+                                <div class="col-auto text-end">
+                                    @if (Recipe.Servings != null)
+                                    {
+                                        <p class="recipe-serving-size"><strong>Serving Size:</strong> @Recipe.Servings</p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-md-12 justify-content-center d-flex flex-wrap text-center mt-5">
+                                <p class="recipe-preptime"><strong>Prep Time:</strong> @Recipe.PrepTime mins</p>
+                                <p class="recipe-cooktime"><strong>Cook Time:</strong> @Recipe.CookTime mins</p>
+                                <p class="recipe-category"><strong>Category:</strong> @Recipe.Category</p>
+                                @if (Recipe.Ethnicity != "NA")
+                                {
+                                    <p class="recipe-ethnicity"><strong>Ethnicity:</strong> @Recipe.Ethnicity</p>
+                                }
+                            </div>
+                            <div class="row text-start">
+                                <div class="ingredients-col col-md-6">
+                                    <h4 class="recipe-ingredients-title">Ingredients:</h4>
+                                    <ul class="ingredients-list list-unstyled">
+                                        @foreach (var ingredient in @RecipeIngredients)
+                                        {
+                                            <li class="recipe-ingredients">@($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Name}")</li>
+                                        }
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 class="recipe-instructions-title">Instructions:</h4>
+                                    <ul class="list-unstyled">
+                                        @foreach (var instruction in @Instructions)
+                                        {
+                                            <li class="recipe-instructions">@($"{instruction.StepNumber}. {instruction.InstructionText}")</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     }
     else
@@ -75,8 +118,14 @@
     private Recipe Recipe;
     private List<Ingredient> RecipeIngredients = [];
     private List<Instruction> Instructions = [];
+    private List<UserCookbook> UserCookbooksList = new();
+    private ApplicationUser currentUser;
     private string AuthorUserName;
     private bool IsUserAuthor = false;
+    private string IsServingNull = "";
+    private bool IsRecipeLiked = false;
+    private int LikeCount { get; set; } = 0;
+    private int CookbookCount { get; set; } = 0;
 
     [Parameter]
     public string RecipeId { get; set; }
@@ -94,7 +143,7 @@
                 AuthorUserName = author?.UserName ?? "Anonymous";
 
                 // Check if the current user is the author
-                var currentUser = await UserService.GetUserAsync();
+                currentUser = await UserService.GetUserAsync();
                 if (currentUser != null && currentUser.Id == Recipe.AuthorID)
                 {
                     IsUserAuthor = true;
@@ -102,13 +151,71 @@
 
                 RecipeIngredients = await RecipeService.GetIngredientsByRecipeIdAsync(recipeId);
                 Instructions = await RecipeService.GetInstructionsByRecipeIdAsync(recipeId);
+
+                if (Recipe.Servings == null)
+                {
+                    IsServingNull = "margin-left: 0; margin-right: 85px;";
+                }
+                if (currentUser != null)
+                {
+                    IsRecipeLiked = await RecipeService.IsRecipeLikedByUserAsync(recipeId, currentUser.Id);
+                    await LoadUserCookbooks();
+                }
+                LikeCount = await RecipeService.GetLikeCountAsync(recipeId);
+                CookbookCount = await RecipeService.GetCookbookSavesCount(recipeId);
             }
         }
     }
 
+    private async Task LoadUserCookbooks()
+    {
+        UserCookbooksList = await CookbookService.GetCookbooksByUserIdAsync(currentUser.Id);
+        StateHasChanged();
+    }
+
+    private async Task OpenCookbookDialogAsync(int recipeId)
+    {
+        var parameters = new DialogParameters
+        {
+            { "UserCookbooks", UserCookbooksList },
+            { "RecipeID", recipeId },
+            { "UserID" , currentUser.Id },
+            { "RefreshCookbooksCallback", EventCallback.Factory.Create(this, LoadUserCookbooks) }
+        };
+
+        var options = new DialogOptions
+            {
+                MaxWidth = MaxWidth.Small,
+                FullWidth = true
+            };
+
+        var dialog = await DialogService.ShowAsync<AddCookbookDialog>("Add to CookBook", parameters, options);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Canceled)
+        {
+            Snackbar.Add("Recipe added successfully!", Severity.Success);
+            CookbookCount = await RecipeService.GetCookbookSavesCount(recipeId);
+            StateHasChanged();
+        }
+    }
 
     private void EditRecipe(int recipeId)
     {
         NavigationManager.NavigateTo($"/edit-recipe/{recipeId}");
+    }
+
+    private async void ToggleLike()
+    {
+        if (currentUser != null)
+        {
+            LikeCount = await RecipeService.ToggleLikeAsync(Recipe.ID, !IsRecipeLiked, currentUser.Id);
+            IsRecipeLiked = !IsRecipeLiked;
+            StateHasChanged();
+        }
+        else
+        {
+            NavigationManager.NavigateTo($"/Account/Login");
+        }
     }
 }

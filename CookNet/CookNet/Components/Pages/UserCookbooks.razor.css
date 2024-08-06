@@ -62,15 +62,15 @@
 }
 
 .displaycookbooks-container {
-    padding: 25px;
+    padding-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Adjust gap between cards */
+    gap: 10px; /* Reduced gap between cards */
     justify-content: center; /* Center the cards horizontally */
 }
 
 .cookbook-card-container {
-    flex: 1 1 calc(25% - 20px); /* Four cards per row with gap consideration */
+    flex: 1 1 calc(20% - 10px); /* Five cards per row with adjusted gap */
     display: flex;
     justify-content: center; /* Center the card within the container */
 }
@@ -85,7 +85,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 300px; /* Set a maximum width for the cards */
+    max-width: 250px; /* Adjusted maximum width for smaller cards */
     box-sizing: border-box;
 }
 
@@ -111,26 +111,27 @@
 }
 
 .cookbookcard-body {
-    padding: 10px;
+    padding: 8px; /* Reduced padding for smaller cards */
     text-align: center;
 }
 
 .cookbookcard-title {
     color: white;
-    font-size: 1.2rem; /* Larger font size for titles */
-    margin: 0 0 5px 0;
+    font-size: 1.1rem; /* Slightly smaller font size for titles */
+    margin: 0 0 4px 0;
 }
 
 .cookbookdate-created,
 .cookbook-ispublic {
-    font-size: 0.875rem;
+    font-size: 0.8rem; /* Slightly smaller font size for text */
     color: white;
-    margin: 5px 0;
+    margin: 4px 0;
 }
 
+/* Responsive styles */
 @media (max-width: 768px) {
     .cookbook-card-container {
-        flex: 1 1 calc(50% - 20px); /* Two cards per row for smaller screens */
+        flex: 1 1 calc(40% - 10px); /* Adjust for two cards per row on smaller screens */
     }
 }
 

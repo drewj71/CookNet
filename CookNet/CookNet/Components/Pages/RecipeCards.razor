@@ -27,12 +27,12 @@
                     <p class="cook-time" title="Total Cook Time">@totalCookTime @hrsOrMins</p>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title d-inline-block">@recipe.Name</h5>
-                    <p class="date-created d-inline-block">@recipe.DateCreated.ToShortDateString()</p>
+                    <h5 class="card-title">@recipe.Name</h5>
+                    <div class="card-meta">
+                        <a class="username-nav" href="@($"/users/{recipe.Author.UserName}")">@("@")@recipe.Author.UserName</a>
+                        <p class="date-created">@recipe.DateCreated.ToShortDateString()</p>
+                    </div>
                 </div>
-            </a>
-            <a class="username-nav text-decoration-none" href="@($"/users/{recipe.Author.UserName}")">
-                <p class="users-recipe">@("@")@recipe.Author.UserName</p>
             </a>
             <button class="bookmark-recipe" @onclick="@(async () => await OnBookmarkClicked.InvokeAsync(recipe.ID))" title="Save to Cookbook">
                 <i class="cookbooks-icon bi bi-journal-bookmark-fill"></i>

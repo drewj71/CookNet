@@ -1,24 +1,39 @@
 ﻿.recipedetails-container {
     color: black;
+}
+
+.recipe-details {
     padding: 25px;
 }
 
 .recipe-title {
     font-size: 3rem;
     text-align: center;
+    font-weight: bold;
 }
 
 .edit-button {
     margin: auto;
     display: block;
-    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.cookbooks-icon {
+    font-size: 2.5rem !important;
+    margin-bottom: -10px;
 }
 
 .recipe-author {
     font-size: 1.3rem;
     text-align: center;
     font-weight: 600;
+    margin-bottom: 0;
 }
+
+    .recipe-author a {
+        color: rgb(111, 78, 55);
+    }
 
 .recipe-thumbnail {
     width: 400px;
@@ -31,18 +46,17 @@
 }
 
 .recipe-description {
-    margin-top: 20px;
     font-size: 1.2rem;
     text-align: center;
 }
 
 .recipe-story {
-    font-size: 1rem;
+    font-size: 1.5rem;
+    line-height: 1.6;
 }
 
-.center-container {
-    display: flex;
-    justify-content: center;
+.recipe-details-body {
+    text-align: center;
 }
 
 .recipe-preptime, 
@@ -50,28 +64,49 @@
 .recipe-category, 
 .recipe-ethnicity {
     margin: 0 10px 20px 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
 .recipe-story-title, .recipe-ingredients-title, .recipe-instructions-title {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .recipe-ingredients, .recipe-instructions {
-    font-size: 1rem;
-    line-height: 35px;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
 }
 
 .ingredients-list {
-    list-style-type: none; /* Remove default bullet points */
-    padding-left: 15px; /* Remove default padding */
+    list-style-type: none;
 }
 
-.recipe-ingredients::before {
-    content: "\25C6"; /* Unicode character for diamond */
-    color: rgb(107, 36, 12);
-    display: inline-block;
-    width: 1em; /* Adjust size as needed */
-    margin-left: -1em; /* Adjust indentation */
+
+.divider-line {
+    height: 1px;
+    background-color: #000;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.card {
+    background-color: #f2f2f2;
+}
+
+.card-title {
+    font-size: 2rem;
+    margin-left: 20px;
+}
+
+.ingredients-col {
+    padding: 0;
+    text-align: initial;
+    margin-left: 25px;
+    margin-right: -25px;
+}
+
+.serving-null {
+    margin-left: 0 !important;
 }

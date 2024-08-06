@@ -70,20 +70,25 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-8 col-md-3 form-group">
+            <div class="col-sm-8 col-md-2 form-group">
                 <label class="preptimeTxt form-group-label" for="PrepTime">Prep Time (minutes):</label>
                 <InputNumber id="PrepTime" class="form-control" @bind-Value="@Recipe.PrepTime"
                              style="@GetInputStyleInt(Recipe.PrepTime, isPrepValid)" />
             </div>
 
-            <div class="col-sm-8 col-md-3 form-group">
+            <div class="col-sm-8 col-md-2 form-group">
                 <label class="cooktimeTxt form-group-label" for="CookTime">Cook Time (minutes):</label>
                 <InputNumber id="CookTime" class="form-control" @bind-Value="@Recipe.CookTime"
                              style="@GetInputStyleInt(Recipe.CookTime, isCookTimeValid)" />
             </div>
 
+            <div class="col-sm-8 col-md-2 form-group">
+                <label class="servingsTxt form-group-label" for="Servings">Servings:</label>
+                <InputNumber id="Servings" class="form-control" @bind-Value="@Recipe.Servings" />
+            </div>
+
             <div class="col-sm-8 col-md-3 form-group">
-                <label class="form-group-label" for="Category">Category:</label>
+                <label class="categoryTxt form-group-label" for="Category">Category:</label>
                 <InputSelect id="Category" class="form-control long-select" @bind-Value="@Recipe.Category"
                              style="@GetInputStyleDDL(Recipe.Category, isCategoryValid)">
                     <option value="Select One">--Select One--</option>
@@ -99,7 +104,7 @@
             </div>
 
             <div class="col-sm-8 col-md-3 form-group">
-                <label class="form-group-label" for="Ethnicity">Ethnicity:</label>
+                <label class="ethnicityTxt form-group-label" for="Ethnicity">Ethnicity:</label>
                 <InputSelect id="Ethnicity" class="form-control long-select" @bind-Value="@Recipe.Ethnicity"
                              style="@GetInputStyleDDL(Recipe.Ethnicity, isEthnicityValid)">
                     <option value="Select One">--Select One--</option>

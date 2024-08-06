@@ -12,7 +12,14 @@
         <DataAnnotationsValidator />
         <ValidationSummary />
 
-        <h3 class="edit-recipe-title">Edit Recipe</h3>
+        <div class="row">
+            <div class="col-md-5">
+                <h3><i class="bi bi-arrow-left-square-fill goback" @onclick="ReturnBack"></i></h3>
+            </div>              
+            <div class="col-md-6">
+                <h3 class="edit-recipe-title">Edit Recipe</h3>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-md-6 form-group">
@@ -56,15 +63,20 @@
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-sm-8 col-md-3 form-group">
+        <div class="row my-3">
+            <div class="col-sm-8 col-md-2 form-group">
                 <label class="form-group-label" for="PrepTime">Prep Time (minutes):</label>
                 <InputNumber id="PrepTime" class="form-control" @bind-Value="@RecipePrepTime" style="@GetInputStyleInt(RecipePrepTime, isPrepValid)" />
             </div>
 
-            <div class="col-sm-8 col-md-3 form-group">
+            <div class="col-sm-8 col-md-2 form-group">
                 <label class="form-group-label" for="CookTime">Cook Time (minutes):</label>
                 <InputNumber id="CookTime" class="form-control" @bind-Value="@RecipeCookTime" style="@GetInputStyleInt(RecipeCookTime, isCookTimeValid)" />
+            </div>
+
+            <div class="col-sm-8 col-md-2 form-group">
+                <label class="form-group-label" for="Servings">Servings:</label>
+                <InputNumber id="Servings" class="form-control" @bind-Value="@RecipeServings" />
             </div>
 
             <div class="col-sm-8 col-md-3 form-group">
@@ -100,19 +112,19 @@
         </div>
 
         <div class="edit-section">
-            <div class="col-md-6 edit-ingredients">
+            <div class="col-md-6 edit-ingredients" style="background-color: #f2f2f2; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
                 <h4 class="col-md-6 edit-ingredients-title">Ingredients:</h4>
-                @foreach (var recipeIngredient in Recipe.RecipeIngredients)
+                @foreach (var ing in AllIngredients)
                 {
-                    var ingredient = recipeIngredient.Ingredient;
+                    var ingredient = ing.Ingredient;
                     <div class="col-md-12 ingredient-edit">
-                        @if (!recipeIngredient.IsEditing)
+                        @if (!ing.IsEditing)
                         {
                             <div>
-                                <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveIngredient(recipeIngredient)"></i>
-                                <i class="edit-ingredient fa fa-pen" @onclick="() => EditIngredient(recipeIngredient)"></i>
-                                <span>@recipeIngredient.Quantity</span>
-                                <span>@recipeIngredient.QuantityUnit</span>
+                                <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveIngredient(ing)"></i>
+                                <i class="edit-ingredient fa fa-pen" @onclick="() => EditIngredient(ing)"></i>
+                                <span>@ing.Quantity</span>
+                                <span>@ing.QuantityUnit</span>
                                 <span>@ingredient.Name</span>
                             </div>
                         }
@@ -126,25 +138,25 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-group-label" for="NewIngredientQuantity">Quantity:</label>
-                                    <InputText id="NewIngredientQuantity" class="form-control" @bind-Value="recipeIngredient.Quantity"
-                                               style="@GetInputStyle(recipeIngredient.Quantity, isQuantityValid)"/>
+                                    <InputText id="NewIngredientQuantity" class="form-control" @bind-Value="ing.Quantity"
+                                               style="@GetInputStyle(ing.Quantity, isQuantityValid)"/>
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-group-label" for="NewQuantityUnit">Unit:</label>
-                                    <InputText id="NewQuantityUnit" class="form-control" @bind-Value="recipeIngredient.QuantityUnit" />
+                                    <InputText id="NewQuantityUnit" class="form-control" @bind-Value="ing.QuantityUnit" />
                                 </div>
                                 <div class="col-md-3 save-cancel-btns">
-                                    <button type="button" class="btn btn-primary" @onclick="() => SaveIngredient(recipeIngredient)">Save</button>
-                                    <button type="button" class="btn btn-danger" @onclick="() => CancelEditIngredient(recipeIngredient)">Cancel</button>
+                                    <button type="button" class="btn btn-primary" @onclick="() => SaveIngredient(ing)">Save</button>
+                                    <button type="button" class="btn btn-danger" @onclick="() => CancelEditIngredient(ing)">Cancel</button>
                                 </div>
                             </div>
                         }
                     </div>
                 }
             </div>
-            <div class="col-md-6 edit-instructions">
+            <div class="col-md-6 edit-instructions" style="background-color: #f2f2f2; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
                 <h4 class="col-md-6 edit-instructions-title">Instructions:</h4>
-                @foreach (var instruction in Recipe.Instructions)
+                @foreach (var instruction in AllInstructions)
                 {
                     <div class="col-md-12 instruction-edit">
                         @if (!instruction.IsEditing)
@@ -178,7 +190,7 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-5">
-                        <label class="form-group-label" for="NewIngredientName">Ingredient Name:</label>
+                        <label class="form-group-label" for="NewIngredientName">Name:</label>
                         <InputText id="NewIngredientName" class="form-control" @bind-Value="@NewIngredientName" placeholder="All-Purpose Flour"
                                    style="@GetInputStyle(NewIngredientName, isNewIngNameValid)" />
                     </div>
@@ -188,7 +200,7 @@
                                    style="@GetInputStyle(NewIngredientQuantity, isNewQuantityValid)" />
                     </div>
                     <div class="col-md-2">
-                        <label class="form-group-label" for="NewIngredientQuantityUnit">Quantity Unit:</label>
+                        <label class="form-group-label" for="NewIngredientQuantityUnit">Unit:</label>
                         <InputText id="NewIngredientQuantityUnit" class="form-control" @bind-Value="@NewIngredientQuantityUnit" placeholder="cup" />
                     </div>
                     <div class="col-md-3 add-ingredient-btn">
@@ -251,6 +263,7 @@
     private string RecipeDescription { get; set; }
     private int RecipePrepTime { get; set; }
     private int RecipeCookTime { get; set; }
+    private int? RecipeServings { get; set; }
     private string RecipeCategory { get; set; }
     private string RecipeEthnicity { get; set; }
     private string RecipeStory { get; set; }
@@ -278,18 +291,23 @@
     private string currentUnitEdit;
     private string currentInstructionEdit;
 
+    List<RecipeIngredient> AllIngredients { get; set; } = new();
+    List<Instruction> AllInstructions { get; set; } = new();
     List<Ingredient> AddedIngredients { get; set; } = new();
     List<Instruction> AddedInstructions { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
         Recipe = await RecipeService.GetRecipeByIdAsync(RecipeID);
+        AllIngredients = Recipe.RecipeIngredients.ToList();
+        AllInstructions = Recipe.Instructions.ToList();
         if (Recipe != null)
         {
             RecipeName = Recipe.Name;
             RecipeDescription = Recipe.Description;
             RecipePrepTime = Recipe.PrepTime;
             RecipeCookTime = Recipe.CookTime;
+            RecipeServings = Recipe.Servings;
             RecipeCategory = Recipe.Category;
             RecipeEthnicity = Recipe.Ethnicity;
             RecipeStory = Recipe.RecipeStory;
@@ -329,6 +347,18 @@
                 QuantityUnit = NewIngredientQuantityUnit
             });
 
+            var newIngredient = new Ingredient
+            {
+                Name = NewIngredientName
+            };
+
+            AllIngredients.Add(new RecipeIngredient
+            {
+                Ingredient = newIngredient,
+                Quantity = NewIngredientQuantity,
+                QuantityUnit = NewIngredientQuantityUnit
+            });
+
             NewIngredientName = string.Empty;
             NewIngredientQuantity = string.Empty;
             NewIngredientQuantityUnit = string.Empty;
@@ -342,6 +372,11 @@
         if (isNewInstructionValid)
         {
             AddedInstructions.Add(new Instruction
+            {
+                InstructionText = NewInstructionText
+            });
+
+            AllInstructions.Add(new Instruction
             {
                 InstructionText = NewInstructionText
             });
@@ -421,6 +456,14 @@
 
     private void RemoveIngredient(RecipeIngredient recipeIngredient)
     {
+        var addedIngredient = AddedIngredients.FirstOrDefault(i => i.Name == recipeIngredient.Ingredient.Name &&
+                                                                   i.Quantity == recipeIngredient.Quantity &&
+                                                                   i.QuantityUnit == recipeIngredient.QuantityUnit);
+        if (addedIngredient != null)
+        {
+            AddedIngredients.Remove(addedIngredient);
+        }
+        AllIngredients.Remove(recipeIngredient);
         Recipe.RecipeIngredients.Remove(recipeIngredient);
     }
 
@@ -436,7 +479,25 @@
 
     private void RemoveInstruction(Instruction instruction)
     {
+        var addedInstruction = AddedInstructions.FirstOrDefault(i => i.InstructionText == instruction.InstructionText);
+        if (addedInstruction != null)
+        {
+            AddedInstructions.Remove(addedInstruction);
+        }
+        AllInstructions.Remove(instruction);
         Recipe.Instructions.Remove(instruction);
+        ReorderStepNums();
+    }
+
+    private void ReorderStepNums()
+    {
+        if (AllInstructions != null && AllInstructions.Count > 0)
+        {
+            for (int i = 0; i < AllInstructions.Count; i++)
+            {
+                AllInstructions[i].StepNumber = i + 1;
+            }
+        }
     }
 
     private void SaveInstruction(Instruction instruction)
@@ -454,6 +515,11 @@
         instruction.IsEditing = false;
     }
 
+    private void ReturnBack()
+    {
+        NavigationManager.NavigateTo($"/recipes/{RecipeID}");
+    }
+
     private bool SaveEditRecipe()
     {
         isNameValid = !string.IsNullOrWhiteSpace(RecipeName);
@@ -469,6 +535,7 @@
             Recipe.Description = RecipeDescription;
             Recipe.PrepTime = RecipePrepTime;
             Recipe.CookTime = RecipeCookTime;
+            Recipe.Servings = RecipeServings;
             Recipe.Category = RecipeCategory;
             Recipe.Ethnicity = RecipeEthnicity;
             Recipe.RecipeStory = RecipeStory == null ? null : RecipeStory;

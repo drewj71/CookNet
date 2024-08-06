@@ -1,5 +1,4 @@
-﻿
-.card-columns {
+﻿.card-columns {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
@@ -12,7 +11,8 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .card-img-top {
@@ -20,25 +20,37 @@
     object-fit: cover;
 }
 
-.card-title, .date-created {
+.card-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-title {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
     color: white;
 }
 
 .date-created {
-    float: right;
+    margin: 0;
 }
 
 .username-nav {
-    display: block;
-    margin: -20px 0 -5px 15px;
-    color: white;
-}
-
-.users-recipe {
     color: rgb(28, 10, 0);
+    text-decoration: none;
 }
 
-    .users-recipe:hover {
+    .username-nav:hover {
         opacity: 75%;
     }
 

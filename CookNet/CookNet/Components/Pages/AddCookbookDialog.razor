@@ -18,33 +18,25 @@
     <DialogContent>
         @if (!string.IsNullOrEmpty(UserID))
         {
-            @if (UserCookbooks.Count > 0)
-            {
-                <div class="cookbook-card-container">
-                    @foreach (var cookbook in UserCookbooks)
-                    {
-                        var isCookbookPublic = cookbook.IsPublic ? "Public" : "Private";
-                        <div class="cookbook-card @(selectedCookbooks.Contains(cookbook.CookbookID) ? "selected" : "")" @onclick="() => SelectCookbook(cookbook.CookbookID)">
-                            <div class="cookbook-img position-relative">
-                                @if (!string.IsNullOrEmpty(cookbook.CoverImage))
-                                {
-                                    <img class="cookbookcard-img-top" src="@cookbook.CoverImage" alt="Cover Image" title="@cookbook.CookbookName" />
-                                }
-                            </div>
-                            <div class="cookbookcard-body text-center">
-                                <h5 class="cookbookcard-title d-inline-block">@cookbook.CookbookName</h5>
-                                <em><p class="cookbookdate-created" title="Created Date">@cookbook.DateCreated.ToShortDateString()</p></em>
-                                <p class="cookbook-ispublic @isCookbookPublic">@isCookbookPublic</p>
-                            </div>
+            <div class="cookbook-card-container">
+                @foreach (var cookbook in UserCookbooks)
+                {
+                    var isCookbookPublic = cookbook.IsPublic ? "Public" : "Private";
+                    <div class="cookbook-card @(selectedCookbooks.Contains(cookbook.CookbookID) ? "selected" : "")" @onclick="() => SelectCookbook(cookbook.CookbookID)">
+                        <div class="cookbook-img position-relative">
+                            @if (!string.IsNullOrEmpty(cookbook.CoverImage))
+                            {
+                                <img class="cookbookcard-img-top" src="@cookbook.CoverImage" alt="Cover Image" title="@cookbook.CookbookName" />
+                            }
                         </div>
-                    }
-                </div>
-            }
-            else
-            {
-                <p>You don't have any Cookbooks!</p>
-                <button type="button" class="btn btn-primary" @onclick="OpenCreateCookbookDialogAsync">New Cookbook</button>
-            }
+                        <div class="cookbookcard-body text-center">
+                            <h5 class="cookbookcard-title d-inline-block">@cookbook.CookbookName</h5>
+                            <em><p class="cookbookdate-created" title="Created Date">@cookbook.DateCreated.ToShortDateString()</p></em>
+                            <p class="cookbook-ispublic @isCookbookPublic">@isCookbookPublic</p>
+                        </div>
+                    </div>
+                }
+            </div>
         }
         else
         {

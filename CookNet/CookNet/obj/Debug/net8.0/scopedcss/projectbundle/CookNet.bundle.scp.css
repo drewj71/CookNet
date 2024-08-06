@@ -370,6 +370,10 @@ main[b-2tlxc31yxu] {
     font-weight: 600;
 }
 
+.servingsTxt[b-n8opd8dmcj], .categoryTxt[b-n8opd8dmcj], .ethnicityTxt[b-n8opd8dmcj] {
+    margin-top: 6px;
+}
+
 .preview-thumbnail[b-n8opd8dmcj] {
     width: 200px;
     height: auto;
@@ -412,7 +416,6 @@ main[b-2tlxc31yxu] {
 
 .edit-recipe-title[b-nwn678rb5z] {
     font-size: 3rem;
-    text-align: center;
 }
 
 .form-group[b-nwn678rb5z] {
@@ -511,6 +514,14 @@ main[b-2tlxc31yxu] {
 .save-cancel-btns[b-nwn678rb5z] {
     margin-top: 22px;
 }
+
+.goback[b-nwn678rb5z] {
+    cursor: pointer;
+}
+
+.goback:hover[b-nwn678rb5z] {
+    opacity: 75%;
+}
 /* _content/CookNet/Components/Pages/Home.razor.rz.scp.css */
 .divider-row[b-bv7obqaypn] {
     background-color: rgb(28, 10, 0);
@@ -528,7 +539,6 @@ main[b-2tlxc31yxu] {
     padding: 25px;
 }
 /* _content/CookNet/Components/Pages/RecipeCards.razor.rz.scp.css */
-
 .card-columns[b-pxf527or8f] {
     display: flex;
     flex-wrap: wrap;
@@ -542,7 +552,8 @@ main[b-2tlxc31yxu] {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .card-img-top[b-pxf527or8f] {
@@ -550,25 +561,37 @@ main[b-2tlxc31yxu] {
     object-fit: cover;
 }
 
-.card-title[b-pxf527or8f], .date-created[b-pxf527or8f] {
+.card-body[b-pxf527or8f] {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-title[b-pxf527or8f] {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.card-meta[b-pxf527or8f] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
     color: white;
 }
 
 .date-created[b-pxf527or8f] {
-    float: right;
+    margin: 0;
 }
 
 .username-nav[b-pxf527or8f] {
-    display: block;
-    margin: -20px 0 -5px 15px;
-    color: white;
-}
-
-.users-recipe[b-pxf527or8f] {
     color: rgb(28, 10, 0);
+    text-decoration: none;
 }
 
-    .users-recipe:hover[b-pxf527or8f] {
+    .username-nav:hover[b-pxf527or8f] {
         opacity: 75%;
     }
 
@@ -597,25 +620,40 @@ main[b-2tlxc31yxu] {
 /* _content/CookNet/Components/Pages/RecipeDetails.razor.rz.scp.css */
 .recipedetails-container[b-j9rgftzswo] {
     color: black;
+}
+
+.recipe-details[b-j9rgftzswo] {
     padding: 25px;
 }
 
 .recipe-title[b-j9rgftzswo] {
     font-size: 3rem;
     text-align: center;
+    font-weight: bold;
 }
 
 .edit-button[b-j9rgftzswo] {
     margin: auto;
     display: block;
-    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.cookbooks-icon[b-j9rgftzswo] {
+    font-size: 2.5rem !important;
+    margin-bottom: -10px;
 }
 
 .recipe-author[b-j9rgftzswo] {
     font-size: 1.3rem;
     text-align: center;
     font-weight: 600;
+    margin-bottom: 0;
 }
+
+    .recipe-author a[b-j9rgftzswo] {
+        color: rgb(111, 78, 55);
+    }
 
 .recipe-thumbnail[b-j9rgftzswo] {
     width: 400px;
@@ -628,18 +666,17 @@ main[b-2tlxc31yxu] {
 }
 
 .recipe-description[b-j9rgftzswo] {
-    margin-top: 20px;
     font-size: 1.2rem;
     text-align: center;
 }
 
 .recipe-story[b-j9rgftzswo] {
-    font-size: 1rem;
+    font-size: 1.5rem;
+    line-height: 1.6;
 }
 
-.center-container[b-j9rgftzswo] {
-    display: flex;
-    justify-content: center;
+.recipe-details-body[b-j9rgftzswo] {
+    text-align: center;
 }
 
 .recipe-preptime[b-j9rgftzswo], 
@@ -647,30 +684,51 @@ main[b-2tlxc31yxu] {
 .recipe-category[b-j9rgftzswo], 
 .recipe-ethnicity[b-j9rgftzswo] {
     margin: 0 10px 20px 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
 .recipe-story-title[b-j9rgftzswo], .recipe-ingredients-title[b-j9rgftzswo], .recipe-instructions-title[b-j9rgftzswo] {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .recipe-ingredients[b-j9rgftzswo], .recipe-instructions[b-j9rgftzswo] {
-    font-size: 1rem;
-    line-height: 35px;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
 }
 
 .ingredients-list[b-j9rgftzswo] {
-    list-style-type: none; /* Remove default bullet points */
-    padding-left: 15px; /* Remove default padding */
+    list-style-type: none;
 }
 
-.recipe-ingredients[b-j9rgftzswo]::before {
-    content: "\25C6"; /* Unicode character for diamond */
-    color: rgb(107, 36, 12);
-    display: inline-block;
-    width: 1em; /* Adjust size as needed */
-    margin-left: -1em; /* Adjust indentation */
+
+.divider-line[b-j9rgftzswo] {
+    height: 1px;
+    background-color: #000;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.card[b-j9rgftzswo] {
+    background-color: #f2f2f2;
+}
+
+.card-title[b-j9rgftzswo] {
+    font-size: 2rem;
+    margin-left: 20px;
+}
+
+.ingredients-col[b-j9rgftzswo] {
+    padding: 0;
+    text-align: initial;
+    margin-left: 25px;
+    margin-right: -25px;
+}
+
+.serving-null[b-j9rgftzswo] {
+    margin-left: 0 !important;
 }
 /* _content/CookNet/Components/Pages/UserCookbooks.razor.rz.scp.css */
 .usercookbooks-container[b-zdxd9okrfd] {
@@ -737,15 +795,15 @@ main[b-2tlxc31yxu] {
 }
 
 .displaycookbooks-container[b-zdxd9okrfd] {
-    padding: 25px;
+    padding-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Adjust gap between cards */
+    gap: 10px; /* Reduced gap between cards */
     justify-content: center; /* Center the cards horizontally */
 }
 
 .cookbook-card-container[b-zdxd9okrfd] {
-    flex: 1 1 calc(25% - 20px); /* Four cards per row with gap consideration */
+    flex: 1 1 calc(20% - 10px); /* Five cards per row with adjusted gap */
     display: flex;
     justify-content: center; /* Center the card within the container */
 }
@@ -760,7 +818,7 @@ main[b-2tlxc31yxu] {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 300px; /* Set a maximum width for the cards */
+    max-width: 250px; /* Adjusted maximum width for smaller cards */
     box-sizing: border-box;
 }
 
@@ -786,26 +844,27 @@ main[b-2tlxc31yxu] {
 }
 
 .cookbookcard-body[b-zdxd9okrfd] {
-    padding: 10px;
+    padding: 8px; /* Reduced padding for smaller cards */
     text-align: center;
 }
 
 .cookbookcard-title[b-zdxd9okrfd] {
     color: white;
-    font-size: 1.2rem; /* Larger font size for titles */
-    margin: 0 0 5px 0;
+    font-size: 1.1rem; /* Slightly smaller font size for titles */
+    margin: 0 0 4px 0;
 }
 
 .cookbookdate-created[b-zdxd9okrfd],
 .cookbook-ispublic[b-zdxd9okrfd] {
-    font-size: 0.875rem;
+    font-size: 0.8rem; /* Slightly smaller font size for text */
     color: white;
-    margin: 5px 0;
+    margin: 4px 0;
 }
 
+/* Responsive styles */
 @media (max-width: 768px) {
     .cookbook-card-container[b-zdxd9okrfd] {
-        flex: 1 1 calc(50% - 20px); /* Two cards per row for smaller screens */
+        flex: 1 1 calc(40% - 10px); /* Adjust for two cards per row on smaller screens */
     }
 }
 
@@ -900,4 +959,92 @@ main[b-2tlxc31yxu] {
 
 .useritems-container[b-be9y8cypfz] {
     padding: 20px;
+}
+
+.Private[b-be9y8cypfz] {
+    color: red !important;
+}
+
+.Public[b-be9y8cypfz] {
+    font-weight: 800;
+    color: forestgreen !important;
+}
+
+.displaycookbooks-container[b-be9y8cypfz] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Reduced gap between cards */
+    justify-content: center; /* Center the cards horizontally */
+}
+
+.cookbook-card-container[b-be9y8cypfz] {
+    flex: 1 1 calc(20% - 10px); /* Five cards per row with adjusted gap */
+    display: flex;
+    justify-content: center; /* Center the card within the container */
+}
+
+.cookbook-card[b-be9y8cypfz] {
+    background-color: rgb(175, 130, 96);
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 250px; /* Adjusted maximum width for smaller cards */
+    box-sizing: border-box;
+}
+
+    .cookbook-card:hover[b-be9y8cypfz] {
+        transform: scale(1.05); /* Slightly enlarge on hover */
+    }
+
+.cookbook-img[b-be9y8cypfz] {
+    width: 100%;
+    height: 0;
+    padding-top: 150%; /* Aspect ratio for 600x900 */
+    position: relative;
+    overflow: hidden;
+}
+
+.cookbookcard-img-top[b-be9y8cypfz] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cookbookcard-body[b-be9y8cypfz] {
+    padding: 8px; /* Reduced padding for smaller cards */
+    text-align: center;
+}
+
+.cookbookcard-title[b-be9y8cypfz] {
+    color: white;
+    font-size: 1.1rem; /* Slightly smaller font size for titles */
+    margin: 0 0 4px 0;
+}
+
+.cookbookdate-created[b-be9y8cypfz],
+.cookbook-ispublic[b-be9y8cypfz] {
+    font-size: 0.8rem; /* Slightly smaller font size for text */
+    color: white;
+    margin: 4px 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .cookbook-card-container[b-be9y8cypfz] {
+        flex: 1 1 calc(40% - 10px); /* Adjust for two cards per row on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .cookbook-card-container[b-be9y8cypfz] {
+        flex: 1 1 100%; /* One card per row for very small screens */
+    }
 }
