@@ -21,10 +21,12 @@ namespace CookNet.Data
         public DateTime RegistrationDate { get; set; }
         public ICollection<UserCookbook> UserCookbooks { get; set; }
         public ICollection<RecipeRating> RecipeRatings { get; set; }
+        public ICollection<RecipeComment> Comments { get; set; }
 
         public ApplicationUser() { 
             UserCookbooks = new List<UserCookbook>();
             RecipeRatings = new List<RecipeRating>();
+            Comments = new List<RecipeComment>();
         }    
     }
 }

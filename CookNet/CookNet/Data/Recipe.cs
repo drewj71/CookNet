@@ -25,6 +25,7 @@ namespace CookNet.Data
         public ICollection<RecipeImage> RecipeImages { get; set; }
         public ICollection<CookbookRecipe> CookbookRecipes { get; set; }
         public ICollection<RecipeRating> RecipeRatings { get; set; }
+        public ICollection<RecipeComment> Comments { get; set; }
         public Recipe()
         {
             RecipeIngredients = new List<RecipeIngredient>();
@@ -32,6 +33,7 @@ namespace CookNet.Data
             RecipeImages = new List<RecipeImage>();
             CookbookRecipes = new List<CookbookRecipe>();
             RecipeRatings = new List<RecipeRating>();
+            Comments = new List<RecipeComment>();
         }
     }
 }

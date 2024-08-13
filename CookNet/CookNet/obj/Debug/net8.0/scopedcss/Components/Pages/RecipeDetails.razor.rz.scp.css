@@ -21,7 +21,7 @@
 
 .cookbooks-icon[b-j9rgftzswo] {
     font-size: 2.5rem !important;
-    margin-bottom: -10px;
+    margin-bottom: -6px;
 }
 
 .recipe-author[b-j9rgftzswo] {
@@ -109,4 +109,46 @@
 
 .serving-null[b-j9rgftzswo] {
     margin-left: 0 !important;
+}
+
+.comment-item[b-j9rgftzswo] {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.comment-header[b-j9rgftzswo] {
+    display: flex;
+    justify-content: space-between; /* Distributes space between items */
+    align-items: center; /* Aligns items vertically */
+}
+
+.comment-actions[b-j9rgftzswo] {
+    display: flex;
+    gap: 10px; /* Adds space between the icons */
+    font-size: 1.2rem; /* Adjusts the icon size if needed */
+    color: #333; /* Adjusts the icon color if needed */
+}
+
+.comment-body[b-j9rgftzswo] {
+    margin-top: 10px;
+}
+
+.username-comment[b-j9rgftzswo] {
+    color: rgb(111, 78, 55);
+    margin-right: 5px;
+}
+
+.username-comment:hover[b-j9rgftzswo] {
+    opacity: 75%;
+}
+
+.fa-trash-can[b-j9rgftzswo] {
+    color: red;
+    cursor: pointer;
+}
+
+.fa-pen[b-j9rgftzswo] {
+    color: gray;
+    cursor: pointer;
 }

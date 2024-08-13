@@ -1,0 +1,47 @@
+﻿@using CookNet.Data
+@inject IDialogService DialogService
+@inject RecipeService RecipeService
+@inject ISnackbar Snackbar
+
+<MudDialog>
+    <TitleContent>Edit Comment</TitleContent>
+    <DialogContent>
+        <MudTextField @bind-Value="CommentText" Label="Comment" FullWidth="true" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Secondary" @onclick="CancelEdit">Cancel</MudButton>
+        <MudButton Color="Color.Primary" @onclick="SaveComment">Save</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] public MudDialogInstance MudDialogInstance { get; set; }
+    [Parameter] public int CommentID { get; set; }
+    [Parameter] public string ExistingCommentText { get; set; }
+
+    private string CommentText { get; set; }
+
+    protected override void OnInitialized()
+    {
+        CommentText = ExistingCommentText;
+    }
+
+    private async Task SaveComment()
+    {
+        if (!string.IsNullOrEmpty(CommentText))
+        {
+            await RecipeService.UpdateCommentAsync(CommentID, CommentText);
+            Snackbar.Add("Comment updated successfully!", Severity.Success);
+            MudDialogInstance.Close(DialogResult.Ok(true));
+        }
+        else
+        {
+            Snackbar.Add("Comment cannot be empty.", Severity.Error);
+        }
+    }
+
+    private void CancelEdit()
+    {
+        MudDialogInstance.Close(DialogResult.Cancel());
+    }
+}

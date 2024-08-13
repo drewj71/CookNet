@@ -245,5 +245,61 @@ namespace CookNet.Data
             }
             return await _context.RecipeRatings.CountAsync(r => r.RecipeID == recipeId);
         }
+
+        public async Task<List<RecipeComment>> GetCommentsByRecipeIdAsync(int recipeId)
+        {
+            return await _context.Comments
+                .Where(c => c.RecipeID == recipeId)
+                .OrderByDescending(c => c.DateCreated)
+                .ToListAsync();
+        }
+
+        public async Task AddCommentAsync(RecipeComment comment)
+        {
+            _context.Comments.Add(comment);
+            await SaveChanges();
+        }
+
+        public async Task<bool> HasRepliesAsync(int commentId)
+        {
+            return await _context.Comments.AnyAsync(c => c.ParentCommentID == commentId);
+        }
+
+        public async Task MarkCommentAsDeletedAsync(int commentId)
+        {
+            var comment = await _context.Comments.FindAsync(commentId);
+            if (comment != null)
+            {
+                comment.IsDeleted = true;
+                await SaveChanges();
+            }
+        }
+
+        public async Task UpdateCommentAsync(int commentId, string newCommentText)
+        {
+            var comment = await _context.Comments
+                .FirstOrDefaultAsync(c => c.CommentID == commentId);
+
+            if (comment == null)
+            {
+                throw new InvalidOperationException("Comment not found.");
+            }
+
+            comment.Comment = newCommentText;
+            comment.DateUpdated = DateTime.UtcNow;
+
+            _context.Comments.Update(comment);
+            await SaveChanges();
+        }
+
+        public async Task DeleteCommentAsync(int commentId)
+        {
+            var comment = await _context.Comments.FindAsync(commentId);
+            if (comment != null)
+            {
+                _context.Comments.Remove(comment);
+                await SaveChanges();
+            }
+        }
     }
 }

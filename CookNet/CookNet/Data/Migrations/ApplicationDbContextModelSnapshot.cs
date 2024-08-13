@@ -240,6 +240,52 @@ namespace CookNet.Migrations
                     b.ToTable("Recipes");
                 });
 
+            modelBuilder.Entity("CookNet.Data.RecipeComment", b =>
+                {
+                    b.Property<int>("CommentID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentID"));
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ParentCommentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecipeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CommentID");
+
+                    b.HasIndex("ParentCommentID");
+
+                    b.HasIndex("RecipeID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("CookNet.Data.RecipeImage", b =>
                 {
                     b.Property<int>("RecipeImageID")
@@ -538,6 +584,32 @@ namespace CookNet.Migrations
                     b.Navigation("Author");
                 });
 
+            modelBuilder.Entity("CookNet.Data.RecipeComment", b =>
+                {
+                    b.HasOne("CookNet.Data.RecipeComment", "ParentComment")
+                        .WithMany("Replies")
+                        .HasForeignKey("ParentCommentID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("CookNet.Data.Recipe", "Recipe")
+                        .WithMany("Comments")
+                        .HasForeignKey("RecipeID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("CookNet.Data.ApplicationUser", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ParentComment");
+
+                    b.Navigation("Recipe");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("CookNet.Data.RecipeImage", b =>
                 {
                     b.HasOne("CookNet.Data.Recipe", "Recipe")
@@ -651,6 +723,8 @@ namespace CookNet.Migrations
 
             modelBuilder.Entity("CookNet.Data.ApplicationUser", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("RecipeRatings");
 
                     b.Navigation("UserCookbooks");
@@ -658,6 +732,8 @@ namespace CookNet.Migrations
 
             modelBuilder.Entity("CookNet.Data.Recipe", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("CookbookRecipes");
 
                     b.Navigation("Instructions");
@@ -667,6 +743,11 @@ namespace CookNet.Migrations
                     b.Navigation("RecipeIngredients");
 
                     b.Navigation("RecipeRatings");
+                });
+
+            modelBuilder.Entity("CookNet.Data.RecipeComment", b =>
+                {
+                    b.Navigation("Replies");
                 });
 
             modelBuilder.Entity("CookNet.Data.UserCookbook", b =>
