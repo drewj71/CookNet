@@ -143,6 +143,12 @@
     opacity: 75%;
 }
 
+.fa-reply {
+    color: cornflowerblue;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
 .fa-trash-can {
     color: red;
     cursor: pointer;

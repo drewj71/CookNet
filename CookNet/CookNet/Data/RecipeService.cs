@@ -301,5 +301,13 @@ namespace CookNet.Data
                 await SaveChanges();
             }
         }
+
+        public async Task<List<RecipeComment>> GetRepliesAsync(int parentCommentId)
+        {
+            return await _context.Comments
+                .Where(c => c.ParentCommentID == parentCommentId && !c.IsDeleted)
+                .OrderBy(c => c.DateCreated)
+                .ToListAsync();
+        }
     }
 }

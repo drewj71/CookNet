@@ -121,29 +121,83 @@
                             @foreach (var comment in Comments)
                             {
                                 <div class="comment-item">
-                                    <div class="comment-header">
-                                        <div>
-                                            <a href=@($"/users/{comment.Username}")><strong class="username-comment">@comment.Username</strong></a> <span class="text-muted">@comment.DateCreated.ToString("MMMM dd, yyyy")</span>
-                                        </div>
-                                        @if (currentUser != null && comment.UserID == currentUser.Id)
-                                        {
-                                            <div class="comment-actions">
-                                                <i class="fa fa-pen" @onclick="() => OpenEditCommentDialog(comment.CommentID, comment.Comment)"></i>
-                                                <i class="fa-solid fa-trash-can ms-2" @onclick="() => DeleteComment(comment.CommentID)" title="Delete Comment"></i>
+                                    @if (comment.ParentCommentID is null)
+                                    {
+                                        <div class="comment-header">
+                                            <div>
+                                                <a href=@($"/users/{comment.Username}")><strong class="username-comment">@comment.Username</strong></a> <span class="text-muted">@comment.DateCreated.ToString("MMMM dd, yyyy")</span>
                                             </div>
-                                        }
-                                    </div>
-                                    <div class="comment-body">
-                                        @if (comment.IsDeleted)
-                                        {
-                                            <p class="text-muted"><em>This comment has been deleted.</em></p>
-                                        }
-                                        else
-                                        {
-                                            <p>@comment.Comment</p>
-                                        }
-                                    </div>
+                                            <div class="comment-actions">
+                                                <i class="fa fa-reply ms-2" @onclick="() => ToggleReply(comment.CommentID)" title="Reply"></i>
+                                                @if (currentUser != null && comment.UserID == currentUser.Id)
+                                                {
+                                                    <i class="fa fa-pen" @onclick="() => OpenEditCommentDialog(comment.CommentID, comment.Comment)"></i>
+                                                    <i class="fa-solid fa-trash-can ms-2" @onclick="() => DeleteComment(comment.CommentID)" title="Delete Comment"></i>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="comment-body">
+                                            @if (comment.IsDeleted)
+                                            {
+                                                <p class="text-muted"><em>This comment has been deleted.</em></p>
+                                            }
+                                            else
+                                            {
+                                                <p>@comment.Comment</p>
+                                            }
+                                            @if (IsReplying)
+                                            {
+                                                <div class="reply-input">
+                                                    <MudTextField @bind-Value="NewReplyTxt" Placeholder="Write a reply..." Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Send" OnAdornmentClick="() => SubmitReply(comment.CommentID)" Immediate="true" />
+                                                </div>
+                                            }
+                                        </div>
+                                    }
                                 </div>
+                                @if (comment.Replies != null && comment.Replies.Any())
+                                {
+                                    @foreach (var reply in comment.Replies)
+                                    {
+                                        <div class="reply-item">
+                                            <div class="reply-header">
+                                                <div>
+                                                    <a href=@($"/users/{comment.Username}")><strong class="username-comment">@comment.Username</strong></a> <span class="text-muted">@comment.DateCreated.ToString("MMMM dd, yyyy")</span>
+                                                </div>
+                                                <div class="comment-actions">
+                                                    <i class="fa fa-reply ms-2" @onclick="() => ToggleReply(comment.CommentID)" title="Reply"></i>
+                                                    @if (currentUser != null && comment.UserID == currentUser.Id)
+                                                    {
+                                                        <i class="fa fa-pen" @onclick="() => OpenEditCommentDialog(comment.CommentID, comment.Comment)"></i>
+                                                        <i class="fa-solid fa-trash-can ms-2" @onclick="() => DeleteComment(comment.CommentID)" title="Delete Comment"></i>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="reply-body">
+
+                                                <div class="reply-item ms-4">
+                                                    <div>
+                                                        <a href=@($"/users/{reply.Username}")><strong class="username-comment">@reply.Username</strong></a>
+                                                        <span class="text-muted">@reply.DateCreated.ToString("MMMM dd, yyyy")</span>
+                                                    </div>
+                                                    @if (comment.IsDeleted)
+                                                    {
+                                                        <p class="text-muted"><em>This comment has been deleted.</em></p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>@comment.Comment</p>
+                                                    }
+                                                    @if (IsReplying)
+                                                    {
+                                                        <div class="reply-input">
+                                                            <MudTextField @bind-Value="NewReplyTxt" Placeholder="Write a reply..." Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Send" OnAdornmentClick="() => SubmitReply(comment.CommentID)" Immediate="true" />
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
                             }
                         }
                         else
@@ -179,6 +233,8 @@
     private int LikeCount { get; set; } = 0;
     private int CookbookCount { get; set; } = 0;
     private string NewCommentTxt { get; set; }
+    private string NewReplyTxt { get; set; }
+    private bool IsReplying { get; set; } = false;
 
     [Parameter]
     public string RecipeId { get; set; }
@@ -278,15 +334,15 @@
         if (!string.IsNullOrWhiteSpace(NewCommentTxt) && currentUser != null)
         {
             var newComment = new RecipeComment
-                {
-                    RecipeID = Recipe.ID,
-                    UserID = currentUser.Id,
-                    Comment = NewCommentTxt,
-                    Username = currentUser.UserName,
-                    DateCreated = DateTime.UtcNow,
-                    DateUpdated = DateTime.UtcNow,
-                    IsDeleted = false
-                };
+            {
+                RecipeID = Recipe.ID,
+                UserID = currentUser.Id,
+                Comment = NewCommentTxt,
+                Username = currentUser.UserName,
+                DateCreated = DateTime.UtcNow,
+                DateUpdated = DateTime.UtcNow,
+                IsDeleted = false
+            };
 
             await RecipeService.AddCommentAsync(newComment);
             Comments.Add(newComment);
@@ -319,6 +375,43 @@
             StateHasChanged();
         }
     }
+
+    private void ToggleReply(int commentId)
+    {
+        var comment = Comments.FirstOrDefault(c => c.CommentID == commentId);
+        if (comment != null)
+        {
+            IsReplying = !IsReplying;
+        }
+    }
+
+    private async Task SubmitReply(int parentCommentId)
+    {
+        var parentComment = Comments.FirstOrDefault(c => c.CommentID == parentCommentId);
+        if (parentComment != null && !string.IsNullOrWhiteSpace(NewReplyTxt))
+        {
+            var reply = new RecipeComment
+            {
+                RecipeID = Recipe.ID,
+                Comment = NewReplyTxt,
+                UserID = currentUser.Id,
+                Username = currentUser.UserName,
+                DateCreated = DateTime.UtcNow,
+                DateUpdated = DateTime.UtcNow,
+                ParentCommentID = parentCommentId,
+                IsDeleted = false
+            };
+
+            await RecipeService.AddCommentAsync(reply);
+
+            // Clear the reply field and refresh the comments
+            NewReplyTxt = string.Empty;
+            IsReplying = false;
+            Comments = await RecipeService.GetCommentsByRecipeIdAsync(int.Parse(RecipeId));
+            StateHasChanged();
+        }
+    }
+
     private async void DeleteComment(int commentId)
     {
         var confirmed = await DialogService.ShowMessageBox(

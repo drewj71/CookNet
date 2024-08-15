@@ -102,6 +102,10 @@ namespace CookNet.Data
                 .WithMany(pc => pc.Replies)
                 .HasForeignKey(rc => rc.ParentCommentID)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<RecipeComment>()
+                .Property(rc => rc.IsDeleted)
+                .HasDefaultValue(false);
         }
     }
 }
