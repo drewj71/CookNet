@@ -39,6 +39,13 @@ namespace CookNet.Data
                 .ToListAsync();
         }
 
+        public async Task<List<UserCookbook>> GetCookbooksContainingRecipeAsync(int recipeId)
+        {
+            return await _context.UserCookbooks
+                                   .Where(c => c.CookbookRecipes.Any(cr => cr.RecipeID == recipeId))
+                                   .ToListAsync();
+        }
+
         public async Task<List<Recipe>> GetRecipesByCookbookIdAsync(int cookbookId)
         {
             using (var context = _contextFactory.CreateDbContext())
@@ -107,6 +114,16 @@ namespace CookNet.Data
                 });
 
             _context.CookbookRecipes.AddRange(newAssociations);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task RemoveRecipeFromCookbooks(int recipeId, List<int> cookbookIds)
+        {
+            var cookbookRecipesToRemove = await _context.CookbookRecipes
+                .Where(cr => cookbookIds.Contains(cr.CookbookID) && cr.RecipeID == recipeId)
+                .ToListAsync();
+
+            _context.CookbookRecipes.RemoveRange(cookbookRecipesToRemove);
             await _context.SaveChangesAsync();
         }
 

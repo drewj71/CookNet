@@ -66,10 +66,31 @@
     public EventCallback RefreshCookbooksCallback { get; set; }
 
     private List<int> selectedCookbooks = new List<int>();
+    private List<int> originalSelectedCookbooks = new List<int>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var cookbooksContainingRecipe = await CookbookService.GetCookbooksContainingRecipeAsync(RecipeID);
+        selectedCookbooks = cookbooksContainingRecipe.Select(c => c.CookbookID).ToList();
+        originalSelectedCookbooks = new List<int>(selectedCookbooks);
+    }
 
     private async Task Submit()
     {
-        await CookbookService.AddRecipeToCookbooks(RecipeID, selectedCookbooks);
+        // Add recipe to newly selected cookbooks
+        var newlySelectedCookbooks = selectedCookbooks.Except(originalSelectedCookbooks).ToList();
+        if (newlySelectedCookbooks.Any())
+        {
+            await CookbookService.AddRecipeToCookbooks(RecipeID, newlySelectedCookbooks);
+        }
+
+        // Remove recipe from deselected cookbooks
+        var deselectedCookbooks = originalSelectedCookbooks.Except(selectedCookbooks).ToList();
+        if (deselectedCookbooks.Any())
+        {
+            await CookbookService.RemoveRecipeFromCookbooks(RecipeID, deselectedCookbooks);
+        }
+
         MudDialog.Close(DialogResult.Ok(true));
     }
 

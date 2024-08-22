@@ -115,6 +115,7 @@
     background-color: #f2f2f2;
     padding: 10px;
     border-radius: 5px;
+    margin: 10px 0 10px 0;
 }
 
 .comment-header[b-j9rgftzswo] {
@@ -131,6 +132,24 @@
 }
 
 .comment-body[b-j9rgftzswo] {
+    margin-top: 10px;
+}
+
+.reply-item[b-j9rgftzswo] {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.reply-header[b-j9rgftzswo] {
+    display: flex;
+    justify-content: space-between; /* Distributes space between items */
+    align-items: center; /* Aligns items vertically */
+}
+
+.reply-body[b-j9rgftzswo] {
     margin-top: 10px;
 }
 
