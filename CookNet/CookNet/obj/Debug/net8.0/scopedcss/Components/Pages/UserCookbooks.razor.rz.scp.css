@@ -87,6 +87,7 @@
     width: 100%;
     max-width: 250px; /* Adjusted maximum width for smaller cards */
     box-sizing: border-box;
+    position: relative;
 }
 
     .cookbook-card:hover[b-zdxd9okrfd] {
@@ -140,3 +141,33 @@
         flex: 1 1 100%; /* One card per row for very small screens */
     }
 }
+
+.cookbook-options[b-zdxd9okrfd] {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 1;
+    display: flex;
+    gap: 8px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    border-radius: 4px;
+}
+
+    .cookbook-options i[b-zdxd9okrfd] {
+        color: white;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+
+    .cookbook-options i:nth-child(1)[b-zdxd9okrfd] {
+        margin-right: 5px;
+    }
+
+        .cookbook-options .fa-pen:hover[b-zdxd9okrfd] {
+            color: dodgerblue;
+        }
+
+        .cookbook-options .fa-trash-can:hover[b-zdxd9okrfd] {
+            color: red;
+        }

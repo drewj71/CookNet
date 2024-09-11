@@ -1,0 +1,28 @@
+﻿@using MudBlazor
+
+<MudDialog>
+    <DialogContent>
+        <p>@Message</p>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Confirm">Confirm</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public string Message { get; set; } = "Are you sure you want to proceed?";
+    [Parameter] public int CookbookID { get; set; }
+
+    void Confirm()
+    {
+        MudDialog.Close(DialogResult.Ok(CookbookID));
+    }
+
+    void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+}

@@ -107,7 +107,8 @@
         var options = new DialogOptions
         {
             MaxWidth = MaxWidth.Small,
-            FullWidth = true
+            FullWidth = true,
+            CloseOnEscapeKey = true
         };
 
         var dialog = await DialogService.ShowAsync<CreateCookbookDialog>("Create New Cookbook", parameters, options);

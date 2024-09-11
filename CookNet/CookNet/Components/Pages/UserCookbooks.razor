@@ -35,6 +35,10 @@
                 var isCookbookPublic = cookbook.IsPublic ? "Public" : "Private";
                 <div class="cookbook-card-container">
                     <div class="cookbook-card">
+                        <div class="cookbook-options">
+                            <i class="fa fa-pen" title="Edit Cookbook" @onclick="() => EditCookbook(cookbook.CookbookID)"></i>
+                            <i class="fa fa-trash-can" title="Delete Cookbook" @onclick="() => ShowDeleteConfirmation(cookbook.CookbookID)"></i>
+                        </div>
                         <div class="cookbook-img" @onclick="() => NavigateToCookbookRecipes(cookbook.CookbookID, cookbook.CookbookName)">
                             @if (!string.IsNullOrEmpty(cookbook.CoverImage))
                             {
@@ -108,7 +112,7 @@
             Snackbar.Add("Cookbook created successfully!", Severity.Success);
         }
     }
-    
+
     private async Task OnCookbookCreated()
     {
         if (RefreshCookbooksCallback.HasDelegate)
@@ -124,5 +128,41 @@
     private void NavigateToCookbookRecipes(int cookbookId, string cookbookName)
     {
         Navigation.NavigateTo($"/cookbook-recipes/{cookbookId}/{cookbookName}");
+    }
+
+    private void EditCookbook(int cookbookID)
+    {
+
+    }
+
+    private async Task ShowDeleteConfirmation(int cookbookID)
+    {
+        var parameters = new DialogParameters
+        {
+            { "Message", "Are you sure you want to delete this cookbook? This action cannot be undone." },
+            { "CookbookID", cookbookID }
+        };
+
+        var options = new DialogOptions 
+        { 
+            MaxWidth = MaxWidth.Small,
+            FullWidth = true,
+            CloseOnEscapeKey = true 
+        };
+
+        var dialog = DialogService.Show<ConfirmationDialog>("Delete Cookbook", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled && result.Data is int id)
+        {
+            await DeleteCookbook(id);
+        }
+    }
+
+    private async Task DeleteCookbook(int cookbookID)
+    {
+        await CookbookService.DeleteCookbookAsync(cookbookID);
+        Navigation.NavigateTo(Navigation.Uri, true); // Refreshes the entire page to display the cookbooks after one has been deleted
+        Snackbar.Add("Cookbook deleted successfully.", Severity.Success);
     }
 }

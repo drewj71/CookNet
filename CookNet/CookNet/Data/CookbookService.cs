@@ -90,12 +90,42 @@ namespace CookNet.Data
 
         public async Task DeleteCookbookAsync(int cookbookID)
         {
-            var book = await _context.UserCookbooks.FindAsync(cookbookID);
-            if (book != null)
+            try
             {
-                _context.UserCookbooks.Remove(book);
-                await _context.SaveChangesAsync();
+                var recipesInBook = _context.CookbookRecipes.Where(cr => cr.CookbookID == cookbookID);
+                if (recipesInBook.Any())
+                {
+                    await RemoveCookbookRecipes(recipesInBook);
+                }
+
+                var book = await _context.UserCookbooks.FindAsync(cookbookID);
+                if (book != null)
+                {
+                    _context.UserCookbooks.Remove(book);
+                    await _context.SaveChangesAsync();
+                    Console.WriteLine($"Cookbook with ID {cookbookID} deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine($"No cookbook found with ID {cookbookID}.");
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting cookbook with ID {cookbookID}: {ex.Message}");
+                throw;
+            }
+        }
+
+        public async Task RemoveCookbookRecipes(IEnumerable<CookbookRecipe> recipes)
+        {
+            if (recipes == null || !recipes.Any())
+            {
+                return;
+            }
+
+            _context.CookbookRecipes.RemoveRange(recipes);
+            await _context.SaveChangesAsync();
         }
 
         public async Task AddRecipeToCookbooks(int recipeId, List<int> cookbookIds)
