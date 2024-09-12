@@ -13,9 +13,15 @@
 <PageTitle>Recipes - @CookbookName</PageTitle>
 
 <div class="cookbook-recipes-container">
-    <div class="cookbook-recipes-title">
+    <div class="cookbook-recipes-header">
         <h5 class="cookbook-name">Recipes in @CookbookName</h5>
+        <div class="edit-cookbook-btn">
+            <button class="edit-cookbook btn btn-primary" type="button" @onclick="EditCookbook">Edit Cookbook</button>
+        </div>
     </div>
+
+    <div class="divider-line"></div>
+
     <div class="cookbook-recipes">
         @if (CookbookRecipesList != null && CookbookRecipesList.Count > 0)
         {
@@ -28,12 +34,10 @@
     </div>
 </div>
 
-    @code {
-    [Parameter]
-    public int CookbookID { get; set; }
+@code {
+    [Parameter] public int CookbookID { get; set; }
 
-    [Parameter]
-    public string CookbookName { get; set; }
+    [Parameter] public string CookbookName { get; set; }
 
     private List<UserCookbook> UserCookbooksList;
     public List<Recipe> CookbookRecipesList = new List<Recipe>();
@@ -48,7 +52,7 @@
         }
         if (userId != null)
         {
-            LoadUserCookbooks();
+            await LoadUserCookbooks();
             CookbookRecipesList = await CookbookService.GetRecipesByCookbookIdAsync(CookbookID);
         }
     }
@@ -82,5 +86,28 @@
     {
         UserCookbooksList = await CookbookService.GetCookbooksByUserIdAsync(userId);
         StateHasChanged();
+    }
+
+    private async Task EditCookbook()
+    {
+        var parameters = new DialogParameters
+        {
+            { "CookbookID", CookbookID }
+        };
+
+        var options = new DialogOptions
+            {
+                MaxWidth = MaxWidth.Small,
+                FullWidth = true,
+                CloseOnEscapeKey = true
+            };
+
+        var dialog = await DialogService.ShowAsync<EditCookbookDialog>("Edit Cookbook", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            Snackbar.Add("Cookbook edited successfully!", Severity.Success);
+        }
     }
 }

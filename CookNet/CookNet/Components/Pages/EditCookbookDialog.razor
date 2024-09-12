@@ -1,0 +1,127 @@
+﻿@using CookNet.Data
+@using MudBlazor
+@inject CookbookService CookbookService
+
+<EditForm Model="@editCookbook" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudDialog>
+        <TitleContent>
+            <h5 class="text-center">Edit CookBook</h5>
+        </TitleContent>
+        <DialogContent>
+                <div class="coverimg-container text-center py-2">
+                    <div class="coverimg-title col-md-12 pb-2">
+                        <p class="cookbookCoverImg">Cover Image</p>
+                    </div>
+                    <div class="coverimg-preview">
+                        @if (CurrentCoverImage != null)
+                        {
+                            <MudImage Src="@CurrentCoverImage" Alt="Cover Image" Class="mb-2"
+                                      Style="width: 200px; height: auto;" />
+                            <br />
+                            <button class="btn btn-danger mb-3" type="button" @onclick="RemoveCoverImage">Remove</button>
+                        }
+                    </div>
+                    @if (ShowFileUpload)
+                    {
+                        <div class="coverimg-input col-md-12">
+                            <em><p class="coverimg-help">Recommended file size: 1200 x 1800</p></em>
+                            <MudFileUpload T="IBrowserFile" Accept=".png, .jpg" FilesChanged="HandleCoverImageSelected" MaximumFileCount="1">
+                                <ActivatorContent>
+                                    <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.CloudUpload">
+                                        Choose Image
+                                    </MudButton>
+                                </ActivatorContent>
+                            </MudFileUpload>
+                        </div>
+                    }
+                </div>
+                <div class="cookbookname-container py-2">
+                <MudTextField Label="Name" Placeholder="Fall Recipes" HelperText="Required" @bind-Value="CookbookName" For="@(() => CookbookName)" Required="true" />
+                </div>
+                <div class="cookbookdesc-container py-2">
+                    <MudTextField Label="Cookbook Description" Placeholder="Collection of the best fall recipes!" @bind-Value="CookbookDescription" Multiline="true" Rows="3" />
+                </div>
+                <div class="ispublic-container mt-2 text-center">
+                    <p class="ispublic-msg">Do you want this CookBook to be public?</p>
+                    <MudSwitch T="bool" Color="Color.Primary" @bind-Value="IsPublic" @onclick="SetCookbookPublic" />
+                </div>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Cancel">Cancel</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Color="Color.Primary">Save</MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>
+
+@code {
+    [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public int CookbookID { get; set; }
+
+    [Parameter] public EventCallback OnEditCallback { get; set; }
+
+    private UserCookbook editCookbook;
+    private string? CurrentCoverImage;
+    private bool ShowFileUpload;
+    private bool IsPublic;
+    private string CookbookName;
+    private string CookbookDescription;
+    private IBrowserFile? CoverImage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (CookbookID > 0)
+        {
+            editCookbook = await CookbookService.GetCookbookByIdAsync(CookbookID);
+            if (editCookbook != null)
+            {
+                CurrentCoverImage = editCookbook.CoverImage;
+                ShowFileUpload = CoverImage != null ? false : true;
+                IsPublic = editCookbook.IsPublic;
+                CookbookName = editCookbook.CookbookName;
+                CookbookDescription = editCookbook.CookbookDescription;
+            }
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+
+    private async Task HandleCoverImageSelected(IBrowserFile file)
+    {
+        if (file != null)
+        {
+            CoverImage = file;
+            var thumbnailUrl = await CookbookService.UploadImageAsync(CoverImage);
+            CurrentCoverImage = thumbnailUrl;
+            ShowFileUpload = false;
+        }
+    }
+
+    private void RemoveCoverImage()
+    {
+        CoverImage = null;
+        CurrentCoverImage = null;
+        ShowFileUpload = true;
+    }
+
+    private void SetCookbookPublic() => IsPublic = !IsPublic;
+
+    private async Task OnValidSubmit()
+    {
+        if (!string.IsNullOrWhiteSpace(CookbookName))
+        {
+            editCookbook.CookbookName = CookbookName;
+            editCookbook.CookbookDescription = CookbookDescription;
+            editCookbook.DateUpdated = DateTime.UtcNow;
+            editCookbook.CoverImage = CurrentCoverImage;
+            editCookbook.IsPublic = IsPublic;
+            await CookbookService.UpdateCookbookAsync(editCookbook);
+            if (OnEditCallback.HasDelegate)
+            {
+                await OnEditCallback.InvokeAsync(null);
+            }
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+    }
+}

@@ -64,11 +64,11 @@
 </div>
 
 @code {
-    [Parameter]
-    public string UserName { get; set; }
+    [Parameter] public string UserName { get; set; }
 
-    [Parameter]
-    public EventCallback RefreshCookbooksCallback { get; set; }
+    [Parameter] public EventCallback RefreshCookbooksCallback { get; set; }
+
+    [Parameter] public EventCallback RefreshEditCookbooksCallback { get; set; }
 
     private ApplicationUser User;
     private List<UserCookbook> UserCookbooksList;
@@ -130,9 +130,28 @@
         Navigation.NavigateTo($"/cookbook-recipes/{cookbookId}/{cookbookName}");
     }
 
-    private void EditCookbook(int cookbookID)
+    private async Task EditCookbook(int cookbookID)
     {
+        var parameters = new DialogParameters
+        {
+            { "CookbookID", cookbookID },
+            { "OnEditCallback", EventCallback.Factory.Create(this, OnCookbookEdit) }
+        };
 
+        var options = new DialogOptions
+        {
+            MaxWidth = MaxWidth.Small,
+            FullWidth = true,
+            CloseOnEscapeKey = true
+        };
+
+        var dialog = await DialogService.ShowAsync<EditCookbookDialog>("Edit Cookbook", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            Snackbar.Add("Cookbook edited successfully!", Severity.Success);
+        }
     }
 
     private async Task ShowDeleteConfirmation(int cookbookID)
@@ -159,10 +178,28 @@
         }
     }
 
+    private async Task OnCookbookEdit()
+    {
+        if (RefreshEditCookbooksCallback.HasDelegate)
+        {
+            await RefreshEditCookbooksCallback.InvokeAsync(null);
+        }
+
+        UserCookbooksList = await CookbookService.GetCookbooksByUserIdAsync(userId);
+        StateHasChanged();
+    }
+
+    private async Task LoadCookbooks()
+    {
+        UserCookbooksList = await CookbookService.GetCookbooksByUserIdAsync(userId);
+        amountOfCookbooks = UserCookbooksList.Count;
+        StateHasChanged();
+    }
+
     private async Task DeleteCookbook(int cookbookID)
     {
         await CookbookService.DeleteCookbookAsync(cookbookID);
-        Navigation.NavigateTo(Navigation.Uri, true); // Refreshes the entire page to display the cookbooks after one has been deleted
+        await LoadCookbooks();
         Snackbar.Add("Cookbook deleted successfully.", Severity.Success);
     }
 }

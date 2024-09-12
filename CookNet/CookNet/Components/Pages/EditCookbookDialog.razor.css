@@ -1,0 +1,10 @@
+﻿.ispublic-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ispublic-msg {
+    margin-top: 20px;
+    margin-right: 20px;
+}

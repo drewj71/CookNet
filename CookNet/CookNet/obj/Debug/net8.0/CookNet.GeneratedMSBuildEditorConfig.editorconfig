@@ -229,6 +229,10 @@ build_metadata.AdditionalFiles.CssScope = b-q7w4dkw477
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDcmVhdGVSZWNpcGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-n8opd8dmcj
 
+[D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet/Components/Pages/EditCookbookDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFZGl0Q29va2Jvb2tEaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-v6gdmryzka
+
 [D:/Users/Andrew Jenks/Documents/Github/CookNet/CookNet/CookNet/Components/Pages/EditRecipe.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFZGl0UmVjaXBlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-nwn678rb5z

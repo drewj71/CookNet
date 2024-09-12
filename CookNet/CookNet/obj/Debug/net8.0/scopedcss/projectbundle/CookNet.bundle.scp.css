@@ -330,14 +330,37 @@ main[b-2tlxc31yxu] {
     padding: 25px;
 }
 
-.cookbook-recipes-title[b-fbahpg667f] {
-    padding-bottom: 20px;
+.cookbook-recipes-header[b-fbahpg667f] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .cookbook-name[b-fbahpg667f] {
     font-size: 3rem;
     margin: 0;
     text-align: center;
+}
+
+.edit-cookbook-btn[b-fbahpg667f] {
+    margin-top: 10px;
+}
+
+.edit-cookbook[b-fbahpg667f] {
+    margin: 0;
+    margin-left: 10px;
+}
+
+.divider-line[b-fbahpg667f] {
+    height: 1px;
+    background-color: #000;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.cookbook-recipes[b-fbahpg667f] {
+    padding-top: 20px;
 }
 /* _content/CookNet/Components/Pages/CreateCookbookDialog.razor.rz.scp.css */
 .ispublic-container[b-q7w4dkw477] {
@@ -407,6 +430,17 @@ main[b-2tlxc31yxu] {
 
 .ingredient-span[b-n8opd8dmcj] {
     font-size: 16px;
+}
+/* _content/CookNet/Components/Pages/EditCookbookDialog.razor.rz.scp.css */
+.ispublic-container[b-v6gdmryzka] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ispublic-msg[b-v6gdmryzka] {
+    margin-top: 20px;
+    margin-right: 20px;
 }
 /* _content/CookNet/Components/Pages/EditRecipe.razor.rz.scp.css */
 .edit-recipe-container[b-nwn678rb5z] {

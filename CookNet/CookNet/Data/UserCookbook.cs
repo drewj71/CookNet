@@ -11,7 +11,7 @@ namespace CookNet.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CookbookID { get; set; }
         public string UserID { get; set; }
-        public string CookbookName { get; set; }
+        [Required] public string CookbookName { get; set; }
         public string? CookbookDescription { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }

@@ -944,6 +944,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\35980c71-70e5-47b8-b946-9cd391514201_AJProfilePicture.png))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\3598a7e3-3ffb-4468-a93e-30f5bb5bd941_tlp_hero_book-cover-adb8a02f82394b605711f8632a44488b.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/3598a7e3-3ffb-4468-a93e-30f5bb5bd941_tlp_hero_book-cover-adb8a02f82394b605711f8632a44488b.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\3598a7e3-3ffb-4468-a93e-30f5bb5bd941_tlp_hero_book-cover-adb8a02f82394b605711f8632a44488b.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\3b3c76df-d32f-4819-8220-1b8465cd262a_book-covers-big-2019101610.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>CookNet</SourceId>
@@ -1360,6 +1376,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\4f7dfead-ee84-4375-a98b-be569c521e30_IMG_3135.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\50adba2d-6d26-4fae-adff-4b685443c3ef_tlp_hero_book-cover-adb8a02f82394b605711f8632a44488b.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/50adba2d-6d26-4fae-adff-4b685443c3ef_tlp_hero_book-cover-adb8a02f82394b605711f8632a44488b.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\50adba2d-6d26-4fae-adff-4b685443c3ef_tlp_hero_book-cover-adb8a02f82394b605711f8632a44488b.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\50cd3916-bb6e-4d65-990e-436594775cd1_YouTube-Thumbnail-_-Food-6-scaled.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>CookNet</SourceId>
@@ -1631,6 +1663,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\6bff240b-0e11-4d81-8842-bd646d4760d4_df4dwik-5b57875e-f334-408c-b455-0e8bfdf6da85.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\6d4c9272-59a8-42d8-9942-2d1704210d67_media_19d5e212dbe8553614c3a9fbabd4d7f219ab01c85.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/6d4c9272-59a8-42d8-9942-2d1704210d67_media_19d5e212dbe8553614c3a9fbabd4d7f219ab01c85.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\6d4c9272-59a8-42d8-9942-2d1704210d67_media_19d5e212dbe8553614c3a9fbabd4d7f219ab01c85.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\6ddc0882-3f5a-446e-8952-614603047ba3_YouTube-Thumbnail-_-Food-6-scaled.jpg))">
       <SourceType>Package</SourceType>
@@ -1936,6 +1984,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\85aeabad-e60d-40ce-9b8d-d9398b7ee649_YouTube-Thumbnail-_-Food-6-scaled.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\8854706a-fd36-40d3-87a1-e72791f06f9a_media_19d5e212dbe8553614c3a9fbabd4d7f219ab01c85.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/8854706a-fd36-40d3-87a1-e72791f06f9a_media_19d5e212dbe8553614c3a9fbabd4d7f219ab01c85.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\8854706a-fd36-40d3-87a1-e72791f06f9a_media_19d5e212dbe8553614c3a9fbabd4d7f219ab01c85.png))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\88627d4d-b250-4bc3-aee3-8af9e815271f_buckwheat-banana-chocolate-chip-muffins-thumbnail.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>CookNet</SourceId>
@@ -1967,6 +2031,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\88f1d8f9-98a3-4b88-a21f-0c897cedf2ac_YouTube-Thumbnail-_-Food-6-scaled.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\890b8107-e21e-42fa-a1d1-4c8ec08340ad_book-covers-big-2019101610.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/890b8107-e21e-42fa-a1d1-4c8ec08340ad_book-covers-big-2019101610.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\890b8107-e21e-42fa-a1d1-4c8ec08340ad_book-covers-big-2019101610.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\894ae3e7-5cde-4d3f-aba5-dcbf13219489_df4dwik-5b57875e-f334-408c-b455-0e8bfdf6da85.jpg))">
       <SourceType>Package</SourceType>
@@ -2096,6 +2176,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\96fa742d-8be4-449c-b63d-ed3da4794bdd_mystery-old-steps-1200x1800.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\9751e3d6-5b8e-4f32-bc95-dc6f575e6874_book-covers-big-2019101610.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/9751e3d6-5b8e-4f32-bc95-dc6f575e6874_book-covers-big-2019101610.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\9751e3d6-5b8e-4f32-bc95-dc6f575e6874_book-covers-big-2019101610.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\979bcc26-1a45-4b8d-bbb7-0634554a1af1_df4dwik-5b57875e-f334-408c-b455-0e8bfdf6da85.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>CookNet</SourceId>
@@ -2160,6 +2256,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\98a9cbe5-a0cf-4a13-8ed0-4b3541578982_AJProfilePicture.png))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\9902ebf5-335f-402b-a020-0a80f1d2161e_tlp_hero_book-cover-adb8a02f82394b605711f8632a44488b.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/9902ebf5-335f-402b-a020-0a80f1d2161e_tlp_hero_book-cover-adb8a02f82394b605711f8632a44488b.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\9902ebf5-335f-402b-a020-0a80f1d2161e_tlp_hero_book-cover-adb8a02f82394b605711f8632a44488b.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\9913f5c5-7b0a-40e2-adf5-564f29f0588d_1712508498512eq7xf8cv.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>CookNet</SourceId>
@@ -2191,6 +2303,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\9b166421-21ee-4501-af37-77a687957b70_F8-LFO7WcAAgg8S.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\9b2ec111-dba9-4b3f-a46a-47e69637146e_template-1.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/9b2ec111-dba9-4b3f-a46a-47e69637146e_template-1.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\9b2ec111-dba9-4b3f-a46a-47e69637146e_template-1.png))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\9b7224fd-dbb1-42b4-9990-c8c09b1b3bfb_tlp_hero_book-cover-adb8a02f82394b605711f8632a44488b.jpg))">
       <SourceType>Package</SourceType>
@@ -2560,6 +2688,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\b7014b81-4bdd-406f-9279-88ebd2193ca4_YouTube-Thumbnail-_-Food-6-scaled.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\b73fc347-fbd1-43ce-874f-7d22cac63bca_book-covers-big-2019101610.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/b73fc347-fbd1-43ce-874f-7d22cac63bca_book-covers-big-2019101610.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\b73fc347-fbd1-43ce-874f-7d22cac63bca_book-covers-big-2019101610.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\bc2e6ed4-276c-4095-b4c9-7feab1ba4c20_mystery-old-steps-1200x1800.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>CookNet</SourceId>
@@ -2752,6 +2896,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\d0ee6353-73b7-44f4-a8b1-f6f2782260dc_AJProfilePicture.png))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\d13f78bc-f62f-49e2-9fa2-6ce8278a058c_book-covers-big-2019101610.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/d13f78bc-f62f-49e2-9fa2-6ce8278a058c_book-covers-big-2019101610.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\d13f78bc-f62f-49e2-9fa2-6ce8278a058c_book-covers-big-2019101610.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\d317e722-49da-41e4-b61a-a51288bb3d34_tlp_hero_book-cover-adb8a02f82394b605711f8632a44488b.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>CookNet</SourceId>
@@ -2847,6 +3007,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\d90234a3-a552-4c23-8f83-0e928bc6951a_df4dwik-5b57875e-f334-408c-b455-0e8bfdf6da85.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\d92f9f3f-1fbd-4420-8d45-79af973aff5f_book-covers-big-2019101610.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/d92f9f3f-1fbd-4420-8d45-79af973aff5f_book-covers-big-2019101610.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\d92f9f3f-1fbd-4420-8d45-79af973aff5f_book-covers-big-2019101610.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\daecb3ea-a3d5-4d76-a08e-1add65283ea0_F8-LFO7WcAAgg8S.jpg))">
       <SourceType>Package</SourceType>
@@ -3103,6 +3279,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\f13f0213-954d-4849-8347-f28360e10e6f_food-recipe-youtube-video-thumbnail-template-design-90c172b63d2315778e7e5d2538a89266_screen.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\f1b00cbf-101a-4608-bf2f-2cf544b5280b_book-covers-big-2019101610.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>CookNet</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CookNet</BasePath>
+      <RelativePath>Uploads/f1b00cbf-101a-4608-bf2f-2cf544b5280b_book-covers-big-2019101610.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\f1b00cbf-101a-4608-bf2f-2cf544b5280b_book-covers-big-2019101610.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Uploads\f2d631a5-e8eb-457d-9d4a-498e7454a599_F8-LFO7WcAAgg8S.jpg))">
       <SourceType>Package</SourceType>

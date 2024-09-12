@@ -3,12 +3,35 @@
     padding: 25px;
 }
 
-.cookbook-recipes-title[b-fbahpg667f] {
-    padding-bottom: 20px;
+.cookbook-recipes-header[b-fbahpg667f] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .cookbook-name[b-fbahpg667f] {
     font-size: 3rem;
     margin: 0;
     text-align: center;
+}
+
+.edit-cookbook-btn[b-fbahpg667f] {
+    margin-top: 10px;
+}
+
+.edit-cookbook[b-fbahpg667f] {
+    margin: 0;
+    margin-left: 10px;
+}
+
+.divider-line[b-fbahpg667f] {
+    height: 1px;
+    background-color: #000;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.cookbook-recipes[b-fbahpg667f] {
+    padding-top: 20px;
 }

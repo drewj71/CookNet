@@ -3,12 +3,35 @@
     padding: 25px;
 }
 
-.cookbook-recipes-title {
-    padding-bottom: 20px;
+.cookbook-recipes-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .cookbook-name {
     font-size: 3rem;
     margin: 0;
     text-align: center;
+}
+
+.edit-cookbook-btn {
+    margin-top: 10px;
+}
+
+.edit-cookbook {
+    margin: 0;
+    margin-left: 10px;
+}
+
+.divider-line {
+    height: 1px;
+    background-color: #000;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.cookbook-recipes {
+    padding-top: 20px;
 }
