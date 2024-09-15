@@ -9,10 +9,6 @@ main[b-2tlxc31yxu] {
     flex: 1;
 }
 
-.sidebar[b-2tlxc31yxu] {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
-}
-
 .top-row[b-2tlxc31yxu] {
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;
@@ -101,21 +97,16 @@ main[b-2tlxc31yxu] {
     margin: 0 !important;
     padding: 0 !important;
 }
-/* _content/CookNet/Components/Layout/NavMenu.razor.rz.scp.css */
-.navbar-toggler:checked[b-8sk4w4v26d] {
-    background-color: rgba(255, 255, 255, 0.5);
-}
 
-.top-row[b-8sk4w4v26d] {
+.top-row-navbar[b-2tlxc31yxu] {
     height: 3.5rem;
     background-color: rgb(28, 10, 0);
+    display: flex;
+    align-items: center;
+    z-index: 1;
 }
 
-.nav-scrollable[b-8sk4w4v26d] {
-    background-color: rgb(111, 78, 55);
-}
-
-.navbar-brand[b-8sk4w4v26d] {
+.navbar-brand[b-2tlxc31yxu] {
     font-size: 2rem;
     font-family: "Kanit", sans-serif;
     font-weight: 400;
@@ -124,12 +115,57 @@ main[b-2tlxc31yxu] {
     color: #ffffff;
     text-decoration: none;
     margin-top: -10px;
-    margin-left: 10px;
 }
 
-    .navbar-brand:hover[b-8sk4w4v26d] {
+    .navbar-brand:hover[b-2tlxc31yxu] {
         color: #ff0000;
     }
+
+.container-fluid[b-2tlxc31yxu] {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.navbar-toggler[b-2tlxc31yxu] {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    padding: 0;
+    margin-top: -7px;
+    margin-right: 10px;
+}
+
+    .navbar-toggler:focus[b-2tlxc31yxu] {
+        outline: none;
+        box-shadow: none;
+    }
+
+.navmenu-visible[b-2tlxc31yxu] {
+    width: 13% !important;
+}
+
+.navmenu-hidden[b-2tlxc31yxu] {
+    width: 3.8% !important;
+}
+
+.navitems-visible[b-2tlxc31yxu] {
+    display: block;
+}
+
+.navitems-hidden[b-2tlxc31yxu] {
+    display: none;
+}
+/* _content/CookNet/Components/Layout/NavMenu.razor.rz.scp.css */
+.navbar-toggler:checked[b-8sk4w4v26d] {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+.nav-scrollable[b-8sk4w4v26d] {
+    background-color: rgb(111, 78, 55);
+}
 
 .bi[b-8sk4w4v26d] {
     display: inline-block;

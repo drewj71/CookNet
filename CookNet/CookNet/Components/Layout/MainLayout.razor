@@ -13,8 +13,16 @@
 <HeadOutlet />
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
+    <div class="sidebar @(NavMenuClass)">
+        <div class="top-row-navbar ps-3 navbar">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <a class="navbar-brand @(NavItemsClass)" href="">CookNet</a>
+                <button type="button" class="navbar-toggler" @onclick="ToggleNavMenu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <NavMenu IsNavMenuVisible="IsNavMenuVisible" />
     </div>
 
     <main>
@@ -69,6 +77,9 @@
 
 @code {
     private string? currentUrl;
+    private bool IsNavMenuVisible { get; set; } = true;
+    private string NavMenuClass { get; set; } = "navmenu-visible";
+    private string NavItemsClass { get; set; } = "navitems-visible";
 
     protected override void OnInitialized()
     {
@@ -85,5 +96,12 @@
     public void Dispose()
     {
         NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+
+    private void ToggleNavMenu()
+    {
+        IsNavMenuVisible = !IsNavMenuVisible;
+        NavMenuClass = IsNavMenuVisible ? "navmenu-visible" : "navmenu-hidden";
+        NavItemsClass = IsNavMenuVisible ? "navitems-visible" : "navitems-hidden";
     }
 }

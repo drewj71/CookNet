@@ -8,10 +8,6 @@ main {
     flex: 1;
 }
 
-.sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
-}
-
 .top-row {
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;
@@ -99,4 +95,63 @@ main {
 .main-page {
     margin: 0 !important;
     padding: 0 !important;
+}
+
+.top-row-navbar {
+    height: 3.5rem;
+    background-color: rgb(28, 10, 0);
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.navbar-brand {
+    font-size: 2rem;
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 5px;
+    color: #ffffff;
+    text-decoration: none;
+    margin-top: -10px;
+}
+
+    .navbar-brand:hover {
+        color: #ff0000;
+    }
+
+.container-fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.navbar-toggler {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    padding: 0;
+    margin-top: -7px;
+    margin-right: 10px;
+}
+
+    .navbar-toggler:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+.navmenu-visible {
+    width: 13% !important;
+}
+
+.navmenu-hidden {
+    width: 3.8% !important;
+}
+
+.navitems-visible {
+    display: block;
+}
+
+.navitems-hidden {
+    display: none;
 }
