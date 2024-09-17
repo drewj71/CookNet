@@ -2,8 +2,6 @@
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-
-
 .nav-scrollable {
     background-color: rgb(111, 78, 55);
 }
@@ -77,5 +75,17 @@
         /* Allow sidebar to scroll for tall menus */
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
+    }
+}
+
+@media (max-width: 640.98px) {
+    .open-mobile {
+        display: block;
+        transition:display 1s ease;
+    }
+
+    .close-mobile {
+        display: none;
+        transition:display 1s ease;
     }
 }

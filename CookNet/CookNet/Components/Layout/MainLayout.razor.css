@@ -34,6 +34,12 @@ main {
 
 
 @media (max-width: 640.98px) {
+    .top-row-navbar {
+        width: 100vw; /* Make it take full screen width */
+        left: 0;
+        top: 0;
+    }
+
     .top-row {
         justify-content: space-between;
     }
@@ -70,6 +76,32 @@ main {
     .top-row, article {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
+    }
+
+    .navmenu-visible {
+        width: 250px !important;
+        transition: width 0.3s ease;
+    }
+
+    .navmenu-hidden {
+        width: 70px !important;
+        transition: width 0.3s ease;
+    }
+
+    .navitems-visible {
+        white-space: nowrap;
+        transform: translateX(0); /* Bring it fully into view */
+        opacity: 1; /* Make it fully visible */
+        font-size: 32px;
+        transition: transform 0.3s ease, opacity 0.5s ease, font-size 0.5s ease;
+    }
+
+    .navitems-hidden {
+        white-space: nowrap;
+        transform: translateX(-150px); /* Move it off the screen to the left */
+        opacity: 0; /* Make it invisible */
+        font-size: 0px !important;
+        transition: transform 0.3s ease, opacity 0.3s ease, font-size 0.1s ease;
     }
 }
 
@@ -140,18 +172,28 @@ main {
         box-shadow: none;
     }
 
-.navmenu-visible {
-    width: 13% !important;
+/*.navmenu-visible {
+    width: 250px !important;
+    transition: width 0.3s ease;
 }
 
 .navmenu-hidden {
-    width: 3.8% !important;
+    width: 70px !important;
+    transition: width 0.3s ease;
 }
 
 .navitems-visible {
-    display: block;
+    white-space: nowrap;
+    transform: translateX(0);*/ /* Bring it fully into view */
+    /*opacity: 1;*/ /* Make it fully visible */
+    /*font-size: 32px;
+    transition: transform 0.3s ease, opacity 0.5s ease, font-size 0.5s ease;
 }
 
 .navitems-hidden {
-    display: none;
-}
+    white-space: nowrap;
+    transform: translateX(-150px);*/ /* Move it off the screen to the left */
+    /*opacity: 0;*/ /* Make it invisible */
+    /*font-size: 0px;
+    transition: transform 0.3s ease, opacity 0.3s ease, font-size 0.1s ease;
+}*/

@@ -1,8 +1,8 @@
 ﻿@inject NavigationManager NavigationManager
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+@* <input type="checkbox" title="Navigation menu" class="navbar-toggler" /> *@
 
-<div class="nav-scrollable">
+<div class="nav-scrollable @(IsNavMenuVisible ? "open-mobile" : "close-mobile")">
     <nav class="flex-column">
         <div class="nav-item px-3" title="Home">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
