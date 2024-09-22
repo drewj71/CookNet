@@ -2,3 +2,8 @@
     color: black;
     padding: 25px;
 }
+
+.about-title {
+    font-size: 3rem;
+    text-align: center;
+}

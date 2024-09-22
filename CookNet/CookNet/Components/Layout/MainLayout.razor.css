@@ -15,6 +15,7 @@ main {
     height: 3.5rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
     .top-row ::deep a, .top-row ::deep .btn-link {
@@ -84,7 +85,7 @@ main {
     }
 
     .navmenu-hidden {
-        width: 70px !important;
+        width: 0px !important;
         transition: width 0.3s ease;
     }
 
@@ -93,7 +94,7 @@ main {
         transform: translateX(0); /* Bring it fully into view */
         opacity: 1; /* Make it fully visible */
         font-size: 32px;
-        transition: transform 0.3s ease, opacity 0.5s ease, font-size 0.5s ease;
+        transition: transform 0.3s ease, opacity 1s ease, font-size 0.5s ease;
     }
 
     .navitems-hidden {
@@ -160,40 +161,18 @@ main {
 .navbar-toggler {
     background: none;
     border: none;
-    color: #ffffff;
+    color: rgb(28, 10, 0) !important;
     font-size: 1.5rem;
     padding: 0;
-    margin-top: -7px;
-    margin-right: 10px;
+    margin-right: auto;
+    padding: 5px;
 }
+
+    .navbar-toggler:hover {
+        background-color: rgba(111, 78, 55, 0.8);
+    }
 
     .navbar-toggler:focus {
         outline: none;
         box-shadow: none;
     }
-
-/*.navmenu-visible {
-    width: 250px !important;
-    transition: width 0.3s ease;
-}
-
-.navmenu-hidden {
-    width: 70px !important;
-    transition: width 0.3s ease;
-}
-
-.navitems-visible {
-    white-space: nowrap;
-    transform: translateX(0);*/ /* Bring it fully into view */
-    /*opacity: 1;*/ /* Make it fully visible */
-    /*font-size: 32px;
-    transition: transform 0.3s ease, opacity 0.5s ease, font-size 0.5s ease;
-}
-
-.navitems-hidden {
-    white-space: nowrap;
-    transform: translateX(-150px);*/ /* Move it off the screen to the left */
-    /*opacity: 0;*/ /* Make it invisible */
-    /*font-size: 0px;
-    transition: transform 0.3s ease, opacity 0.3s ease, font-size 0.1s ease;
-}*/

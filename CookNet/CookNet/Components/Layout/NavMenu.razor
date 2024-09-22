@@ -1,27 +1,25 @@
 ﻿@inject NavigationManager NavigationManager
 
-@* <input type="checkbox" title="Navigation menu" class="navbar-toggler" /> *@
-
-<div class="nav-scrollable @(IsNavMenuVisible ? "open-mobile" : "close-mobile")">
+<div class="nav-scrollable @(IsNavMenuVisible ? "navmenu-open" : "navmenu-closed")">
     <nav class="flex-column">
         <div class="nav-item px-3" title="Home">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="bi bi-house-fill" aria-hidden="true"></span> 
-                <span style="@(IsNavMenuVisible ? "display: block;" : "display: none;")">Home</span>
+                <span class="@(IsNavMenuVisible ? "navitems-visible" : "navitems-hidden")">Home</span>
             </NavLink>
         </div>
 
         <div class="nav-item px-3" title="All Recipes">
             <NavLink class="nav-link" href="recipes">
                 <span class="bi bi-basket2-fill" aria-hidden="true"></span>
-                <span style="@(IsNavMenuVisible ? "display: block;" : "display: none;")">All Recipes</span>
+                <span class="@(IsNavMenuVisible ? "navitems-visible" : "navitems-hidden")">All Recipes</span>
             </NavLink>
         </div>
 
         <div class="nav-item px-3" title="Ingredient Insights">
             <NavLink class="nav-link" href="ingredient-insights">
                 <span class="bi bi-egg-fried" aria-hidden="true"></span>
-                <span style="@(IsNavMenuVisible ? "display: block;" : "display: none;")">Ingredient Insights</span>
+                <span class="@(IsNavMenuVisible ? "navitems-visible" : "navitems-hidden")">Ingredient Insights</span>
             </NavLink>
         </div>
 
@@ -30,14 +28,14 @@
                 <div class="nav-item px-3" title="Create Recipe">
                     <NavLink class="nav-link" href="create-recipe">
                         <span class="bi bi-patch-plus-fill" aria-hidden="true"></span>
-                        <span style="@(IsNavMenuVisible ? "display: block;" : "display: none;")">Create Recipe</span>
+                        <span class="@(IsNavMenuVisible ? "navitems-visible" : "navitems-hidden")">Create Recipe</span>
                     </NavLink>
                 </div>
 
                 <div class="nav-item px-3" title="Cookbooks">
                     <NavLink class="nav-link" href="@($"/cookbooks/{context.User.Identity?.Name}")">
                         <span class="bi bi-journal-bookmark-fill" aria-hidden="true"></span>
-                        <span style="@(IsNavMenuVisible ? "display: block;" : "display: none;")">Cookbooks</span>
+                        <span class="@(IsNavMenuVisible ? "navitems-visible" : "navitems-hidden")">Cookbooks</span>
                     </NavLink>
                 </div>
             </Authorized>
@@ -46,7 +44,7 @@
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="about" title="About">
                 <span class="bi bi-info-square-fill" aria-hidden="true"></span>
-                <span style="@(IsNavMenuVisible ? "display: block;" : "display: none;")">About</span>
+                <span class="@(IsNavMenuVisible ? "navitems-visible" : "navitems-hidden")">About</span>
             </NavLink>
         </div>
     </nav>

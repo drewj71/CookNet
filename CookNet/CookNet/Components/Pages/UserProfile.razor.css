@@ -74,13 +74,6 @@
     cursor: pointer;
 }
 
-.divider-line {
-    height: 1px;
-    background-color: #000;
-    margin: 10px 0;
-    width: 100%;
-}
-
 .useritems-container {
     padding: 20px;
 }

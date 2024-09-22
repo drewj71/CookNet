@@ -15,11 +15,8 @@
 <div class="page">
     <div class="sidebar @(NavMenuClass)">
         <div class="top-row-navbar ps-3 navbar">
-            <div class="container-fluid d-flex justify-content-between align-items-center">
+            <div class="container-fluid d-flex justify-content-center align-items-center">
                 <a class="navbar-brand @(NavItemsClass)" href="">CookNet</a>
-                <button type="button" class="navbar-toggler" @onclick="ToggleNavMenu">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
             </div>
         </div>
         <NavMenu IsNavMenuVisible="IsNavMenuVisible" />
@@ -27,40 +24,45 @@
 
     <main>
         <div class="top-row px-4">
-            <AuthorizeView>
-                <Authorized>
-                    <div class="nav-item px-3">
-                        <NavLink class="nav-link profpic" href="@($"/users/{context.User.Identity?.Name}")">
-                            <ProfilePictureIcon />
-                        </NavLink>
-                    </div>
-                    <div class="nav-item px-3">
-                        <form action="Account/Logout" method="post">
-                            <AntiforgeryToken />
-                            <input type="hidden" name="ReturnUrl" value="@currentUrl" />
-                            <button type="submit" class="btn btn-danger">
-                                <span class="bi bi-arrow-bar-left" aria-hidden="true"></span> Logout
-                            </button>
-                        </form>
-                    </div>
-                </Authorized>
-                <NotAuthorized>
-                    <div class="nav-item px-3">
-                        <NavLink class="nav-link" href="Account/Register">
-                            <button type="submit" class="btn btn-primary">
-                            <span class="bi bi-person" aria-hidden="true"></span> Register
-                            </button>
-                        </NavLink>
-                    </div>
-                    <div class="nav-item px-3">
-                        <NavLink class="nav-link" href="Account/Login">
-                            <button type="submit" class="btn btn-success">
-                            <span class="bi bi-person-badge" aria-hidden="true"></span> Login
-                            </button>
-                        </NavLink>
-                    </div>
-                </NotAuthorized>
-            </AuthorizeView>
+            <button type="button" class="navbar-toggler" @onclick="ToggleNavMenu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="d-flex justify-content-end align-items-center">
+                <AuthorizeView>
+                    <Authorized>
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link profpic" href="@($"/users/{context.User.Identity?.Name}")">
+                                <ProfilePictureIcon />
+                            </NavLink>
+                        </div>
+                        <div class="nav-item px-3">
+                            <form action="Account/Logout" method="post">
+                                <AntiforgeryToken />
+                                <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                                <button type="submit" class="btn btn-danger">
+                                    <span class="bi bi-arrow-bar-left" aria-hidden="true"></span> Logout
+                                </button>
+                            </form>
+                        </div>
+                    </Authorized>
+                    <NotAuthorized>
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="Account/Register">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="bi bi-person" aria-hidden="true"></span> Register
+                                </button>
+                            </NavLink>
+                        </div>
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="Account/Login">
+                                <button type="submit" class="btn btn-success">
+                                    <span class="bi bi-person-badge" aria-hidden="true"></span> Login
+                                </button>
+                            </NavLink>
+                        </div>
+                    </NotAuthorized>
+                </AuthorizeView>
+            </div>
         </div>
 
         <article class="content main-page">

@@ -76,16 +76,32 @@
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
     }
+
+    .navitems-visible {
+        white-space: nowrap;
+        transform: translateX(0); /* Bring it fully into view */
+        opacity: 1; /* Make it fully visible */
+        font-size: 14.4px;
+        transition: transform 0.3s ease, opacity 1s ease, font-size 0.5s ease;
+    }
+
+    .navitems-hidden {
+        white-space: nowrap;
+        transform: translateX(-150px); /* Move it off the screen to the left */
+        opacity: 0; /* Make it invisible */
+        font-size: 0px !important;
+        transition: transform 0.3s ease, opacity 0.3s ease, font-size 0.1s ease;
+    }
 }
 
 @media (max-width: 640.98px) {
-    .open-mobile {
+    .navmenu-open {
         display: block;
-        transition:display 1s ease;
+        transition: display 1s ease;
     }
 
-    .close-mobile {
+    .navmenu-closed {
         display: none;
-        transition:display 1s ease;
+        transition: display 1s ease;
     }
 }

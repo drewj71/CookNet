@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Data.SqlClient;
+using MudBlazor;
 
 namespace CookNet.Data
 {
@@ -308,6 +309,21 @@ namespace CookNet.Data
                 .Where(c => c.ParentCommentID == parentCommentId && !c.IsDeleted)
                 .OrderBy(c => c.DateCreated)
                 .ToListAsync();
+        }
+
+        public async Task<PaginatedList<Recipe>> GetPaginatedRecipesBySearchQuery(string searchQuery, int pageIndex, int pageSize)
+        {
+            var query = _context.Recipes
+                      .Where(r => r.Name.ToLower().Contains(searchQuery.ToLower()) ||
+                                  r.Description.ToLower().Contains(searchQuery.ToLower()));
+
+            var totalRecipes = await query.CountAsync();
+
+            var recipes = await query.Skip((pageIndex - 1) * pageSize)
+                                     .Take(pageSize)
+                                     .ToListAsync();
+
+            return new PaginatedList<Recipe>(recipes, totalRecipes, pageIndex, pageSize);
         }
     }
 }

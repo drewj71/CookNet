@@ -1,10 +1,42 @@
 .divider-row[b-bv7obqaypn] {
     background-color: rgb(28, 10, 0);
     width: 100%;
-    height: 75px;
+    height: 50px;
 }
 
 .maincontent-container[b-bv7obqaypn] {
     color: black;
     padding-top: 10px;
+}
+
+.main-text[b-bv7obqaypn] {
+    font-size: 7rem;
+}
+
+@media (max-width: 764px) {
+    .main-text[b-bv7obqaypn] {
+        font-size: 2.5rem;
+    }
+
+    .main-desc[b-bv7obqaypn] {
+        font-size: 16px !important;
+    }
+
+    .main-img[b-bv7obqaypn] {
+        display: none;
+    }
+
+    .main-img-mobile[b-bv7obqaypn] {
+        display: inline;
+    }
+}
+
+@media (min-width: 764px) {
+    .main-img[b-bv7obqaypn] {
+        display: inline;
+    }
+
+    .main-img-mobile[b-bv7obqaypn] {
+        display: none;
+    }
 }

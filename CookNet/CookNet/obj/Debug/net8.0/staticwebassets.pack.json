@@ -9,6 +9,42 @@
       "PackagePath": "staticwebassets\\CookNetHeader.jpg"
     },
     {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\DefaultRecipesImages\\Appetizer.jpg",
+      "PackagePath": "staticwebassets\\DefaultRecipesImages\\Appetizer.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\DefaultRecipesImages\\Beverage.jpg",
+      "PackagePath": "staticwebassets\\DefaultRecipesImages\\Beverage.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\DefaultRecipesImages\\Breakfast.jpg",
+      "PackagePath": "staticwebassets\\DefaultRecipesImages\\Breakfast.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\DefaultRecipesImages\\Dessert.jpg",
+      "PackagePath": "staticwebassets\\DefaultRecipesImages\\Dessert.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\DefaultRecipesImages\\Dinner.jpg",
+      "PackagePath": "staticwebassets\\DefaultRecipesImages\\Dinner.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\DefaultRecipesImages\\Lunch.jpg",
+      "PackagePath": "staticwebassets\\DefaultRecipesImages\\Lunch.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\DefaultRecipesImages\\Sauce.jpeg",
+      "PackagePath": "staticwebassets\\DefaultRecipesImages\\Sauce.jpeg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\DefaultRecipesImages\\Seasoning.jpg",
+      "PackagePath": "staticwebassets\\DefaultRecipesImages\\Seasoning.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\DefaultRecipesImages\\Snack.jpeg",
+      "PackagePath": "staticwebassets\\DefaultRecipesImages\\Snack.jpeg"
+    },
+    {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\JS\\site.js",
       "PackagePath": "staticwebassets\\JS\\site.js"
     },
@@ -437,6 +473,10 @@
       "PackagePath": "staticwebassets\\Uploads\\7525d23b-a1a6-4873-876b-41cf8394d34b_tlp_hero_book-cover-adb8a02f82394b605711f8632a44488b.jpg"
     },
     {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\7584f085-729a-48be-bd72-fc5c936bd0aa_pexels-jenna-hamra-248942-1305063.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\7584f085-729a-48be-bd72-fc5c936bd0aa_pexels-jenna-hamra-248942-1305063.jpg"
+    },
+    {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\766d378e-7ef3-48b8-a579-affcf623946b_AJProfilePicture.png",
       "PackagePath": "staticwebassets\\Uploads\\766d378e-7ef3-48b8-a579-affcf623946b_AJProfilePicture.png"
     },
@@ -599,6 +639,10 @@
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\a71655ee-6caf-4276-be4e-2dd3d37ecb61_1712508498512eq7xf8cv.jpg",
       "PackagePath": "staticwebassets\\Uploads\\a71655ee-6caf-4276-be4e-2dd3d37ecb61_1712508498512eq7xf8cv.jpg"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\a800fb6b-8581-4ce7-8642-3570660a48f3_Ideas-de-desayunos-faciles-y-saludables.jpg",
+      "PackagePath": "staticwebassets\\Uploads\\a800fb6b-8581-4ce7-8642-3570660a48f3_Ideas-de-desayunos-faciles-y-saludables.jpg"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\a8b153b1-58b4-4ae8-8de4-b157d4d11d24_pexels-stefanstefancik-91216 (1).jpg",

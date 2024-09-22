@@ -91,7 +91,8 @@
                     <option value="Dessert">Dessert</option>
                     <option value="Snack">Snack</option>
                     <option value="Beverage">Beverage</option>
-                    <option value="Topping">Topping</option>
+                    <option value="Sauce">Sauce</option>
+                    <option value="Seasoning">Seasoning</option>
                 </InputSelect>
             </div>
 
@@ -290,11 +291,19 @@
     private string currentQuantityEdit;
     private string currentUnitEdit;
     private string currentInstructionEdit;
+    private bool IsDefaultThumbnail = false;
 
     List<RecipeIngredient> AllIngredients { get; set; } = new();
     List<Instruction> AllInstructions { get; set; } = new();
     List<Ingredient> AddedIngredients { get; set; } = new();
     List<Instruction> AddedInstructions { get; set; } = new();
+
+    List<string> defaultThumbnails = new List<string> 
+    { 
+        "DefaultRecipesImages\\Breakfast.jpg", "DefaultRecipesImages\\Lunch.jpg", "DefaultRecipesImages\\Appetizer.jpg",
+        "DefaultRecipesImages\\Dinner.jpg", "DefaultRecipesImages\\Dessert.jpg", "DefaultRecipesImages\\Snack.jpeg",
+        "DefaultRecipesImages\\Beverage.jpg", "DefaultRecipesImages\\Sauce.jpeg", "DefaultRecipesImages\\Seasoning.jpg"
+    };
 
     protected override async Task OnInitializedAsync()
     {
@@ -314,6 +323,7 @@
             if (Recipe.ThumbnailImage != null)
             {
                 showFileUpload = false;
+                IsDefaultThumbnail = defaultThumbnails.Contains(Recipe.ThumbnailImage) ? true : false;
             }
         }
     }
@@ -412,6 +422,7 @@
             var thumbnailUrl = await RecipeService.UploadImageAsync(ThumbnailImage);
             Recipe.ThumbnailImage = thumbnailUrl;
             showFileUpload = false;
+            IsDefaultThumbnail = false;
         }
     }
 
@@ -420,6 +431,7 @@
         ThumbnailImage = null;
         Recipe.ThumbnailImage = null;
         showFileUpload = true;
+        IsDefaultThumbnail = true;
     }
 
     private void EditIngredient(RecipeIngredient recipeIngredient)
@@ -566,6 +578,51 @@
             foreach (var instruction in AddedInstructions)
             {
                 await RecipeService.AddInstructionToRecipeAsync(Recipe, instruction.InstructionText);
+            }
+        }
+
+        if (IsDefaultThumbnail)
+        {
+            switch (Recipe.Category)
+            {
+                case "Breakfast":
+                    Recipe.ThumbnailImage = "DefaultRecipesImages\\Breakfast.jpg";
+                    break;
+
+                case "Lunch":
+                    Recipe.ThumbnailImage = "DefaultRecipesImages\\Lunch.jpg";
+                    break;
+
+                case "Appetizer":
+                    Recipe.ThumbnailImage = "DefaultRecipesImages\\Appetizer.jpg";
+                    break;
+
+                case "Dinner":
+                    Recipe.ThumbnailImage = "DefaultRecipesImages\\Dinner.jpg";
+                    break;
+
+                case "Dessert":
+                    Recipe.ThumbnailImage = "DefaultRecipesImages\\Dessert.jpg";
+                    break;
+
+                case "Snack":
+                    Recipe.ThumbnailImage = "DefaultRecipesImages\\Snack.jpeg";
+                    break;
+
+                case "Beverage":
+                    Recipe.ThumbnailImage = "DefaultRecipesImages\\Beverage.jpg";
+                    break;
+
+                case "Sauce":
+                    Recipe.ThumbnailImage = "DefaultRecipesImages\\Sauce.jpeg";
+                    break;
+
+                case "Seasoning":
+                    Recipe.ThumbnailImage = "DefaultRecipesImages\\Seasoning.jpg";
+                    break;
+
+                default:
+                    break;
             }
         }
 
