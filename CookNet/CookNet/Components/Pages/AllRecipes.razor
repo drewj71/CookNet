@@ -1,4 +1,11 @@
 ﻿@using CookNet.Data
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@inject RecipeService RecipeService
+@inject CookbookService CookbookService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
 @page "/recipes"
 
 <PageTitle>All Recipes</PageTitle>
@@ -8,13 +15,14 @@
 
     <hr />
 
-    <div class="filter-options">
+    <div class="filter-options mb-5">
         <div class="row">
             <div class="col-md-3">
-                <MudInput @bind-Value="searchQuery" Placeholder="Search all recipes" Variant="Variant.Outlined" Style="width: 100%"></MudInput>
+                <MudTextField @bind-Value="searchQuery" Label="Search Recipes" Variant="Variant.Outlined" Style="width: 100%" 
+                    DebounceInterval="250" OnDebounceIntervalElapsed="SearchRecipesDebounced"></MudTextField>
             </div>
             <div class="col-md-3">
-
+                <MudDateRangePicker @ref="picker" Label="Select Date Range" @bind-DateRange="SelectedDateRange" AutoClose="@autoClose" Variant="Variant.Outlined" Style="width: 100%"></MudDateRangePicker>
             </div>
             <div class="col-md-3">
 
@@ -24,31 +32,110 @@
             </div>
         </div>
     </div>
+
+    <div class="recipes-container">
+        <div class="allrecipes-cards">
+            @if (filteredRecipes == null)
+            {
+                <p>No Recipes to Display</p>
+            }
+            else
+            {
+                <RecipeCards Recipes="filteredRecipes" OnBookmarkClicked="OpenCookbookDialogAsync" />
+            }
+        </div>
+    </div>
 </div>
 
 @code {
     // TODO - Display recipes with options to search, or filter by ingredient, CookTime, ethnicity, or category
     private string searchQuery = string.Empty;
-    //private PaginatedList<Recipe> filteredRecipes = new PaginatedList<Recipe>();
-    private Timer debounceTimer;
+    private PaginatedList<Recipe> filteredRecipes;
+    private DateRange selectedDateRange = new DateRange(DateTime.Today.AddMonths(-1), DateTime.Today);
     private int pageIndex = 1;
     private int pageSize = 100;
+    private List<UserCookbook> UserCookbooks;
+    private string userId { get; set; }
+    private MudDateRangePicker picker;
+    private bool autoClose;
 
-    // private void SearchRecipesDebounced(ChangeEventArgs e)
-    // {
-    //     searchQuery = e.Value.ToString();
-    //     if (debounceTimer != null)
-    //     {
-    //         debounceTimer.Dispose();
-    //     }
+    private DateRange SelectedDateRange
+    {
+        get => selectedDateRange;
+        set
+        {
+            selectedDateRange = value;
+            OnDateRangeChanged(selectedDateRange);
+        }
+    }
 
-    //     debounceTimer = new Timer(async _ =>
-    //     {
-    //         if (!string.IsNullOrEmpty(searchQuery))
-    //         {
-    //             //filteredRecipes = await RecipeService.GetPaginatedRecipesBySearchQuery(searchQuery, pageIndex, pageSize);
-    //             InvokeAsync(StateHasChanged);
-    //         }
-    //     }, null, 500, Timeout.Infinite);
-    //}
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadRecipes();
+        var user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
+        if (user != null)
+        {
+            userId = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+        }
+        if (userId != null)
+        {
+            await LoadUserCookbooks();
+        }
+    }
+
+    private async Task LoadUserCookbooks()
+    {
+        UserCookbooks = await CookbookService.GetCookbooksByUserIdAsync(userId);
+        StateHasChanged();
+    }
+
+    private async Task OpenCookbookDialogAsync(int recipeId)
+    {
+        var parameters = new DialogParameters
+        {
+            { "UserCookbooks", UserCookbooks },
+            { "RecipeID", recipeId },
+            { "UserID" , userId },
+            { "RefreshCookbooksCallback", EventCallback.Factory.Create(this, LoadUserCookbooks) }
+        };
+
+        var options = new DialogOptions
+            {
+                MaxWidth = MaxWidth.Small,
+                FullWidth = true,
+                CloseOnEscapeKey = true
+            };
+
+        var dialog = await DialogService.ShowAsync<AddCookbookDialog>("Add to CookBook", parameters, options);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Canceled)
+        {
+            Snackbar.Add("Recipe added successfully!", Severity.Success);
+        }
+    }
+
+    private async Task LoadRecipes()
+    {
+        DateTime startDate = selectedDateRange.Start ?? DateTime.MinValue;
+        DateTime endDate = selectedDateRange.End ?? DateTime.MaxValue;
+
+        filteredRecipes = await RecipeService.GetPaginatedRecipesBySearchQuery(startDate, endDate, searchQuery, pageIndex, pageSize);
+        StateHasChanged();
+    }
+
+    private async Task SearchRecipesDebounced(string query)
+    {
+        searchQuery = query;
+        await LoadRecipes();
+    }
+
+    private async Task OnDateRangeChanged(DateRange newRange)
+    {
+        // Update the selected date range
+        selectedDateRange = newRange;
+
+        // Reload recipes with the new date range
+        await LoadRecipes();
+    }
 }

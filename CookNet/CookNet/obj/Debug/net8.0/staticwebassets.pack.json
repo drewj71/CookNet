@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\CookNetHeader.jpg"
     },
     {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\CookNetHeaderMobile.jpg",
+      "PackagePath": "staticwebassets\\CookNetHeaderMobile.jpg"
+    },
+    {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\DefaultRecipesImages\\Appetizer.jpg",
       "PackagePath": "staticwebassets\\DefaultRecipesImages\\Appetizer.jpg"
     },

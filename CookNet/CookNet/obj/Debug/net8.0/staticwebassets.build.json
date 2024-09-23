@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tAG/hlxQSH87jfb7Rlf6gI428i2SUWIW/GZ+vjlWvVQ=",
+  "Hash": "5+onNd9erR1XLHM42XHEAKIBn85/LiU9lgG0S0kuyqM=",
   "Source": "CookNet",
   "BasePath": "_content/CookNet",
   "Mode": "Default",
@@ -8090,6 +8090,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\CookNetHeader.jpg"
+    },
+    {
+      "Identity": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\CookNetHeaderMobile.jpg",
+      "SourceId": "CookNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\",
+      "BasePath": "_content/CookNet",
+      "RelativePath": "CookNetHeaderMobile.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\CookNetHeaderMobile.jpg"
     },
     {
       "Identity": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\cooknetLogo.png",
