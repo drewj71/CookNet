@@ -18,17 +18,36 @@
     <div class="filter-options mb-5">
         <div class="row">
             <div class="col-md-3">
-                <MudTextField @bind-Value="searchQuery" Label="Search Recipes" Variant="Variant.Outlined" Style="width: 100%" 
+                <MudTextField @bind-Value="searchQuery" Label="Search" Placeholder="Search Recipes" Variant="Variant.Outlined" Style="width: 100%" 
                     DebounceInterval="250" OnDebounceIntervalElapsed="SearchRecipesDebounced"></MudTextField>
             </div>
             <div class="col-md-3">
                 <MudDateRangePicker @ref="picker" Label="Select Date Range" @bind-DateRange="SelectedDateRange" AutoClose="@autoClose" Variant="Variant.Outlined" Style="width: 100%"></MudDateRangePicker>
             </div>
             <div class="col-md-3">
-
+                <MudSelect T="string" @bind-Value="categoryVal" SelectedValuesChanged="@(SearchRecipesByDDL)" Label="Select a Category" Placeholder="Category"
+                           Variant="Variant.Outlined" Clearable="true">
+                    <MudSelectItem Value="@("Breakfast")">Breakfast</MudSelectItem>
+                    <MudSelectItem Value="@("Lunch")">Lunch</MudSelectItem>
+                    <MudSelectItem Value="@("Appetizer")">Appetizer</MudSelectItem>
+                    <MudSelectItem Value="@("Dinner")">Dinner</MudSelectItem>
+                    <MudSelectItem Value="@("Dessert")">Dessert</MudSelectItem>
+                    <MudSelectItem Value="@("Snack")">Snack</MudSelectItem>
+                    <MudSelectItem Value="@("Beverage")">Beverage</MudSelectItem>
+                    <MudSelectItem Value="@("Topping")">Topping</MudSelectItem>
+                    <MudSelectItem Value="@("Seasoning")">Seasoning</MudSelectItem>
+                </MudSelect>
             </div>
             <div class="col-md-3">
-
+                <MudSelect T="string" @bind-Value="ethnicityVal" SelectedValuesChanged="@(SearchRecipesByDDL)" Label="Select an Ethnicity" Placeholder="Ethnicity"
+                           Variant="Variant.Outlined" Clearable="true">
+                    <MudSelectItem Value="@("Asian")">Asian</MudSelectItem>
+                    <MudSelectItem Value="@("LatinHispanic")">Latin/Hispanic</MudSelectItem>
+                    <MudSelectItem Value="@("Mediterranean")">Mediterranean</MudSelectItem>
+                    <MudSelectItem Value="@("MiddleEastern")">MiddleEastern</MudSelectItem>
+                    <MudSelectItem Value="@("American")">American</MudSelectItem>
+                    <MudSelectItem Value="@("Southern")">Southern</MudSelectItem>
+                </MudSelect>
             </div>
         </div>
     </div>
@@ -51,13 +70,15 @@
     // TODO - Display recipes with options to search, or filter by ingredient, CookTime, ethnicity, or category
     private string searchQuery = string.Empty;
     private PaginatedList<Recipe> filteredRecipes;
-    private DateRange selectedDateRange = new DateRange(DateTime.Today.AddMonths(-1), DateTime.Today);
+    private DateRange selectedDateRange = new DateRange(DateTime.Today.AddMonths(-6), DateTime.Today);
     private int pageIndex = 1;
     private int pageSize = 100;
     private List<UserCookbook> UserCookbooks;
     private string userId { get; set; }
     private MudDateRangePicker picker;
     private bool autoClose;
+    private string categoryVal { get; set; }
+    private string ethnicityVal { get; set; }
 
     private DateRange SelectedDateRange
     {
@@ -120,7 +141,7 @@
         DateTime startDate = selectedDateRange.Start ?? DateTime.MinValue;
         DateTime endDate = selectedDateRange.End ?? DateTime.MaxValue;
 
-        filteredRecipes = await RecipeService.GetPaginatedRecipesBySearchQuery(startDate, endDate, searchQuery, pageIndex, pageSize);
+        filteredRecipes = await RecipeService.GetPaginatedRecipesBySearchQuery(startDate, endDate, searchQuery, categoryVal, ethnicityVal, pageIndex, pageSize);
         StateHasChanged();
     }
 
@@ -138,4 +159,6 @@
         // Reload recipes with the new date range
         await LoadRecipes();
     }
+
+    private async Task SearchRecipesByDDL() => await LoadRecipes();
 }

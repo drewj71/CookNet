@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5+onNd9erR1XLHM42XHEAKIBn85/LiU9lgG0S0kuyqM=",
+  "Hash": "DCllX4T5R3vee47009WAwe/NDgNIEeT9ri1yYOOn9uw=",
   "Source": "CookNet",
   "BasePath": "_content/CookNet",
   "Mode": "Default",
@@ -11396,6 +11396,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\b4cd81b5-c73e-45ec-8194-acf7c17d8b2e_YouTube-Thumbnail-_-Food-6-scaled.jpg"
+    },
+    {
+      "Identity": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\b54170e8-d42a-4817-a77b-6ec42f31b095_book-covers-big-2019101610.jpg",
+      "SourceId": "CookNet",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\",
+      "BasePath": "_content/CookNet",
+      "RelativePath": "Uploads/b54170e8-d42a-4817-a77b-6ec42f31b095_book-covers-big-2019101610.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\b54170e8-d42a-4817-a77b-6ec42f31b095_book-covers-big-2019101610.jpg"
     },
     {
       "Identity": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Uploads\\b7014b81-4bdd-406f-9279-88ebd2193ca4_YouTube-Thumbnail-_-Food-6-scaled.jpg",

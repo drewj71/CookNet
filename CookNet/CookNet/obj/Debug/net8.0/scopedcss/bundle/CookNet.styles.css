@@ -745,6 +745,10 @@ main[b-2tlxc31yxu] {
 
 .date-created[b-pxf527or8f] {
     margin: 0;
+    border: 2px solid rgb(111, 78, 55);
+    background-color: rgb(111, 78, 55);
+    border-radius: 8px;
+    box-shadow: 3px 3px 10px black;
 }
 
 .username-nav[b-pxf527or8f] {
@@ -1203,7 +1207,7 @@ main[b-2tlxc31yxu] {
 }
 
 .useritems-container[b-be9y8cypfz] {
-    padding: 20px;
+    padding: 20px 0 20px 0;
 }
 
 .Private[b-be9y8cypfz] {

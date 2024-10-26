@@ -177,7 +177,7 @@
                                                 @if (IsReplying && CommentIDBeingReplied == reply.CommentID)
                                                 {
                                                     <div class="reply-input">
-                                                        <MudTextField @bind-Value="NewReplyTxt" Placeholder="Write a reply..." Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Send" OnAdornmentClick="() => SubmitReply(reply.CommentID)" Immediate="true" />
+                                                        <MudTextField @bind-Value="NewReplyTxt" Placeholder="Write a reply..." Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Send" OnAdornmentClick="() => SubmitReply(reply.ParentCommentID ?? reply.CommentID)" Immediate="true" />
                                                     </div>
                                                 }
                                             </div>

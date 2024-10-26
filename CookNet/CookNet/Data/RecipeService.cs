@@ -311,13 +311,18 @@ namespace CookNet.Data
                 .ToListAsync();
         }
 
-        public async Task<PaginatedList<Recipe>> GetPaginatedRecipesBySearchQuery(DateTime startDate, DateTime endDate, string searchQuery, int pageIndex, int pageSize)
+        public async Task<PaginatedList<Recipe>> GetPaginatedRecipesBySearchQuery(DateTime startDate, DateTime endDate, string searchQuery, string category, string ethnicity, int pageIndex, int pageSize)
         {
             var query = _context.Recipes
                 .Where(r => r.DateCreated >= startDate && r.DateCreated <= endDate)
                 .Where(r => string.IsNullOrEmpty(searchQuery) ||
                             r.Name.ToLower().Contains(searchQuery.ToLower()) ||
-                            r.Description.ToLower().Contains(searchQuery.ToLower()));
+                            r.Description.ToLower().Contains(searchQuery.ToLower()) ||
+                            (r.PrepTime + r.CookTime).ToString().Contains(searchQuery))
+                .Where (r => string.IsNullOrEmpty(category) ||
+                            r.Category.ToLower().Contains(category.ToLower()))
+                .Where(r => string.IsNullOrEmpty(ethnicity) ||
+                            r.Ethnicity.ToLower().Contains(ethnicity.ToLower()));
 
             var totalRecipes = await query.CountAsync();
 
