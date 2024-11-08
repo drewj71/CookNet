@@ -10,22 +10,22 @@
         </TitleContent>
         <DialogContent>
                 <div class="coverimg-container text-center py-2">
-                    <div class="coverimg-title col-md-12 pb-2">
+                    @* <div class="coverimg-title col-md-12 pb-2">
                         <p class="cookbookCoverImg">Cover Image</p>
-                    </div>
+                    </div> *@
                     <div class="coverimg-preview">
                         @if (cookbook.CoverImage != null)
                         {
                             <MudImage Src="@cookbook.CoverImage" Alt="Cover Image" Class="mb-2"
                                       Style="width: 200px; height: auto;" />
                                       <br />
-                            <button class="btn btn-danger mb-3" type="button" @onclick="RemoveCoverImage">Remove</button>
+                            <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="RemoveCoverImage">Remove</MudButton>
                         }
                     </div>
                     @if (ShowFileUpload)
                     {
                         <div class="coverimg-input col-md-12">
-                            <em><p class="coverimg-help">Recommended file size: 1200 x 1800</p></em>
+                            <em><p class="coverimg-help m-0" style="@(IsFileTooBig ? "color: red;" : "")">Max file size: 5 MB</p></em>
                             <MudFileUpload T="IBrowserFile" Accept=".png, .jpg" FilesChanged="HandleCoverImageSelected" MaximumFileCount="1">
                                 <ActivatorContent>
                                     <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.CloudUpload">
@@ -65,6 +65,7 @@
     private IBrowserFile? CoverImage;
     private bool ShowFileUpload = true;
     private bool IsPublic = false;
+    private bool IsFileTooBig = false;
 
     private void Cancel() => MudDialog.Cancel();
 
@@ -74,8 +75,15 @@
         {
             CoverImage = file;
             var thumbnailUrl = await CookbookService.UploadImageAsync(CoverImage);
-            cookbook.CoverImage = thumbnailUrl;
-            ShowFileUpload = false;
+            if (!string.IsNullOrEmpty(thumbnailUrl))
+            {
+                cookbook.CoverImage = thumbnailUrl;
+                ShowFileUpload = false;
+            }
+            else
+            {
+                IsFileTooBig = true;
+            }
         }
     }
 

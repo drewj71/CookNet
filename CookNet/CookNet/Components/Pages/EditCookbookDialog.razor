@@ -10,22 +10,22 @@
         </TitleContent>
         <DialogContent>
                 <div class="coverimg-container text-center py-2">
-                    <div class="coverimg-title col-md-12 pb-2">
+                    @* <div class="coverimg-title col-md-12 pb-2">
                         <p class="cookbookCoverImg">Cover Image</p>
-                    </div>
+                    </div> *@
                     <div class="coverimg-preview">
                         @if (CurrentCoverImage != null)
                         {
                             <MudImage Src="@CurrentCoverImage" Alt="Cover Image" Class="mb-2"
                                       Style="width: 200px; height: auto;" />
                             <br />
-                            <button class="btn btn-danger mb-3" type="button" @onclick="RemoveCoverImage">Remove</button>
+                            <MudButton class="mb-3" Color="Color.Error" Variant="Variant.Filled" OnClick="RemoveCoverImage">Remove</MudButton>
                         }
                     </div>
                     @if (ShowFileUpload)
                     {
                         <div class="coverimg-input col-md-12">
-                            <em><p class="coverimg-help">Recommended file size: 1200 x 1800</p></em>
+                            <em><p class="coverimg-help m-0">Max file size: 5 MB</p></em>
                             <MudFileUpload T="IBrowserFile" Accept=".png, .jpg" FilesChanged="HandleCoverImageSelected" MaximumFileCount="1">
                                 <ActivatorContent>
                                     <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.CloudUpload">
@@ -77,7 +77,7 @@
             if (editCookbook != null)
             {
                 CurrentCoverImage = editCookbook.CoverImage;
-                ShowFileUpload = CoverImage != null ? false : true;
+                ShowFileUpload = CurrentCoverImage == null ? true : false;
                 IsPublic = editCookbook.IsPublic;
                 CookbookName = editCookbook.CookbookName;
                 CookbookDescription = editCookbook.CookbookDescription;

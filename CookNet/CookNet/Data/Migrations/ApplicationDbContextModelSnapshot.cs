@@ -134,6 +134,84 @@ namespace CookNet.Migrations
                     b.ToTable("CookbookRecipes");
                 });
 
+            modelBuilder.Entity("CookNet.Data.DefaultThumbnails", b =>
+                {
+                    b.Property<int>("DefaultThumbnailID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DefaultThumbnailID"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageCategory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("LastUpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastUpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("DefaultThumbnailID");
+
+                    b.HasIndex("ImagePath")
+                        .IsUnique();
+
+                    b.ToTable("DefaultThumbnails");
+                });
+
+            modelBuilder.Entity("CookNet.Data.ExceptionLog", b =>
+                {
+                    b.Property<int>("ExceptionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExceptionID"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateLogged")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Exception")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PriorityLevel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ExceptionID");
+
+                    b.ToTable("ExceptionLog");
+                });
+
             modelBuilder.Entity("CookNet.Data.Ingredient", b =>
                 {
                     b.Property<int>("ID")
@@ -199,7 +277,6 @@ namespace CookNet.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Category")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CookTime")
@@ -209,11 +286,9 @@ namespace CookNet.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ethnicity")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -238,6 +313,31 @@ namespace CookNet.Migrations
                     b.HasIndex("AuthorID");
 
                     b.ToTable("Recipes");
+                });
+
+            modelBuilder.Entity("CookNet.Data.RecipeCategory", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryID"));
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.HasKey("CategoryID");
+
+                    b.HasIndex("CategoryName")
+                        .IsUnique();
+
+                    b.ToTable("RecipeCategories");
                 });
 
             modelBuilder.Entity("CookNet.Data.RecipeComment", b =>
@@ -286,6 +386,31 @@ namespace CookNet.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("CookNet.Data.RecipeEthnicity", b =>
+                {
+                    b.Property<int>("EthnicityID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EthnicityID"));
+
+                    b.Property<string>("EthnicityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.HasKey("EthnicityID");
+
+                    b.HasIndex("EthnicityName")
+                        .IsUnique();
+
+                    b.ToTable("RecipeEthnicities");
                 });
 
             modelBuilder.Entity("CookNet.Data.RecipeImage", b =>
@@ -345,6 +470,63 @@ namespace CookNet.Migrations
                     b.HasIndex("IngredientID");
 
                     b.ToTable("RecipeIngredients");
+                });
+
+            modelBuilder.Entity("CookNet.Data.RecipeNutrition", b =>
+                {
+                    b.Property<int>("RecipeNutritionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecipeNutritionID"));
+
+                    b.Property<int>("Calories")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Carbohydrates")
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Fats")
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<decimal>("Fiber")
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<string>("LastUpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastUpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Protein")
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<int>("RecipeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ServingSize")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Sodium")
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<decimal>("Sugar")
+                        .HasColumnType("decimal(5,2)");
+
+                    b.HasKey("RecipeNutritionID");
+
+                    b.HasIndex("RecipeID");
+
+                    b.ToTable("RecipeNutrition");
                 });
 
             modelBuilder.Entity("CookNet.Data.RecipeRating", b =>
@@ -642,6 +824,17 @@ namespace CookNet.Migrations
                     b.Navigation("Recipe");
                 });
 
+            modelBuilder.Entity("CookNet.Data.RecipeNutrition", b =>
+                {
+                    b.HasOne("CookNet.Data.Recipe", "Recipe")
+                        .WithMany("RecipeNutrition")
+                        .HasForeignKey("RecipeID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Recipe");
+                });
+
             modelBuilder.Entity("CookNet.Data.RecipeRating", b =>
                 {
                     b.HasOne("CookNet.Data.Recipe", "Recipe")
@@ -743,6 +936,8 @@ namespace CookNet.Migrations
                     b.Navigation("RecipeImages");
 
                     b.Navigation("RecipeIngredients");
+
+                    b.Navigation("RecipeNutrition");
 
                     b.Navigation("RecipeRatings");
                 });

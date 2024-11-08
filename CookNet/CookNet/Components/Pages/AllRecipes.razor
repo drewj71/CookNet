@@ -27,26 +27,25 @@
             <div class="col-md-3">
                 <MudSelect T="string" @bind-Value="categoryVal" SelectedValuesChanged="@(SearchRecipesByDDL)" Label="Select a Category" Placeholder="Category"
                            Variant="Variant.Outlined" Clearable="true">
-                    <MudSelectItem Value="@("Breakfast")">Breakfast</MudSelectItem>
-                    <MudSelectItem Value="@("Lunch")">Lunch</MudSelectItem>
-                    <MudSelectItem Value="@("Appetizer")">Appetizer</MudSelectItem>
-                    <MudSelectItem Value="@("Dinner")">Dinner</MudSelectItem>
-                    <MudSelectItem Value="@("Dessert")">Dessert</MudSelectItem>
-                    <MudSelectItem Value="@("Snack")">Snack</MudSelectItem>
-                    <MudSelectItem Value="@("Beverage")">Beverage</MudSelectItem>
-                    <MudSelectItem Value="@("Topping")">Topping</MudSelectItem>
-                    <MudSelectItem Value="@("Seasoning")">Seasoning</MudSelectItem>
+                    @if (recipeCategories != null)
+                    {
+                        @foreach (var cat in recipeCategories)
+                        {
+                            <MudSelectItem Value="@(cat.CategoryName)">@cat.CategoryName</MudSelectItem>
+                        }
+                    }
                 </MudSelect>
             </div>
             <div class="col-md-3">
                 <MudSelect T="string" @bind-Value="ethnicityVal" SelectedValuesChanged="@(SearchRecipesByDDL)" Label="Select an Ethnicity" Placeholder="Ethnicity"
                            Variant="Variant.Outlined" Clearable="true">
-                    <MudSelectItem Value="@("Asian")">Asian</MudSelectItem>
-                    <MudSelectItem Value="@("LatinHispanic")">Latin/Hispanic</MudSelectItem>
-                    <MudSelectItem Value="@("Mediterranean")">Mediterranean</MudSelectItem>
-                    <MudSelectItem Value="@("MiddleEastern")">MiddleEastern</MudSelectItem>
-                    <MudSelectItem Value="@("American")">American</MudSelectItem>
-                    <MudSelectItem Value="@("Southern")">Southern</MudSelectItem>
+                    @if (recipeEthnicities != null)
+                    {
+                        @foreach (var eth in recipeEthnicities)
+                        {
+                            <MudSelectItem Value="@(eth.EthnicityName)">@eth.EthnicityName</MudSelectItem>
+                        }
+                    }
                 </MudSelect>
             </div>
         </div>
@@ -79,6 +78,8 @@
     private bool autoClose;
     private string categoryVal { get; set; }
     private string ethnicityVal { get; set; }
+    private List<RecipeCategory> recipeCategories;
+    private List<RecipeEthnicity> recipeEthnicities;
 
     private DateRange SelectedDateRange
     {
@@ -102,6 +103,8 @@
         {
             await LoadUserCookbooks();
         }
+        recipeCategories = await RecipeService.GetActiveRecipeCategories();
+        recipeEthnicities = await RecipeService.GetActiveRecipeEthnicities();
     }
 
     private async Task LoadUserCookbooks()

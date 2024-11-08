@@ -24,67 +24,121 @@ namespace CookNet.Data
 
         public async Task<List<UserCookbook>> GetCookbooksAsync()
         {
-            return await _context.UserCookbooks.ToListAsync();
+            try
+            {
+                return await _context.UserCookbooks.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the cookbooks.", ex);
+                return new List<UserCookbook>();
+            }
         }
 
         public async Task<UserCookbook?> GetCookbookByIdAsync(int cookbookID)
         {
-            return await _context.UserCookbooks.FindAsync(cookbookID);
+            try
+            {
+                return await _context.UserCookbooks.FindAsync(cookbookID);
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the cookbook.", ex);
+                return new UserCookbook();
+            }
         }
 
         public async Task<List<UserCookbook>> GetCookbooksByUserIdAsync(string userId)
         {
-            return await _context.UserCookbooks
-                .Where(c => c.UserID == userId)
-                .ToListAsync();
+            try
+            {
+                return await _context.UserCookbooks
+                    .Where(c => c.UserID == userId)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the cookbooks.", ex);
+                return new List<UserCookbook>();
+            }
         }
 
         public async Task<List<UserCookbook>> GetCookbooksContainingRecipeAsync(int recipeId)
         {
-            return await _context.UserCookbooks
-                                   .Where(c => c.CookbookRecipes.Any(cr => cr.RecipeID == recipeId))
-                                   .ToListAsync();
+            try
+            {
+                return await _context.UserCookbooks
+                                       .Where(c => c.CookbookRecipes.Any(cr => cr.RecipeID == recipeId))
+                                       .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the cookbooks.", ex);
+                return new List<UserCookbook>();
+            }
         }
 
         public async Task<List<Recipe>> GetRecipesByCookbookIdAsync(int cookbookId)
         {
-            using (var context = _contextFactory.CreateDbContext())
+            try
             {
-                var recipes = await context.Recipes
-                    .Where(r => r.CookbookRecipes.Any(cr => cr.CookbookID == cookbookId))
-                    .Select(r => new Recipe
-                    {
-                        ID = r.ID,
-                        Name = r.Name,
-                        DateCreated = r.DateCreated,
-                        CookTime = r.CookTime,
-                        PrepTime = r.PrepTime,
-                        ThumbnailImage = r.ThumbnailImage,
-                        Author = r.Author
-                    })
-                    .ToListAsync();
+                using (var context = _contextFactory.CreateDbContext())
+                {
+                    var recipes = await context.Recipes
+                        .Where(r => r.CookbookRecipes.Any(cr => cr.CookbookID == cookbookId))
+                        .Select(r => new Recipe
+                        {
+                            ID = r.ID,
+                            Name = r.Name,
+                            DateCreated = r.DateCreated,
+                            CookTime = r.CookTime,
+                            PrepTime = r.PrepTime,
+                            ThumbnailImage = r.ThumbnailImage,
+                            Author = r.Author
+                        })
+                        .ToListAsync();
 
-                return recipes;
+                    return recipes;
+                }
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the recipes for a cookbook.", ex);
+                return new List<Recipe>();
             }
         }
 
         public async Task CreateCookbookAsync(UserCookbook book)
         {
-            if (book == null)
+            try
             {
-                throw new ArgumentNullException(nameof(book));
+                if (book == null)
+                {
+                    throw new ArgumentNullException(nameof(book));
+                }
+                _context.UserCookbooks.Add(book);
+                await _context.SaveChangesAsync();
             }
-            _context.UserCookbooks.Add(book);
-            await _context.SaveChangesAsync();
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while creating a cookbook.", ex);
+            }
         }
 
         public async Task UpdateCookbookAsync(UserCookbook book)
         {
-            var existingBook = await _context.UserCookbooks.FindAsync(book.CookbookID);
-            if (existingBook != null)
+            try
             {
-                _context.Entry(existingBook).CurrentValues.SetValues(book);
-                await _context.SaveChangesAsync();
+                var existingBook = await _context.UserCookbooks.FindAsync(book.CookbookID);
+                if (existingBook != null)
+                {
+                    _context.Entry(existingBook).CurrentValues.SetValues(book);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while updating a cookbook.", ex);
             }
         }
 
@@ -99,82 +153,103 @@ namespace CookNet.Data
                 }
 
                 var book = await _context.UserCookbooks.FindAsync(cookbookID);
-                if (book != null)
-                {
-                    _context.UserCookbooks.Remove(book);
-                    await _context.SaveChangesAsync();
-                    Console.WriteLine($"Cookbook with ID {cookbookID} deleted successfully.");
-                }
-                else
-                {
-                    Console.WriteLine($"No cookbook found with ID {cookbookID}.");
-                }
+                _context.UserCookbooks.Remove(book);
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error deleting cookbook with ID {cookbookID}: {ex.Message}");
-                throw;
+                await LogExceptionAsync("An error has occured while deleting a cookbook.", ex);
             }
         }
 
         public async Task RemoveCookbookRecipes(IEnumerable<CookbookRecipe> recipes)
         {
-            if (recipes == null || !recipes.Any())
+            try
             {
-                return;
+                _context.CookbookRecipes.RemoveRange(recipes);
+                await _context.SaveChangesAsync();
             }
-
-            _context.CookbookRecipes.RemoveRange(recipes);
-            await _context.SaveChangesAsync();
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while removing recipes from cookbook.", ex);
+            }
         }
 
         public async Task AddRecipeToCookbooks(int recipeId, List<int> cookbookIds)
         {
-            var existingAssociations = _context.CookbookRecipes
-                .Where(cr => cr.RecipeID == recipeId)
-                .ToList();
+            try
+            {
+                var existingAssociations = _context.CookbookRecipes
+                    .Where(cr => cr.RecipeID == recipeId)
+                    .ToList();
 
-            var newAssociations = cookbookIds
-                .Where(cookbookId => !existingAssociations.Any(cr => cr.CookbookID == cookbookId))
-                .Select(cookbookId => new CookbookRecipe
-                {
-                    CookbookID = cookbookId,
-                    RecipeID = recipeId,
-                    DateAdded = DateTime.UtcNow
-                });
+                var newAssociations = cookbookIds
+                    .Where(cookbookId => !existingAssociations.Any(cr => cr.CookbookID == cookbookId))
+                    .Select(cookbookId => new CookbookRecipe
+                    {
+                        CookbookID = cookbookId,
+                        RecipeID = recipeId,
+                        DateAdded = DateTime.UtcNow
+                    });
 
-            _context.CookbookRecipes.AddRange(newAssociations);
-            await _context.SaveChangesAsync();
+                _context.CookbookRecipes.AddRange(newAssociations);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while adding a recipe to cookbook.", ex);
+            }
         }
 
         public async Task RemoveRecipeFromCookbooks(int recipeId, List<int> cookbookIds)
         {
-            var cookbookRecipesToRemove = await _context.CookbookRecipes
-                .Where(cr => cookbookIds.Contains(cr.CookbookID) && cr.RecipeID == recipeId)
-                .ToListAsync();
+            try
+            {
+                var cookbookRecipesToRemove = await _context.CookbookRecipes
+                    .Where(cr => cookbookIds.Contains(cr.CookbookID) && cr.RecipeID == recipeId)
+                    .ToListAsync();
 
-            _context.CookbookRecipes.RemoveRange(cookbookRecipesToRemove);
-            await _context.SaveChangesAsync();
+                _context.CookbookRecipes.RemoveRange(cookbookRecipesToRemove);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while removing a recipe from cookbook.", ex);
+            }
         }
 
         private readonly HashSet<string> AllowedExtensions = new HashSet<string> { ".jpg", ".jpeg", ".png" };
-        private const long MaxFileSize = 10 * 1024 * 1024; // 10 MB
+        private const long MaxFileSize = 5242880; // 5 MB
 
-        private bool IsValidImage(string fileName)
+        private async Task<bool> IsValidImage(string fileName)
         {
-            var extension = Path.GetExtension(fileName).ToLowerInvariant();
-            return AllowedExtensions.Contains(extension);
+            try
+            {
+                var extension = Path.GetExtension(fileName).ToLowerInvariant();
+                return AllowedExtensions.Contains(extension);
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving recipes.", ex);
+                return false;
+            }
         }
 
         public async Task<string> UploadImageAsync(IBrowserFile file)
         {
-            if (file == null || file.Size == 0 || string.IsNullOrEmpty(file.Name) || !IsValidImage(file.Name) || file.Size > MaxFileSize)
+            try
             {
-                throw new ArgumentException("Invalid file or unsupported file type");
+                var isImageValid = await IsValidImage(file.Name);
+                if (file != null && file.Size > 0 && !string.IsNullOrEmpty(file.Name) && isImageValid && file.Size < MaxFileSize)
+                {
+                    return await SaveImageAsync(file);
+                }
             }
-
-            // Save the image and return its path
-            return await SaveImageAsync(file);
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while uploading the image.", ex);
+            }
+            return "";
         }
 
         private async Task<string> SaveImageAsync(IBrowserFile file)
@@ -192,17 +267,43 @@ namespace CookNet.Data
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    await file.OpenReadStream().CopyToAsync(fileStream);
+                    await file.OpenReadStream(MaxFileSize).CopyToAsync(fileStream);
                 }
 
                 return Path.Combine("uploads", uniqueFileName);
             }
             catch (Exception ex)
             {
-                // Log the error or handle it accordingly
-                throw new InvalidOperationException("Error saving image file", ex);
+                await LogExceptionAsync("An error has occured while saving the image.", ex);
             }
+            return "";
         }
 
+        private async Task LogExceptionAsync(string message, Exception exception)
+        {
+            var logEntry = new ExceptionLog
+            {
+                PriorityLevel = DeterminePriority(exception),
+                Message = message,
+                Exception = exception.ToString(),
+                DateLogged = DateTime.Now,
+                CreatedBy = "CookbookService"
+            };
+
+            _context.Set<ExceptionLog>().Add(logEntry);
+            await _context.SaveChangesAsync();
+        }
+
+        private string DeterminePriority(Exception exception)
+        {
+            // Set priority based on exception type or other criteria
+            if (exception is ArgumentNullException || exception is NullReferenceException)
+                return "HIGH";
+            else if (exception is InvalidOperationException)
+                return "MED";
+
+            // Default to LOW for unclassified exceptions
+            return "LOW";
+        }
     }
 }

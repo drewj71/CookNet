@@ -42,7 +42,7 @@
 }
 
 .add-ingredient-btn[b-n8opd8dmcj], .add-instruction-btn[b-n8opd8dmcj] {
-    margin-top: 38px;
+    margin-top: 30px;
 }
 
 .remove-ingredient[b-n8opd8dmcj] {
@@ -54,4 +54,8 @@
 
 .ingredient-span[b-n8opd8dmcj] {
     font-size: 16px;
+}
+
+.thumbnailimg-help[b-n8opd8dmcj] {
+    margin-bottom: 5px;
 }

@@ -97,11 +97,11 @@
 }
 
 .add-ingredient-btn[b-nwn678rb5z], .add-instruction-btn[b-nwn678rb5z] {
-    margin-top: 24px;
+    margin-top: 18px;
 }
 
 .save-cancel-btns[b-nwn678rb5z] {
-    margin-top: 22px;
+    margin-top: 15px;
 }
 
 .goback[b-nwn678rb5z] {
@@ -110,4 +110,8 @@
 
 .goback:hover[b-nwn678rb5z] {
     opacity: 75%;
+}
+
+.thumbnailimg-help[b-nwn678rb5z] {
+    margin-bottom: 5px;
 }

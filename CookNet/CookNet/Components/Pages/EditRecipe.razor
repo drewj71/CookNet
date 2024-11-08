@@ -3,35 +3,32 @@
 @using Microsoft.AspNetCore.Components.Forms
 @inject NavigationManager NavigationManager
 @inject RecipeService RecipeService
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
 @rendermode InteractiveServer
 
 <PageTitle>Edit Recipe</PageTitle>
 
 <div class="edit-recipe-container">
-    <EditForm Model="@Recipe" OnValidSubmit="HandleSubmit" FormName="EditRecipeForm">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
-        <div class="row">
-            <div class="col-md-5">
-                <h3><i class="bi bi-arrow-left-square-fill goback" @onclick="ReturnBack"></i></h3>
-            </div>              
-            <div class="col-md-6">
-                <h3 class="edit-recipe-title">Edit Recipe</h3>
-            </div>
+    <div class="row">
+        <div class="col-md-5">
+            <h3><i class="bi bi-arrow-left-square-fill goback" @onclick="ReturnBack"></i></h3>
         </div>
+        <div class="col-md-6">
+            <h3 class="edit-recipe-title">Edit Recipe</h3>
+        </div>
+    </div>
 
+    <MudForm Model="@Recipe" @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
         <div class="row">
             <div class="col-md-6 form-group">
-                <label class="form-group-label" for="Name">Name: </label>
-                <InputText id="Name" class="form-control" @bind-Value="@RecipeName" style="@GetInputStyle(RecipeName, isNameValid)" />
+                <MudTextField T="string" Label="Recipe Name" @bind-Value="@RecipeName" Required="true" RequiredError="Recipe Name is required!" Variant="Variant.Outlined"
+                    Error="@(!isNameValid)" ErrorText="Required" Immediate="true" @onblur="ValidateRecipeName" />
             </div>
             <div class="col-md-6 form-group">
-                <label class="form-group-label" for="Description">Description:</label>
-                <InputTextArea id="Description" class="form-control" @bind-Value="@RecipeDescription" style="@GetInputStyle(RecipeDescription, isDescriptionValid)" />
+                <MudTextField T="string" Label="Description" @bind-Value="@RecipeDescription" Required="false" Variant="Variant.Outlined" />
             </div>
         </div>
-
         <div class="row d-flex">
             <div class="col-md-6 d-flex flex-column">
                 @if (Recipe.ThumbnailImage != null)
@@ -46,7 +43,7 @@
                 @if (showFileUpload)
                 {
                     <div class="thumbnailimg-input col-md-4">
-                        <em><p class="thumbnailimg-help">Recommended file size: 1920 x 1080</p></em>
+                        <em><p class="thumbnailimg-help" style="@(IsFileTooBig ? "color: red;" : "")">Max file size: 5 MB</p></em>
                         <MudFileUpload T="IBrowserFile" Accept=".png, .jpg" FilesChanged="HandleThumbnailImageSelected" MaximumFileCount="10">
                             <ActivatorContent>
                                 <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.CloudUpload">
@@ -58,60 +55,48 @@
                 }
             </div>
             <div class="col-md-6 d-flex flex-column">
-                <label class="form-group-label" for="StoryText">Recipe Story:</label>
-                <InputTextArea id="StoryText" class="form-control" @bind-Value="@RecipeStory" style="flex-grow: 1; resize: none;" />
+                <MudTextField T="string" Label="Recipe Story" @bind-Value="@RecipeStory" Lines="10" Required="true" RequiredError="Recipe Story is required!" Variant="Variant.Outlined"
+                              Error="@(!isStoryValid)" ErrorText="Required" Immediate="true" @onblur="ValidateRecipeStory" />
             </div>
         </div>
-        
         <div class="row my-3">
             <div class="col-sm-8 col-md-2 form-group">
-                <label class="form-group-label" for="PrepTime">Prep Time (minutes):</label>
-                <InputNumber id="PrepTime" class="form-control" @bind-Value="@RecipePrepTime" style="@GetInputStyleInt(RecipePrepTime, isPrepValid)" />
+                <MudNumericField T="int" Label="Prep Time" @bind-Value="@RecipePrepTime" Required="true" RequiredError="Prep time is required!"
+                                 Variant="Variant.Outlined" Error="@(!isPrepValid)" ErrorText="Required" Immediate="true" @onblur="ValidatePrepTime" />
             </div>
-
             <div class="col-sm-8 col-md-2 form-group">
-                <label class="form-group-label" for="CookTime">Cook Time (minutes):</label>
-                <InputNumber id="CookTime" class="form-control" @bind-Value="@RecipeCookTime" style="@GetInputStyleInt(RecipeCookTime, isCookTimeValid)" />
-            </div>
+                <MudNumericField T="int" Label="Cook Time" @bind-Value="@RecipeCookTime" Required="true" RequiredError="Cook time is required!"
+                                 Variant="Variant.Outlined" Error="@(!isCookTimeValid)" ErrorText="Required" Immediate="true" @onblur="ValidateCookTime" />
 
+            </div>
             <div class="col-sm-8 col-md-2 form-group">
-                <label class="form-group-label" for="Servings">Servings:</label>
-                <InputNumber id="Servings" class="form-control" @bind-Value="@RecipeServings" />
+                <MudNumericField T="int?" Label="Serving Size" @bind-Value="@RecipeServings" Required="false" Variant="Variant.Outlined" />
             </div>
-
             <div class="col-sm-8 col-md-3 form-group">
-                <label class="form-group-label" for="Category">Category:</label>
-                <InputSelect id="Category" class="form-control long-select" @bind-Value="@RecipeCategory"
-                             style="@GetInputStyleDDL(RecipeCategory, isCategoryValid)">
-                    <option value="Select One">--Select One--</option>
-                    <option value="Breakfast">Breakfast</option>
-                    <option value="Lunch">Lunch</option>
-                    <option value="Appetizer">Appetizer</option>
-                    <option value="Dinner">Dinner</option>
-                    <option value="Dessert">Dessert</option>
-                    <option value="Snack">Snack</option>
-                    <option value="Beverage">Beverage</option>
-                    <option value="Sauce">Sauce</option>
-                    <option value="Seasoning">Seasoning</option>
-                </InputSelect>
+                <MudSelect T="string" @bind-Value="@RecipeCategory" Label="Select a Category" Placeholder="Category"
+                           Variant="Variant.Outlined" Clearable="true">
+                    @if (RecipeCategories != null)
+                    {
+                        @foreach (var cat in RecipeCategories)
+                        {
+                            <MudSelectItem Value="@(cat.CategoryName)">@cat.CategoryName</MudSelectItem>
+                        }
+                    }
+                </MudSelect>
             </div>
-
             <div class="col-sm-8 col-md-3 form-group">
-                <label class="form-group-label" for="Ethnicity">Ethnicity:</label>
-                <InputSelect id="Ethnicity" class="form-control long-select" @bind-Value="@RecipeEthnicity"
-                             style="@GetInputStyleDDL(RecipeEthnicity, isEthnicityValid)">
-                    <option value="Select One">--Select One--</option>
-                    <option value="NA">N/A</option>
-                    <option value="Asian">Asian</option>
-                    <option value="LatinHispanic">Latin/Hispanic</option>
-                    <option value="Mediterranean">Mediterranean</option>
-                    <option value="MiddleEastern">Middle Eastern</option>
-                    <option value="American">American</option>
-                    <option value="Southern">Southern</option>
-                </InputSelect>
+                <MudSelect T="string" @bind-Value="@RecipeEthnicity" Label="Select an Ethnicity" Placeholder="Ethnicity"
+                           Variant="Variant.Outlined" Clearable="true">
+                    @if (RecipeEthnicities != null)
+                    {
+                        @foreach (var eth in RecipeEthnicities)
+                        {
+                            <MudSelectItem Value="@(eth.EthnicityName)">@eth.EthnicityName</MudSelectItem>
+                        }
+                    }
+                </MudSelect>
             </div>
         </div>
-
         <div class="edit-section">
             <div class="col-md-6 edit-ingredients" style="background-color: #f2f2f2; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
                 <h4 class="col-md-6 edit-ingredients-title">Ingredients:</h4>
@@ -119,38 +104,38 @@
                 {
                     var ingredient = ing.Ingredient;
                     <div class="col-md-12 ingredient-edit">
-                        @if (!ing.IsEditing)
+                        @if (ingredient != null)
                         {
-                            <div>
-                                <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveIngredient(ing)"></i>
-                                <i class="edit-ingredient fa fa-pen" @onclick="() => EditIngredient(ing)"></i>
-                                <span>@ing.Quantity</span>
-                                <span>@ing.QuantityUnit</span>
-                                <span>@ingredient.Name</span>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label class="form-group-label" for="NewIngredientName">Name:</label>
-                                    <InputText id="NewIngredientName" class="form-control" @bind-Value="ingredient.Name"
-                                               style="@GetInputStyle(ingredient.Name, isIngNameValid)"/>
+                            @if (!ing.IsEditing)
+                            {
+                                <div>
+                                    <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveIngredient(ing)"></i>
+                                    <i class="edit-ingredient fa fa-pen" @onclick="() => EditIngredient(ing)"></i>
+                                    <span>@ing.Quantity</span>
+                                    <span>@ing.QuantityUnit</span>
+                                    <span>@ingredient.Name</span>
                                 </div>
-                                <div class="col-md-2">
-                                    <label class="form-group-label" for="NewIngredientQuantity">Quantity:</label>
-                                    <InputText id="NewIngredientQuantity" class="form-control" @bind-Value="ing.Quantity"
-                                               style="@GetInputStyle(ing.Quantity, isQuantityValid)"/>
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <MudTextField T="string" Label="Ingredient Name" @bind-Value="@ingredient.Name" Variant="Variant.Outlined"
+                                                      Error="@(!isIngNameValid)" ErrorText="Required" Immediate="true" @onblur="@(() => ValidateIngEdit(ing))" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <MudTextField T="string" Label="Quantity" @bind-Value="@ing.Quantity" Variant="Variant.Outlined"
+                                                      Error="@(!isQuantityValid)" ErrorText="Required" Immediate="true" @onblur="@(() => ValidateIngQuantEdit(ing))" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <MudTextField T="string" Label="Unit" @bind-Value="@ing.QuantityUnit" Variant="Variant.Outlined" />
+                                    </div>
+                                    <div class="col-md-3 save-cancel-btns">
+                                        <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="() => SaveIngredient(ing)">Save</MudButton>
+                                        <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="() => CancelEditIngredient(ing)">Cancel</MudButton>
+                                    </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <label class="form-group-label" for="NewQuantityUnit">Unit:</label>
-                                    <InputText id="NewQuantityUnit" class="form-control" @bind-Value="ing.QuantityUnit" />
-                                </div>
-                                <div class="col-md-3 save-cancel-btns">
-                                    <button type="button" class="btn btn-primary" @onclick="() => SaveIngredient(ing)">Save</button>
-                                    <button type="button" class="btn btn-danger" @onclick="() => CancelEditIngredient(ing)">Cancel</button>
-                                </div>
-                            </div>
+                            }
                         }
                     </div>
                 }
@@ -172,13 +157,12 @@
                         {
                             <div class="row">
                                 <div class="col-md-9">
-                                    <label class="form-group-label" for="NewInstruction">Instruction:</label>
-                                    <InputText id="NewInstruction" class="form-control" @bind-Value="instruction.InstructionText"
-                                               style="@GetInputStyle(instruction.InstructionText, isInstructionValid)" />
+                                    <MudTextField T="string" Label="Instruction" @bind-Value="@instruction.InstructionText" Variant="Variant.Outlined"
+                                                  Error="@(!isInstructionValid)" ErrorText="Required" Immediate="true" @onblur="@(() => ValidateInstructEdit(instruction))" />
                                 </div>
                                 <div class="col-md-3 save-cancel-btns">
-                                    <button type="button" class="btn btn-primary" @onclick="() => SaveInstruction(instruction)">Save</button>
-                                    <button type="button" class="btn btn-danger" @onclick="() => CancelEditInstruction(instruction)">Cancel</button>
+                                    <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="() => SaveInstruction(instruction)">Save</MudButton>
+                                    <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="() => CancelEditInstruction(instruction)">Cancel</MudButton>
                                 </div>
                             </div>
                         }
@@ -186,78 +170,51 @@
                 }
             </div>
         </div>
-
         <div class="col-md-12 row">
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-5">
-                        <label class="form-group-label" for="NewIngredientName">Name:</label>
-                        <InputText id="NewIngredientName" class="form-control" @bind-Value="@NewIngredientName" placeholder="All-Purpose Flour"
-                                   style="@GetInputStyle(NewIngredientName, isNewIngNameValid)" />
+                        <MudTextField T="string" Label="Ingredient Name" @bind-Value="@NewIngredientName" Variant="Variant.Outlined"
+                                      Error="@(!isNewIngNameValid || !isIngredientsAdded)" ErrorText="Required" Immediate="true" @onblur="ValidateIngredientName" />
                     </div>
                     <div class="col-md-2">
-                        <label class="form-group-label" for="NewIngredientQuantity">Quantity:</label>
-                        <InputText id="NewIngredientQuantity" class="form-control" @bind-Value="@NewIngredientQuantity" placeholder="1/2"
-                                   style="@GetInputStyle(NewIngredientQuantity, isNewQuantityValid)" />
+                        <MudTextField T="string" Label="Quantity" @bind-Value="@NewIngredientQuantity" Variant="Variant.Outlined"
+                                      Error="@(!isNewQuantityValid || !isIngredientsAdded)" ErrorText="Required" Immediate="true" @onblur="ValidateIngredientQuantity" />
                     </div>
                     <div class="col-md-2">
-                        <label class="form-group-label" for="NewIngredientQuantityUnit">Unit:</label>
-                        <InputText id="NewIngredientQuantityUnit" class="form-control" @bind-Value="@NewIngredientQuantityUnit" placeholder="cup" />
+                        <MudTextField T="string" Label="Unit" @bind-Value="@NewIngredientQuantityUnit" Variant="Variant.Outlined" />
                     </div>
                     <div class="col-md-3 add-ingredient-btn">
-                        <button type="button" class="btn btn-primary" @onclick="AddIngredientAsync">Add Ingredient</button>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="AddIngredientAsync">Add Ingredient</MudButton>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-9">
-                        <label class="form-group-label" for="NewInstructionText">Instructions:</label>
-                        <InputText id="NewInstructionText" class="form-control" @bind-Value="NewInstructionText" placeholder="Preheat oven to 450."
-                                   style="@GetInputStyle(NewInstructionText, isNewInstructionValid)" />
+                        <MudTextField T="string" Label="Instruction" @bind-Value="@NewInstructionText" Variant="Variant.Outlined"
+                                      Error="@(!isNewInstructionValid || !isInstructionsAdded)" ErrorText="Required" Immediate="true" @onblur="ValidateInstruction" />
                     </div>
                     <div class="col-md-3 add-instruction-btn">
-                        <button type="button" class="btn btn-primary" @onclick="AddInstructionAsync">Add Instruction</button>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="AddInstructionAsync">Add Instruction</MudButton>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="col-md-12 confirmation-btns pt-3">
-            <button type="submit" class="btn btn-success">Save</button>
-            <button type="button" class="btn btn-danger" @onclick="ShowConfirmationModal">Delete Recipe</button>
+            <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="HandleSubmit">Save</MudButton>
+            <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="ShowDeleteConfirmation">Delete Recipe</MudButton>
         </div>
-
-        <!-- Delete Confirmation Modal -->
-        @if (ShowModal)
-        {
-            <div class="modal fade show" tabindex="-1" role="dialog" style="display: block;">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Delete Confirmation</h5>
-                            <button type="button" class="close" aria-label="Close" @onclick="CloseModal">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Are you sure you want to delete the recipe?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @onclick="CloseModal">Cancel</button>
-                            <button type="button" class="btn btn-danger" @onclick="DeleteConfirmed">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-
-    </EditForm>
+    </MudForm>
 </div>
 
 @code {
     [Parameter]
     public int RecipeID { get; set; }
+
+    MudForm form;
+    bool success;
+    string[] errors = { };
 
     private Recipe Recipe { get; set; } = new Recipe();
     private string RecipeName { get; set; }
@@ -292,11 +249,17 @@
     private string currentUnitEdit;
     private string currentInstructionEdit;
     private bool IsDefaultThumbnail = false;
+    private bool isStoryValid = true;
+    private bool isIngredientsAdded = true;
+    private bool isInstructionsAdded = true;
+    private bool IsFileTooBig = false;
 
     List<RecipeIngredient> AllIngredients { get; set; } = new();
     List<Instruction> AllInstructions { get; set; } = new();
     List<Ingredient> AddedIngredients { get; set; } = new();
     List<Instruction> AddedInstructions { get; set; } = new();
+    List<RecipeCategory> RecipeCategories { get; set; } = new();
+    List<RecipeEthnicity> RecipeEthnicities { get; set; } = new();
 
     List<string> defaultThumbnails = new List<string> 
     { 
@@ -310,15 +273,17 @@
         Recipe = await RecipeService.GetRecipeByIdAsync(RecipeID);
         AllIngredients = Recipe.RecipeIngredients.ToList();
         AllInstructions = Recipe.Instructions.ToList();
+        RecipeCategories = await RecipeService.GetActiveRecipeCategories();
+        RecipeEthnicities = await RecipeService.GetActiveRecipeEthnicities();
         if (Recipe != null)
         {
             RecipeName = Recipe.Name;
-            RecipeDescription = Recipe.Description;
+            RecipeDescription = Recipe.Description ?? "";
             RecipePrepTime = Recipe.PrepTime;
             RecipeCookTime = Recipe.CookTime;
             RecipeServings = Recipe.Servings;
-            RecipeCategory = Recipe.Category;
-            RecipeEthnicity = Recipe.Ethnicity;
+            RecipeCategory = Recipe.Category ?? "";
+            RecipeEthnicity = Recipe.Ethnicity ?? "";
             RecipeStory = Recipe.RecipeStory;
             if (Recipe.ThumbnailImage != null)
             {
@@ -328,26 +293,10 @@
         }
     }
 
-    private string GetInputStyle(string value, bool isValid)
-    {
-        return string.IsNullOrWhiteSpace(value) && !isValid ? "border: 1px solid red;" : "border: 1px solid initial;";
-    }
-
-    private string GetInputStyleInt(int value, bool isValid)
-    {
-        return value <= 0 && !isValid ? "border: 1px solid red;" : "border: 1px solid initial;";
-    }
-
-    private string GetInputStyleDDL(string value, bool isValid)
-    {
-        return !isValid && value == "Select One" ? "border: 1px solid red;" : "border: 1px solid initial;";
-    }
-
     private async Task AddIngredientAsync()
     {
-        isNewIngNameValid = !string.IsNullOrWhiteSpace(NewIngredientName);
-        isNewQuantityValid = !string.IsNullOrWhiteSpace(NewIngredientQuantity);
-
+        ValidateIngredientName();
+        ValidateIngredientQuantity();
         if (isNewIngNameValid && isNewQuantityValid)
         {
             AddedIngredients.Add(new Ingredient
@@ -377,8 +326,7 @@
 
     private async Task AddInstructionAsync()
     {
-        isNewInstructionValid = !string.IsNullOrWhiteSpace(NewInstructionText);
-
+        ValidateInstruction();
         if (isNewInstructionValid)
         {
             AddedInstructions.Add(new Instruction
@@ -395,22 +343,33 @@
         }
     }
 
-    private void ShowConfirmationModal()
+    private async Task ShowDeleteConfirmation()
     {
-        ShowModal = true;
-    }
+        var parameters = new DialogParameters
+        {
+            { "Message", "Are you sure you want to delete this recipe? This action cannot be undone." }
+        };
 
-    private void CloseModal()
-    {
-        ShowModal = false;
+        var options = new DialogOptions
+            {
+                MaxWidth = MaxWidth.Small,
+                FullWidth = true,
+                CloseOnEscapeKey = true
+            };
+
+        var dialog = DialogService.Show<ConfirmationDialog>("Delete Recipe", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            await DeleteConfirmed();
+        }
     }
 
     private async Task DeleteConfirmed()
     {
-        // Call the RecipeService to delete the recipe from the database
         await RecipeService.DeleteRecipeAsync(Recipe.ID);
-
-        // Redirect the user to a specific page after deletion, for example, the home page
+        Snackbar.Add("Recipe deleted successfully.", Severity.Success);
         NavigationManager.NavigateTo("/");
     }
 
@@ -420,9 +379,18 @@
         {
             ThumbnailImage = file;
             var thumbnailUrl = await RecipeService.UploadImageAsync(ThumbnailImage);
-            Recipe.ThumbnailImage = thumbnailUrl;
-            showFileUpload = false;
-            IsDefaultThumbnail = false;
+            if (!string.IsNullOrEmpty(thumbnailUrl))
+            {
+                Recipe.ThumbnailImage = thumbnailUrl;
+                showFileUpload = false;
+                IsDefaultThumbnail = false;
+                IsFileTooBig = false;
+            }
+            else
+            {
+                IsDefaultThumbnail = true;
+                IsFileTooBig = true;
+            }
         }
     }
 
@@ -438,6 +406,10 @@
     {
         foreach (var ingredient in Recipe.RecipeIngredients)
         {
+            if (ingredient.IsEditing == true)
+            {
+                CancelEditIngredient(ingredient);
+            }
             ingredient.IsEditing = false;
         }
 
@@ -449,8 +421,8 @@
 
     private void SaveIngredient(RecipeIngredient recipeIngredient)
     {
-        isIngNameValid = !string.IsNullOrEmpty(recipeIngredient.Ingredient.Name);
-        isQuantityValid = !string.IsNullOrEmpty(recipeIngredient.Quantity);
+        ValidateIngEdit(recipeIngredient);
+        ValidateIngQuantEdit(recipeIngredient);
 
         if (isIngNameValid && isQuantityValid)
         {
@@ -483,6 +455,10 @@
     {
         foreach (var instr in Recipe.Instructions)
         {
+            if (instr.IsEditing == true)
+            {
+                CancelEditInstruction(instr);
+            }
             instr.IsEditing = false;
         }
         currentInstructionEdit = instruction.InstructionText;
@@ -514,7 +490,7 @@
 
     private void SaveInstruction(Instruction instruction)
     {
-        isInstructionValid = !string.IsNullOrEmpty(instruction.InstructionText);
+        ValidateInstructEdit(instruction);
         if (isInstructionValid)
         {
             instruction.IsEditing = false;
@@ -535,13 +511,10 @@
     private bool SaveEditRecipe()
     {
         isNameValid = !string.IsNullOrWhiteSpace(RecipeName);
-        isDescriptionValid = !string.IsNullOrWhiteSpace(RecipeDescription);
         isPrepValid = RecipePrepTime > 0;
         isCookTimeValid = RecipeCookTime > 0;
-        isCategoryValid = RecipeCategory != "Select One";
-        isEthnicityValid = RecipeEthnicity != "Select One";
 
-        if (isNameValid && isDescriptionValid && isPrepValid && isCookTimeValid && isCategoryValid && isEthnicityValid)
+        if (isNameValid  && isPrepValid && isCookTimeValid)
         {
             Recipe.Name = RecipeName;
             Recipe.Description = RecipeDescription;
@@ -556,6 +529,17 @@
 
         return false;
     }
+
+    private void ValidatePrepTime() => isPrepValid = Recipe.PrepTime > 0;
+    private void ValidateCookTime() => isCookTimeValid = Recipe.CookTime > 0;
+    private void ValidateIngredientName() => isNewIngNameValid = !string.IsNullOrWhiteSpace(NewIngredientName);
+    private void ValidateIngredientQuantity() => isNewQuantityValid = !string.IsNullOrWhiteSpace(NewIngredientQuantity);
+    private void ValidateInstruction() => isNewInstructionValid = !string.IsNullOrEmpty(NewInstructionText);
+    private void ValidateRecipeName() => isNameValid = !string.IsNullOrEmpty(RecipeName);
+    private void ValidateRecipeStory() => isStoryValid = !string.IsNullOrEmpty(RecipeStory);
+    private void ValidateIngEdit(RecipeIngredient ri) => isIngNameValid = !string.IsNullOrEmpty(ri.Ingredient.Name);
+    private void ValidateIngQuantEdit(RecipeIngredient ri) => isQuantityValid = !string.IsNullOrEmpty(ri.Quantity);
+    private void ValidateInstructEdit(Instruction i) => isInstructionValid = !string.IsNullOrEmpty(i.InstructionText);
 
     private async Task HandleSubmit()
     {
@@ -627,7 +611,7 @@
         }
 
         await RecipeService.SaveChanges();
-
+        Snackbar.Add("Recipe edited successfully.", Severity.Success);
         // Redirect to recipe details page
         NavigationManager.NavigateTo($"/recipes/{Recipe.ID}");
     }

@@ -97,11 +97,11 @@
 }
 
 .add-ingredient-btn, .add-instruction-btn {
-    margin-top: 24px;
+    margin-top: 18px;
 }
 
 .save-cancel-btns {
-    margin-top: 22px;
+    margin-top: 15px;
 }
 
 .goback {
@@ -110,4 +110,8 @@
 
 .goback:hover {
     opacity: 75%;
+}
+
+.thumbnailimg-help {
+    margin-bottom: 5px;
 }

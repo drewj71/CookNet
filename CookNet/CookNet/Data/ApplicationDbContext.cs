@@ -19,6 +19,11 @@ namespace CookNet.Data
         public DbSet<CookbookRecipe> CookbookRecipes { get; set; }
         public DbSet<RecipeRating> RecipeRatings { get; set; }
         public DbSet<RecipeComment> Comments { get; set; }
+        public DbSet<RecipeCategory> RecipeCategories { get; set; }
+        public DbSet<RecipeEthnicity> RecipeEthnicities { get; set; }
+        public DbSet<DefaultThumbnails> DefaultThumbnails { get; set; }
+        public DbSet<RecipeNutrition> RecipeNutrition { get; set; }
+        public DbSet<ExceptionLog> ExceptionLog { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,7 +32,8 @@ namespace CookNet.Data
             modelBuilder.Entity<Recipe>()
                 .HasMany(r => r.RecipeImages)
                 .WithOne(ri => ri.Recipe)
-                .HasForeignKey(ri => ri.RecipeID);
+                .HasForeignKey(ri => ri.RecipeID)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Configure one-to-many relationship between Recipe and Instruction
             modelBuilder.Entity<Instruction>()
@@ -106,6 +112,36 @@ namespace CookNet.Data
             modelBuilder.Entity<RecipeComment>()
                 .Property(rc => rc.IsDeleted)
                 .HasDefaultValue(false);
+
+            modelBuilder.Entity<RecipeEthnicity>()
+                .HasIndex(e => e.EthnicityName)
+                .IsUnique();
+
+            modelBuilder.Entity<RecipeEthnicity>()
+                .Property(e => e.IsActive)
+                .HasDefaultValue(true);
+
+            modelBuilder.Entity<RecipeCategory>()
+                .HasIndex(c => c.CategoryName)
+                .IsUnique();
+                
+            modelBuilder.Entity<RecipeCategory>()
+                .Property(c => c.IsActive)
+                .HasDefaultValue(true);
+
+            modelBuilder.Entity<DefaultThumbnails>()
+                .Property(d => d.IsActive)
+                .HasDefaultValue(true);
+
+            modelBuilder.Entity<DefaultThumbnails>()
+                .HasIndex(d => d.ImagePath)
+                .IsUnique();
+
+            modelBuilder.Entity<RecipeNutrition>()
+                .HasOne(rn => rn.Recipe)
+                .WithMany(r => r.RecipeNutrition) // Use WithOne if this is a one-to-one relationship
+                .HasForeignKey(rn => rn.RecipeID)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

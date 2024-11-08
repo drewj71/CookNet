@@ -23,110 +23,199 @@ namespace CookNet.Data
 
         public async Task<List<Recipe>> GetRecipesAsync()
         {
-            return await _context.Recipes.ToListAsync();
+            try
+            {
+                return await _context.Recipes.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving recipes.", ex);
+                return new List<Recipe>();
+            }
         }
 
         public async Task CreateRecipeAsync(Recipe recipe)
         {
-            _context.Recipes.Add(recipe);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Recipes.Add(recipe);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while creating a new recipe.", ex);
+            }
         }
 
         public async Task DeleteRecipeAsync(int recipeId)
         {
-            var recipe = await _context.Recipes.FindAsync(recipeId);
-            if (recipe != null)
+            try
             {
-                //SPROC currently not working
-                //await _context.Database.ExecuteSqlRawAsync("EXEC DeleteRelatedIngredients @RecipeID", new SqlParameter("@RecipeID", recipeId));
-                _context.Recipes.Remove(recipe);
-                await _context.SaveChangesAsync();
+                var recipe = await _context.Recipes
+                    .Include(r => r.RecipeRatings)
+                    .FirstOrDefaultAsync(r => r.ID == recipeId);
+                if (recipe != null)
+                {
+                    _context.RecipeRatings.RemoveRange(recipe.RecipeRatings);
+                    _context.Recipes.Remove(recipe);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while deleting a recipe.", ex);
             }
         }
 
         public async Task<List<Ingredient>> GetIngredientsByRecipeIdAsync(int recipeId)
         {
-            var recipeIngredients = await _context.RecipeIngredients
-                .Where(ri => ri.RecipeID == recipeId)
-                .Include(ri => ri.Ingredient).ToListAsync();
+            try
+            {
+                var recipeIngredients = await _context.RecipeIngredients
+                    .Where(ri => ri.RecipeID == recipeId)
+                    .Include(ri => ri.Ingredient).ToListAsync();
 
-            var ingredients = recipeIngredients.Select(ri => ri.Ingredient).ToList();
+                var ingredients = recipeIngredients.Select(ri => ri.Ingredient).ToList();
 
-            return ingredients;
+                return ingredients;
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while deleting a recipe.", ex);
+                return new List<Ingredient>();
+            }
         }
 
         public async Task<List<Instruction>> GetInstructionsByRecipeIdAsync(int recipeId)
         {
-            return await _context.Instructions.Where(ins => ins.RecipeID == recipeId).ToListAsync();
+            try
+            {
+                return await _context.Instructions.Where(ins => ins.RecipeID == recipeId).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving instructions.", ex);
+                return new List<Instruction>();
+            }
         }
 
         public async Task AddIngredientToRecipeAsync(Recipe recipe, string ingredientName, string quantity, string quantityMeasure)
         {
-            var ingredient = new Ingredient
+            try
             {
-                Name = ingredientName,
-                Quantity = quantity,
-                QuantityUnit = quantityMeasure
-            };
-            _context.Ingredients.Add(ingredient);
+                var ingredient = new Ingredient
+                {
+                    Name = ingredientName,
+                    Quantity = quantity,
+                    QuantityUnit = quantityMeasure
+                };
+                _context.Ingredients.Add(ingredient);
 
-            var recipeIngredient = new RecipeIngredient
+                var recipeIngredient = new RecipeIngredient
+                {
+                    Recipe = recipe,
+                    Ingredient = ingredient,
+                    Quantity = quantity,
+                    QuantityUnit = quantityMeasure
+                };
+
+                _context.RecipeIngredients.Add(recipeIngredient);
+            }
+            catch (Exception ex)
             {
-                Recipe = recipe,
-                Ingredient = ingredient,
-                Quantity = quantity,
-                QuantityUnit = quantityMeasure
-            };
-
-            _context.RecipeIngredients.Add(recipeIngredient);
+                await LogExceptionAsync("An error has occured while adding ingredient to recipe.", ex);
+            }
         }
 
         public async Task AddInstructionToRecipeAsync(Recipe recipe, string instructionText)
         {
-            var instruction = new Instruction
+            try
             {
-                StepNumber = recipe.Instructions.Count + 1,
-                InstructionText = instructionText
-            };
+                var instruction = new Instruction
+                {
+                    StepNumber = recipe.Instructions.Count + 1,
+                    InstructionText = instructionText
+                };
 
-            recipe.Instructions.Add(instruction);
+                recipe.Instructions.Add(instruction);
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while adding instruction to recipe.", ex);
+            }
         }
 
         public async Task<Recipe> GetRecipeByIdAsync(int recipeId)
         {
-            var recipe = await _context.Recipes.FirstOrDefaultAsync(r => r.ID == recipeId);
-            if (recipe == null)
+            try
             {
-                throw new InvalidOperationException($"Recipe with ID '{recipeId}' not found.");
+                var recipe = await _context.Recipes
+                    .Include(r => r.RecipeIngredients)
+                        .ThenInclude(ri => ri.Ingredient)
+                    .Include(r => r.Instructions)
+                    .Include(r => r.RecipeImages)
+                    .FirstOrDefaultAsync(r => r.ID == recipeId);
+                if (recipe == null)
+                {
+                    throw new InvalidOperationException($"Recipe with ID '{recipeId}' not found.");
+                }
+                return recipe;
             }
-            return recipe;
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while adding instruction to recipe.", ex);
+                return new Recipe();
+            }
         }
+
         public async Task<List<Recipe>> GetRecipesByAuthorAsync(string authorId)
         {
-            return await _context.Recipes
-                .Where(r => r.AuthorID == authorId)
-                .OrderByDescending(r => r.DateCreated)
-                .ToListAsync();
+            try
+            {
+                return await _context.Recipes
+                    .Where(r => r.AuthorID == authorId)
+                    .OrderByDescending(r => r.DateCreated)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving recipes.", ex);
+                return new List<Recipe>();
+            }
         }
 
         private readonly HashSet<string> AllowedExtensions = new HashSet<string> { ".jpg", ".jpeg", ".png" };
-        private const long MaxFileSize = 10 * 1024 * 1024; // 10 MB
+        private const long MaxFileSize = 5242880; // 5 MB
 
-        private bool IsValidImage(string fileName)
+        private async Task<bool> IsValidImage(string fileName)
         {
-            var extension = Path.GetExtension(fileName).ToLowerInvariant();
-            return AllowedExtensions.Contains(extension);
+            try
+            {
+                var extension = Path.GetExtension(fileName).ToLowerInvariant();
+                return AllowedExtensions.Contains(extension);
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving recipes.", ex);
+                return false;
+            }
         }
 
         public async Task<string> UploadImageAsync(IBrowserFile file)
         {
-            if (file == null || file.Size == 0 || string.IsNullOrEmpty(file.Name) || !IsValidImage(file.Name) || file.Size > MaxFileSize)
+            try
             {
-                throw new ArgumentException("Invalid file or unsupported file type");
+                var isImageValid = await IsValidImage(file.Name);
+                if (file != null && file.Size > 0 && !string.IsNullOrEmpty(file.Name) && isImageValid && file.Size < MaxFileSize)
+                {
+                    return await SaveImageAsync(file);
+                }
             }
-
-            // Save the image and return its path
-            return await SaveImageAsync(file);
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while uploading the image.", ex);
+            }
+            return "";
         }
 
         private async Task<string> SaveImageAsync(IBrowserFile file)
@@ -144,52 +233,81 @@ namespace CookNet.Data
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    await file.OpenReadStream().CopyToAsync(fileStream);
+                    await file.OpenReadStream(MaxFileSize).CopyToAsync(fileStream);
                 }
 
                 return Path.Combine("uploads", uniqueFileName);
             }
             catch (Exception ex)
             {
-                // Log the error or handle it accordingly
-                throw new InvalidOperationException("Error saving image file", ex);
+                await LogExceptionAsync("An error has occured while saving the image.", ex);
             }
+            return "";
         }
 
         public async Task SaveChanges()
         {
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while saving changes to the database.", ex);
+            }
         }
 
         public async Task RemoveIngredientFromRecipeAsync(Recipe recipe, Ingredient ingredient)
         {
-            var recipeIngredient = await _context.RecipeIngredients.FirstOrDefaultAsync(ri => ri.RecipeID == recipe.ID && ri.IngredientID == ingredient.ID);
-
-            if (recipeIngredient != null)
+            try
             {
-                _context.RecipeIngredients.Remove(recipeIngredient);
-                await SaveChanges();
+                var recipeIngredient = await _context.RecipeIngredients.FirstOrDefaultAsync(ri => ri.RecipeID == recipe.ID && ri.IngredientID == ingredient.ID);
+
+                if (recipeIngredient != null)
+                {
+                    _context.RecipeIngredients.Remove(recipeIngredient);
+                    await SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while removing ingredient from recipe.", ex);
             }
         }
 
         public async Task RemoveInstructionFromRecipeAsync(Recipe recipe, Instruction instruction)
         {
-            var recipeInstruction = await _context.Instructions.FirstOrDefaultAsync(i => i.RecipeID == recipe.ID && i.ID == instruction.ID);
-
-            if (recipeInstruction != null)
+            try
             {
-                _context.Instructions.Remove(recipeInstruction);
-                await SaveChanges();
+                var recipeInstruction = await _context.Instructions.FirstOrDefaultAsync(i => i.RecipeID == recipe.ID && i.ID == instruction.ID);
+
+                if (recipeInstruction != null)
+                {
+                    _context.Instructions.Remove(recipeInstruction);
+                    await SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while removing instruction from recipe.", ex);
             }
         }
 
         public async Task<List<Recipe>> GetMostRecentRecipesAsync()
         {
-            return await _context.Recipes
-                .Include(r => r.Author)
-                .OrderByDescending(r => r.DateCreated)
-                .Take(10)
-                .ToListAsync();
+            try
+            {
+                return await _context.Recipes
+                    .Include(r => r.Author)
+                    .OrderByDescending(r => r.DateCreated)
+                    .Take(10)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving most recent recipes.", ex);
+                return new List<Recipe>();
+            }
         }
 
         //public async Task<List<Recipe>> GetTop10RecipesAsync()
@@ -199,140 +317,291 @@ namespace CookNet.Data
 
         public async Task<int> GetCookbookSavesCount(int recipeId)
         {
-            return await _context.CookbookRecipes
-                .Where(r => r.RecipeID == recipeId)
-                .CountAsync();
+            try
+            {
+                return await _context.CookbookRecipes
+                    .Where(r => r.RecipeID == recipeId)
+                    .CountAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving cookbook saves count.", ex);
+                return -1;
+            }
         }
 
         public async Task<int> GetLikeCountAsync(int recipeId)
         {
-            return await _context.RecipeRatings
-                .Where(r => r.RecipeID == recipeId)
-                .CountAsync();
+            try
+            {
+                return await _context.RecipeRatings
+                    .Where(r => r.RecipeID == recipeId)
+                    .CountAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving recipe likes count.", ex);
+                return -1;
+            }
         }
 
         public async Task<bool> IsRecipeLikedByUserAsync(int recipeId, string currentUserId)
         {
-            return await _context.RecipeRatings
+            try
+            {
+                return await _context.RecipeRatings
                 .AnyAsync(r => r.RecipeID == recipeId && r.UserID == currentUserId);
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving if the user liked the recipe.", ex);
+                return false;
+            }
         }
 
         public async Task<int> ToggleLikeAsync(int recipeId, bool isLiked, string currentUserId)
         {
-            var existingLike = await _context.RecipeRatings
-                .FirstOrDefaultAsync(r => r.RecipeID == recipeId && r.UserID == currentUserId);
+            try
+            {
+                var existingLike = await _context.RecipeRatings
+                    .FirstOrDefaultAsync(r => r.RecipeID == recipeId && r.UserID == currentUserId);
 
-            if (isLiked)
-            {
-                if (existingLike == null)
+                if (isLiked)
                 {
-                    var newLike = new RecipeRating
+                    if (existingLike == null)
                     {
-                        RecipeID = recipeId,
-                        UserID = currentUserId,
-                        CreatedDate = DateTime.UtcNow
-                    };
-                    _context.RecipeRatings.Add(newLike);
-                    await SaveChanges();
+                        var newLike = new RecipeRating
+                        {
+                            RecipeID = recipeId,
+                            UserID = currentUserId,
+                            CreatedDate = DateTime.UtcNow
+                        };
+                        _context.RecipeRatings.Add(newLike);
+                        await SaveChanges();
+                    }
                 }
-            }
-            else
-            {
-                if (existingLike != null) 
+                else
                 {
-                    _context.RecipeRatings.Remove(existingLike);
-                    await SaveChanges();
+                    if (existingLike != null)
+                    {
+                        _context.RecipeRatings.Remove(existingLike);
+                        await SaveChanges();
+                    }
                 }
+                return await _context.RecipeRatings.CountAsync(r => r.RecipeID == recipeId);
             }
-            return await _context.RecipeRatings.CountAsync(r => r.RecipeID == recipeId);
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while processing a like for a user.", ex);
+                return -1;
+            }
         }
 
         public async Task<List<RecipeComment>> GetCommentsByRecipeIdAsync(int recipeId)
         {
-            return await _context.Comments
-                .Where(c => c.RecipeID == recipeId)
-                .OrderByDescending(c => c.DateCreated)
-                .ToListAsync();
+            try
+            {
+                return await _context.Comments
+                    .Where(c => c.RecipeID == recipeId)
+                    .OrderByDescending(c => c.DateCreated)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while getting the comments for a recipe.", ex);
+                return new List<RecipeComment>();
+            }
         }
 
         public async Task AddCommentAsync(RecipeComment comment)
         {
-            _context.Comments.Add(comment);
-            await SaveChanges();
+            try
+            {
+                _context.Comments.Add(comment);
+                await SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while adding a comment to a recipe.", ex);
+            }
         }
 
         public async Task<bool> HasRepliesAsync(int commentId)
         {
-            return await _context.Comments.AnyAsync(c => c.ParentCommentID == commentId);
+            try
+            {
+                return await _context.Comments.AnyAsync(c => c.ParentCommentID == commentId);
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while determining if there are replies for this comment.", ex);
+                return false;
+            }
         }
 
         public async Task MarkCommentAsDeletedAsync(int commentId)
         {
-            var comment = await _context.Comments.FindAsync(commentId);
-            if (comment != null)
+            try
             {
-                comment.IsDeleted = true;
-                await SaveChanges();
+                var comment = await _context.Comments.FindAsync(commentId);
+                if (comment != null)
+                {
+                    comment.IsDeleted = true;
+                    await SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while marking this comment as deleted.", ex);
             }
         }
 
         public async Task UpdateCommentAsync(int commentId, string newCommentText)
         {
-            var comment = await _context.Comments
-                .FirstOrDefaultAsync(c => c.CommentID == commentId);
-
-            if (comment == null)
+            try
             {
-                throw new InvalidOperationException("Comment not found.");
+                var comment = await _context.Comments
+                    .FirstOrDefaultAsync(c => c.CommentID == commentId);
+
+                if (comment == null)
+                {
+                    throw new InvalidOperationException("Comment not found.");
+                }
+
+                comment.Comment = newCommentText;
+                comment.DateUpdated = DateTime.UtcNow;
+
+                _context.Comments.Update(comment);
+                await SaveChanges();
             }
-
-            comment.Comment = newCommentText;
-            comment.DateUpdated = DateTime.UtcNow;
-
-            _context.Comments.Update(comment);
-            await SaveChanges();
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while updating this comment.", ex);
+            }
         }
 
         public async Task DeleteCommentAsync(int commentId)
         {
-            var comment = await _context.Comments.FindAsync(commentId);
-            if (comment != null)
+            try
             {
-                _context.Comments.Remove(comment);
-                await SaveChanges();
+                var comment = await _context.Comments.FindAsync(commentId);
+                if (comment != null)
+                {
+                    _context.Comments.Remove(comment);
+                    await SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while deleting this comment.", ex);
             }
         }
 
         public async Task<List<RecipeComment>> GetRepliesAsync(int parentCommentId)
         {
-            return await _context.Comments
-                .Where(c => c.ParentCommentID == parentCommentId && !c.IsDeleted)
-                .OrderBy(c => c.DateCreated)
-                .ToListAsync();
+            try
+            {
+                return await _context.Comments
+                    .Where(c => c.ParentCommentID == parentCommentId && !c.IsDeleted)
+                    .OrderBy(c => c.DateCreated)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the replies to this comment.", ex);
+                return new List<RecipeComment>();
+            }
         }
 
         public async Task<PaginatedList<Recipe>> GetPaginatedRecipesBySearchQuery(DateTime startDate, DateTime endDate, string searchQuery, string category, string ethnicity, int pageIndex, int pageSize)
         {
-            var query = _context.Recipes
-                .Where(r => r.DateCreated >= startDate && r.DateCreated <= endDate)
-                .Where(r => string.IsNullOrEmpty(searchQuery) ||
-                            r.Name.ToLower().Contains(searchQuery.ToLower()) ||
-                            r.Description.ToLower().Contains(searchQuery.ToLower()) ||
-                            (r.PrepTime + r.CookTime).ToString().Contains(searchQuery))
-                .Where (r => string.IsNullOrEmpty(category) ||
-                            r.Category.ToLower().Contains(category.ToLower()))
-                .Where(r => string.IsNullOrEmpty(ethnicity) ||
-                            r.Ethnicity.ToLower().Contains(ethnicity.ToLower()));
+            try
+            {
+                var query = _context.Recipes
+                    .Where(r => r.DateCreated >= startDate && r.DateCreated <= endDate)
+                    .Where(r => string.IsNullOrEmpty(searchQuery) ||
+                        r.Name.ToLower().Contains(searchQuery.ToLower()) ||
+                        r.Description.ToLower().Contains(searchQuery.ToLower()) ||
+                        (r.PrepTime + r.CookTime).ToString().Contains(searchQuery))
+                    .Where(r => string.IsNullOrEmpty(category) ||
+                        r.Category.ToLower().Contains(category.ToLower()))
+                    .Where(r => string.IsNullOrEmpty(ethnicity) ||
+                        r.Ethnicity.ToLower().Contains(ethnicity.ToLower()));
 
-            var totalRecipes = await query.CountAsync();
+                var totalRecipes = await query.CountAsync();
 
-            var recipes = await query.Skip((pageIndex - 1) * pageSize)
-                                     .Include(r => r.Author)
-                                     .OrderByDescending(r => r.DateCreated)
-                                     .Take(pageSize)
-                                     .ToListAsync();
+                var recipes = await query.Skip((pageIndex - 1) * pageSize)
+                                         .Include(r => r.Author)
+                                         .OrderByDescending(r => r.DateCreated)
+                                         .Take(pageSize)
+                                         .ToListAsync();
 
-            return new PaginatedList<Recipe>(recipes, totalRecipes, pageIndex, pageSize);
+                return new PaginatedList<Recipe>(recipes, totalRecipes, pageIndex, pageSize);
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving recipes from the search query.", ex);
+                return new PaginatedList<Recipe>();
+            }
+        }
+
+        public async Task<List<RecipeCategory>> GetActiveRecipeCategories()
+        {
+            try
+            {
+                return await _context.RecipeCategories
+                    .Where(rc => rc.IsActive == true)
+                    .OrderBy(rc => rc.CategoryName)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the recipe categories.", ex);
+                return new List<RecipeCategory>();
+            }
+        }
+
+        public async Task<List<RecipeEthnicity>> GetActiveRecipeEthnicities()
+        {
+            try
+            {
+                return await _context.RecipeEthnicities
+                    .Where(re => re.IsActive == true)
+                    .OrderBy(re => re.EthnicityName)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the recipe ethnicities.", ex);
+                return new List<RecipeEthnicity>();
+            }
+        }
+
+        private async Task LogExceptionAsync(string message, Exception exception)
+        {
+            var logEntry = new ExceptionLog
+            {
+                PriorityLevel = DeterminePriority(exception),
+                Message = message,
+                Exception = exception.ToString(),
+                DateLogged = DateTime.Now,
+                CreatedBy = "RecipeService"
+            };
+
+            _context.Set<ExceptionLog>().Add(logEntry);
+            await SaveChanges();
+        }
+
+        private string DeterminePriority(Exception exception)
+        {
+            // Set priority based on exception type or other criteria
+            if (exception is ArgumentNullException || exception is NullReferenceException)
+                return "HIGH";
+            else if (exception is InvalidOperationException)
+                return "MED";
+
+            // Default to LOW for unclassified exceptions
+            return "LOW";
         }
     }
 }

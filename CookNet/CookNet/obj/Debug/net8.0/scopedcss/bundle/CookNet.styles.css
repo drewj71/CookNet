@@ -508,7 +508,7 @@ main[b-2tlxc31yxu] {
 }
 
 .add-ingredient-btn[b-n8opd8dmcj], .add-instruction-btn[b-n8opd8dmcj] {
-    margin-top: 38px;
+    margin-top: 30px;
 }
 
 .remove-ingredient[b-n8opd8dmcj] {
@@ -520,6 +520,10 @@ main[b-2tlxc31yxu] {
 
 .ingredient-span[b-n8opd8dmcj] {
     font-size: 16px;
+}
+
+.thumbnailimg-help[b-n8opd8dmcj] {
+    margin-bottom: 5px;
 }
 /* _content/CookNet/Components/Pages/EditCookbookDialog.razor.rz.scp.css */
 .ispublic-container[b-v6gdmryzka] {
@@ -632,11 +636,11 @@ main[b-2tlxc31yxu] {
 }
 
 .add-ingredient-btn[b-nwn678rb5z], .add-instruction-btn[b-nwn678rb5z] {
-    margin-top: 24px;
+    margin-top: 18px;
 }
 
 .save-cancel-btns[b-nwn678rb5z] {
-    margin-top: 22px;
+    margin-top: 15px;
 }
 
 .goback[b-nwn678rb5z] {
@@ -645,6 +649,10 @@ main[b-2tlxc31yxu] {
 
 .goback:hover[b-nwn678rb5z] {
     opacity: 75%;
+}
+
+.thumbnailimg-help[b-nwn678rb5z] {
+    margin-bottom: 5px;
 }
 /* _content/CookNet/Components/Pages/Home.razor.rz.scp.css */
 .divider-row[b-bv7obqaypn] {

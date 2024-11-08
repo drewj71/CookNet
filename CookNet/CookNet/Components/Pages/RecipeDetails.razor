@@ -73,7 +73,7 @@
                                 <p class="recipe-preptime"><strong>Prep Time:</strong> @Recipe.PrepTime mins</p>
                                 <p class="recipe-cooktime"><strong>Cook Time:</strong> @Recipe.CookTime mins</p>
                                 <p class="recipe-category"><strong>Category:</strong> @Recipe.Category</p>
-                                @if (Recipe.Ethnicity != "NA")
+                                @if (Recipe.Ethnicity != null)
                                 {
                                     <p class="recipe-ethnicity"><strong>Ethnicity:</strong> @Recipe.Ethnicity</p>
                                 }
@@ -272,7 +272,9 @@
 
     private async Task OpenCookbookDialogAsync(int recipeId)
     {
-        var parameters = new DialogParameters
+        if (currentUser != null)
+        {
+            var parameters = new DialogParameters
         {
             { "UserCookbooks", UserCookbooksList },
             { "RecipeID", recipeId },
@@ -280,20 +282,25 @@
             { "RefreshCookbooksCallback", EventCallback.Factory.Create(this, LoadUserCookbooks) }
         };
 
-        var options = new DialogOptions
+            var options = new DialogOptions
+                {
+                    MaxWidth = MaxWidth.Small,
+                    FullWidth = true
+                };
+
+            var dialog = await DialogService.ShowAsync<AddCookbookDialog>("Add to CookBook", parameters, options);
+            var result = await dialog.Result;
+
+            if (result != null && !result.Canceled)
             {
-                MaxWidth = MaxWidth.Small,
-                FullWidth = true
-            };
-
-        var dialog = await DialogService.ShowAsync<AddCookbookDialog>("Add to CookBook", parameters, options);
-        var result = await dialog.Result;
-
-        if (result != null && !result.Canceled)
+                Snackbar.Add("Recipe added successfully!", Severity.Success);
+                CookbookCount = await RecipeService.GetCookbookSavesCount(recipeId);
+                StateHasChanged();
+            }
+        }
+        else
         {
-            Snackbar.Add("Recipe added successfully!", Severity.Success);
-            CookbookCount = await RecipeService.GetCookbookSavesCount(recipeId);
-            StateHasChanged();
+            NavigationManager.NavigateTo($"/Account/Login");
         }
     }
 
