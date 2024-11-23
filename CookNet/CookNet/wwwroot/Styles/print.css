@@ -1,0 +1,50 @@
+﻿.card {
+    border: 5px solid rgb(28, 10, 0);
+    border-radius: 8px;
+}
+
+.card-header {
+    background-color: rgb(111, 78, 55) !important;
+    color: white !important;
+}
+
+.card-body {
+    background-color: #f2f2f2;
+}
+
+.card-title {
+    font-size: 2rem;
+}
+
+.ingredients-col {
+    padding: 0;
+    text-align: initial;
+    margin-left: 25px;
+    margin-right: -25px;
+}
+
+.serving-null {
+    margin-left: 0 !important;
+}
+
+.recipe-ingredients, .recipe-instructions {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.ingredients-list {
+    list-style-type: none;
+}
+
+.recipe-preptime,
+.recipe-cooktime,
+.recipe-category,
+.recipe-ethnicity {
+    margin: 0 10px 20px 0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.card-btns {
+    display: none;
+}

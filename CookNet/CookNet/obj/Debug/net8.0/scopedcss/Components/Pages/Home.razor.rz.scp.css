@@ -13,6 +13,10 @@
     font-size: 7rem;
 }
 
+.main-text[tabindex="-1"]:focus[b-bv7obqaypn] {
+    outline: none;
+}
+
 @media (max-width: 764px) {
     .main-text[b-bv7obqaypn] {
         font-size: 2.5rem;

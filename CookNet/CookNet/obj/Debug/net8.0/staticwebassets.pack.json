@@ -49,8 +49,12 @@
       "PackagePath": "staticwebassets\\DefaultRecipesImages\\Snack.jpeg"
     },
     {
-      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\JS\\site.js",
-      "PackagePath": "staticwebassets\\JS\\site.js"
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Styles\\app.css",
+      "PackagePath": "staticwebassets\\Styles\\app.css"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\Styles\\print.css",
+      "PackagePath": "staticwebassets\\Styles\\print.css"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\TestThumbnail.jpg",
@@ -953,16 +957,16 @@
       "PackagePath": "staticwebassets\\Uploads\\ffe4ac3c-4cba-47a4-a965-90be5ba2229d_AJProfilePicture.png"
     },
     {
-      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\app.css",
-      "PackagePath": "staticwebassets\\app.css"
-    },
-    {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\common_functions.js",
+      "PackagePath": "staticwebassets\\common_functions.js"
     },
     {
       "Id": "D:\\Users\\Andrew Jenks\\Documents\\Github\\CookNet\\CookNet\\CookNet\\wwwroot\\cooknetLogo.png",

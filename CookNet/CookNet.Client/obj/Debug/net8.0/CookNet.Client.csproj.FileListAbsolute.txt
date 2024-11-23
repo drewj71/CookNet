@@ -1039,6 +1039,20 @@ C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debu
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\CookNet..C3BC3A09.Up2Date
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\scopedcss\Pages\About.razor.rz.scp.css
 C:\Users\drewj\OneDrive\Documents\GitHub\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\scopedcss\projectbundle\CookNet.Client.bundle.scp.css
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Threading.Timer.dll
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Transactions.Local.dll
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.ValueTuple.dll
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Web.dll
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Windows.dll
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Xml.ReaderWriter.dll
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Xml.XDocument.dll
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Xml.XPath.dll
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Xml.XmlSerializer.dll
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.dll
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\dotnet.js
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\dotnet.native.js
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\jlqf8sf1q5.gz
+D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\ns3wl8qkro.gz
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\wwwroot\_framework\blazor.boot.json
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\wwwroot\_framework\blazor.webassembly.js
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\wwwroot\_framework\CookNet.Client.pdb
@@ -1625,31 +1639,19 @@ D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Threading.Tasks.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Threading.Thread.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Threading.ThreadPool.dll
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Threading.Timer.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Threading.dll
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Transactions.Local.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Transactions.dll
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.ValueTuple.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Web.HttpUtility.dll
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Web.dll
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Windows.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Xml.Linq.dll
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Xml.ReaderWriter.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Xml.Serialization.dll
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Xml.XDocument.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Xml.XPath.XDocument.dll
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Xml.XPath.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Xml.XmlDocument.dll
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Xml.XmlSerializer.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Xml.dll
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\WindowsBase.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\mscorlib.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\netstandard.dll
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\System.Private.CoreLib.dll
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\dotnet.js
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\dotnet.js.map
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\dotnet.native.js
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\dotnet.native.wasm
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\dotnet.runtime.js
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\bin\Debug\net8.0\dotnet.runtime.js.map
@@ -1895,7 +1897,6 @@ D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\46zwh6qaic.gz
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\zn1gjowm90.gz
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\y57qv7ekfa.gz
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\jlqf8sf1q5.gz
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\2fg25dsb7y.gz
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\zp6p40zugr.gz
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\ojj88gmdns.gz
@@ -1982,7 +1983,6 @@ D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\l283xru7im.gz
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\w5widsm9tj.gz
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\cwl6xcy4xl.gz
-D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\ns3wl8qkro.gz
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\l2e954wk4x.gz
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\nd4gdcx1c5.gz
 D:\Users\Andrew Jenks\Documents\Github\CookNet\CookNet\CookNet.Client\obj\Debug\net8.0\compressed\y8s6li04kd.gz

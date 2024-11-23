@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <Folder Include="Components\Services\" />
-    <Folder Include="wwwroot\JS\" />
     <Folder Include="wwwroot\DefaultRecipesImages\" />
     <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>

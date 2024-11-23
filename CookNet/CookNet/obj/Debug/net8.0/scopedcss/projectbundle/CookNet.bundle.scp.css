@@ -558,6 +558,15 @@ main[b-2tlxc31yxu] {
         width: 100%;
     }
 
+.edit-ingredients[b-nwn678rb5z], .edit-instructions[b-nwn678rb5z] {
+    background-color: rgba(111, 78, 55, 0.7);
+    color: white;
+    border: 5px solid rgb(28, 10, 0);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
 .ingredients[b-nwn678rb5z], .instructions[b-nwn678rb5z] {
     flex: 1; /* Equal width for both sections */
 }
@@ -666,6 +675,10 @@ main[b-2tlxc31yxu] {
 
 .main-text[b-bv7obqaypn] {
     font-size: 7rem;
+}
+
+.main-text[tabindex="-1"]:focus[b-bv7obqaypn] {
+    outline: none;
 }
 
 @media (max-width: 764px) {
@@ -850,11 +863,26 @@ main[b-2tlxc31yxu] {
     text-align: center;
 }
 
+.recipe-author-card[b-j9rgftzswo] {
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+    .recipe-author-card a[b-j9rgftzswo] {
+        color: navajowhite;
+    }
+
+        .recipe-author-card a:hover[b-j9rgftzswo] {
+            color: lightgray;
+        }
+
 .recipe-preptime[b-j9rgftzswo], 
 .recipe-cooktime[b-j9rgftzswo], 
 .recipe-category[b-j9rgftzswo], 
 .recipe-ethnicity[b-j9rgftzswo] {
-    margin: 0 10px 20px 0;
+    margin: 0 20px 20px 0;
     font-size: 1rem;
     font-weight: 500;
 }
@@ -883,12 +911,21 @@ main[b-2tlxc31yxu] {
 }
 
 .card[b-j9rgftzswo] {
+    border: 5px solid rgb(28, 10, 0);
+    border-radius: 8px;
+}
+
+.card-header[b-j9rgftzswo] {
+    background-color: rgb(111, 78, 55) !important;
+    color: white !important;
+}
+
+.card-body[b-j9rgftzswo] {
     background-color: #f2f2f2;
 }
 
 .card-title[b-j9rgftzswo] {
     font-size: 2rem;
-    margin-left: 20px;
 }
 
 .ingredients-col[b-j9rgftzswo] {
