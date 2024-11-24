@@ -201,3 +201,59 @@
     color: gray;
     cursor: pointer;
 }
+
+.bi-twitter-x, .bi-facebook, .bi-instagram, .bi-envelope-fill, .bi-link {
+    color: white;
+}
+
+.share-x {
+    padding: 5px 20px;
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: #000000;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.share-label {
+    padding: 0 10px;
+    color: white;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.share-facebook {
+    padding: 5px 20px;
+    border: 2px solid #316FF6;
+    border-radius: 8px;
+    background-color: #316FF6;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/*.share-instagram {
+    padding: 5px 20px;
+    border: 2px solid #8134AF;
+    border-radius: 8px;
+    background-color: #8134AF;
+    display: inline-block;
+    cursor: pointer;
+}*/
+
+.share-email {
+    padding: 5px 20px;
+    border: 2px solid gray;
+    border-radius: 8px;
+    background-color: gray;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.share-link {
+    padding: 5px 20px;
+    border: 2px solid forestgreen;
+    border-radius: 8px;
+    background-color: forestgreen;
+    display: inline-block;
+    cursor: pointer;
+}

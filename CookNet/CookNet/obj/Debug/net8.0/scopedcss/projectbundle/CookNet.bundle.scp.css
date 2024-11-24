@@ -1005,6 +1005,62 @@ main[b-2tlxc31yxu] {
     color: gray;
     cursor: pointer;
 }
+
+.bi-twitter-x[b-j9rgftzswo], .bi-facebook[b-j9rgftzswo], .bi-instagram[b-j9rgftzswo], .bi-envelope-fill[b-j9rgftzswo], .bi-link[b-j9rgftzswo] {
+    color: white;
+}
+
+.share-x[b-j9rgftzswo] {
+    padding: 5px 20px;
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: #000000;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.share-label[b-j9rgftzswo] {
+    padding: 0 10px;
+    color: white;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.share-facebook[b-j9rgftzswo] {
+    padding: 5px 20px;
+    border: 2px solid #316FF6;
+    border-radius: 8px;
+    background-color: #316FF6;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/*.share-instagram {
+    padding: 5px 20px;
+    border: 2px solid #8134AF;
+    border-radius: 8px;
+    background-color: #8134AF;
+    display: inline-block;
+    cursor: pointer;
+}*/
+
+.share-email[b-j9rgftzswo] {
+    padding: 5px 20px;
+    border: 2px solid gray;
+    border-radius: 8px;
+    background-color: gray;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.share-link[b-j9rgftzswo] {
+    padding: 5px 20px;
+    border: 2px solid forestgreen;
+    border-radius: 8px;
+    background-color: forestgreen;
+    display: inline-block;
+    cursor: pointer;
+}
 /* _content/CookNet/Components/Pages/UserCookbooks.razor.rz.scp.css */
 .usercookbooks-container[b-zdxd9okrfd] {
     color: black;
