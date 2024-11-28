@@ -8,5 +8,6 @@ namespace CookNet.Data
         public string Name { get; set; }
         public string Quantity { get; set; }
         public string? QuantityUnit { get; set; }
+        public double? ToGrams { get; set; }
     }
 }

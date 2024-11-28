@@ -36,6 +36,7 @@ builder.Services.AddScoped<DbContextFactory>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<RecipeService>();
 builder.Services.AddScoped<CookbookService>();
+builder.Services.AddHttpClient<NutritionService>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options =>

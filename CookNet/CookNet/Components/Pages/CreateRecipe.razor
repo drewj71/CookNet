@@ -11,6 +11,7 @@
 @inject UserManager<ApplicationUser> UserManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject RecipeService RecipeService
+@inject NutritionService NutritionService
 @inject NavigationManager NavigationManager
 @inject ISnackbar Snackbar
 @rendermode InteractiveServer
@@ -21,153 +22,214 @@
 <div class="create-recipe-container">
     <h3 class="create-recipe-title">Create a New Recipe</h3>
     <hr />
+
     <MudForm Model="@Recipe" @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-        <div class="row">
-            <div class="form-group col-md-6">
-                <MudTextField T="string" Label="Recipe Name" @bind-Value="@Recipe.Name" Required="true" RequiredError="Recipe Name is required!" Variant="Variant.Outlined"
-                    Error="@(!isNameValid)" ErrorText="Required" Immediate="true" @onblur="ValidateRecipeName" />
+        <div class="recipe-details-section">
+            <div class="col-md-12 d-flex align-items-start" @onclick="ToggleRecipeDetailsSection" style="cursor: pointer;">
+                <h3 class="section-title">Recipe Details</h3>
+                <i class="open-section @(RecipeDetailsSectionIcon)"></i>
             </div>
-            <div class="form-group col-md-6">
-                <MudTextField T="string" Label="Description" @bind-Value="@Recipe.Description" Required="false" Variant="Variant.Outlined" />
-            </div>
-        </div>
-        <div class="row d-flex">
-            <div class="col-md-6 d-flex flex-column">
-                @if (Recipe.ThumbnailImage != null)
-                {
-                    <MudImage Src="@Recipe.ThumbnailImage" Alt="Thumbnail Image" Class="mb-2"
-                              Style="width: 400px; height: auto;" />
-                    <div class="col-md-6 d-flex flex-column px-3">
+            <div class="recipe-details-body" style="@(RecipeDetailsSectionOpen ? "display:block;" : "display:none;")">
+                <hr />
+                <div class="row">
+                    <div class="col-md-12 d-flex align-items-center justify-content-center">
+                        @if (Recipe.ThumbnailImage != null)
+                        {
+                            <MudImage Src="@Recipe.ThumbnailImage" Alt="Thumbnail Image" Class="mb-2"
+                                      Style="width: 50%; height: auto; object-fit: cover;" />
+                            @* <div class="col-md-6 d-flex px-3">
                         <button class="btn btn-danger" type="button" @onclick="RemoveThumbnail">Remove</button>
-                    </div>
-                }
-
-                @if (showFileUpload)
-                {
-                    <div class="thumbnailimg-input col-md-4">
-                        <em><p class="thumbnailimg-help" style="@(IsFileTooBig ? "color: red;" : "")">Max file size: 5 MB</p></em>
-                        <MudFileUpload T="IBrowserFile" Accept=".png, .jpg" FilesChanged="HandleThumbnailImageSelected" MaximumFileCount="10">
-                            <ActivatorContent>
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.CloudUpload">
-                                    Choose Image
-                                </MudButton>
-                            </ActivatorContent>
-                        </MudFileUpload>
-                    </div>
-                }
-            </div>
-            <div class="col-md-6 d-flex flex-column">
-                <MudTextField T="string" Label="Recipe Story" @bind-Value="@Recipe.RecipeStory" Lines="10" Required="true" RequiredError="Recipe Story is required!" Variant="Variant.Outlined"
-                    Error="@(!isStoryValid)" ErrorText="Required" Immediate="true" @onblur="ValidateRecipeStory" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-8 col-md-2 form-group">
-                <MudNumericField T="int" Label="Prep Time" @bind-Value="@Recipe.PrepTime" Required="true" RequiredError="Prep time is required!" 
-                    Variant="Variant.Outlined" Error="@(!isPrepValid)" ErrorText="Required" Immediate="true" @onblur="ValidatePrepTime" />
-            </div>
-            <div class="col-sm-8 col-md-2 form-group">
-                <MudNumericField T="int" Label="Cook Time" @bind-Value="@Recipe.CookTime" Required="true" RequiredError="Cook time is required!"
-                    Variant="Variant.Outlined" Error="@(!isCookTimeValid)" ErrorText="Required" Immediate="true" @onblur="ValidateCookTime" />
-
-            </div>
-            <div class="col-sm-8 col-md-2 form-group">
-                <MudNumericField T="int?" Label="Serving Size" @bind-Value="@Recipe.Servings" Required="false" Variant="Variant.Outlined" />
-            </div>
-            <div class="col-sm-8 col-md-3 form-group">
-                <MudSelect T="string" @bind-Value="@Recipe.Category" Label="Select a Category" Placeholder="Category"
-                           Variant="Variant.Outlined" Clearable="true">
-                    @if (RecipeCategories != null)
-                    {
-                        @foreach (var cat in RecipeCategories)
-                        {
-                            <MudSelectItem Value="@(cat.CategoryName)">@cat.CategoryName</MudSelectItem>
+                        </div> *@
                         }
-                    }
-                </MudSelect>
-            </div>
-            <div class="col-sm-8 col-md-3 form-group">
-                <MudSelect T="string" @bind-Value="@Recipe.Ethnicity" Label="Select an Ethnicity" Placeholder="Ethnicity"
-                           Variant="Variant.Outlined" Clearable="true">
-                    @if (RecipeEthnicities != null)
-                    {
-                        @foreach (var eth in RecipeEthnicities)
+
+                        @if (showFileUpload)
                         {
-                            <MudSelectItem Value="@(eth.EthnicityName)">@eth.EthnicityName</MudSelectItem>
+                            <div class="thumbnailimg-input col-md-12">
+                                <em><p class="thumbnailimg-help text-center" style="@(IsFileTooBig ? "color: red;" : "")">Max file size: 5 MB</p></em>
+                                <MudFileUpload Class="align-items-center" T="IBrowserFile" Accept=".png, .jpg" FilesChanged="HandleThumbnailImageSelected" MaximumFileCount="10">
+                                    <ActivatorContent>
+                                        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.CloudUpload">
+                                            Choose Thumbnail Image
+                                        </MudButton>
+                                    </ActivatorContent>
+                                </MudFileUpload>
+                            </div>
                         }
-                    }
-                </MudSelect>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col-md-5 form-group">
-                        <MudTextField T="string" Label="Ingredient Name" @bind-Value="@NewIngredientName" Variant="Variant.Outlined"
-                            Error="@(!isIngNameValid || !isIngredientsAdded)" ErrorText="Required" Immediate="true" @onblur="ValidateIngredientName" />
+                    <div class="form-group col-md-6">
+                        <MudTextField T="string" Label="Recipe Name" @bind-Value="@Recipe.Name" Required="true" RequiredError="Recipe Name is required!" Variant="Variant.Outlined"
+                                      Error="@(!isNameValid)" ErrorText="Required" Immediate="true" @onblur="ValidateRecipeName" />
                     </div>
-                    <div class="col-md-2 form-group">
-                        <MudTextField T="string" Label="Quantity" @bind-Value="@NewIngredientQuantity" Variant="Variant.Outlined" 
-                            Error="@(!isQuantityValid || !isIngredientsAdded)" ErrorText="Required" Immediate="true" @onblur="ValidateIngredientQuantity" />
+                    <div class="form-group col-md-6">
+                        <MudTextField T="string" Label="Description" @bind-Value="@Recipe.Description" Required="false" Variant="Variant.Outlined" />
                     </div>
-                    <div class="col-md-2 form-group">
-                        <MudTextField T="string" Label="Unit" @bind-Value="@NewIngredientQuantityUnit" Variant="Variant.Outlined" />
+                </div>
+                <div class="row d-flex flex-wrap">
+                    <div class="col-md-8 d-flex flex-column">
+                        <MudTextField T="string" Label="Recipe Story" @bind-Value="@Recipe.RecipeStory" Required="true" Lines="17" RequiredError="Recipe Story is required!" Variant="Variant.Outlined"
+                                      Error="@(!isStoryValid)" ErrorText="Required" Immediate="true" @onblur="ValidateRecipeStory" />
                     </div>
-                    <div class="col-md-3 add-ingredient-btn">
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="AddIngredientAsync">Add Ingredient</MudButton>
+                    <div class="col-md-4">
+                        <div class="col-md-12 form-group">
+                            <MudNumericField T="int" Label="Prep Time" @bind-Value="@Recipe.PrepTime" Required="true" RequiredError="Prep time is required!"
+                                             Variant="Variant.Outlined" Error="@(!isPrepValid)" ErrorText="Required" Immediate="true" @onblur="ValidatePrepTime" />
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <MudNumericField T="int" Label="Cook Time" @bind-Value="@Recipe.CookTime" Required="true" RequiredError="Cook time is required!"
+                                             Variant="Variant.Outlined" Error="@(!isCookTimeValid)" ErrorText="Required" Immediate="true" @onblur="ValidateCookTime" />
+
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <MudNumericField T="int?" Label="Serving Size" @bind-Value="@Recipe.Servings" Required="false" Variant="Variant.Outlined" />
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <MudSelect T="string" @bind-Value="@Recipe.Category" Label="Select a Category" Placeholder="Category"
+                                       Variant="Variant.Outlined" Clearable="true">
+                                @if (RecipeCategories != null)
+                                {
+                                    @foreach (var cat in RecipeCategories)
+                                    {
+                                        <MudSelectItem Value="@(cat.CategoryName)">@cat.CategoryName</MudSelectItem>
+                                    }
+                                }
+                            </MudSelect>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <MudSelect T="string" @bind-Value="@Recipe.Ethnicity" Label="Select an Ethnicity" Placeholder="Ethnicity"
+                                       Variant="Variant.Outlined" Clearable="true">
+                                @if (RecipeEthnicities != null)
+                                {
+                                    @foreach (var eth in RecipeEthnicities)
+                                    {
+                                        <MudSelectItem Value="@(eth.EthnicityName)">@eth.EthnicityName</MudSelectItem>
+                                    }
+                                }
+                            </MudSelect>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+            </div>
+            <hr />
+        </div>
+
+        <div class="ingredients-section">
+            <div class="col-md-12 d-flex align-items-start" @onclick="ToggleIngredientsSection" style="cursor: pointer;">
+                <h3 class="section-title">Ingredients & Instructions</h3>
+                <i class="open-section @(IngredientsSectionIcon)"></i>
+            </div>
+            <div class="ingredients-body" style="@(IngredientsSectionOpen ? "display:block;" : "display:none;")">
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5 form-group">
+                                <MudTextField T="string" Label="Ingredient Name" @bind-Value="@NewIngredientName" Variant="Variant.Outlined"
+                                              Error="@(!isIngNameValid || !isIngredientsAdded)" ErrorText="Required" Immediate="true" @onblur="ValidateIngredientName" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <MudTextField T="string" Label="Quantity" @bind-Value="@NewIngredientQuantity" Variant="Variant.Outlined"
+                                              Error="@(!isQuantityValid || !isIngredientsAdded)" ErrorText="Required" Immediate="true" @onblur="ValidateIngredientQuantity" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <MudTextField T="string" Label="Unit" @bind-Value="@NewIngredientQuantityUnit" Variant="Variant.Outlined" />
+                            </div>
+                            <div class="col-md-3 add-ingredient-btn">
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="AddIngredientAsync">Add Ingredient</MudButton>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-9 form-group">
+                                <MudTextField T="string" Label="Instruction" @bind-Value="@NewInstructionText" Variant="Variant.Outlined"
+                                              Error="@(!isInstructionValid || !isInstructionsAdded)" ErrorText="Required" Immediate="true" @onblur="ValidateInstruction" />
+                            </div>
+                            <div class="col-md-3 add-instruction-btn">
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="AddInstructionAsync">Add Instruction</MudButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        @if (AddedIngredients.Any())
+                        {
+                            <div style="background-color: #f2f2f2; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+                                <h4>Added Ingredients:</h4>
+                                <ul class="list-unstyled">
+                                    @foreach (var ingredient in AddedIngredients)
+                                    {
+                                        <li>
+                                            <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveIngredient(ingredient)"></i>
+                                            <span class="ingredient-span">@($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Name} {(ingredient.ToGrams != null ? ingredient.ToGrams + "g" : null)}")</span>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-6">
+                        @if (AddedInstructions.Any())
+                        {
+                            <div style="background-color: #f2f2f2; padding: 10px; margin-bottom: 10px;">
+                                <h4>Added Instructions:</h4>
+                                <ul class="list-unstyled">
+                                    @foreach (var instruction in AddedInstructions)
+                                    {
+                                        <li>
+                                            <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveInstruction(instruction)"></i>
+                                            <span class="ingredient-span">@($"{instruction.InstructionText}")</span>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <hr />
+        </div>
+
+        <div class="nutrition-section">
+            <div class="col-md-12 d-flex align-items-start" @onclick="ToggleNutritionSection" style="cursor: pointer;">
+                <h3 class="section-title">Nutritional Info</h3>
+                <i class="open-section @(NutritionSectionIcon)"></i>
+            </div>
+            <div class="ingredients-body" style="@(NutritionSectionOpen ? "display:block;" : "display:none;")">
+                <hr />
                 <div class="row">
-                    <div class="col-md-9 form-group">
-                        <MudTextField T="string" Label="Instruction" @bind-Value="@NewInstructionText" Variant="Variant.Outlined" 
-                            Error="@(!isInstructionValid || !isInstructionsAdded)" ErrorText="Required" Immediate="true" @onblur="ValidateInstruction" />
-                    </div>
-                    <div class="col-md-3 add-instruction-btn">
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="AddInstructionAsync">Add Instruction</MudButton>
+                    <div class="col-md-12">
+                        <p class="totalCalories">Calories: @(Calories > 0 ? Math.Round(Calories,2) : null) @(CaloriesUnit ?? "")</p>
+                        <p class="totalProtein">Protein: @(Protein > 0 ? Math.Round(Protein, 2) : null) @(ProteinUnit ?? "")</p>
+                        <p class="totalFat">Fat: @(Fat > 0 ? Math.Round(Fat,2) : null) @(FatUnit ?? "")</p>
+                        <p class="totalCarbs">Carbohydrates: @(Carbs > 0 ? Math.Round(Carbs, 2) : null) @(CarbsUnit ?? "")</p>
+                        <p class="totalSugar">Sugar: @(Sugar > 0 ? Math.Round(Sugar,2) : null) @(SugarUnit ?? "")</p>
+                        <p class="totalFiber">Fiber: @(Fiber > 0 ? Math.Round(Fiber,2) : null) @(FiberUnit ?? "")</p>
+                        <p class="totalCalcium">Calcium: @(Calcium > 0 ? Math.Round(Calcium,2) : null) @(CalciumUnit ?? "")</p>
+                        <p class="totalSodium">Sodium: @(Sodium > 0 ? Math.Round(Sodium,2) : null) @(SodiumUnit ?? "")</p>
+                        <p class="totalIron">Iron: @(Iron > 0 ? Math.Round(Iron,2) : null) @(IronUnit ?? "")</p>
+                        <p class="totalVitaminA">Vitamin A: @(VitaminA > 0 ? Math.Round(VitaminA,2) : null) @(VitaminAUnit ?? "")</p>
+                        <p class="totalVitaminC">Vitamin C: @(VitaminC > 0 ? Math.Round(VitaminC,2) : null) @(VitaminCUnit ?? "")</p>
+                        <p class="totalThiamin">Thiamin: @(Thiamin > 0 ? Math.Round(Thiamin,2) : null) @(ThiaminUnit ?? "")</p>
+                        <p class="totalRiboflavin">Riboflavin: @(Riboflavin > 0 ? Math.Round(Riboflavin, 2) : null) @(RiboflavinUnit ?? "")</p>
+                        <p class="totalNiacin">Niacin: @(Niacin > 0 ? Math.Round(Niacin,2) : null) @(NiacinUnit ?? "")</p>
+                        <p class="totalCholesterol">Cholesterol: @(Cholesterol > 0 ? Math.Round(Cholesterol,2) : null) @(CholesterolUnit ?? "")</p>
+                        <p class="totalTransFat">Total Trans Fat: @(TotalTransFat > 0 ? Math.Round(TotalTransFat,2) : null) @(TotalTransFatUnit ?? "")</p>
+                        <p class="totalSatFat">Total Saturated Fat: @(TotalSatFat > 0 ? Math.Round(TotalSatFat,2) : null) @(TotalSatFatUnit ?? "")</p>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                @if (AddedIngredients.Any())
-                {
-                    <div style="background-color: #f2f2f2; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
-                        <h4>Added Ingredients:</h4>
-                        <ul class="list-unstyled">
-                            @foreach (var ingredient in AddedIngredients)
-                            {
-                                <li>
-                                    <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveIngredient(ingredient)"></i>
-                                    <span class="ingredient-span">@($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Name}")</span>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                }
-            </div>
-            <div class="col-md-6">
-                @if (AddedInstructions.Any())
-                {
-                    <div style="background-color: #f2f2f2; padding: 10px; margin-bottom: 10px;">
-                        <h4>Added Instructions:</h4>
-                        <ul class="list-unstyled">
-                            @foreach (var instruction in AddedInstructions)
-                            {
-                                <li>
-                                    <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveInstruction(instruction)"></i>
-                                    <span class="ingredient-span">@($"{instruction.InstructionText}")</span>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                }
-            </div>
+            <hr />
         </div>
         <div class="col-md-12 mt-3">
-            <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="HandleSubmit">Submit</MudButton>
+            <div class="sumbit-btn d-flex justify-content-center">
+                <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="HandleSubmit" Style="padding-left:200px; padding-right:200px;">Submit</MudButton>
+            </div>
         </div>
     </MudForm>
 </div>
@@ -205,12 +267,30 @@
     private List<RecipeEthnicity> RecipeEthnicities;
     private bool IsFileTooBig = false;
 
+    private string RecipeDetailsSectionIcon = "bi bi-caret-up-fill";
+    private string IngredientsSectionIcon = "bi bi-caret-down-fill";
+    private string InstructionsSectionIcon = "bi bi-caret-down-fill";
+    private string NutritionSectionIcon = "bi bi-caret-down-fill";
+
+    private bool RecipeDetailsSectionOpen = true;
+    private bool IngredientsSectionOpen = false;
+    private bool InstructionsSectionOpen = false;
+    private bool NutritionSectionOpen = false;
+
+    private List<FoodItem> AllNutrients = new();
+    private List<string> TotalIngredients = new();
+    private double Calories = 0, Protein = 0, Fat = 0, Carbs = 0, Sugar = 0, Fiber = 0, Calcium = 0, Sodium = 0, Iron = 0, VitaminA = 0;
+    private double VitaminC = 0, Thiamin = 0, Riboflavin = 0, Niacin = 0, Cholesterol = 0, TotalTransFat = 0, TotalSatFat = 0;
+    private string? CaloriesUnit, ProteinUnit, FatUnit, CarbsUnit, SugarUnit, FiberUnit, CalciumUnit, SodiumUnit, IronUnit, VitaminAUnit;
+    private string? VitaminCUnit, ThiaminUnit, RiboflavinUnit, NiacinUnit, CholesterolUnit, TotalTransFatUnit, TotalSatFatUnit;
+
     protected override async void OnInitialized()
     {
         Recipe = new Recipe();
         AddedIngredients = new List<Ingredient>();
         AddedInstructions = new List<Instruction>();
         AddedRecipeStory = new List<RecipeStory>();
+        AllNutrients = new List<FoodItem>();
     }
 
     protected override async Task OnInitializedAsync()
@@ -234,17 +314,148 @@
         return !isValid && (value == "Select One" || string.IsNullOrEmpty(value)) ? "border: 1px solid red;" : "border: 1px solid initial;";
     }
 
+    public double? ConvertToGrams(string userInput, string householdServingFullText, double servingSizeInGrams)
+    {
+        // Step 1: Parse household serving to get quantity and unit
+        var householdParts = householdServingFullText.Split(' ', 2);
+        if (householdParts.Length != 2)
+            throw new ArgumentException("Invalid household serving format.");
+
+        if (!double.TryParse(householdParts[0], out double householdQuantity))
+            throw new ArgumentException("Invalid quantity in household serving.");
+
+        string householdUnit = householdParts[1].ToLower();
+
+        // Step 2: Parse user input to extract quantity and unit
+        var userParts = userInput.Split(' ', 2);
+        if (userParts.Length != 2)
+            throw new ArgumentException("Invalid user input format.");
+
+        if (!double.TryParse(userParts[0], out double userQuantity))
+            throw new ArgumentException("Invalid quantity in user input.");
+
+        string userUnit = userParts[1].ToLower();
+
+        double householdQuantityInGrams = NutritionService.ConvertToGrams(householdUnit, householdQuantity);
+        double userQuantityInGrams = NutritionService.ConvertToGrams(userUnit, userQuantity);
+
+        double conversionFactor = servingSizeInGrams / householdQuantityInGrams;
+        return userQuantityInGrams * conversionFactor > 0 ? userQuantityInGrams * conversionFactor : null;
+    }
+
+
     private async Task AddIngredientAsync()
     {
         ValidateIngredientName();
         ValidateIngredientQuantity();
         if (isIngNameValid && isQuantityValid)
         {
+            var nutrients = await NutritionService.GetFoodDetailsAsync(NewIngredientName);
+            double? grams = null;
+            if (nutrients != null)
+            {
+                foreach (var nutrient in nutrients.FoodNutrients)
+                {
+                    if (nutrient.NutrientName.ToUpper().Contains("PROTEIN"))
+                    {
+                        Protein += nutrient.Value;
+                        ProteinUnit = Protein > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("TOTAL LIPID"))
+                    {
+                        Fat += nutrient.Value;
+                        FatUnit = Fat > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("CARBOHYDRATE"))
+                    {
+                        Carbs += nutrient.Value;
+                        CarbsUnit = Carbs > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("ENERGY"))
+                    {
+                        Calories += nutrient.Value;
+                        CaloriesUnit = Calories > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("SUGAR"))
+                    {
+                        Sugar += nutrient.Value;
+                        SugarUnit = Sugar > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("FIBER"))
+                    {
+                        Fiber += nutrient.Value;
+                        FiberUnit = Fiber > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("CALCIUM"))
+                    {
+                        Calcium += nutrient.Value;
+                        CalciumUnit = Calcium > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("SODIUM"))
+                    {
+                        Sodium += nutrient.Value;
+                        SodiumUnit = Sodium > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("IRON"))
+                    {
+                        Iron += nutrient.Value;
+                        IronUnit = Iron > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("VITAMINA"))
+                    {
+                        VitaminA += nutrient.Value;
+                        VitaminAUnit = VitaminA > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("VITAMINC"))
+                    {
+                        VitaminC += nutrient.Value;
+                        VitaminCUnit = VitaminC > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("THIAMIN"))
+                    {
+                        Thiamin += nutrient.Value;
+                        ThiaminUnit = Thiamin > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("RIBOFLAVIN"))
+                    {
+                        Riboflavin += nutrient.Value;
+                        RiboflavinUnit = Riboflavin > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("NIACIN"))
+                    {
+                        Niacin += nutrient.Value;
+                        NiacinUnit = Niacin > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("CHOLESTEROL"))
+                    {
+                        Cholesterol += nutrient.Value;
+                        CholesterolUnit = Cholesterol > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("TRANS"))
+                    {
+                        TotalTransFat += nutrient.Value;
+                        TotalTransFatUnit = TotalTransFat > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                    else if (nutrient.NutrientName.ToUpper().Contains("SATURATED"))
+                    {
+                        TotalSatFat += nutrient.Value;
+                        TotalSatFatUnit = TotalSatFat > 0 ? nutrient.UnitName.ToLower() : null;
+                    }
+                }
+                AllNutrients.Add(nutrients);
+                TotalIngredients.Add(nutrients.Ingredients);
+                if (!string.IsNullOrEmpty(NewIngredientQuantityUnit) && nutrients.HouseholdServingFullText != null)
+                {
+                    grams = ConvertToGrams(NewIngredientQuantity + " " + NewIngredientQuantityUnit, nutrients.HouseholdServingFullText, nutrients.ServingSize);
+                }
+            }
+
             AddedIngredients.Add(new Ingredient
             {
                 Name = NewIngredientName,
                 Quantity = NewIngredientQuantity,
-                QuantityUnit = NewIngredientQuantityUnit
+                QuantityUnit = NewIngredientQuantityUnit,
+                ToGrams = grams
             });
 
             NewIngredientName = string.Empty;
@@ -301,6 +512,29 @@
         ThumbnailImage = null;
         Recipe.ThumbnailImage = null;
         showFileUpload = true;
+    }
+
+    private void ToggleRecipeDetailsSection()
+    {
+        RecipeDetailsSectionOpen = !RecipeDetailsSectionOpen;
+        RecipeDetailsSectionIcon = RecipeDetailsSectionOpen ? "bi bi-caret-up-fill" : "bi bi-caret-down-fill";
+    }
+
+    private void ToggleIngredientsSection()
+    {
+        IngredientsSectionOpen = !IngredientsSectionOpen;
+        IngredientsSectionIcon = IngredientsSectionOpen ? "bi bi-caret-up-fill" : "bi bi-caret-down-fill";
+    }
+
+    private void ToggleNutritionSection()
+    {
+        NutritionSectionOpen = !NutritionSectionOpen;
+        NutritionSectionIcon = NutritionSectionOpen ? "bi bi-caret-up-fill" : "bi bi-caret-down-fill";
+
+        if (AllNutrients.Count > 0)
+        {
+            
+        }
     }
 
     private bool CreateNewRecipe()

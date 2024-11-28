@@ -59,3 +59,9 @@
 .thumbnailimg-help {
     margin-bottom: 5px;
 }
+
+.open-section {
+    font-size: 1.5rem;
+    margin-left: 10px;
+    padding-top: 3px;
+}

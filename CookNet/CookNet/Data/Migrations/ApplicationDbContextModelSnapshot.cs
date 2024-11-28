@@ -231,6 +231,9 @@ namespace CookNet.Migrations
                     b.Property<string>("QuantityUnit")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double?>("ToGrams")
+                        .HasColumnType("float");
+
                     b.HasKey("ID");
 
                     b.ToTable("Ingredients");

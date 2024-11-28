@@ -523,6 +523,12 @@ main[b-2tlxc31yxu] {
 .thumbnailimg-help[b-n8opd8dmcj] {
     margin-bottom: 5px;
 }
+
+.open-section[b-n8opd8dmcj] {
+    font-size: 1.5rem;
+    margin-left: 10px;
+    padding-top: 3px;
+}
 /* _content/CookNet/Components/Pages/EditCookbookDialog.razor.rz.scp.css */
 .ispublic-container[b-v6gdmryzka] {
     display: flex;
@@ -798,7 +804,7 @@ main[b-2tlxc31yxu] {
     border: none;
     color: white;
     background-color: rgba(0, 0, 0, 0.75);
-    border-radius: 3px;
+    border-radius: 8px;
     padding: 3px;
 }
 /* _content/CookNet/Components/Pages/RecipeDetails.razor.rz.scp.css */
