@@ -114,6 +114,7 @@
 .card-header {
     background-color: rgb(111, 78, 55) !important;
     color: white !important;
+    border-bottom: 3px solid black;
 }
 
 .card-body {
@@ -256,4 +257,11 @@
     background-color: forestgreen;
     display: inline-block;
     cursor: pointer;
+}
+
+p.recipe-diet {
+    padding: 6px 18px;
+    border: 2px solid green;
+    border-radius: 8px;
+    background-color: green;
 }

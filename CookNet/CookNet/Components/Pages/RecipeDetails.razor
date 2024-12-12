@@ -61,12 +61,6 @@
                     </svg>
                     <label class="share-label">Share</label>
                 </div>
-                @* <div class="share-instagram col-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-                        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
-                    </svg>
-                    <label class="share-label">Share</label>
-                </div> *@
                 <div class="share-email col-auto" @onclick="ShareViaEmail">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
                         <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
@@ -130,6 +124,15 @@
                                     <p class="recipe-ethnicity"><strong>Ethnicity:</strong> @Recipe.Ethnicity</p>
                                 }
                             </div>
+                            <div class="card-diets col-md-12 justify-content-center d-flex flex-wrap text-center gap-3">
+                                @if (Diets.Count > 0)
+                                {
+                                    @foreach (var diet in Diets)
+                                    {
+                                        <p class="recipe-diet"><strong>@diet</strong></p>
+                                    }
+                                }
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="row text-start">
@@ -151,6 +154,49 @@
                                         }
                                     </ul>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-nutrition">
+                                <h4 class="nutrition-title mt-3">Nutritional Information</h4>
+                                @if (Nutrition != null && Units != null)
+                                {
+                                    <span class="nutrition-info-span calories-nutrition">@(Nutrition.Calories > 0 ? (MarkupString)$"<b>Calories:</b> {Math.Round(Nutrition.Calories, 2)}" : null) @(Nutrition.Calories > 0 ? Units.CaloriesUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.Calories > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span carbs-nutrition">@(Nutrition.Carbohydrates > 0 ? (MarkupString)$"<b>Carbohydrates:</b> {Math.Round(Nutrition.Carbohydrates, 2)}" : null) @(Nutrition.Carbohydrates > 0 ? Units.CarbsUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.Carbohydrates > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span protein-nutrition">@(Nutrition.Protein > 0 ? (MarkupString)$"<b>Protein:</b> {Math.Round(Nutrition.Protein, 2)}" : null) @(Nutrition.Protein > 0 ? Units.ProteinUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.Protein > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span fat-nutrition">@(Nutrition.Fats > 0 ? (MarkupString)$"<b>Fat:</b> {Math.Round(Nutrition.Fats, 2)}" : null) @(Nutrition.Fats > 0 ? Units.FatsUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.Fats > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span totaltrans-nutrition">@(Nutrition.TransFat > 0 ? (MarkupString)$"<b>Trans Fat:</b> {Math.Round(Nutrition.TransFat, 2)}" : null) @(Nutrition.TransFat > 0 ? Units.TransFatUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.TransFat > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span totalsatfat-nutrition">@(Nutrition.SatFat > 0 ? (MarkupString)$"<b>Saturated Fat:</b> {Math.Round(Nutrition.SatFat, 2)}" : null) @(Nutrition.SatFat > 0 ? Units.SatFatUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.SatFat > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span cholesterol-nutrition">@(Nutrition.Cholesterol > 0 ? (MarkupString)$"<b>Cholesterol:</b> {Math.Round(Nutrition.Cholesterol, 2)}" : null) @(Nutrition.Cholesterol > 0 ? Units.CholesterolUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.Cholesterol > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span fiber-nutrition">@(Nutrition.Fiber > 0 ? (MarkupString)$"<b>Fiber:</b> {Math.Round(Nutrition.Fiber, 2)}" : null) @(Nutrition.Fiber > 0 ? Units.FiberUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.Fiber > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span sugar-nutrition">@(Nutrition.Sugar > 0 ? (MarkupString)$"<b>Sugar:</b> {Math.Round(Nutrition.Sugar, 2)}" : null)  @(Nutrition.Sugar > 0 ? Units.SugarUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.Sugar > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span calcium-nutrition">@(Nutrition.Calcium > 0 ? (MarkupString)$"<b>Calcium:</b> {Math.Round(Nutrition.Calcium, 2)}" : null) @(Nutrition.Calcium > 0 ? Units.CalciumUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.Calcium > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span sodium-nutrition">@(Nutrition.Sodium > 0 ? (MarkupString)$"<b>Sodium:</b> {Math.Round(Nutrition.Sodium, 2)}" : null) @(Nutrition.Sodium > 0 ? Units.SodiumUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.Sodium > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span iron-nutrition">@(Nutrition.Iron > 0 ? (MarkupString)$"<b>Iron:</b> {Math.Round(Nutrition.Iron, 2)}" : null) @(Nutrition.Iron > 0 ? Units.IronUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.Iron > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span potassium-nutrition">@(Nutrition.Potassium > 0 ? (MarkupString)$"<b>Potassium:</b> {Math.Round(Nutrition.Potassium, 2)}" : null) @(Nutrition.Potassium > 0 ? Units.PotassiumUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.Potassium > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span vitamina-nutrition">@(Nutrition.VitaminA > 0 ? (MarkupString)$"<b>VitaminA:</b> {Math.Round(Nutrition.VitaminA, 2)}" : null) @(Nutrition.VitaminA > 0 ? Units.VitaminAUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.VitaminA > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span vitaminc-nutrition">@(Nutrition.VitaminC > 0 ? (MarkupString)$"<b>VitaminC:</b> {Math.Round(Nutrition.VitaminC, 2)}" : null) @(Nutrition.VitaminC > 0 ? Units.VitaminCUnit : "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Nutrition.VitaminC > 0 ? " | " : "")</span>
+                                    <p class="nutrition-info-tooltip text-center mt-3 fst-italic">Nutritional Information is calculated automatically based on entered ingredients, it is only an approximation.</p>
+                                }
+                                else
+                                {
+                                    <p class="nutrition-null">There is no nutritional information to display.</p>
+                                }
                             </div>
                         </div>
                     </div>
@@ -265,6 +311,10 @@
     private List<Instruction> Instructions = [];
     private List<UserCookbook> UserCookbooksList = new();
     private List<RecipeComment> Comments = new();
+    private RecipeNutrition Nutrition = new();
+    private NutritionUnits Units = new();
+    private string Allergens { get; set; }
+    private List<string> Diets = new();
     private ApplicationUser currentUser;
     private string AuthorUserName;
     private bool IsUserAuthor = false;
@@ -323,6 +373,10 @@
                 LikeCount = await RecipeService.GetLikeCountAsync(recipeId);
                 CookbookCount = await RecipeService.GetCookbookSavesCount(recipeId);
                 Comments = await RecipeService.GetCommentsByRecipeIdAsync(recipeId);
+                Nutrition = await RecipeService.GetNutritionForRecipe(recipeId);
+                Allergens = await RecipeService.GetAllergensForRecipe(recipeId);
+                Diets = await RecipeService.GetDietsForRecipe(recipeId);
+                Units = await RecipeService.GetNutritionUnits();
                 shareURLTwitter = $"https://x.com/intent/tweet?url={recipeURL + RecipeId}&text={Uri.EscapeDataString(shareText)}";
                 shareURLFacebook = $"https://www.facebook.com/sharer/sharer.php?u={recipeURL + RecipeId}&quote={Uri.EscapeDataString(shareText)}";
                 shareEmailURL = $"mailto:?subject=Check%20this%20recipe%20out%20on%20CookNet!&body=Hi%20there,%0A%0AI%20found%20this%20great%20recipe%20and%20thought%20you%20might%20like%20it:%20{recipeURL + RecipeId}%0A%0AEnjoy!";

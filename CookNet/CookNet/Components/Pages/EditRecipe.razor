@@ -221,7 +221,7 @@
     private string RecipeDescription { get; set; }
     private int RecipePrepTime { get; set; }
     private int RecipeCookTime { get; set; }
-    private int? RecipeServings { get; set; }
+    private int? RecipeServings { get; set; } = 1;
     private string RecipeCategory { get; set; }
     private string RecipeEthnicity { get; set; }
     private string RecipeStory { get; set; }
@@ -553,7 +553,7 @@
         {
             foreach (var ingredient in AddedIngredients)
             {
-                await RecipeService.AddIngredientToRecipeAsync(Recipe, ingredient.Name, ingredient.Quantity, ingredient.QuantityUnit);
+                await RecipeService.AddIngredientToRecipeAsync(Recipe, ingredient.Name, ingredient.Quantity, ingredient.QuantityUnit, ingredient.ToGrams);
             }
         }
 

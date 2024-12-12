@@ -19,7 +19,7 @@ namespace CookNet.Data
         public ApplicationUser Author { get; set; }
         public string? ThumbnailImage { get; set; }
         public string RecipeStory { get; set; }
-        public int? Servings { get; set; }
+        public int? Servings { get; set; } = 1;
         public ICollection<RecipeIngredient> RecipeIngredients { get; set; }
         public ICollection<Instruction> Instructions { get; set; }
         public ICollection<RecipeImage> RecipeImages { get; set; }
@@ -27,6 +27,8 @@ namespace CookNet.Data
         public ICollection<RecipeRating> RecipeRatings { get; set; }
         public ICollection<RecipeComment> Comments { get; set; }
         public ICollection<RecipeNutrition> RecipeNutrition { get; set; }
+        public ICollection<RecipeAllergens> Allergens { get; set; }
+        public ICollection<RecipeDiet> RecipeDiets { get; set; }
         public Recipe()
         {
             RecipeIngredients = new List<RecipeIngredient>();
@@ -36,6 +38,8 @@ namespace CookNet.Data
             RecipeRatings = new List<RecipeRating>();
             Comments = new List<RecipeComment>();
             RecipeNutrition = new List<RecipeNutrition>();
+            Allergens = new List<RecipeAllergens>();
+            RecipeDiets = new List<RecipeDiet>();
         }
     }
 }

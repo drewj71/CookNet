@@ -22,6 +22,23 @@ namespace CookNet.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CookNet.Data.AllergenTypes", b =>
+                {
+                    b.Property<int>("AllergenTypeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AllergenTypeID"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AllergenTypeID");
+
+                    b.ToTable("AllergenTypes");
+                });
+
             modelBuilder.Entity("CookNet.Data.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -180,6 +197,23 @@ namespace CookNet.Migrations
                     b.ToTable("DefaultThumbnails");
                 });
 
+            modelBuilder.Entity("CookNet.Data.DietTypes", b =>
+                {
+                    b.Property<int>("DietTypeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DietTypeID"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DietTypeID");
+
+                    b.ToTable("DietTypes");
+                });
+
             modelBuilder.Entity("CookNet.Data.ExceptionLog", b =>
                 {
                     b.Property<int>("ExceptionID")
@@ -267,6 +301,79 @@ namespace CookNet.Migrations
                     b.ToTable("Instructions");
                 });
 
+            modelBuilder.Entity("CookNet.Data.NutritionUnits", b =>
+                {
+                    b.Property<int>("NutritionUnitID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NutritionUnitID"));
+
+                    b.Property<string>("CalciumUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CaloriesUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CarbsUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CholesterolUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FatsUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FiberUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IronUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PotassiumUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProteinUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SatFatUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SodiumUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SugarUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransFatUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VitaminAUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VitaminCUnit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NutritionUnitID");
+
+                    b.ToTable("NutritionUnits");
+                });
+
             modelBuilder.Entity("CookNet.Data.Recipe", b =>
                 {
                     b.Property<int>("ID")
@@ -316,6 +423,29 @@ namespace CookNet.Migrations
                     b.HasIndex("AuthorID");
 
                     b.ToTable("Recipes");
+                });
+
+            modelBuilder.Entity("CookNet.Data.RecipeAllergens", b =>
+                {
+                    b.Property<int>("AllergenID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AllergenID"));
+
+                    b.Property<int>("AllergenTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecipeID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AllergenID");
+
+                    b.HasIndex("AllergenTypeID");
+
+                    b.HasIndex("RecipeID");
+
+                    b.ToTable("RecipeAllergens");
                 });
 
             modelBuilder.Entity("CookNet.Data.RecipeCategory", b =>
@@ -389,6 +519,29 @@ namespace CookNet.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("CookNet.Data.RecipeDiet", b =>
+                {
+                    b.Property<int>("RecipeDietID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecipeDietID"));
+
+                    b.Property<int>("DietTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecipeID")
+                        .HasColumnType("int");
+
+                    b.HasKey("RecipeDietID");
+
+                    b.HasIndex("DietTypeID");
+
+                    b.HasIndex("RecipeID");
+
+                    b.ToTable("RecipeDiets");
                 });
 
             modelBuilder.Entity("CookNet.Data.RecipeEthnicity", b =>
@@ -483,11 +636,17 @@ namespace CookNet.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecipeNutritionID"));
 
-                    b.Property<int>("Calories")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Calcium")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<decimal>("Calories")
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("Carbohydrates")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<decimal>("Cholesterol")
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -497,10 +656,13 @@ namespace CookNet.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Fats")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("Fiber")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<decimal>("Iron")
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("LastUpdatedBy")
                         .IsRequired()
@@ -509,21 +671,35 @@ namespace CookNet.Migrations
                     b.Property<DateTime>("LastUpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal>("Potassium")
+                        .HasColumnType("decimal(10,2)");
+
                     b.Property<decimal>("Protein")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("RecipeID")
                         .HasColumnType("int");
 
-                    b.Property<string>("ServingSize")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("SatFat")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<int>("ServingSize")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Sodium")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal>("Sugar")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<decimal>("TransFat")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<decimal>("VitaminA")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<decimal>("VitaminC")
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("RecipeNutritionID");
 
@@ -771,6 +947,25 @@ namespace CookNet.Migrations
                     b.Navigation("Author");
                 });
 
+            modelBuilder.Entity("CookNet.Data.RecipeAllergens", b =>
+                {
+                    b.HasOne("CookNet.Data.AllergenTypes", "AllergenTypes")
+                        .WithMany("Allergens")
+                        .HasForeignKey("AllergenTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CookNet.Data.Recipe", "Recipe")
+                        .WithMany("Allergens")
+                        .HasForeignKey("RecipeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AllergenTypes");
+
+                    b.Navigation("Recipe");
+                });
+
             modelBuilder.Entity("CookNet.Data.RecipeComment", b =>
                 {
                     b.HasOne("CookNet.Data.RecipeComment", "ParentComment")
@@ -795,6 +990,25 @@ namespace CookNet.Migrations
                     b.Navigation("Recipe");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CookNet.Data.RecipeDiet", b =>
+                {
+                    b.HasOne("CookNet.Data.DietTypes", "DietTypes")
+                        .WithMany("RecipeDiets")
+                        .HasForeignKey("DietTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CookNet.Data.Recipe", "Recipe")
+                        .WithMany("RecipeDiets")
+                        .HasForeignKey("RecipeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DietTypes");
+
+                    b.Navigation("Recipe");
                 });
 
             modelBuilder.Entity("CookNet.Data.RecipeImage", b =>
@@ -919,6 +1133,11 @@ namespace CookNet.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("CookNet.Data.AllergenTypes", b =>
+                {
+                    b.Navigation("Allergens");
+                });
+
             modelBuilder.Entity("CookNet.Data.ApplicationUser", b =>
                 {
                     b.Navigation("Comments");
@@ -928,13 +1147,22 @@ namespace CookNet.Migrations
                     b.Navigation("UserCookbooks");
                 });
 
+            modelBuilder.Entity("CookNet.Data.DietTypes", b =>
+                {
+                    b.Navigation("RecipeDiets");
+                });
+
             modelBuilder.Entity("CookNet.Data.Recipe", b =>
                 {
+                    b.Navigation("Allergens");
+
                     b.Navigation("Comments");
 
                     b.Navigation("CookbookRecipes");
 
                     b.Navigation("Instructions");
+
+                    b.Navigation("RecipeDiets");
 
                     b.Navigation("RecipeImages");
 

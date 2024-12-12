@@ -7,6 +7,7 @@
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Http
 @using System.IO
+@using System.Globalization;
 @inject IUserService UserService
 @inject UserManager<ApplicationUser> UserManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -159,34 +160,42 @@
                     <div class="col-md-6">
                         @if (AddedIngredients.Any())
                         {
-                            <div style="background-color: #f2f2f2; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
-                                <h4>Added Ingredients:</h4>
-                                <ul class="list-unstyled">
-                                    @foreach (var ingredient in AddedIngredients)
-                                    {
-                                        <li>
-                                            <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveIngredient(ingredient)"></i>
-                                            <span class="ingredient-span">@($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Name} {(ingredient.ToGrams != null ? ingredient.ToGrams + "g" : null)}")</span>
-                                        </li>
-                                    }
-                                </ul>
+                            <div class="ingredients-card mb-3">
+                                <div class="ingredients-card-title text-center">
+                                    <h4>Added Ingredients</h4>
+                                </div>
+                                <div class="ingredients-card-body">
+                                    <ul class="list-unstyled">
+                                        @foreach (var ingredient in AddedIngredients)
+                                        {
+                                            <li>
+                                                <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveIngredient(ingredient)"></i>
+                                                <span class="ingredient-span">@($"{ingredient.Quantity} {ingredient.QuantityUnit} {ingredient.Name} {(ingredient.ToGrams != null ? ingredient.ToGrams + "g" : null)}")</span>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
                             </div>
                         }
                     </div>
                     <div class="col-md-6">
                         @if (AddedInstructions.Any())
                         {
-                            <div style="background-color: #f2f2f2; padding: 10px; margin-bottom: 10px;">
-                                <h4>Added Instructions:</h4>
-                                <ul class="list-unstyled">
-                                    @foreach (var instruction in AddedInstructions)
-                                    {
-                                        <li>
-                                            <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveInstruction(instruction)"></i>
-                                            <span class="ingredient-span">@($"{instruction.InstructionText}")</span>
-                                        </li>
-                                    }
-                                </ul>
+                            <div class="instructions-card mb-3">
+                                <div class="instructions-card-title text-center">
+                                    <h4>Added Instructions</h4>
+                                </div>
+                                <div class="instructions-card-body">
+                                    <ul class="list-unstyled">
+                                        @foreach (var instruction in AddedInstructions)
+                                        {
+                                            <li>
+                                                <i class="remove-ingredient bi bi-x-square-fill" @onclick="() => RemoveInstruction(instruction)"></i>
+                                                <span class="ingredient-span">@($"{instruction.InstructionText}")</span>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
                             </div>
                         }
                     </div>
@@ -195,32 +204,75 @@
             <hr />
         </div>
 
-        <div class="nutrition-section">
-            <div class="col-md-12 d-flex align-items-start" @onclick="ToggleNutritionSection" style="cursor: pointer;">
-                <h3 class="section-title">Nutritional Info</h3>
-                <i class="open-section @(NutritionSectionIcon)"></i>
+        <div class="moreinfo-section">
+            <div class="col-md-12 d-flex align-items-start" @onclick="ToggleMoreInfoSection" style="cursor: pointer;">
+                <h3 class="section-title">Additional Info</h3>
+                <i class="open-section @(MoreInfoSectionIcon)"></i>
             </div>
-            <div class="ingredients-body" style="@(NutritionSectionOpen ? "display:block;" : "display:none;")">
+            <div class="moreinfo-body" style="@(MoreInfoSectionOpen ? "display:block;" : "display:none;")">
                 <hr />
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="totalCalories">Calories: @(Calories > 0 ? Math.Round(Calories,2) : null) @(CaloriesUnit ?? "")</p>
-                        <p class="totalProtein">Protein: @(Protein > 0 ? Math.Round(Protein, 2) : null) @(ProteinUnit ?? "")</p>
-                        <p class="totalFat">Fat: @(Fat > 0 ? Math.Round(Fat,2) : null) @(FatUnit ?? "")</p>
-                        <p class="totalCarbs">Carbohydrates: @(Carbs > 0 ? Math.Round(Carbs, 2) : null) @(CarbsUnit ?? "")</p>
-                        <p class="totalSugar">Sugar: @(Sugar > 0 ? Math.Round(Sugar,2) : null) @(SugarUnit ?? "")</p>
-                        <p class="totalFiber">Fiber: @(Fiber > 0 ? Math.Round(Fiber,2) : null) @(FiberUnit ?? "")</p>
-                        <p class="totalCalcium">Calcium: @(Calcium > 0 ? Math.Round(Calcium,2) : null) @(CalciumUnit ?? "")</p>
-                        <p class="totalSodium">Sodium: @(Sodium > 0 ? Math.Round(Sodium,2) : null) @(SodiumUnit ?? "")</p>
-                        <p class="totalIron">Iron: @(Iron > 0 ? Math.Round(Iron,2) : null) @(IronUnit ?? "")</p>
-                        <p class="totalVitaminA">Vitamin A: @(VitaminA > 0 ? Math.Round(VitaminA,2) : null) @(VitaminAUnit ?? "")</p>
-                        <p class="totalVitaminC">Vitamin C: @(VitaminC > 0 ? Math.Round(VitaminC,2) : null) @(VitaminCUnit ?? "")</p>
-                        <p class="totalThiamin">Thiamin: @(Thiamin > 0 ? Math.Round(Thiamin,2) : null) @(ThiaminUnit ?? "")</p>
-                        <p class="totalRiboflavin">Riboflavin: @(Riboflavin > 0 ? Math.Round(Riboflavin, 2) : null) @(RiboflavinUnit ?? "")</p>
-                        <p class="totalNiacin">Niacin: @(Niacin > 0 ? Math.Round(Niacin,2) : null) @(NiacinUnit ?? "")</p>
-                        <p class="totalCholesterol">Cholesterol: @(Cholesterol > 0 ? Math.Round(Cholesterol,2) : null) @(CholesterolUnit ?? "")</p>
-                        <p class="totalTransFat">Total Trans Fat: @(TotalTransFat > 0 ? Math.Round(TotalTransFat,2) : null) @(TotalTransFatUnit ?? "")</p>
-                        <p class="totalSatFat">Total Saturated Fat: @(TotalSatFat > 0 ? Math.Round(TotalSatFat,2) : null) @(TotalSatFatUnit ?? "")</p>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="nutrition-info-card">
+                                <div class="nutrition-info-header text-center">
+                                    <h4 class="nutrition-info-title">Nutritional Info</h4>
+                                </div>
+                                <div class="nutrition-info-body">
+                                    <span class="nutrition-info-span calories-nutrition">@(Calories > 0 ? (MarkupString)$"<b>Calories:</b> {Math.Round(Calories, 2)}" : null) @(CaloriesUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Calories > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span carbs-nutrition">@(Carbs > 0 ? (MarkupString)$"<b>Carbohydrates:</b> {Math.Round(Carbs, 2)}" : null) @(CarbsUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Carbs > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span protein-nutrition">@(Protein > 0 ? (MarkupString)$"<b>Protein:</b> {Math.Round(Protein, 2)}" : null) @(ProteinUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Protein > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span fat-nutrition">@(Fat > 0 ? (MarkupString)$"<b>Fat:</b> {Math.Round(Fat, 2)}" : null) @(FatUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Fat > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span totaltrans-nutrition">@(TotalTransFat > 0 ? (MarkupString)$"<b>Trans Fat:</b> {Math.Round(TotalTransFat, 2)}" : null) @(TotalTransFatUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(TotalTransFat > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span totalsatfat-nutrition">@(TotalSatFat > 0 ? (MarkupString)$"<b>Saturated Fat:</b> {Math.Round(TotalSatFat, 2)}" : null) @(TotalSatFatUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(TotalSatFat > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span cholesterol-nutrition">@(Cholesterol > 0 ? (MarkupString)$"<b>Cholesterol:</b> {Math.Round(Cholesterol, 2)}" : null) @(CholesterolUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Cholesterol > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span fiber-nutrition">@(Fiber > 0 ? (MarkupString)$"<b>Fiber:</b> {Math.Round(Fiber, 2)}" : null) @(FiberUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Fiber > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span sugar-nutrition">@(Sugar > 0 ? (MarkupString)$"<b>Sugar:</b> {Math.Round(Sugar, 2)}" : null)  @(SugarUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Sugar > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span calcium-nutrition">@(Calcium > 0 ? (MarkupString)$"<b>Calcium:</b> {Math.Round(Calcium, 2)}" : null) @(CalciumUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Calcium > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span sodium-nutrition">@(Sodium > 0 ? (MarkupString)$"<b>Sodium:</b> {Math.Round(Sodium, 2)}" : null) @(SodiumUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Sodium > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span iron-nutrition">@(Iron > 0 ? (MarkupString)$"<b>Iron:</b> {Math.Round(Iron, 2)}" : null) @(IronUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Iron > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span potassium-nutrition">@(Potassium > 0 ? (MarkupString)$"<b>Potassium:</b> {Math.Round(Potassium, 2)}" : null) @(PotassiumUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(Potassium > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span vitamina-nutrition">@(VitaminA > 0 ? (MarkupString)$"<b>VitaminA:</b> {Math.Round(VitaminA, 2)}" : null) @(VitaminAUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(VitaminA > 0 ? " | " : "")</span>
+                                    <span class="nutrition-info-span vitaminc-nutrition">@(VitaminC > 0 ? (MarkupString)$"<b>VitaminC:</b> {Math.Round(VitaminC, 2)}" : null) @(VitaminCUnit ?? "")</span>
+                                    <span class="nutrition-info-span info-divider">@(VitaminC > 0 ? " | " : "")</span>
+                                    <p class="nutrition-info-tooltip text-center mt-3 fst-italic">Nutritional Information is calculated automatically based on entered ingredients, it is only an approximation.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <MudSelect T="string" Label="Allergens" MultiSelection="true" Placeholder="Allergens"
+                                           Variant="Variant.Outlined" Clearable="true" @bind-SelectedValues="selectedAllergens">
+                                    @foreach (var allergy in Allergens)
+                                    {
+                                        <MudSelectItem T="string" Value="@allergy.Name">@allergy.Name</MudSelectItem>
+                                    }
+                                </MudSelect>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <MudSelect T="string" Label="Diet Types" MultiSelection="true" Placeholder="Diet Types"
+                                           Variant="Variant.Outlined" Clearable="true" @bind-SelectedValues="selectedDiets">
+                                    @foreach (var diet in Diets)
+                                    {
+                                        <MudSelectItem T="string" Value="@diet.Name">@diet.Name</MudSelectItem>
+                                    }
+                                </MudSelect>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -244,7 +296,6 @@
     private string NewIngredientQuantity { get; set; } = "";
     private string? NewIngredientQuantityUnit { get; set; }
     private string NewInstructionText { get; set; } = "";
-    private string? NewRecipeStory { get; set; }
     private string UserId { get; set; }
     List<Ingredient> AddedIngredients { get; set; } = new();
     List<Instruction> AddedInstructions { get; set; } = new();
@@ -269,20 +320,23 @@
 
     private string RecipeDetailsSectionIcon = "bi bi-caret-up-fill";
     private string IngredientsSectionIcon = "bi bi-caret-down-fill";
-    private string InstructionsSectionIcon = "bi bi-caret-down-fill";
-    private string NutritionSectionIcon = "bi bi-caret-down-fill";
+    private string MoreInfoSectionIcon = "bi bi-caret-down-fill";
 
     private bool RecipeDetailsSectionOpen = true;
     private bool IngredientsSectionOpen = false;
-    private bool InstructionsSectionOpen = false;
-    private bool NutritionSectionOpen = false;
+    private bool MoreInfoSectionOpen = false;
 
-    private List<FoodItem> AllNutrients = new();
+    private Dictionary<string, FoodItem> AddedNutrients = new();
     private List<string> TotalIngredients = new();
     private double Calories = 0, Protein = 0, Fat = 0, Carbs = 0, Sugar = 0, Fiber = 0, Calcium = 0, Sodium = 0, Iron = 0, VitaminA = 0;
-    private double VitaminC = 0, Thiamin = 0, Riboflavin = 0, Niacin = 0, Cholesterol = 0, TotalTransFat = 0, TotalSatFat = 0;
-    private string? CaloriesUnit, ProteinUnit, FatUnit, CarbsUnit, SugarUnit, FiberUnit, CalciumUnit, SodiumUnit, IronUnit, VitaminAUnit;
-    private string? VitaminCUnit, ThiaminUnit, RiboflavinUnit, NiacinUnit, CholesterolUnit, TotalTransFatUnit, TotalSatFatUnit;
+    private double VitaminC = 0, Cholesterol = 0, TotalTransFat = 0, TotalSatFat = 0, Potassium = 0;
+    private string? CaloriesUnit = null, ProteinUnit = null, FatUnit = null, CarbsUnit = null, SugarUnit = null, FiberUnit = null, CalciumUnit = null, SodiumUnit = null;
+    private string? IronUnit = null, VitaminAUnit = null, VitaminCUnit = null,  CholesterolUnit = null, TotalTransFatUnit = null, TotalSatFatUnit = null, PotassiumUnit = null;
+
+    private IEnumerable<string> selectedAllergens { get; set; } = new HashSet<string>();
+    private IEnumerable<string> selectedDiets { get; set; } = new HashSet<string>();
+    private List<DietTypes> Diets { get; set; } = new();
+    private List<AllergenTypes> Allergens { get; set; } = new();
 
     protected override async void OnInitialized()
     {
@@ -290,13 +344,14 @@
         AddedIngredients = new List<Ingredient>();
         AddedInstructions = new List<Instruction>();
         AddedRecipeStory = new List<RecipeStory>();
-        AllNutrients = new List<FoodItem>();
     }
 
     protected override async Task OnInitializedAsync()
     {
         RecipeCategories = await RecipeService.GetActiveRecipeCategories();
         RecipeEthnicities = await RecipeService.GetActiveRecipeEthnicities();
+        Diets = await RecipeService.GetDietTypes();
+        Allergens = await RecipeService.GetAllergenTypes();
     }
 
     private string GetInputStyle(string value, bool isValid)
@@ -319,20 +374,20 @@
         // Step 1: Parse household serving to get quantity and unit
         var householdParts = householdServingFullText.Split(' ', 2);
         if (householdParts.Length != 2)
-            throw new ArgumentException("Invalid household serving format.");
+            return null;
 
         if (!double.TryParse(householdParts[0], out double householdQuantity))
-            throw new ArgumentException("Invalid quantity in household serving.");
+            return null;
 
         string householdUnit = householdParts[1].ToLower();
 
         // Step 2: Parse user input to extract quantity and unit
         var userParts = userInput.Split(' ', 2);
         if (userParts.Length != 2)
-            throw new ArgumentException("Invalid user input format.");
+            return null;
 
         if (!double.TryParse(userParts[0], out double userQuantity))
-            throw new ArgumentException("Invalid quantity in user input.");
+            return null;
 
         string userUnit = userParts[1].ToLower();
 
@@ -352,101 +407,129 @@
         {
             var nutrients = await NutritionService.GetFoodDetailsAsync(NewIngredientName);
             double? grams = null;
+            var userAmount = 0.0;
+
             if (nutrients != null)
             {
-                foreach (var nutrient in nutrients.FoodNutrients)
+                if (nutrients.ServingSize >= 0)
                 {
-                    if (nutrient.NutrientName.ToUpper().Contains("PROTEIN"))
+                    var servingSize = nutrients.ServingSize > 0 ? nutrients.ServingSize : 1;
+                    if (NewIngredientQuantity.Trim().Contains(" "))
                     {
-                        Protein += nutrient.Value;
-                        ProteinUnit = Protein > 0 ? nutrient.UnitName.ToLower() : null;
+                        var numParts = NewIngredientQuantity.Split(' ');
+                        if (numParts.Length > 1)
+                        {
+                            double wholeNumber = double.Parse(numParts[0], CultureInfo.InvariantCulture);
+                            double fraction = NutritionService.ConvertFractionToDecimal(numParts[1]);
+                            userAmount = wholeNumber + fraction;
+                        }
                     }
-                    else if (nutrient.NutrientName.ToUpper().Contains("TOTAL LIPID"))
+                    else if (NewIngredientQuantity.Trim().Contains("/"))
                     {
-                        Fat += nutrient.Value;
-                        FatUnit = Fat > 0 ? nutrient.UnitName.ToLower() : null;
+                        userAmount = NutritionService.ConvertFractionToDecimal(NewIngredientQuantity);
                     }
-                    else if (nutrient.NutrientName.ToUpper().Contains("CARBOHYDRATE"))
+                    else 
                     {
-                        Carbs += nutrient.Value;
-                        CarbsUnit = Carbs > 0 ? nutrient.UnitName.ToLower() : null;
+                        try
+                        {
+                            userAmount = Convert.ToDouble(NewIngredientQuantity);
+                        }
+                        catch (Exception ex) 
+                        {
+                            Console.WriteLine($"Error: {ex.Message}");
+                        }
+                        finally
+                        {
+                            userAmount = 1.00;
+                        }
                     }
-                    else if (nutrient.NutrientName.ToUpper().Contains("ENERGY"))
+
+                    foreach (var nutrient in nutrients.FoodNutrients)
                     {
-                        Calories += nutrient.Value;
-                        CaloriesUnit = Calories > 0 ? nutrient.UnitName.ToLower() : null;
-                    }
-                    else if (nutrient.NutrientName.ToUpper().Contains("SUGAR"))
-                    {
-                        Sugar += nutrient.Value;
-                        SugarUnit = Sugar > 0 ? nutrient.UnitName.ToLower() : null;
-                    }
-                    else if (nutrient.NutrientName.ToUpper().Contains("FIBER"))
-                    {
-                        Fiber += nutrient.Value;
-                        FiberUnit = Fiber > 0 ? nutrient.UnitName.ToLower() : null;
-                    }
-                    else if (nutrient.NutrientName.ToUpper().Contains("CALCIUM"))
-                    {
-                        Calcium += nutrient.Value;
-                        CalciumUnit = Calcium > 0 ? nutrient.UnitName.ToLower() : null;
-                    }
-                    else if (nutrient.NutrientName.ToUpper().Contains("SODIUM"))
-                    {
-                        Sodium += nutrient.Value;
-                        SodiumUnit = Sodium > 0 ? nutrient.UnitName.ToLower() : null;
-                    }
-                    else if (nutrient.NutrientName.ToUpper().Contains("IRON"))
-                    {
-                        Iron += nutrient.Value;
-                        IronUnit = Iron > 0 ? nutrient.UnitName.ToLower() : null;
-                    }
-                    else if (nutrient.NutrientName.ToUpper().Contains("VITAMINA"))
-                    {
-                        VitaminA += nutrient.Value;
-                        VitaminAUnit = VitaminA > 0 ? nutrient.UnitName.ToLower() : null;
-                    }
-                    else if (nutrient.NutrientName.ToUpper().Contains("VITAMINC"))
-                    {
-                        VitaminC += nutrient.Value;
-                        VitaminCUnit = VitaminC > 0 ? nutrient.UnitName.ToLower() : null;
-                    }
-                    else if (nutrient.NutrientName.ToUpper().Contains("THIAMIN"))
-                    {
-                        Thiamin += nutrient.Value;
-                        ThiaminUnit = Thiamin > 0 ? nutrient.UnitName.ToLower() : null;
-                    }
-                    else if (nutrient.NutrientName.ToUpper().Contains("RIBOFLAVIN"))
-                    {
-                        Riboflavin += nutrient.Value;
-                        RiboflavinUnit = Riboflavin > 0 ? nutrient.UnitName.ToLower() : null;
-                    }
-                    else if (nutrient.NutrientName.ToUpper().Contains("NIACIN"))
-                    {
-                        Niacin += nutrient.Value;
-                        NiacinUnit = Niacin > 0 ? nutrient.UnitName.ToLower() : null;
-                    }
-                    else if (nutrient.NutrientName.ToUpper().Contains("CHOLESTEROL"))
-                    {
-                        Cholesterol += nutrient.Value;
-                        CholesterolUnit = Cholesterol > 0 ? nutrient.UnitName.ToLower() : null;
-                    }
-                    else if (nutrient.NutrientName.ToUpper().Contains("TRANS"))
-                    {
-                        TotalTransFat += nutrient.Value;
-                        TotalTransFatUnit = TotalTransFat > 0 ? nutrient.UnitName.ToLower() : null;
-                    }
-                    else if (nutrient.NutrientName.ToUpper().Contains("SATURATED"))
-                    {
-                        TotalSatFat += nutrient.Value;
-                        TotalSatFatUnit = TotalSatFat > 0 ? nutrient.UnitName.ToLower() : null;
+                        double nutrientRatio = userAmount / servingSize;
+
+                        if (nutrient.NutrientName.ToUpper().Contains("PROTEIN"))
+                        {
+                            Protein += nutrient.Value * nutrientRatio;
+                            ProteinUnit = Protein > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("TOTAL LIPID"))
+                        {
+                            Fat += nutrient.Value * nutrientRatio;
+                            FatUnit = Fat > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("CARBOHYDRATE"))
+                        {
+                            Carbs += nutrient.Value * nutrientRatio;
+                            CarbsUnit = Carbs > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("ENERGY"))
+                        {
+                            Calories += nutrient.Value * nutrientRatio;
+                            CaloriesUnit = Calories > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("SUGAR"))
+                        {
+                            Sugar += nutrient.Value * nutrientRatio;
+                            SugarUnit = Sugar > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("FIBER"))
+                        {
+                            Fiber += nutrient.Value * nutrientRatio;
+                            FiberUnit = Fiber > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("CALCIUM"))
+                        {
+                            Calcium += nutrient.Value * nutrientRatio;
+                            CalciumUnit = Calcium > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("SODIUM"))
+                        {
+                            Sodium += nutrient.Value * nutrientRatio;
+                            SodiumUnit = Sodium > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("IRON"))
+                        {
+                            Iron += nutrient.Value * nutrientRatio;
+                            IronUnit = Iron > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("VITAMINA"))
+                        {
+                            VitaminA += nutrient.Value * nutrientRatio;
+                            VitaminAUnit = VitaminA > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("VITAMINC"))
+                        {
+                            VitaminC += nutrient.Value * nutrientRatio;
+                            VitaminCUnit = VitaminC > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("CHOLESTEROL"))
+                        {
+                            Cholesterol += nutrient.Value * nutrientRatio;
+                            CholesterolUnit = Cholesterol > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("TRANS"))
+                        {
+                            TotalTransFat += nutrient.Value * nutrientRatio;
+                            TotalTransFatUnit = TotalTransFat > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("SATURATED"))
+                        {
+                            TotalSatFat += nutrient.Value * nutrientRatio;
+                            TotalSatFatUnit = TotalSatFat > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
+                        else if (nutrient.NutrientName.ToUpper().Contains("POTASSIUM"))
+                        {
+                            Potassium += nutrient.Value * nutrientRatio;
+                            PotassiumUnit = Potassium > 0 ? nutrient.UnitName.ToLower() : null;
+                        }
                     }
                 }
-                AllNutrients.Add(nutrients);
                 TotalIngredients.Add(nutrients.Ingredients);
+                AddedNutrients[NewIngredientName] = nutrients;
                 if (!string.IsNullOrEmpty(NewIngredientQuantityUnit) && nutrients.HouseholdServingFullText != null)
                 {
-                    grams = ConvertToGrams(NewIngredientQuantity + " " + NewIngredientQuantityUnit, nutrients.HouseholdServingFullText, nutrients.ServingSize);
+                    grams = ConvertToGrams(userAmount + " " + NewIngredientQuantityUnit, nutrients.HouseholdServingFullText, nutrients.ServingSize);
                 }
             }
 
@@ -481,6 +564,87 @@
     async void RemoveIngredient(Ingredient ingredient)
     {
         AddedIngredients.Remove(ingredient);
+        if (AddedNutrients.TryGetValue(ingredient.Name, out FoodItem item))
+        {
+            foreach (var nutrient in item.FoodNutrients)
+            {
+                if (nutrient.NutrientName.ToUpper().Contains("PROTEIN"))
+                {
+                    Protein -= nutrient.Value;
+                    ProteinUnit = Protein > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("TOTAL LIPID"))
+                {
+                    Fat -= nutrient.Value;
+                    FatUnit = Fat > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("CARBOHYDRATE"))
+                {
+                    Carbs -= nutrient.Value;
+                    CarbsUnit = Carbs > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("ENERGY"))
+                {
+                    Calories -= nutrient.Value;
+                    CaloriesUnit = Calories > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("SUGAR"))
+                {
+                    Sugar -= nutrient.Value;
+                    SugarUnit = Sugar > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("FIBER"))
+                {
+                    Fiber -= nutrient.Value;
+                    FiberUnit = Fiber > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("CALCIUM"))
+                {
+                    Calcium -= nutrient.Value;
+                    CalciumUnit = Calcium > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("SODIUM"))
+                {
+                    Sodium -= nutrient.Value;
+                    SodiumUnit = Sodium > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("IRON"))
+                {
+                    Iron -= nutrient.Value;
+                    IronUnit = Iron > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("VITAMINA"))
+                {
+                    VitaminA -= nutrient.Value;
+                    VitaminAUnit = VitaminA > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("VITAMINC"))
+                {
+                    VitaminC -= nutrient.Value;
+                    VitaminCUnit = VitaminC > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("CHOLESTEROL"))
+                {
+                    Cholesterol -= nutrient.Value;
+                    CholesterolUnit = Cholesterol > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("TRANS"))
+                {
+                    TotalTransFat -= nutrient.Value;
+                    TotalTransFatUnit = TotalTransFat > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("SATURATED"))
+                {
+                    TotalSatFat -= nutrient.Value;
+                    TotalSatFatUnit = TotalSatFat > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+                else if (nutrient.NutrientName.ToUpper().Contains("POTASSIUM"))
+                {
+                    Potassium -= nutrient.Value;
+                    PotassiumUnit = Potassium > 0 ? nutrient.UnitName.ToLower() : null;
+                }
+            }
+        }
     }
 
     async void RemoveInstruction(Instruction instruction)
@@ -526,15 +690,10 @@
         IngredientsSectionIcon = IngredientsSectionOpen ? "bi bi-caret-up-fill" : "bi bi-caret-down-fill";
     }
 
-    private void ToggleNutritionSection()
+    private void ToggleMoreInfoSection()
     {
-        NutritionSectionOpen = !NutritionSectionOpen;
-        NutritionSectionIcon = NutritionSectionOpen ? "bi bi-caret-up-fill" : "bi bi-caret-down-fill";
-
-        if (AllNutrients.Count > 0)
-        {
-            
-        }
+        MoreInfoSectionOpen = !MoreInfoSectionOpen;
+        MoreInfoSectionIcon = MoreInfoSectionOpen ? "bi bi-caret-up-fill" : "bi bi-caret-down-fill";
     }
 
     private bool CreateNewRecipe()
@@ -549,7 +708,6 @@
         if (isNameValid && isStoryValid && isPrepValid && isCookTimeValid && isIngredientsAdded && isInstructionsAdded)
         {
             Recipe.DateCreated = DateTime.Now;
-            Recipe.RecipeStory = NewRecipeStory ?? "";
             return true;
         }
         return false;
@@ -580,7 +738,7 @@
 
             foreach (var ingredient in AddedIngredients)
             {
-                await RecipeService.AddIngredientToRecipeAsync(Recipe, ingredient.Name, ingredient.Quantity, ingredient.QuantityUnit);
+                await RecipeService.AddIngredientToRecipeAsync(Recipe, ingredient.Name, ingredient.Quantity, ingredient.QuantityUnit, ingredient.ToGrams);
             }
 
             foreach (var instruction in AddedInstructions)
@@ -634,6 +792,9 @@
             }
 
             await RecipeService.CreateRecipeAsync(Recipe);
+            await RecipeService.AddRecipeAllergensAsync(Recipe.ID, selectedAllergens);
+            await RecipeService.AddRecipeDietsAsync(Recipe.ID, selectedDiets);
+            await RecipeService.AddRecipeNutritionAsync(Recipe.ID, Calories, Protein, Fat, Fiber, Sugar, Sodium, Calcium, Cholesterol, Iron, Potassium, TotalSatFat, TotalTransFat, VitaminA, VitaminC, Recipe.Servings, currentUser.UserName);
             Snackbar.Add("Recipe created successfully.", Severity.Success);
             NavigationManager.NavigateTo($"/recipes/{Recipe.ID}");
         }

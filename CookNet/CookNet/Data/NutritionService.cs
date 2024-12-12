@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -40,6 +41,8 @@ namespace CookNet.Data
             { "ounce", 28.35 },       // 1 ounce = 28.35 grams
             { "ounces", 28.35 },       
             { "oz", 28.35 },
+            { "oz.", 28.35 },
+            { "onz", 28.35 },
             { "ozs", 28.35 },
             { "pound", 453.59 },      // 1 pound = 453.59 grams
             { "pounds", 453.59 },
@@ -72,10 +75,22 @@ namespace CookNet.Data
             }
         }
 
+        public static double ConvertFractionToDecimal(string fraction)
+        {
+            var fractionParts = fraction.Split('/');
+            if (fractionParts.Length == 2)
+            {
+                double numerator = double.Parse(fractionParts[0], CultureInfo.InvariantCulture);
+                double denominator = double.Parse(fractionParts[1], CultureInfo.InvariantCulture);
+                return numerator / denominator;
+            }
+            throw new FormatException("Invalid fraction format");
+        }
+
         public async Task<FoodItem> GetFoodDetailsAsync(string foodName)
         {
             // Step 1: Search for the food
-            var searchResponse = await _httpClient.GetAsync($"{_baseURL}/foods/search?query={foodName}&api_key={_apiKey}");
+            var searchResponse = await _httpClient.GetAsync($"{_baseURL}/foods/search?query={foodName}&Branded&api_key={_apiKey}");
             searchResponse.EnsureSuccessStatusCode();
             var response = await searchResponse.Content.ReadAsStringAsync();
             var foodResponse = JsonSerializer.Deserialize<FoodResponse>(response, new JsonSerializerOptions
@@ -88,7 +103,6 @@ namespace CookNet.Data
         }
     }
 
-    // FoodSearchResponse model
     public class FoodResponse
     {
         public List<FoodItem> Foods { get; set; }

@@ -24,6 +24,11 @@ namespace CookNet.Data
         public DbSet<DefaultThumbnails> DefaultThumbnails { get; set; }
         public DbSet<RecipeNutrition> RecipeNutrition { get; set; }
         public DbSet<ExceptionLog> ExceptionLog { get; set; }
+        public DbSet<RecipeAllergens> RecipeAllergens { get; set; }
+        public DbSet<AllergenTypes> AllergenTypes { get; set; }
+        public DbSet<RecipeDiet> RecipeDiets { get; set; }
+        public DbSet<DietTypes> DietTypes { get; set; }
+        public DbSet<NutritionUnits> NutritionUnits { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -142,6 +147,36 @@ namespace CookNet.Data
                 .WithMany(r => r.RecipeNutrition) // Use WithOne if this is a one-to-one relationship
                 .HasForeignKey(rn => rn.RecipeID)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<RecipeAllergens>()
+                .HasKey(a => a.AllergenID);
+
+            modelBuilder.Entity<RecipeAllergens>()
+                .HasOne(a => a.Recipe)
+                .WithMany(r => r.Allergens)
+                .HasForeignKey(a => a.RecipeID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RecipeAllergens>()
+                .HasOne(a => a.AllergenTypes)
+                .WithMany(at => at.Allergens)
+                .HasForeignKey(a => a.AllergenTypeID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RecipeDiet>()
+                .HasKey(rd => rd.RecipeDietID);
+
+            modelBuilder.Entity<RecipeDiet>()
+                .HasOne(rd => rd.Recipe)
+                .WithMany(r => r.RecipeDiets)
+                .HasForeignKey(rd => rd.RecipeID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RecipeDiet>()
+                .HasOne(rd => rd.DietTypes)
+                .WithMany(dt => dt.RecipeDiets)
+                .HasForeignKey(rd => rd.DietTypeID)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

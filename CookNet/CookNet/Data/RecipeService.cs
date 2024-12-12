@@ -99,7 +99,7 @@ namespace CookNet.Data
             }
         }
 
-        public async Task AddIngredientToRecipeAsync(Recipe recipe, string ingredientName, string quantity, string quantityMeasure)
+        public async Task AddIngredientToRecipeAsync(Recipe recipe, string ingredientName, string quantity, string quantityMeasure, double? toGrams)
         {
             try
             {
@@ -107,7 +107,8 @@ namespace CookNet.Data
                 {
                     Name = ingredientName,
                     Quantity = quantity,
-                    QuantityUnit = quantityMeasure
+                    QuantityUnit = quantityMeasure,
+                    ToGrams = toGrams
                 };
                 _context.Ingredients.Add(ingredient);
 
@@ -574,6 +575,213 @@ namespace CookNet.Data
             {
                 await LogExceptionAsync("An error has occured while retrieving the recipe ethnicities.", ex);
                 return new List<RecipeEthnicity>();
+            }
+        }
+
+        public async Task<List<DietTypes>> GetDietTypes()
+        {
+            try
+            {
+                return await _context.DietTypes
+                    .OrderBy(dt => dt.Name).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the diet types.", ex);
+                return new List<DietTypes>();
+            }
+        }
+
+        public async Task<List<string>> GetDietsForRecipe(int recipeId)
+        {
+            try
+            {
+                var diets = await _context.RecipeDiets
+                    .Where(rd => rd.RecipeID == recipeId)
+                    .Join(_context.DietTypes,
+                        rd => rd.DietTypeID,
+                        dt => dt.DietTypeID,
+                        (rd, dt) => dt.Name)
+                    .ToListAsync();
+
+                return diets;
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the diet types.", ex);
+                return new List<string>();
+            }
+
+        }
+
+        public async Task<List<AllergenTypes>> GetAllergenTypes()
+        {
+            try
+            {
+                return await _context.AllergenTypes
+                    .OrderBy(at => at.Name).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the allergen types.", ex);
+                return new List<AllergenTypes>();
+            }
+        }
+
+        public async Task<string> GetAllergensForRecipe(int recipeId)
+        {
+            try
+            {
+                var allergens = await _context.RecipeAllergens
+                    .Where(ra => ra.RecipeID == recipeId)
+                    .Join(_context.AllergenTypes,
+                        ra => ra.AllergenTypeID,
+                        at => at.AllergenTypeID,
+                        (ra, at) => at.Name)
+                    .ToListAsync();
+
+                string allAllergens = "";
+                if (allergens.Count > 0)
+                {
+                    foreach (var allergen in allergens)
+                    {
+                        allAllergens += allergen.ToString() + ", ";
+                    }
+                    allAllergens = allAllergens.TrimEnd(',');
+                }
+
+                return allAllergens;
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the allergen types.", ex);
+                return "";
+            }
+        }
+
+        public async Task<RecipeNutrition> GetNutritionForRecipe(int recipeId)
+        {
+            try
+            {
+                return await _context.RecipeNutrition
+                    .FirstOrDefaultAsync(rn => rn.RecipeID == recipeId) ?? new RecipeNutrition();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the nutrition information.", ex);
+                return new RecipeNutrition();
+            }
+        }
+
+        public async Task<NutritionUnits> GetNutritionUnits()
+        {
+            try
+            {
+                return await _context.NutritionUnits
+                    .FirstOrDefaultAsync() ?? new NutritionUnits();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while retrieving the nutrition units.", ex);
+                return new NutritionUnits();
+            }
+        }
+
+        public async Task AddRecipeAllergensAsync(int recipeId, IEnumerable<string> selectedAllergens)
+        {
+            try
+            {
+                if (selectedAllergens == null || !selectedAllergens.Any())
+                    return;
+
+                // Map allergen names to IDs
+                var allergenIds = await _context.AllergenTypes
+                    .Where(a => selectedAllergens.Contains(a.Name))
+                    .Select(a => a.AllergenTypeID)
+                    .ToListAsync();
+
+                // Create RecipeAllergen entries
+                var recipeAllergens = allergenIds.Select(allergenId => new RecipeAllergens
+                {
+                    RecipeID = recipeId,
+                    AllergenTypeID = allergenId
+                });
+
+                // Add to database
+                _context.RecipeAllergens.AddRange(recipeAllergens);
+                await SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while inserting recipe allergens.", ex);
+            }
+        }
+
+        public async Task AddRecipeDietsAsync(int recipeId, IEnumerable<string> selectedDiets)
+        {
+            try
+            {
+                if (selectedDiets == null || !selectedDiets.Any())
+                    return;
+
+                // Map diet names to IDs
+                var dietIds = await _context.DietTypes
+                    .Where(d => selectedDiets.Contains(d.Name))
+                    .Select(d => d.DietTypeID)
+                    .ToListAsync();
+
+                // Create RecipeDiet entries
+                var recipeDiets = dietIds.Select(dietId => new RecipeDiet
+                {
+                    RecipeID = recipeId,
+                    DietTypeID = dietId
+                });
+
+                // Add to database
+                _context.RecipeDiets.AddRange(recipeDiets);
+                await SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while inserting recipe diets.", ex);
+            }
+        }
+
+        public async Task AddRecipeNutritionAsync(int recipeId, double calories, double protein, double fats, double fiber, double sugar, double sodium, double calcium,
+            double cholesterol, double iron, double potassium, double satFat, double transFat, double vitA, double vitC, int? servingSize, string userName)
+        {
+            try
+            {
+                var recipeNutrition = new RecipeNutrition
+                {
+                    RecipeID = recipeId,
+                    Calories = Convert.ToInt32(calories),
+                    Protein = Convert.ToDecimal(protein),
+                    Fats = Convert.ToDecimal(fats),
+                    Fiber = Convert.ToDecimal(fiber),
+                    Sugar = Convert.ToDecimal(sugar),
+                    Sodium = Convert.ToDecimal(sodium),
+                    Calcium = Convert.ToDecimal(calcium),
+                    Cholesterol = Convert.ToDecimal(cholesterol),
+                    Iron = Convert.ToDecimal(iron),
+                    Potassium = Convert.ToDecimal(potassium),
+                    SatFat = Convert.ToDecimal(satFat),
+                    TransFat = Convert.ToDecimal(transFat),
+                    VitaminA = Convert.ToDecimal(vitA),
+                    VitaminC = Convert.ToDecimal(vitC),
+                    ServingSize = servingSize ?? 1,
+                    CreatedBy = userName,
+                    LastUpdatedBy = userName,
+                    CreatedDate = DateTime.Now,
+                    LastUpdatedDate = DateTime.Now
+                };
+
+                _context.RecipeNutrition.Add(recipeNutrition);
+                await SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                await LogExceptionAsync("An error has occured while inserting recipe nutrition.", ex);
             }
         }
 
